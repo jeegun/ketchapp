@@ -1,0 +1,2 @@
+class KetchupsController < ApplicationController
+end
