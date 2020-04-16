@@ -8,7 +8,6 @@ class KetchupsController < ApplicationController
     @ketchup = Ketchup.new(ketchup_params)
     @trip = Trip.find(params[:trip_id])
     @ketchup.trip = @trip
-    @ketchup.user = current_user
     @ketchup.status = "pending"
     if @ketchup.save
       redirect_to ketchup_path(@ketchup), notice: 'Ketchup created.'
