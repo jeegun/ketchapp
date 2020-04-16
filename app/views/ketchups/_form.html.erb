@@ -1,0 +1,8 @@
+<%= simple_form_for [@trip, @ketchup] do |f| %>
+  <%= f.input :date %>
+  <%= f.input :start_time %>
+  <%= f.input :duration, label: 'Duration (in min)', input_html: { value: 30, min: 30, step: 15 } %>
+  <%= f.input :location %>
+  <%= f.input :message %>
+  <%= f.submit "Search your friends", class: "btn btn-flat" %>
+<% end %>
