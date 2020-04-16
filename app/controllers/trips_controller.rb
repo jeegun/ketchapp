@@ -19,6 +19,7 @@ class TripsController < ApplicationController
   end
 
   def show
+    @friends = User.where(["home_city = ?", @trip.location])
   end
 
   def edit

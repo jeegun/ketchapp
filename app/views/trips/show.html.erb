@@ -1,4 +1,33 @@
-<%= @trip.user.full_name %>
-<%= @trip.location %>
-<%= @trip.start_date %>
-<%= @trip.end_date %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <ul class="list-inline tabs-underlined">
+        <li>
+          <a href="#" class="tab-underlined active">Friends</a>
+        </li>
+        <li>
+          <a href="#" class="tab-underlined">Ketchups</a>
+        </li>
+      </ul>
+      <div class="cards-friends">
+        <% @friends.each do |friend| %>
+          <div class="card-vertical-friend">
+            <img src="https://kitt.lewagon.com/placeholder/users/<%= friend.lewagon_username %>" />
+            <div class="card-vertical-friend-infos">
+              <h3><%= friend.full_name %></h3>
+              <p>Available dates: </p>
+              <br>
+            </div>
+            <div class="card-vertical-friend-btn">
+              <a class="btn btn-ghost" href="#">Start a chat</a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="ketchups">
+        <p>No ketchups yet</p>
+        <%= link_to 'Create new ketchup', '#' %>
+      </div>
+    </div>
+  </div>
+</div>

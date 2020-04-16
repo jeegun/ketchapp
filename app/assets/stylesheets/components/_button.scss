@@ -1,6 +1,6 @@
 .btn-ghost {
-  color: #4A4A4A;
-  border: 1px solid #4A4A4A;
+  color: $ketchup;
+  border: 1px solid $ketchup;
   padding: 8px 24px;
   border-radius: 50px;
   font-weight: lighter;
@@ -9,20 +9,21 @@
 }
 
 .btn-ghost:hover {
+  color: $ketchup;
   opacity: 1;
 }
 
 .btn-flat {
-  color: white;
+  color: $mayo;
   padding: 8px 24px;
   border-radius: 4px;
-  background: $k_green;
+  background: $ketchup;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
-  background: #1BCB7F;
-  color: white;
+  background: #961517;
+  color: $mayo;
 }
 
 .btn-gradient {
