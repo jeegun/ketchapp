@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_175534) do
     t.time "start_time"
     t.integer "duration"
     t.string "location"
-    t.string "message"
+    t.text "message"
     t.string "status"
     t.float "latitude"
     t.float "longitude"

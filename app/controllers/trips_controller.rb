@@ -1,7 +1,19 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+
   def index
     @trip = Trip.all
+  end
+
+  def show
+    @friends = User.where(["home_city = ?", @trip.location])
+    @ketchup = Ketchup.new
+    @start_year = @trip.start_date.strftime('%Y')
+    @start_month = @trip.start_date.strftime('%b')
+    @start_day = @trip.start_date.strftime('%d')
+    @end_year = @trip.end_date.strftime('%Y')
+    @end_month = @trip.end_date.strftime('%b')
+    @end_day = @trip.end_date.strftime('%d')
   end
 
   def new
@@ -11,15 +23,13 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
+    @trip.location = (@trip.location.split(' ').map { |e| e.capitalize! }).join(' ')
+    @trip.status = "saved"
     if @trip.save
       redirect_to trip_path(@trip)
     else
       render 'pages/home'
     end
-  end
-
-  def show
-    @friends = User.where(["home_city = ?", @trip.location])
   end
 
   def edit
