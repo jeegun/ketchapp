@@ -14,6 +14,7 @@ class TripsController < ApplicationController
       redirect_to trip_path(@trip)
     else
       render :new
+    end
   end
 
   def show
@@ -36,11 +37,11 @@ class TripsController < ApplicationController
     redirect_to root_path, notice: 'Trip removed.'
   end
 
+  private
+
   def set_trip
     @trip = Trip.find(params[:id])
   end
-
-  private
 
   def trip_params
     params.require(:trip).permit(:start_date, :end_date, :location)
