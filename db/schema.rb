@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_054827) do
+ActiveRecord::Schema.define(version: 2020_04_16_091222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ketchups", force: :cascade do |t|
+    t.date "date"
+    t.time "start_time"
+    t.integer "duratio"
+    t.string "location"
+    t.string "message"
+    t.string "status"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "trip_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_ketchups_on_trip_id"
+    t.index ["user_id"], name: "index_ketchups_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.boolean "read"
+    t.string "content"
+    t.bigint "ketchup_id"
+    t.bigint "trip_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ketchup_id"], name: "index_notifications_on_ketchup_id"
+    t.index ["trip_id"], name: "index_notifications_on_trip_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.string "location"
+    t.string "status"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,8 +65,16 @@ ActiveRecord::Schema.define(version: 2020_04_16_054827) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "home_city"
+    t.string "phone_number"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ketchups", "trips"
+  add_foreign_key "ketchups", "users"
+  add_foreign_key "notifications", "ketchups"
+  add_foreign_key "notifications", "trips"
+  add_foreign_key "notifications", "users"
 end
