@@ -17,7 +17,10 @@ gem 'uglifier'
 gem 'webpacker'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 gem 'faker'
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'
