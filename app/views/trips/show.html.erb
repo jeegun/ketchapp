@@ -31,7 +31,15 @@
         <% end %>
       </div>
       <div class="ketchups">
-        <p>No ketchups yet</p>
+        <% if @ketchups.any? %>
+          <ul>
+            <% @ketchups.each do |ketchup| %>
+              <li><%= link_to "Your ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No ketchups yet</p>
+        <% end %>
         <%= link_to 'Create new ketchup', '#' %>
         <%= render 'ketchups/form' %>
       </div>
