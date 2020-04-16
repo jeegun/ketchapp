@@ -1,0 +1,22 @@
+.tabs-underlined {
+  display: flex;
+  align-items: center;
+}
+
+.tabs-underlined .tab-underlined {
+  color: $ketchup;
+  font-size: 20px;
+  padding: 8px;
+  margin: 8px 16px;
+  opacity: .4;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+  display: inline-block;
+}
+
+.tabs-underlined .tab-underlined.active {
+  opacity: 1;
+  border-bottom: 3px solid $ketchup;
+  font-weight: 700;
+}

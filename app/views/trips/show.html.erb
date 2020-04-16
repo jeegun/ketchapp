@@ -1,6 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+      <ul class="list-inline tabs-underlined">
+        <li>
+          <a href="#" class="tab-underlined active">Friends</a>
+        </li>
+        <li>
+          <a href="#" class="tab-underlined">Ketchups</a>
+        </li>
+      </ul>
       <div class="cards-friends">
         <% @friends.each do |friend| %>
           <div class="card-vertical-friend">
@@ -15,6 +23,10 @@
             </div>
           </div>
         <% end %>
+      </div>
+      <div class="ketchups">
+        <p>No ketchups yet</p>
+        <%= link_to 'Create new ketchup', '#' %>
       </div>
     </div>
   </div>
