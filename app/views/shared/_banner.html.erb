@@ -2,11 +2,6 @@
   <div class="container">
     <h1>Ketchup with people on business trip!</h1>
     <p>Don't miss out on your opportunity to meet people around the world.</p>
-    <%= simple_form_for(@trip) do |f| %>
-      <%= f.input :start_date, as: :date %>
-      <%= f.input :end_date, as: :date %>
-      <%= f.input :location, as: :string %>
-      <%= f.submit "Set up trip", class: "btn btn-flat" %>
-    <% end %>
+    <%= render 'trips/form' %>
   </div>
 </div>

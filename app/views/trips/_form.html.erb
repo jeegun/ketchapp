@@ -1,0 +1,6 @@
+<%= simple_form_for(@trip) do |f| %>
+      <%= f.input :start_date, as: :date %>
+      <%= f.input :end_date, as: :date %>
+      <%= f.input :location, as: :string %>
+      <%= f.submit "Search your friends", class: "btn btn-flat" %>
+    <% end %>
