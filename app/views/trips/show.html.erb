@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+      <div class="mt-4">
+        <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %>to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
+      </div>
       <ul class="list-inline tabs-underlined">
         <li>
           <a href="#" class="tab-underlined active">Friends</a>
