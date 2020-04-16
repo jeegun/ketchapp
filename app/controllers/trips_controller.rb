@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_action :set_trip, only: [:show, :edit, :update, :destroy]
   def index
     @trip = Trip.all
   end
@@ -13,26 +14,22 @@ class TripsController < ApplicationController
     if @trip.save
       redirect_to trip_path(@trip)
     else
-      render :new
+      render 'pages/home'
     end
   end
 
   def show
-    set_trip
   end
 
   def edit
-    set_trip
   end
 
   def update
-    set_trip
     @trip.update(trip_params)
     redirect_to @trip, notice: 'Trip updated!'
   end
 
   def destroy
-    set_trip
     @trip.destroy
     redirect_to root_path, notice: 'Trip removed.'
   end
