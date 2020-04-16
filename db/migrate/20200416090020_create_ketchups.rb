@@ -3,7 +3,7 @@ class CreateKetchups < ActiveRecord::Migration[5.2]
     create_table :ketchups do |t|
       t.date :date
       t.time :start_time
-      t.float :duratio
+      t.integer :duratio
       t.string :location
       t.string :message
       t.string :status
