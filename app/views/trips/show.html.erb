@@ -1,6 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+      <div>
+        <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %>to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
+        <% if @trip.status == 'saved' %>
+          <%= link_to 'Confirm this trip', '#', class: 'btn-ghost my-2', style: 'display:inline-block' %>
+        <% end %>
+      </div>
       <ul class="list-inline tabs-underlined">
         <li>
           <a href="#" class="tab-underlined active">Friends</a>
@@ -27,6 +33,7 @@
       <div class="ketchups">
         <p>No ketchups yet</p>
         <%= link_to 'Create new ketchup', '#' %>
+        <%= render 'ketchups/form' %>
       </div>
     </div>
   </div>
