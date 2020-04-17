@@ -6,6 +6,7 @@
   font-weight: lighter;
   opacity: 0.6;
   transition: opacity 0.3s ease;
+  margin: 0.5rem 0;
 }
 
 .btn-ghost:hover {
@@ -19,6 +20,7 @@
   border-radius: 4px;
   background: $ketchup;
   transition: background 0.3s ease;
+  margin: 0.5rem 0;
 }
 
 .btn-flat:hover {
@@ -34,6 +36,7 @@
   background: linear-gradient(#167FFB, #0F60C4);
   transition: background 0.3s ease;
   border: 1px solid #0F60C4;
+  margin: 0.5rem 0;
 }
 
 .btn-gradient:hover {

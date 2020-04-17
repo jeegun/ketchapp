@@ -1,5 +1,15 @@
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <div class="row">
+      <div class="col-8 offset-2">
+        <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-ghost', style: "width: 100%;" do %> <div class="d-flex"><div style="flex: 0 0 20%;"><%= image_tag('google.png', width: 25, height:25) %></div><div style="flex: 0 0 80%;">Sign in with Google account</div></div> <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
+  <%#= link_to "Log in", new_session_path(resource_name), class: 'text-center' %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
@@ -16,10 +26,4 @@
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
-<% end %>
-
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end %>
 <% end %>
