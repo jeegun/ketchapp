@@ -4,14 +4,14 @@
   padding: 8px 24px;
   border-radius: 50px;
   font-weight: lighter;
-  opacity: 0.6;
   transition: opacity 0.3s ease;
   margin: 0.5rem 0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
 .btn-ghost:hover {
   color: $ketchup;
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .btn-flat {
