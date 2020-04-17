@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div>
-        <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %>to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
+        <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
         <% if @trip.status == 'saved' %>
           <%= link_to 'Confirm this trip', '#', class: 'btn-ghost my-2', style: 'display:inline-block' %>
         <% end %>
@@ -31,7 +31,15 @@
         <% end %>
       </div>
       <div class="ketchups">
-        <p>No ketchups yet</p>
+        <% if @ketchups.any? %>
+          <ul>
+            <% @ketchups.each do |ketchup| %>
+              <li><%= link_to "Your ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No ketchup yet</p>
+        <% end %>
         <%= link_to 'Create new ketchup', '#' %>
         <%= render 'ketchups/form' %>
       </div>

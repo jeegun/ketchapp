@@ -7,6 +7,13 @@ class KetchupsController < ApplicationController
     @day = @ketchup.date.strftime('%d')
     @hour = @ketchup.start_time.strftime('%H')
     @minute = @ketchup.start_time.strftime('%M')
+    if @ketchup.duration >= 60
+      h = @ketchup.duration / 60
+      m = @ketchup.duration % 60
+      m == 0 ? @duration = "#{h}h" : @duration = "#{h}h #{m}m"
+    else
+      @duration = "#{@ketchup.duration}m"
+    end
   end
 
   def create
