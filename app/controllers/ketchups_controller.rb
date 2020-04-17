@@ -25,6 +25,7 @@ class KetchupsController < ApplicationController
       redirect_to ketchup_path(@ketchup), notice: 'Ketchup created.'
     else
       @friends = User.where(["home_city = ?", @trip.location])
+      @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
       render 'trips/show'
     end
   end
