@@ -1,18 +1,46 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Ketchup with <%= @ketchup.user.full_name %></h1>
-      <div>
-        <p>Date:</p>
-        <p><%= @month %> <%= @day %> <%= @year %></p>
-        <p>Time:</p>
-        <p><%= @hour %>:<%= @minute %></p>
-        <p>Duration:</p>
-        <p><%= @duration %></p>
-        <p>Location:</p>
-        <p><%= @ketchup.location %></p>
-        <p>Message:</p>
-        <p><%= @ketchup.message %></p>
+      <div class="ketchup-container">
+        <div class="ketchup">
+          <div class="card-vertical-ketchup">
+            <div class="card-vertical-ketchup-infos">
+              <h1>Ketchup with <%= @ketchup.user.full_name %></h1>
+              <div class="card-vertical-ketchup-btn">
+                <!-- link to chat will be implemented after chat function -->
+                <%= link_to 'Chat', '', class: 'btn btn-ghost' %>
+              </div>
+              <div class="info">
+                <div class="item"><p>Date:</p></div>
+                <div class="content"><p><%= @month %> <%= @day %> <%= @year %></p></div>
+              </div>
+              <div class="info">
+                <div class="item"><p>Time:</p></div>
+                <div class="content"><p><%= @hour %>:<%= @minute %></p></div>
+              </div>
+              <div class="info">
+                <div class="item"><p>Duration:</p></div>
+                <div class="content"><p><%= @duration %></p></div>
+              </div>
+              <div class="info">
+                <div class="item"><p>Location:</p></div>
+                <div class="content"><p><%= @ketchup.location %></p></div>
+              </div>
+              <div class="info">
+                <div class="item"><p>Message:</p></div>
+                <div class="content"><p><%= @ketchup.message %></p></div>
+              </div>
+              <div class="card-vertical-ketchup-btn">
+                <!-- add modal to edit or cancel the ketchup -->
+                <%= link_to 'Edit', '', class: 'btn btn-ghost' %>
+                <%= link_to 'Cancel', '', class: 'btn btn-ghost' %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map">
+          <!-- map of ketchup location -->
+        </div>
       </div>
     </div>
   </div>
