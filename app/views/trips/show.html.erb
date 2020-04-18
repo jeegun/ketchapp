@@ -1,27 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div>
-        <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
-        <% if @trip.status == 'saved' %>
-          <%= link_to 'Confirm this trip', '#', class: 'btn btn-ghost' %>
-        <% end %>
+      <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
+      <div class="d-flex justify-content-between">
+        <div style="flex: 0 0 60%">
+          <ul class="list-inline tabs-underlined">
+            <li>
+              <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
+            </li>
+            <li>
+              <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <% if @trip.status == 'saved' %>
+            <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
+            <%= link_to 'Confirm this trip', '#', class: 'btn btn-flat mt-3 mr-2' %>
+          <% elsif @trip.status == 'confirmed' %>
+            <%= link_to 'Create new ketchups', root_path, class: 'btn btn-flat mt-3 mr-2' %>
+          <% end %>
+        </div>
       </div>
-      <ul class="list-inline tabs-underlined">
-        <li>
-          <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
-        </li>
-        <li>
-          <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
-        </li>
-      </ul>
       <div class="cards-friends">
         <% @friends.each do |friend| %>
           <div class="card-vertical-friend">
             <img src="https://kitt.lewagon.com/placeholder/users/<%= friend.lewagon_username %>" />
             <div class="card-vertical-friend-infos">
               <h3><%= friend.full_name %></h3>
-              <p>Available dates: </p>
+              <!-- <p>Available dates: </p> -->
               <br>
             </div>
             <div class="card-vertical-friend-btn">
