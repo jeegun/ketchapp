@@ -1,16 +1,38 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+      <div class="d-flex justify-content-between">
+        <div  style="flex: 0 0 70%">
+          <ul class="list-inline tabs-underlined">
+            <li>
+              <p class="tab-underlined active">Upcoming (<%= @trips.count if @trips.any? %>)</p>
+            </li>
+            <li>
+              <p class="tab-underlined">Past (<%= @trips.count if @trips.any? %>)</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <%= link_to 'Create new trip', root_path, class: 'btn btn-ghost mt-3 mr-3' %>
+        </div>
+      </div>
       <% if @trips.any? %>
-        <ul>
+        <div class="cards-trips">
           <% @trips.each do |trip| %>
-            <li><%= link_to "Your trip to #{trip.location} on #{trip.start_date.strftime('%b')} #{trip.start_date.strftime('%d')} #{trip.start_date.strftime('%Y')}", trip_path(trip) %></li>
+            <div class="card-vertical-trip">
+              <a href="/trips/<%= trip.id %>">
+                <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                <div class="card-vertical-trip-infos">
+                  <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                  <h4>Trip to <%= trip.location %></h4>
+                </div>
+              </a>
+            </div>
           <% end %>
-        </ul>
+        </div>
       <% else %>
         <p>No trip yet</p>
       <% end %>
-      <%= link_to 'Create new trip', '#' %>
     </div>
   </div>
 </div>

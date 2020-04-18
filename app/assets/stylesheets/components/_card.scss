@@ -32,12 +32,12 @@
   padding: 16px;
 }
 
-.card-trip-infos .card-trip-user {
-  position: absolute;
-  right: 16px;
-  top: -20px;
-  width: 40px;
-}
+// .card-trip-infos .card-trip-user {
+//   position: absolute;
+//   right: 16px;
+//   top: -20px;
+//   width: 40px;
+// }
 
 .cards-friends {
   display: grid;
@@ -83,4 +83,40 @@
 .card-vertical-friend .card-vertical-friend-btn .btn-ghost {
   width: 100%;
   border-radius: 0;
+}
+
+.cards-trips {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 32px;
+  margin: 32px auto;
+}
+
+.card-vertical-trip {
+  position: relative;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 30px;
+}
+
+.card-vertical-trip > a > img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-vertical-trip h4 {
+  color: $ketchup;
+  margin: 8px 0;
+}
+
+.card-vertical-trip p {
+  color: $olive;
+  opacity: .7;
+  margin: 8px 0;
+}
+
+.card-vertical-trip .card-vertical-trip-infos {
+  padding: 16px;
 }
