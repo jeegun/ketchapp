@@ -5,6 +5,7 @@
       <div class="d-flex justify-content-between">
         <div style="flex: 0 0 60%">
           <ul class="list-inline tabs-underlined">
+            <!-- tabs without js function need to add js to show the right div -->
             <li>
               <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
             </li>
@@ -14,14 +15,17 @@
           </ul>
         </div>
         <div>
+          <!-- need to remove edit button from saved when confirm function is implemented -->
           <% if @trip.status == 'saved' %>
             <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
             <%= link_to 'Confirm this trip', '#', class: 'btn btn-flat mt-3 mr-2' %>
           <% elsif @trip.status == 'confirmed' %>
+            <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
             <%= link_to 'Create new ketchups', root_path, class: 'btn btn-flat mt-3 mr-2' %>
           <% end %>
         </div>
       </div>
+      <!-- friends div -->
       <div class="cards-friends">
         <% @friends.each do |friend| %>
           <div class="card-vertical-friend">
@@ -37,17 +41,20 @@
           </div>
         <% end %>
       </div>
+      <!-- ketchups div -->
       <div class="ketchups">
         <% if @ketchups.any? %>
           <ul>
             <% @ketchups.each do |ketchup| %>
-              <li><%= link_to "Your ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
+              <li><%= link_to "Ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
             <% end %>
           </ul>
         <% else %>
           <p>No ketchup yet</p>
         <% end %>
+        <!-- will be button to open modal once implemented -->
         <%= link_to 'Create new ketchup', '#' %>
+        <!-- will move this from to modal -->
         <%= render 'ketchups/form' %>
       </div>
     </div>

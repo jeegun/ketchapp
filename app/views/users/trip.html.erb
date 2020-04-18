@@ -4,6 +4,7 @@
       <div class="d-flex justify-content-between">
         <div  style="flex: 0 0 70%">
           <ul class="list-inline tabs-underlined">
+            <!-- tabs without js function need to add js to show the right div -->
             <li>
               <p class="tab-underlined active">Upcoming (<%= @trips.count %>)</p>
             </li>
@@ -16,23 +17,27 @@
           <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-3' %>
         </div>
       </div>
-      <% if @trips.any? %>
-        <div class="cards-trips">
-          <% @trips.each do |trip| %>
-            <div class="card-vertical-trip">
-              <a href="/trips/<%= trip.id %>">
-                <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
-                <div class="card-vertical-trip-infos">
-                  <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
-                  <h4>Trip to <%= trip.location %></h4>
-                </div>
-              </a>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p>No trip yet</p>
-      <% end %>
+      <!-- upcoming ketchups div -->
+      <div>
+        <% if @trips.any? %>
+          <div class="cards-trips">
+            <% @trips.each do |trip| %>
+              <div class="card-vertical-trip">
+                <a href="/trips/<%= trip.id %>">
+                  <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                  <div class="card-vertical-trip-infos">
+                    <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                    <h4>Trip to <%= trip.location %></h4>
+                  </div>
+                </a>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>No trip yet</p>
+        <% end %>
+      </div>
+      <!-- need past ketchups div here -->
     </div>
   </div>
 </div>
