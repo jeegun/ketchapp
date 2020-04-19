@@ -339,6 +339,10 @@ puts "-" * 60
 puts "Cleaning database"
 puts "-" * 60
 
+Friendship.destroy_all
+puts "Destroyed all friendships"
+FriendRequest.destroy_all
+puts "Destroyed all friend requests"
 Notification.destroy_all
 puts "Destroyed all notifications"
 Ketchup.destroy_all

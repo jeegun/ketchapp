@@ -20,7 +20,7 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     @friend_request.destroy
-    redirect_to trip_path(@ketchup.trip_id)
+    redirect_to root_path
   end
 
   private
