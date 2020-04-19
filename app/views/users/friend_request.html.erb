@@ -13,7 +13,7 @@
 <% end %>
 
 <h1>Friends list</h1>
-<% current_user.friendships.sort.reverse.each do |friend| %>
+<% current_user.friends.sort.reverse.each do |friend| %>
   <% if friend.friend_sender == current_user %>
     <p><%= friend.friend_receiver.full_name %></p>
   <% else %>
