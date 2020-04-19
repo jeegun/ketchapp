@@ -1,0 +1,13 @@
+.ketchup-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.ketchup {
+  flex: 0 0 40%;
+}
+.map {
+  flex: 0 0 60%;
+  background: $mustard;
+}
