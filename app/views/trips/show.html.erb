@@ -37,6 +37,7 @@
             </div>
             <div class="card-vertical-friend-btn">
               <%= simple_form_for(@chat) do |f| %>
+                <%= f.input :recipient_id, input_html: {value: friend.id}, as: :hidden %>
                 <%= f.submit "Start a chat", class: 'btn btn-ghost mb-0' %>
               <% end %>
               <%#= link_to 'Start a chat', chats_path(user_id: friend.id), method: :post, class: 'btn btn-ghost mb-0' %>
