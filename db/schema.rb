@@ -19,6 +19,26 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+  
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
+    t.index ["sender_id", "receiver_id"], name: "index_friend_requests_on_sender_id_and_receiver_id", unique: true
+    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "friend_sender_id"
+    t.integer "friend_receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_receiver_id"], name: "index_friendships_on_friend_receiver_id"
+    t.index ["friend_sender_id"], name: "index_friendships_on_friend_sender_id"
+  end
 
   create_table "ketchups", force: :cascade do |t|
     t.datetime "start_date"

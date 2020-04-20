@@ -1,49 +1,81 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div>
-        <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
-        <% if @trip.status == 'saved' %>
-          <%= link_to 'Confirm this trip', '#', class: 'btn-ghost my-2', style: 'display:inline-block' %>
-        <% end %>
+      <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
+      <div class="d-flex justify-content-between">
+        <div style="flex: 0 0 60%">
+          <ul class="list-inline tabs-underlined">
+            <!-- tabs without js function need to add js to show the right div -->
+            <li>
+              <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
+            </li>
+            <li>
+              <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <!-- need to remove edit button from saved when confirm function is implemented -->
+          <% if @trip.status == 'saved' %>
+            <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
+            <%= link_to 'Confirm this trip', '#', class: 'btn btn-flat mt-3 mr-2' %>
+          <% elsif @trip.status == 'confirmed' %>
+            <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
+            <%= link_to 'Create new ketchups', root_path, class: 'btn btn-flat mt-3 mr-2' %>
+          <% end %>
+        </div>
       </div>
-      <ul class="list-inline tabs-underlined">
-        <li>
-          <a href="#" class="tab-underlined active">Friends</a>
-        </li>
-        <li>
-          <a href="#" class="tab-underlined">Ketchups</a>
-        </li>
-      </ul>
+      <!-- friends div -->
       <div class="cards-friends">
         <% @friends.each do |friend| %>
           <div class="card-vertical-friend">
             <img src="https://kitt.lewagon.com/placeholder/users/<%= friend.lewagon_username %>" />
             <div class="card-vertical-friend-infos">
               <h3><%= friend.full_name %></h3>
-              <p>Available dates: </p>
+              <!-- show friend if they are already friend -->
+              <% if current_user.is_friend?(current_user.id, friend.id) %>
+                <p>Friend</p>
+              <!-- show sent if already sent request -->
+              <% elsif FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", current_user.id, friend.id, "pending"]).any? %>
+                <p>Request sent</p>
+              <!-- show received if already received request -->
+              <% elsif FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", friend.id, current_user.id, "pending"]).any? %>
+                <p>Request received</p>
+              <!-- show button if no request has made yet-->
+              <% else %>
+                <%= simple_form_for [friend ,@friend_request] do |f| %>
+                  <%= f.submit "Friend request", class: "btn btn-ghost" %>
+                <% end %>
+              <% end %>
+              <!-- <p>Available dates: </p> -->
               <br>
             </div>
             <div class="card-vertical-friend-btn">
-              <a class="btn btn-ghost" href="#">Start a chat</a>
+              <a class="btn btn-ghost mb-0" href="#">Start a chat</a>
             </div>
           </div>
         <% end %>
       </div>
+
       <div class="responsiveCal">
         <iframe src="https://calendar.google.com/calendar/embed?src=<%= current_user.email %>&ctz=<%= Time.zone %> style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
       </div>
+
+      <!-- ketchups div -->
+
       <div class="ketchups">
         <% if @ketchups.any? %>
           <ul>
             <% @ketchups.each do |ketchup| %>
-              <li><%= link_to "Your ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
+              <li><%= link_to "Ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
             <% end %>
           </ul>
         <% else %>
           <p>No ketchup yet</p>
         <% end %>
+        <!-- will be button to open modal once implemented -->
         <%= link_to 'Create new ketchup', '#' %>
+        <!-- will move this from to modal -->
         <%= render 'ketchups/form' %>
       </div>
     </div>
