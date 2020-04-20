@@ -339,6 +339,10 @@ puts "-" * 60
 puts "Cleaning database"
 puts "-" * 60
 
+Friendship.destroy_all
+puts "Destroyed all friendships"
+FriendRequest.destroy_all
+puts "Destroyed all friend requests"
 Notification.destroy_all
 puts "Destroyed all notifications"
 Ketchup.destroy_all
@@ -417,6 +421,60 @@ Ketchup.create!(date: Date.new(2020, 5, 21), start_time: Time.new(2020, 5, 21, 1
 
 puts "-" * 60
 puts "Ketchups created"
+puts "-" * 60
+puts "=" * 60
+puts "-" * 60
+puts "Creating friend requests"
+puts "-" * 60
+
+FriendRequest.create!(sender_id: 6, receiver_id: 8, status: 'pending')
+FriendRequest.create!(sender_id: 12, receiver_id: 6, status: 'pending')
+FriendRequest.create!(sender_id: 6, receiver_id: 15, status: 'pending')
+FriendRequest.create!(sender_id: 18, receiver_id: 6, status: 'pending')
+FriendRequest.create!(sender_id: 6, receiver_id: 24, status: 'pending')
+FriendRequest.create!(sender_id: 23, receiver_id: 6, status: 'pending')
+FriendRequest.create!(sender_id: 11, receiver_id: 2, status: 'pending')
+FriendRequest.create!(sender_id: 5, receiver_id: 11, status: 'pending')
+FriendRequest.create!(sender_id: 11, receiver_id: 17, status: 'pending')
+FriendRequest.create!(sender_id: 13, receiver_id: 11, status: 'pending')
+FriendRequest.create!(sender_id: 11, receiver_id: 20, status: 'pending')
+FriendRequest.create!(sender_id: 22, receiver_id: 11, status: 'pending')
+FriendRequest.create!(sender_id: 14, receiver_id: 3, status: 'pending')
+FriendRequest.create!(sender_id: 5, receiver_id: 14, status: 'pending')
+FriendRequest.create!(sender_id: 14, receiver_id: 7, status: 'pending')
+FriendRequest.create!(sender_id: 9, receiver_id: 14, status: 'pending')
+FriendRequest.create!(sender_id: 14, receiver_id: 19, status: 'pending')
+FriendRequest.create!(sender_id: 21, receiver_id: 14, status: 'pending')
+
+puts "-" * 60
+puts "Friend requests created"
+puts "-" * 60
+puts "=" * 60
+puts "-" * 60
+puts "Creating friendships"
+puts "-" * 60
+
+Friendship.create!(friend_sender_id: 9, friend_receiver_id: 6)
+Friendship.create!(friend_sender_id: 6, friend_receiver_id: 7)
+Friendship.create!(friend_sender_id: 13, friend_receiver_id: 6)
+Friendship.create!(friend_sender_id: 6, friend_receiver_id: 16)
+Friendship.create!(friend_sender_id: 19, friend_receiver_id: 6)
+Friendship.create!(friend_sender_id: 6, friend_receiver_id: 22)
+Friendship.create!(friend_sender_id: 1, friend_receiver_id: 11)
+Friendship.create!(friend_sender_id: 11, friend_receiver_id: 4)
+Friendship.create!(friend_sender_id: 16, friend_receiver_id: 11)
+Friendship.create!(friend_sender_id: 11, friend_receiver_id: 15)
+Friendship.create!(friend_sender_id: 21, friend_receiver_id: 11)
+Friendship.create!(friend_sender_id: 11, friend_receiver_id: 23)
+Friendship.create!(friend_sender_id: 2, friend_receiver_id: 14)
+Friendship.create!(friend_sender_id: 14, friend_receiver_id: 1)
+Friendship.create!(friend_sender_id: 8, friend_receiver_id: 14)
+Friendship.create!(friend_sender_id: 14, friend_receiver_id: 10)
+Friendship.create!(friend_sender_id: 24, friend_receiver_id: 14)
+Friendship.create!(friend_sender_id: 14, friend_receiver_id: 20)
+
+puts "-" * 60
+puts "Friendhips created"
 puts "-" * 60
 
 puts "=" * 60
