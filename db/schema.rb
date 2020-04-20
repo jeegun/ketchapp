@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_175534) do
+ActiveRecord::Schema.define(version: 2020_04_19_064014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chats", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_chats_on_recipient_id", unique: true
+    t.index ["sender_id"], name: "index_chats_on_sender_id", unique: true
+  end
 
   create_table "ketchups", force: :cascade do |t|
     t.date "date"
@@ -30,6 +39,16 @@ ActiveRecord::Schema.define(version: 2020_04_16_175534) do
     t.datetime "updated_at", null: false
     t.index ["trip_id"], name: "index_ketchups_on_trip_id"
     t.index ["user_id"], name: "index_ketchups_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "chat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -81,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_04_16_175534) do
 
   add_foreign_key "ketchups", "trips"
   add_foreign_key "ketchups", "users"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "notifications", "ketchups"
   add_foreign_key "notifications", "trips"
   add_foreign_key "notifications", "users"

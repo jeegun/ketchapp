@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :trips, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :ketchups, through: :trips
+  has_many :messages, dependent: :destroy
+  has_many :chats, foreign_key: :sender_id, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
   validates :first_name, :last_name, presence: true
