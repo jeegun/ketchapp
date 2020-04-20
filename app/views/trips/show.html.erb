@@ -36,7 +36,10 @@
               <br>
             </div>
             <div class="card-vertical-friend-btn">
-              <%= link_to 'Start a chat', chats_path(user_id: friend.id), remote: true, method: :post, class: 'btn btn-ghost mb-0' %>
+              <%= simple_form_for(@chat) do |f| %>
+                <%= f.submit "Start a chat", class: 'btn btn-ghost mb-0' %>
+              <% end %>
+              <%#= link_to 'Start a chat', chats_path(user_id: friend.id), method: :post, class: 'btn btn-ghost mb-0' %>
             </div>
           </div>
         <% end %>
