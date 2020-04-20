@@ -6,7 +6,7 @@ class TripsController < ApplicationController
   end
 
   def show
-    @friends = User.where(["home_city = ?", @trip.location])
+    @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
     @ketchup = Ketchup.new
     @start_year = @trip.start_date.strftime('%Y')
     @start_month = @trip.start_date.strftime('%b')
