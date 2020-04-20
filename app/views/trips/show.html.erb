@@ -32,9 +32,11 @@
             <img src="https://kitt.lewagon.com/placeholder/users/<%= friend.lewagon_username %>" />
             <div class="card-vertical-friend-infos">
               <h3><%= friend.full_name %></h3>
-              <!-- need to add one more if they are already friend -->
+              <!-- show friend if they are already friend -->
+              <% if current_user.is_friend?(current_user.id, friend.id) %>
+                <p>Friend</p>
               <!-- show sent if already sent request -->
-              <% if FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", current_user.id, friend.id, "pending"]).any? %>
+              <% elsif FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", current_user.id, friend.id, "pending"]).any? %>
                 <p>Request sent</p>
               <!-- show received if already received request -->
               <% elsif FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", friend.id, current_user.id, "pending"]).any? %>

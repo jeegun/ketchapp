@@ -43,7 +43,16 @@ class User < ApplicationRecord
   end
 
   def friends
-      self.friendships_as_friend_sender + self.friendships_as_friend_receiver
-   end
+    self.friendships_as_friend_sender + self.friendships_as_friend_receiver
+  end
 
+  def is_friend?(me, other)
+    if Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", me, other]).any?
+      return true
+    elsif Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", other, me]).any?
+      return true
+    else
+      return false
+    end
+  end
 end
