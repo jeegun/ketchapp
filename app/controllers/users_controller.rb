@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   end
 
   def friend_request
-    @sent_requests = FriendRequest.where(["sender_id = ?", current_user.id])
-    @received_requests = FriendRequest.where(["receiver_id = ?", current_user.id])
+    @sent_requests = FriendRequest.where(["sender_id = ? AND status = ?", current_user.id, "pending"])
+    @received_requests = FriendRequest.where(["receiver_id = ? AND status = ?", current_user.id, "pending"])
     @friendship = Friendship.new
   end
 end
