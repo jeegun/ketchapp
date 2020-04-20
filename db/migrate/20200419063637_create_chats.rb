@@ -6,7 +6,6 @@ class CreateChats < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :chats, :recipient_id, unique: true
-    add_index :chats, :sender_id, unique: true
+    add_index :chats, [:recipient_id, :sender_id], unique: true
   end
 end
