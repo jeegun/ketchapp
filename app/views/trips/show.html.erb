@@ -30,6 +30,9 @@
           </div>
         <% end %>
       </div>
+      <div class="responsiveCal">
+        <iframe src="https://calendar.google.com/calendar/embed?src=<%= current_user.email %>&ctz=<%= Time.zone %> style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
       <div class="ketchups">
         <% if @ketchups.any? %>
           <ul>

@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :set_trip, only: [:show, :edit, :update, :destroy, :make_google_calendar_reservations]
 
   def index
     @trip = Trip.all
@@ -44,6 +44,11 @@ class TripsController < ApplicationController
   def destroy
     @trip.destroy
     redirect_to root_path, notice: 'Trip removed.'
+  end
+
+  def make_google_calendar_reservations
+    @calendar = GoogleCalWrapper.new(current_user)
+    @calendar.book_rooms(@trip)
   end
 
   private
