@@ -2,10 +2,13 @@ class ChatsController < ApplicationController
   before_action :set_chat, only: [:show]
 
   def index
-    @chats = Chat.includes(:recipient, :messages).find(session[:chats])
+    # @chats = Chat.includes(:recipient, :messages).find(session[:chats])
   end
 
   def show
+    @message = Message.new
+    @my_messages = @chat.messages.where(["user_id = ?", current_user.id])
+    @other_messages = @chat.messages.where(["user_id = ?", @chat.opposed_user(current_user).id])
   end
 
   def create

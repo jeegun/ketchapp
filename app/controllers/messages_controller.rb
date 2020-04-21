@@ -1,7 +1,13 @@
 class MessagesController < ApplicationController
   def create
-    @chat = Chat.includes(:recipient).find(params[:chat_id])
-    @message = @chat.messages.create(message_params)
+    @message = Message.new(message_params)
+    @chat = Chat.find(params[:chat_id])
+    @message.chat_id = params[:chat_id]
+    @message.user = current_user
+    @message.save
+    redirect_to chat_path(@chat)
+    # @chat = Chat.includes(:recipient).find(params[:chat_id])
+    # @message = @chat.messages.create(message_params)
   end
 
   private

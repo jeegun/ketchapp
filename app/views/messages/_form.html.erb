@@ -1,0 +1,6 @@
+<%= simple_form_for([chat, message]) do |f| %>
+  <textarea rows="1" class="form-control text required" name="message[body]" id="message_body" placeholder="Say yo..."></textarea>
+  <div>
+    <%= f.submit "Send", class: 'btn btn-flat'%>
+  </div>
+<% end %>

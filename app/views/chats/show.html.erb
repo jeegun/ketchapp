@@ -2,8 +2,24 @@
   <div class="row">
     <div class="col-12">
       <% current_user.chats.each do |chat| %>
-        <p>Chat with <%= chat.opposed_user(current_user) %></p>
+        <a href="/chats/<%= chat.id %>"><p>Chat with <%= chat.opposed_user(current_user).full_name %></p></a>
       <% end %>
+    </div>
+    <div class="col-12">
+      <h1>Chat with <%= @chat.opposed_user(current_user).full_name %></h1>
+      <div class="messages">
+        <h2>My messages</h2>
+        <% @my_messages.each do |message| %>
+            <p><%= message.body %></p>
+        <% end %>
+        <h2>Other messages</h2>
+        <% @other_messages.each do |message| %>
+            <p><%= message.body %></p>
+        <% end %>
+      </div>
+      <div class="message-form">
+        <%= render 'messages/form', chat: @chat, message: @message %>
+      </div>
     </div>
   </div>
 </div>
