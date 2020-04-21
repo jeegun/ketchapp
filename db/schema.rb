@@ -15,11 +15,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "google_calendar_wrappers", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-  
   create_table "friend_requests", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "receiver_id"
@@ -38,6 +33,11 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
     t.datetime "updated_at", null: false
     t.index ["friend_receiver_id"], name: "index_friendships_on_friend_receiver_id"
     t.index ["friend_sender_id"], name: "index_friendships_on_friend_sender_id"
+  end
+
+  create_table "google_calendar_wrappers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ketchups", force: :cascade do |t|
