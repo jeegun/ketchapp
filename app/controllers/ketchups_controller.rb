@@ -9,6 +9,16 @@ class KetchupsController < ApplicationController
     @day = @ketchup.start_date.strftime('%d')
     @hour = @ketchup.start_date.strftime('%H')
     @minute = @ketchup.start_date.strftime('%M')
+    # converting time difference between end_time and start_time to duration in min
+    time_diff = ((@ketchup.end_date - @ketchup.start_date) / 60).to_i
+    if time_diff >= 60
+      h = time_diff / 60
+      m = time_diff % 60
+      m == 0 ? @duration = "#{h}h" : @duration = "#{h}h #{m}m"
+    else
+      @duration = "#{time_diff}m"
+    end
+
     # if @ketchup.duration >= 60
     #   h = @ketchup.duration / 60
     #   m = @ketchup.duration % 60
