@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_181024) do
+ActiveRecord::Schema.define(version: 2020_04_21_094738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,8 +50,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
 
   create_table "ketchups", force: :cascade do |t|
     t.datetime "start_date"
-    t.time "start_time"
-    t.integer "duration"
     t.string "location"
     t.text "message"
     t.string "status"
