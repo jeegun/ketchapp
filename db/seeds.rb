@@ -416,7 +416,7 @@ Ketchup.create!(start_date: DateTime.new(2020, 5, 10, 18, 00, 0), end_date: Date
 Ketchup.create!(start_date: DateTime.new(2020, 5, 8, 19, 00, 0), end_date: DateTime.new(2020, 5, 8, 23, 00, 0), message: 'Long and relaxing dinner at a restaurant with superb view', location: 'Maiella', status: 'saved', latitude: 40.747190, longitude: -73.956690, user_id: 9, trip_id: 8)
 Ketchup.create!(start_date: DateTime.new(2020, 5, 19, 12, 00, 0), end_date: DateTime.new(2020, 5, 19, 12, 30, 0), message: 'How about having a quick tea?', location: 'Osulloc Tea House', status: 'saved', latitude: 37.574223, longitude: 126.984372, user_id: 21, trip_id: 10)
 Ketchup.create!(start_date: DateTime.new(2020, 5, 19, 19, 30, 0), end_date: DateTime.new(2020, 5, 19, 20, 30, 0), message: 'Let\'s do some picnic at the park with nice weather', location: 'Yeouido Hangang Park', status: 'saved', latitude: 37.528417, longitude: 126.934250, user_id: 20, trip_id: 10)
-Ketchup.create!(start_date: DateTime.new(2020, 5, 21, 18, 00, 0), start_date: DateTime.new(2020, 5, 21, 20, 15, 0), message: 'Craving for some Korean meat! Vamos?', location: 'Gombawi', status: 'saved', latitude: 37.510203, longitude: 127.055203, user_id: 23, trip_id: 10)
+Ketchup.create!(start_date: DateTime.new(2020, 5, 21, 18, 00, 0), end_date: DateTime.new(2020, 5, 21, 20, 15, 0), message: 'Craving for some Korean meat! Vamos?', location: 'Gombawi', status: 'saved', latitude: 37.510203, longitude: 127.055203, user_id: 23, trip_id: 10)
 
 
 puts "-" * 60
