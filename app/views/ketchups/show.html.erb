@@ -1,6 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
+      <h1>Your ketchup with <%= @ketchup.user.full_name %></h1>
+      <div>
+        <p>Date:</p>
+        <p><%= @month %> <%= @day %> <%= @year %></p>
+        <p>Time:</p>
+        <p><%= @hour %>:<%= @minute %></p>
+<!--         <p>Duration:</p>
+        <p><%= @duration %></p> -->
+        <p>Location:</p>
+        <p><%= @ketchup.location %></p>
+        <p>Message:</p>
+        <p><%= @ketchup.message %></p>
       <div class="ketchup-container">
         <div class="ketchup">
           <div class="card-vertical-ketchup">

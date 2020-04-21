@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_222500) do
+ActiveRecord::Schema.define(version: 2020_04_20_181024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "google_calendar_wrappers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+  
   create_table "friend_requests", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "receiver_id"
@@ -36,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_222500) do
   end
 
   create_table "ketchups", force: :cascade do |t|
-    t.date "date"
+    t.datetime "start_date"
     t.time "start_time"
     t.integer "duration"
     t.string "location"
@@ -48,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_222500) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "end_date"
     t.index ["trip_id"], name: "index_ketchups_on_trip_id"
     t.index ["user_id"], name: "index_ketchups_on_user_id"
   end
@@ -95,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_222500) do
     t.string "last_name"
     t.string "access_token"
     t.string "refresh_token"
+    t.integer "expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
