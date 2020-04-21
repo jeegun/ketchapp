@@ -1,6 +1,5 @@
 class ChatsController < ApplicationController
-    before_action :set_chat, only: [:show]
-
+  before_action :set_chat, only: [:show]
 
   def index
     @chats = Chat.includes(:recipient, :messages).find(session[:chats])
@@ -11,7 +10,8 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.new(chat_params)
+    @chat = Chat.new
+    @chat.recipient_id = params[:user_id]
     @chat.sender = current_user
     if @chat.save
       redirect_to chat_path(@chat)

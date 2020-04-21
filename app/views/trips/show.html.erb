@@ -43,7 +43,7 @@
                 <p>Request received</p>
               <!-- show button if no request has made yet-->
               <% else %>
-                <%= simple_form_for [friend ,@friend_request] do |f| %>
+                <%= simple_form_for [friend, @friend_request] do |f| %>
                   <%= f.submit "Friend request", class: "btn btn-ghost" %>
                 <% end %>
               <% end %>
@@ -51,8 +51,7 @@
               <br>
             </div>
             <div class="card-vertical-friend-btn">
-              <%= simple_form_for(@chat) do |f| %>
-                <%= f.input :recipient_id, input_html: {value: friend.id}, as: :hidden %>
+              <%= simple_form_for [friend, @chat] do |f| %>
                 <%= f.submit "Start a chat", class: 'btn btn-ghost mb-0' %>
               <% end %>
               <%#= link_to 'Start a chat', chats_path(user_id: friend.id), method: :post, class: 'btn btn-ghost mb-0' %>
