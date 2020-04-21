@@ -32,6 +32,21 @@
             <img src="https://kitt.lewagon.com/placeholder/users/<%= friend.lewagon_username %>" />
             <div class="card-vertical-friend-infos">
               <h3><%= friend.full_name %></h3>
+              <!-- show friend if they are already friend -->
+              <% if current_user.is_friend?(current_user.id, friend.id) %>
+                <p>Friend</p>
+              <!-- show sent if already sent request -->
+              <% elsif FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", current_user.id, friend.id, "pending"]).any? %>
+                <p>Request sent</p>
+              <!-- show received if already received request -->
+              <% elsif FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", friend.id, current_user.id, "pending"]).any? %>
+                <p>Request received</p>
+              <!-- show button if no request has made yet-->
+              <% else %>
+                <%= simple_form_for [friend ,@friend_request] do |f| %>
+                  <%= f.submit "Friend request", class: "btn btn-ghost" %>
+                <% end %>
+              <% end %>
               <!-- <p>Available dates: </p> -->
               <br>
             </div>
@@ -45,7 +60,13 @@
           </div>
         <% end %>
       </div>
+
+      <div class="responsiveCal">
+        <iframe src="https://calendar.google.com/calendar/embed?src=<%= current_user.email %>&ctz=<%= Time.zone %> style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+      </div>
+
       <!-- ketchups div -->
+
       <div class="ketchups">
         <% if @ketchups.any? %>
           <ul>

@@ -1,12 +1,12 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :set_trip, only: [:show, :edit, :update, :destroy, :make_google_calendar_reservations]
 
   def index
     @trip = Trip.all
   end
 
   def show
-    @friends = User.where(["home_city = ?", @trip.location])
+    @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
     @ketchup = Ketchup.new
     @start_year = @trip.start_date.strftime('%Y')
     @start_month = @trip.start_date.strftime('%b')
@@ -15,6 +15,7 @@ class TripsController < ApplicationController
     @end_month = @trip.end_date.strftime('%b')
     @end_day = @trip.end_date.strftime('%d')
     @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
+    @friend_request = FriendRequest.new
     @chat = Chat.new
   end
 
@@ -45,6 +46,11 @@ class TripsController < ApplicationController
   def destroy
     @trip.destroy
     redirect_to root_path, notice: 'Trip removed.'
+  end
+
+  def make_google_calendar_reservations
+    @calendar = GoogleCalWrapper.new(current_user)
+    @calendar.book_rooms(@trip)
   end
 
   private

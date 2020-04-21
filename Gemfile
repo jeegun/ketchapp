@@ -19,7 +19,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'faker'
-gem 'google-api-client', require: 'google/apis/calendar_v3'
+gem 'google-api-client', '~> 0.34'
 
 
 group :development do
