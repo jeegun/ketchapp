@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:destroy] do
     resources :friend_requests, only: [:create]
+    resources :chats, only: [:create]
   end
 
   resources :friend_requests, only: [:update, :destroy] do
@@ -21,5 +22,9 @@ Rails.application.routes.draw do
   end
 
   resources :ketchups, only: [:show, :update, :destroy]
+
+  resources :chats, only: [:show] do
+    resources :messages, only: [:create]
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

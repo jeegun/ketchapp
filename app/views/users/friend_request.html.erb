@@ -7,7 +7,7 @@
   <h1>Received requests</h1>
   <% @received_requests.each do |request| %>
     <p><%= request.sender.full_name %> sent you a request</p>
-    <%= simple_form_for [request ,@friendship] do |f| %>
+    <%= simple_form_for [request, @friendship] do |f| %>
       <%= f.submit "Accept", class: "btn btn-ghost" %>
     <% end %>
     <%= link_to "Decline", friend_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>

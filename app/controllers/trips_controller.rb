@@ -16,6 +16,7 @@ class TripsController < ApplicationController
     @end_day = @trip.end_date.strftime('%d')
     @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
     @friend_request = FriendRequest.new
+    @chat = Chat.new
   end
 
   def new
