@@ -24,7 +24,6 @@ class User < ApplicationRecord
   has_many :chats, foreign_key: :sender_id, dependent: :destroy
   has_many :friend_senders, through: :friendships_as_friend_receiver, dependent: :destroy
   has_many :friend_receivers, through: :friendships_as_friend_sender, dependent: :destroy
->>>>>>> master
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
   validates :first_name, :last_name, presence: true

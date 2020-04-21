@@ -15,9 +15,12 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "google_calendar_wrappers", force: :cascade do |t|
+  create_table "chats", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipient_id", "sender_id"], name: "index_chats_on_recipient_id_and_sender_id", unique: true
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -40,6 +43,11 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
     t.index ["friend_sender_id"], name: "index_friendships_on_friend_sender_id"
   end
 
+  create_table "google_calendar_wrappers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ketchups", force: :cascade do |t|
     t.datetime "start_date"
     t.time "start_time"
@@ -56,14 +64,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_181024) do
     t.datetime "end_date"
     t.index ["trip_id"], name: "index_ketchups_on_trip_id"
     t.index ["user_id"], name: "index_ketchups_on_user_id"
-  end
-
-  create_table "chats", force: :cascade do |t|
-    t.integer "recipient_id"
-    t.integer "sender_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipient_id", "sender_id"], name: "index_chats_on_recipient_id_and_sender_id", unique: true
   end
 
   create_table "messages", force: :cascade do |t|
