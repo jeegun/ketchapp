@@ -6,7 +6,6 @@ class ChatsController < ApplicationController
   end
 
   def show
-
   end
 
   def create

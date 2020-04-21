@@ -1,1 +1,9 @@
-hola
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <% current_user.chats.each do |chat| %>
+        <p>Chat with <%= chat.opposed_user(current_user) %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

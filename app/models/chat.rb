@@ -22,6 +22,6 @@ class Chat < ApplicationRecord
 
 # returns an opposed user to the requested user
   def opposed_user(user)
-    user == recipient ? sender : recipient
+    user == recipient ? sender.full_name : recipient.full_name
   end
 end

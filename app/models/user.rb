@@ -20,10 +20,11 @@ class User < ApplicationRecord
        foreign_key: :friend_receiver_id,
        class_name: :Friendship,
        dependent: :destroy
-  has_many :messages, dependent: :destroy
-  has_many :chats, foreign_key: :sender_id, dependent: :destroy
   has_many :friend_senders, through: :friendships_as_friend_receiver, dependent: :destroy
   has_many :friend_receivers, through: :friendships_as_friend_sender, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :chats_as_recipient, foreign_key: :recipient_id, class_name: :Chat, dependent: :destroy
+  has_many :chats_as_sender, foreign_key: :sender_id, class_name: :Chat, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
   validates :first_name, :last_name, presence: true
@@ -64,5 +65,9 @@ class User < ApplicationRecord
     else
       return false
     end
+  end
+
+  def chats
+    self.chats_as_recipient + self.chats_as_sender
   end
 end
