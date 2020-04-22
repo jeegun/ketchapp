@@ -3,7 +3,7 @@ class FriendRequestsController < ApplicationController
 
   def create
     @friend_request = FriendRequest.new
-    @friend_request.receiver_id = params[:user_id]
+    @friend_request.receiver = User.find(params[:user_id])
     @friend_request.sender = current_user
     @friend_request.status = 'pending'
     @friend_request.save!

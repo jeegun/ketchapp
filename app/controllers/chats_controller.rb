@@ -7,6 +7,7 @@ class ChatsController < ApplicationController
 
   def show
     @message = Message.new
+    @messages = @chat.messages
     @my_messages = @chat.messages.where(["user_id = ?", current_user.id])
     @other_messages = @chat.messages.where(["user_id = ?", @chat.opposed_user(current_user).id])
   end
