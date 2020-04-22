@@ -1,9 +1,26 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-between">
     <div class="chat-list">
-      <% current_user.chats.each do |chat| %>
-        <a href="/chats/<%= chat.id %>"><p>Chat with <%= chat.opposed_user(current_user).full_name %></p></a>
-      <% end %>
+      <table>
+        <tr>
+          <th><p>Your chat list</th>
+        </tr>
+        <% current_user.chats.each do |chat| %>
+          <tr>
+            <td <% if @chat.id == chat.id %> class="active" <% end %>>
+              <a href="/chats/<%= chat.id %>"><p><%= chat.opposed_user(current_user).full_name %></p>
+                <% if @chat.id != chat.id %>
+                  <% if chat.messages.any? %>
+                    <p class="last-msg"><%= chat.messages.last.body %></p>
+                  <% else %>
+                    <p class="last-msg">(No message yet)</p>
+                  <% end %>
+                <% end %>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
     </div>
     <div class="current-chat">
       <h2><%= @chat.opposed_user(current_user).full_name %></h2>
