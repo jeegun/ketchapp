@@ -7,8 +7,8 @@ class CreateKetchups < ActiveRecord::Migration[5.2]
       t.string :location
       t.string :message
       t.string :status
-      t.float :latitude
-      t.float :longitude
+      t.decimal :latitude, precision: 10, scale: 6
+      t.decimal :longitude, precision: 10, scale: 6
       t.references :trip, foreign_key: true
       t.references :user, foreign_key: true
 

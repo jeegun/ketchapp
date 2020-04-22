@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_04_21_094738) do
     t.string "location"
     t.text "message"
     t.string "status"
-    t.float "latitude"
-    t.float "longitude"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.bigint "trip_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 2020_04_21_094738) do
     t.date "end_date"
     t.string "location"
     t.string "status"
-    t.float "latitude"
-    t.float "longitude"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"

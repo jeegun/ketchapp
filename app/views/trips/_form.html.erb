@@ -1,6 +1,6 @@
-<%= simple_form_for(@trip) do |f| %>
+<%= simple_form_for @trip, data: { controller: "places", action: "google-maps-callback@window->places#initializeMap" } do |f| %>
   <%= f.input :start_date, as: :date %>
   <%= f.input :end_date, as: :date %>
-  <%= f.input :location, as: :string %>
+  <%= f.input :location, as: :string, data: { target: "places.field" } %>
   <%= f.submit "Search your friends", class: "btn btn-flat" %>
 <% end %>

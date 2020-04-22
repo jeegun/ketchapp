@@ -1,10 +1,12 @@
-<%= simple_form_for [@trip, @ketchup] do |f| %>
+<%= simple_form_for [@trip, @ketchup], data: { controller: "places", action: "google-maps-callback@window->places#initializeMap" } do |f| %>
   <%= f.association :user, collection: @friends, label: 'Friends', :label_method => :full_name, :value_method => :id, prompt: "Choose a friend" %>
   <%= f.input :start_date, label: 'Start date & time (UTC)' %>
   <%= f.input :end_date, label: 'End date & time (UTC)' %>
   <%#= f.input :start_time %>
   <%#= f.input :duration, label: 'Duration (in min)', input_html: { value: 30, min: 30, step: 15 } %>
-  <%= f.input :location %>
+  <%= f.input :location, data: { target: "places.field" } %>
+  <%= f.input :latitude, :as => :hidden, data: { target: "places.latitude" } %>
+  <%= f.input :longitude, :as => :hidden, data: { target: "places.longitude" } %>
   <%= f.input :message %>
   <%= f.submit "Send ketchup request", class: "btn btn-flat" %>
 <% end %>

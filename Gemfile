@@ -21,6 +21,9 @@ gem 'omniauth-google-oauth2'
 gem 'faker'
 gem 'google-api-client', '~> 0.34'
 
+#google maps api-related
+gem 'turbolinks'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

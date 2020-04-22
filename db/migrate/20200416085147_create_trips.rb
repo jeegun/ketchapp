@@ -5,8 +5,8 @@ class CreateTrips < ActiveRecord::Migration[5.2]
       t.date :end_date
       t.string :location
       t.string :status
-      t.float :latitude
-      t.float :longitude
+      t.decimal :latitude, precision: 10, scale: 6
+      t.decimal :longitude, precision: 10, scale: 6
 
       t.timestamps
     end
