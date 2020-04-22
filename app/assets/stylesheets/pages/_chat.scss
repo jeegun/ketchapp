@@ -1,0 +1,35 @@
+.chat-list {
+  flex: 0 0 30%;
+}
+
+.current-chat {
+  flex: 0 0 70%;
+}
+
+.messages {
+  background: $mustard;
+}
+
+.message-form-control {
+  position: relative;
+}
+
+.message-form-control .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.message-form-control .form-control {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border: 1px solid #E7E7E7;
+}
+
+.message-form-control .form-control:focus {
+  border: 1px solid $ketchup;
+  outline: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
