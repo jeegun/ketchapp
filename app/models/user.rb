@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :trips, dependent: :destroy
-  has_many :notifications, dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :ketchup_requests, through: :trips, source: :ketchups
   has_many :ketchups
