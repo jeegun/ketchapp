@@ -28,5 +28,10 @@
     <p><%= contact.phone_number %></p>
     <p><%= contact.email %></p>
   <% end %>
+
+  <h1>Only contacts I can add</h1>
+  <% @requestable_users.each do |user| %>
+    <p><%= user.full_name %></p>
+  <% end %>
 </div>
 
