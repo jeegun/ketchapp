@@ -15,9 +15,7 @@ class UsersController < ApplicationController
     @friendship = Friendship.new
     contacts = current_user.contacts
     matching_contacts = contacts.map do |contact|
-      if (User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first != nil)
-        User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first
-      end
+      User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first
     end
     matching_contacts.compact!
     @requestable_users = matching_contacts.map do |contact|
