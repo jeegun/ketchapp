@@ -7,8 +7,9 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_SERVER_KEY'] %>&libraries=places&callback=dispatchMapsEvent" async defer data-turbolinks-eval="false"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer data-turbolinks-eval="false"></script>
   </head>
   <body>
     <%= render 'shared/navbar' %>
@@ -16,7 +17,5 @@
     <%= yield %>
     <%= render 'shared/footer' %>
     <%= javascript_include_tag 'application' %>
-
-    <%= javascript_pack_tag 'application' %>
   </body>
 </html>
