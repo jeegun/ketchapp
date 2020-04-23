@@ -21,5 +21,12 @@
       <p><%= friend.friend_sender.full_name %></p>
     <% end %>
   <% end %>
+
+  <h1>All contacts</h1>
+  <% current_user.contacts.each do |contact| %>
+    <p><%= (contact.first_name + " " + contact.last_name) %></p>
+    <p><%= contact.phone_number %></p>
+    <p><%= contact.email %></p>
+  <% end %>
 </div>
 
