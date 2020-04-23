@@ -4,21 +4,30 @@
       <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
       <div class="d-flex justify-content-between">
         <div style="flex: 0 0 60%">
-          <ul class="list-inline tabs-underlined">
-            <!-- tabs without js function need to add js to show the right div -->
-            <li>
-              <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
-            </li>
-            <li>
-              <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
-            </li>
-          </ul>
+          <% if @trip.status == 'saved' %>
+            <ul class="list-inline tabs-underlined">
+              <!-- tabs without js function need to add js to show the right div -->
+              <li>
+                <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
+              </li>
+            </ul>
+          <% else %>
+            <ul class="list-inline tabs-underlined">
+              <!-- tabs without js function need to add js to show the right div -->
+              <li>
+                <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
+              </li>
+              <li>
+                <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
+              </li>
+            </ul>
+          <% end %>
         </div>
         <div>
           <!-- need to remove edit button from saved when confirm function is implemented -->
           <% if @trip.status == 'saved' %>
-            <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
-            <%= link_to 'Confirm this trip', '#', class: 'btn btn-flat mt-3 mr-2' %>
+            <%= link_to 'Delete this search', trip_path(@trip), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost mt-3 mr-2' %>
+            <%= link_to 'Confirm this trip', trip_path(@trip), method: :patch || :put, class: 'btn btn-flat mt-3 mr-2' %>
           <% elsif @trip.status == 'confirmed' %>
             <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
             <%= link_to 'Create new ketchups', root_path, class: 'btn btn-flat mt-3 mr-2' %>

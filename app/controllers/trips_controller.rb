@@ -39,8 +39,17 @@ class TripsController < ApplicationController
   end
 
   def update
-    @trip.update(trip_params)
-    redirect_to @trip, notice: 'Trip updated!'
+    if @trip.status == 'saved'
+      @trip.status = 'confirmed'
+      @trip.save
+      redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
+    else
+      if @trip.update(trip_params)
+        redirect_to trip_path(@trip), notice: 'Trip updated!'
+      else
+        render :edit
+      end
+    end
   end
 
   def destroy

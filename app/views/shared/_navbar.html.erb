@@ -19,6 +19,9 @@
           <%= link_to "Friend Requests", users_friend_request_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item">
+          <%= link_to "Saved", users_save_path(current_user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to "My Trips", users_trip_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
