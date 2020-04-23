@@ -18,7 +18,7 @@
                 <p class="tab-underlined active">Friends (<%= @friends.count %>)</p>
               </li>
               <li>
-                <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
+                <p class="tab-underlined">Ketchups (<%= @trip.ketchups.count %>)</p>
               </li>
               <li>
                 <p class="tab-underlined">Calendar</p>
@@ -83,9 +83,9 @@
         <!-- ketchups div -->
 
         <div class="ketchups">
-          <% if @ketchups.any? %>
+          <% if @trip.ketchups.any? %>
             <ul>
-              <% @ketchups.each do |ketchup| %>
+              <% @trip.ketchups.each do |ketchup| %>
                 <li><%= link_to "Ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
               <% end %>
             </ul>

@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :trips, dependent: :destroy
   has_many :notifications, dependent: :destroy
-  has_many :ketchups, through: :trips
+  has_many :ketchup_requests, through: :trips, source: :ketchups
+  has_many :ketchups
   has_many :friend_requests_as_sender,
          foreign_key: :sender_id,
          class_name: :FriendRequest,

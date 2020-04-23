@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def trip
     @user = User.find(params[:id])
-    @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confired"])
+    @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
   end
 
   def save
