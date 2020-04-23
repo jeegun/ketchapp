@@ -20,6 +20,9 @@
               <li>
                 <p class="tab-underlined">Ketchups (<%= @ketchups.count %>)</p>
               </li>
+              <li>
+                <p class="tab-underlined">Calendar</p>
+              </li>
             </ul>
           <% end %>
         </div>
@@ -29,8 +32,8 @@
             <%= link_to 'Delete this search', trip_path(@trip), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost mt-3 mr-2' %>
             <%= link_to 'Confirm this trip', trip_path(@trip), method: :patch || :put, class: 'btn btn-flat mt-3 mr-2' %>
           <% elsif @trip.status == 'confirmed' %>
-            <%= link_to 'Edit this trip', '#', class: 'btn btn-ghost mt-3 mr-2'  %>
-            <%= link_to 'Create new ketchups', root_path, class: 'btn btn-flat mt-3 mr-2' %>
+            <%= link_to 'Edit trip', '', data: { toggle: "modal", target: "#tripEditModal" }, class: 'btn btn-ghost mt-3 mr-2' %>
+            <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-2' %>
           <% end %>
         </div>
       </div>
@@ -68,30 +71,53 @@
           </div>
         <% end %>
       </div>
+      <% if @trip.status == 'confirmed' %>
+        <!-- calendar div -->
+        <div class="responsiveCal">
+          <iframe
+            src="https://calendar.google.com/calendar/embed?src=<%= current_user.email %>&ctz=<%= Time.zone %>"
+            style="border: 0" width="800" height="600" frameborder="0" scrolling="no">
+          </iframe>
+        </div>
 
-      <div class="responsiveCal">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=<%= current_user.email %>&ctz=<%= Time.zone %>"
-          style="border: 0" width="800" height="600" frameborder="0" scrolling="no">
-        </iframe>
+        <!-- ketchups div -->
+
+        <div class="ketchups">
+          <% if @ketchups.any? %>
+            <ul>
+              <% @ketchups.each do |ketchup| %>
+                <li><%= link_to "Ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>No ketchup yet</p>
+          <% end %>
+          <!-- will be button to open modal once implemented -->
+          <%= link_to 'Create new ketchup', '#' %>
+          <!-- will move this from to modal -->
+          <%= render 'ketchups/form' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="tripEditModal" tabindex="-1" role="dialog" aria-labelledby="tripEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tripEditModalLabel">Edit trip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-
-      <!-- ketchups div -->
-
-      <div class="ketchups">
-        <% if @ketchups.any? %>
-          <ul>
-            <% @ketchups.each do |ketchup| %>
-              <li><%= link_to "Ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>No ketchup yet</p>
+      <div class="modal-body text-left">
+        <%= simple_form_for @trip do |f| %>
+          <%= f.input :start_date %>
+          <%= f.input :end_date %>
+      </div>
+      <div class="modal-footer">
+        <%= f.button :submit, 'Update dates', class: 'btn-flat' %>
         <% end %>
-        <!-- will be button to open modal once implemented -->
-        <%= link_to 'Create new ketchup', '#' %>
-        <!-- will move this from to modal -->
-        <%= render 'ketchups/form' %>
       </div>
     </div>
   </div>
