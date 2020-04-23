@@ -21,5 +21,20 @@
       <p><%= friend.friend_sender.full_name %></p>
     <% end %>
   <% end %>
+
+  <h1>All contacts</h1>
+  <% current_user.contacts.each do |contact| %>
+    <p><%= (contact.first_name + " " + contact.last_name) %></p>
+    <p><%= contact.phone_number %></p>
+    <p><%= contact.email %></p>
+  <% end %>
+
+  <h1>Only contacts I can add</h1>
+  <% @requestable_users.each do |user| %>
+    <p><%= user.full_name %></p>
+    <%= simple_form_for [user, @friend_request] do |f| %>
+      <%= f.submit "Friend request", class: "btn btn-ghost" %>
+    <% end %>
+  <% end %>
 </div>
 

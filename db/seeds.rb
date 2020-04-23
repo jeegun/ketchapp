@@ -8,7 +8,7 @@ users_data = [
     home_city: "Barcelona",
     latitude: 41.3851,
     longitude: 2.1734,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 001",
     lewagon_username: "EllynBsc"
   },
   {
@@ -19,7 +19,7 @@ users_data = [
     home_city: "Barcelona",
     latitude: 41.3851,
     longitude: 2.1734,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 002",
     lewagon_username: "Avalonvdhorst"
   },
   {
@@ -30,7 +30,7 @@ users_data = [
     home_city: "Barcelona",
     latitude: 41.3851,
     longitude: 2.1734,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 003",
     lewagon_username: "ajdubovoy"
   },
   {
@@ -41,7 +41,7 @@ users_data = [
     home_city: "Barcelona",
     latitude: 41.3851,
     longitude: 2.1734,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 004",
     lewagon_username: "primaulia"
   },
   {
@@ -52,7 +52,7 @@ users_data = [
     home_city: "Barcelona",
     latitude: 41.3851,
     longitude: 2.1734,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 005",
     lewagon_username: "LouiseDarche"
   },
   {
@@ -63,7 +63,7 @@ users_data = [
     home_city: "Barcelona",
     latitude: 41.3851,
     longitude: 2.1734,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 006",
     lewagon_username: "sangsoora"
   },
   {
@@ -74,7 +74,7 @@ users_data = [
     home_city: "New York City",
     latitude: 40.7128,
     longitude: -74.0060,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 007",
     lewagon_username: "valerieschraauwers"
   },
   {
@@ -85,7 +85,7 @@ users_data = [
     home_city: "New York City",
     latitude: 40.7128,
     longitude: -74.0060,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 008",
     lewagon_username: "claire-gtr"
   },
   {
@@ -96,7 +96,7 @@ users_data = [
     home_city: "New York City",
     latitude: 40.7128,
     longitude: -74.0060,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 009",
     lewagon_username: "fanny-rojon"
   },
   {
@@ -107,7 +107,7 @@ users_data = [
     home_city: "New York City",
     latitude: 40.7128,
     longitude: -74.0060,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 010",
     lewagon_username: "ldeld"
   },
   {
@@ -118,7 +118,7 @@ users_data = [
     home_city: "New York City",
     latitude: 40.7128,
     longitude: -74.0060,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 011",
     lewagon_username: "jiggyjensen"
   },
   {
@@ -129,7 +129,7 @@ users_data = [
     home_city: "New York City",
     latitude: 40.7128,
     longitude: -74.0060,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 012",
     lewagon_username: "TheJuanAndOnly99"
   },
   {
@@ -140,7 +140,7 @@ users_data = [
     home_city: "Los Angeles",
     latitude: 34.0522,
     longitude: -118.2437,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 013",
     lewagon_username: "Joyckc"
   },
   {
@@ -151,7 +151,7 @@ users_data = [
     home_city: "Los Angeles",
     latitude: 34.0522,
     longitude: -118.2437,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 014",
     lewagon_username: "jeegun"
   },
   {
@@ -162,7 +162,7 @@ users_data = [
     home_city: "Los Angeles",
     latitude: 34.0522,
     longitude: -118.2437,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 015",
     lewagon_username: "Max51555"
   },
   {
@@ -173,7 +173,7 @@ users_data = [
     home_city: "Los Angeles",
     latitude: 34.0522,
     longitude: -118.2437,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 016",
     lewagon_username: "lhelmert"
   },
   {
@@ -184,7 +184,7 @@ users_data = [
     home_city: "Los Angeles",
     latitude: 34.0522,
     longitude: -118.2437,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 017",
     lewagon_username: "RobOwenKing"
   },
   {
@@ -195,7 +195,7 @@ users_data = [
     home_city: "Los Angeles",
     latitude: 34.0522,
     longitude: -118.2437,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 018",
     lewagon_username: "tomapapp"
   },
   {
@@ -206,7 +206,7 @@ users_data = [
     home_city: "Seoul",
     latitude: 37.5665,
     longitude: 126.9780,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 019",
     lewagon_username: "elenavigo"
   },
   {
@@ -217,7 +217,7 @@ users_data = [
     home_city: "Seoul",
     latitude: 37.5665,
     longitude: 126.9780,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 020",
     lewagon_username: "michaelwlaschitz"
   },
   {
@@ -228,7 +228,7 @@ users_data = [
     home_city: "Seoul",
     latitude: 37.5665,
     longitude: 126.9780,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 021",
     lewagon_username: "leonellerbrock"
   },
   {
@@ -239,7 +239,7 @@ users_data = [
     home_city: "Seoul",
     latitude: 37.5665,
     longitude: 126.9780,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 022",
     lewagon_username: "raph-dav"
   },
   {
@@ -250,7 +250,7 @@ users_data = [
     home_city: "Seoul",
     latitude: 37.5665,
     longitude: 126.9780,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 023",
     lewagon_username: "Boukto2708"
   },
   {
@@ -261,7 +261,7 @@ users_data = [
     home_city: "Seoul",
     latitude: 37.5665,
     longitude: 126.9780,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 024",
     lewagon_username: "ryellingson"
   },
   {
@@ -272,7 +272,7 @@ users_data = [
     home_city: "Mumbai",
     latitude: 19.0760,
     longitude: 72.8777,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 025",
     lewagon_username: "Marin-b"
   },
   {
@@ -283,7 +283,7 @@ users_data = [
     home_city: "Mumbai",
     latitude: 19.0760,
     longitude: 72.8777,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 026",
     lewagon_username: "CassandreHouze"
   },
   {
@@ -294,7 +294,7 @@ users_data = [
     home_city: "Mumbai",
     latitude: 19.0760,
     longitude: 72.8777,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 027",
     lewagon_username: "IkramAkhlaq"
   },
   {
@@ -305,7 +305,7 @@ users_data = [
     home_city: "Mumbai",
     latitude: 19.0760,
     longitude: 72.8777,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 028",
     lewagon_username: "marcdebiolley"
   },
   {
@@ -316,7 +316,7 @@ users_data = [
     home_city: "Mumbai",
     latitude: 19.0760,
     longitude: 72.8777,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 029",
     lewagon_username: "dogaruemiliano"
   },
   {
@@ -327,7 +327,7 @@ users_data = [
     home_city: "Mumbai",
     latitude: 19.0760,
     longitude: 72.8777,
-    phone_number: Faker::PhoneNumber.phone_number,
+    phone_number: "000 000 030",
     lewagon_username: "Abder007"
   }
 ]
@@ -349,6 +349,8 @@ Ketchup.destroy_all
 puts "Destroyed all ketchups"
 Trip.destroy_all
 puts "Destroyed all trips"
+Contact.destroy_all
+puts "Destroyed all contacts"
 User.destroy_all
 puts "Destroyed all users"
 
@@ -366,6 +368,39 @@ end
 
 puts "-" * 60
 puts "Users created"
+puts "-" * 60
+puts "=" * 60
+puts "-" * 60
+puts "Creating contacts"
+puts "-" * 60
+
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 009', email: 'fanny@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 007', email: 'valerie@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 008', email: 'claire@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 012', email: 'juan@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 001', email: 'hola@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '111 111 111', email: 'avalon@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 010', email: 'lorenzo@gmail.com')
+Contact.create!(user_id: 6, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '444 444 444', email: 'bcn@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 015', email: 'maxime@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 016', email: 'laura@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 002', email: 'avalon@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 022', email: 'raphael@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 003', email: 'hola@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '222 222 222', email: 'valerie@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 024', email: 'ry@gmail.com')
+Contact.create!(user_id: 11, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '555 555 555', email: 'bcn@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 024', email: 'michael@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 020', email: 'ry@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 019', email: 'elena@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 005', email: 'louise@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 004', email: 'hola@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '333 333 333', email: 'juan@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 013', email: 'joyce@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '666 666 666 ', email: 'bcn@gmail.com')
+
+puts "-" * 60
+puts "Contacts created"
 puts "-" * 60
 puts "=" * 60
 puts "-" * 60
