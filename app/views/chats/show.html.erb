@@ -12,8 +12,6 @@
                 <% if @chat.id != chat.id %>
                   <% if chat.messages.any? %>
                     <p class="last-msg"><%= chat.messages.last.body %></p>
-                  <% else %>
-                    <p class="last-msg">(No message yet)</p>
                   <% end %>
                 <% end %>
               </a>
@@ -23,7 +21,10 @@
       </table>
     </div>
     <div class="current-chat">
-      <h2><%= @chat.opposed_user(current_user).full_name %></h2>
+      <div class="d-flex pl-3">
+        <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= @chat.opposed_user(current_user).lewagon_username %>">
+        <h2><%= @chat.opposed_user(current_user).full_name %></h2>
+      </div>
       <div class="messages">
         <% @messages.each do |message| %>
           <% if @my_messages.include?(message) %>
