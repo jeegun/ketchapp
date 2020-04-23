@@ -3,9 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :trips, dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
-  has_many :contacts, dependent: :destroy
-  has_many :ketchup_requests, through: :trips, source: :ketchups
-  has_many :ketchups
   has_many :friend_requests_as_sender,
          foreign_key: :sender_id,
          class_name: :FriendRequest,
@@ -27,6 +24,9 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :chats_as_recipient, foreign_key: :recipient_id, class_name: :Chat, dependent: :destroy
   has_many :chats_as_sender, foreign_key: :sender_id, class_name: :Chat, dependent: :destroy
+  has_many :contacts, dependent: :destroy
+  has_many :ketchup_requests, through: :trips, source: :ketchups
+  has_many :ketchups
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
   validates :first_name, :last_name, presence: true
