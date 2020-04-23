@@ -32,7 +32,7 @@
             <%= link_to 'Delete this search', trip_path(@trip), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost mt-3 mr-2' %>
             <%= link_to 'Confirm this trip', trip_path(@trip), method: :patch || :put, class: 'btn btn-flat mt-3 mr-2' %>
           <% elsif @trip.status == 'confirmed' %>
-            <%= link_to 'Edit trip', '', data: { toggle: "modal", target: "#tripEditModal" }, class: 'btn btn-ghost mt-3 mr-2' %>
+            <%= link_to 'Change dates', '', data: { toggle: "modal", target: "#tripEditModal" }, class: 'btn btn-ghost mt-3 mr-2' %>
             <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-2' %>
           <% end %>
         </div>
@@ -105,7 +105,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="tripEditModalLabel">Edit trip</h5>
+        <h5 class="modal-title" id="tripEditModalLabel">Change dates</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -116,7 +116,8 @@
           <%= f.input :end_date %>
       </div>
       <div class="modal-footer">
-        <%= f.button :submit, 'Update dates', class: 'btn-flat' %>
+        <%= f.button :submit, 'Confirm', class: 'btn-flat' %>
+        <%= link_to 'Cancel trip', trip_path(@trip), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost', style: 'margin-left:16px; border-radius: 4px !important;' %>
         <% end %>
       </div>
     </div>
