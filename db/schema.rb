@@ -86,13 +86,17 @@ ActiveRecord::Schema.define(version: 2020_04_21_210628) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.boolean "read"
-    t.string "content"
     t.bigint "ketchup_id"
     t.bigint "trip_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "recipient_id"
+    t.integer "actor_id"
+    t.datetime "read_at"
+    t.string "action"
+    t.integer "notifiable_id"
+    t.string "notifiable_type"
     t.index ["ketchup_id"], name: "index_notifications_on_ketchup_id"
     t.index ["trip_id"], name: "index_notifications_on_trip_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"

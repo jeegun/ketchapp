@@ -32,3 +32,7 @@ a:hover {
 .form-group > label {
   color: $ketchup;
 }
+
+.unread {
+  border-left: 3px solid red;
+}
