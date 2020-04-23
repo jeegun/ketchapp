@@ -20,6 +20,8 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'faker'
 gem 'google-api-client', '~> 0.34'
+gem 'coffee-rails'
+gem 'jquery-rails'
 
 
 group :development do

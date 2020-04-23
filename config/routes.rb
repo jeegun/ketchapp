@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     resources :friendships, only: [:create]
   end
 
+  resources :notifications do
+    collection do
+      post :mark_as_read
+    end
+  end
+
   resources :friendships, only: [:destroy]
 
   root to: 'pages#home'

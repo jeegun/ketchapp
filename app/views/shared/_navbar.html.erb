@@ -13,13 +13,17 @@
       <% if user_signed_in? %>
         <!-- more nav items needed such as chat -->
         <li class="nav-item">
-          <%= link_to "Notifications", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
           <%= link_to "Friend Requests", users_friend_request_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item">
           <%= link_to "My Trips", users_trip_path(current_user), class: "nav-link" %>
+        </li>
+        <li class="nav-item btn-group" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+          <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell"></i> <span data-behavior="unread-count"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+          </div>
         </li>
         <li class="nav-item dropdown">
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{current_user.lewagon_username}", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
