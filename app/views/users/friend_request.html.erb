@@ -32,6 +32,9 @@
   <h1>Only contacts I can add</h1>
   <% @requestable_users.each do |user| %>
     <p><%= user.full_name %></p>
+    <%= simple_form_for [user, @friend_request] do |f| %>
+      <%= f.submit "Friend request", class: "btn btn-ghost" %>
+    <% end %>
   <% end %>
 </div>
 

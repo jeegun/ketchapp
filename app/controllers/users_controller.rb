@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @sent_requests = FriendRequest.where(["sender_id = ? AND status = ?", current_user.id, "pending"])
     @received_requests = FriendRequest.where(["receiver_id = ? AND status = ?", current_user.id, "pending"])
     @friendship = Friendship.new
+    @friend_request = FriendRequest.new
     contacts = current_user.contacts
     matching_contacts = contacts.map do |contact|
       User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first
