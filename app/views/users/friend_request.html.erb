@@ -43,12 +43,16 @@
     <% end %>
   </div>
   <div class="lists" style="display: none;">
-    <h1>People on your contact list</h1>
+    <h1>People you may know</h1>
     <% @requestable_users.each do |user| %>
       <p><%= user.full_name %></p>
       <%= simple_form_for [user, @friend_request] do |f| %>
         <%= f.submit "Friend request", class: "btn btn-ghost" %>
       <% end %>
+    <% end %>
+    <% @non_matching_contacts.each do |contact| %>
+      <p><%= (contact.first_name + ' ' + contact.last_name) %></p>
+      <%= link_to 'Send invite to Ketchapp', '#' %>
     <% end %>
   </div>
 </div>
