@@ -397,7 +397,7 @@ Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Fake
 Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 004', email: 'hola@gmail.com')
 Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '333 333 333', email: 'juan@gmail.com')
 Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 013', email: 'joyce@gmail.com')
-Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '666 666 666 ', email: 'bcn@gmail.com')
+Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '666 666 666', email: 'bcn@gmail.com')
 
 puts "-" * 60
 puts "Contacts created"
@@ -407,12 +407,12 @@ puts "-" * 60
 puts "Creating trips"
 puts "-" * 60
 
-Trip.create!(start_date: Date.new(2019, 12, 21), end_date: Date.new(2020, 1, 4), location: 'Barcelona', status: 'saved', latitude: 41.3851, longitude: 2.1734, user_id: 11)
-Trip.create!(start_date: Date.new(2019, 12, 18), end_date: Date.new(2020, 1, 23), location: 'New York City', status: 'saved', latitude: 40.7128, longitude: -74.0060, user_id: 6)
-Trip.create!(start_date: Date.new(2019, 12, 29), end_date: Date.new(2020, 1, 12), location: 'Mumbai', status: 'saved', latitude: 19.0760, longitude: 72.8777, user_id: 14)
-Trip.create!(start_date: Date.new(2020, 4, 18), end_date: Date.new(2020, 4, 28), location: 'Los Angeles', status: 'saved', latitude: 34.0522, longitude: -118.2437, user_id: 6)
-Trip.create!(start_date: Date.new(2020, 4, 20), end_date: Date.new(2020, 4, 25), location: 'Barcelona', status: 'saved', latitude: 41.3851, longitude: 2.1734, user_id: 14)
-Trip.create!(start_date: Date.new(2020, 4, 21), end_date: Date.new(2020, 4, 29), location: 'Los Angeles', status: 'saved', latitude: 34.0522, longitude: -118.2437, user_id: 11)
+Trip.create!(start_date: Date.new(2019, 12, 21), end_date: Date.new(2020, 1, 4), location: 'Barcelona', status: 'confirmed', latitude: 41.3851, longitude: 2.1734, user_id: 11)
+Trip.create!(start_date: Date.new(2019, 12, 18), end_date: Date.new(2020, 1, 23), location: 'New York City', status: 'confirmed', latitude: 40.7128, longitude: -74.0060, user_id: 6)
+Trip.create!(start_date: Date.new(2019, 12, 29), end_date: Date.new(2020, 1, 12), location: 'Mumbai', status: 'confirmed', latitude: 19.0760, longitude: 72.8777, user_id: 14)
+Trip.create!(start_date: Date.new(2020, 4, 18), end_date: Date.new(2020, 4, 28), location: 'Los Angeles', status: 'confirmed', latitude: 34.0522, longitude: -118.2437, user_id: 6)
+Trip.create!(start_date: Date.new(2020, 4, 20), end_date: Date.new(2020, 4, 25), location: 'Barcelona', status: 'confirmed', latitude: 41.3851, longitude: 2.1734, user_id: 14)
+Trip.create!(start_date: Date.new(2020, 4, 21), end_date: Date.new(2020, 4, 29), location: 'Los Angeles', status: 'confirmed', latitude: 34.0522, longitude: -118.2437, user_id: 11)
 Trip.create!(start_date: Date.new(2020, 5, 2), end_date: Date.new(2020, 5, 13), location: 'Seoul', status: 'saved', latitude: 37.5665, longitude: 126.9780, user_id: 6)
 Trip.create!(start_date: Date.new(2020, 5, 2), end_date: Date.new(2020, 5, 9), location: 'New York City', status: 'saved', latitude: 40.7128, longitude: -74.0060, user_id: 14)
 Trip.create!(start_date: Date.new(2020, 5, 10), end_date: Date.new(2020, 6, 2), location: 'Seoul', status: 'saved', latitude: 37.5665, longitude: 126.9780, user_id: 14)
