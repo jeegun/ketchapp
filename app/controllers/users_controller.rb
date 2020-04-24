@@ -9,6 +9,12 @@ class UsersController < ApplicationController
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"])
   end
 
+  def ketchup
+    @user = User.find(params[:id])
+    @pending_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "pending"])
+    @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
+  end
+
   def friend_request
     @sent_requests = FriendRequest.where(["sender_id = ? AND status = ?", current_user.id, "pending"])
     @received_requests = FriendRequest.where(["receiver_id = ? AND status = ?", current_user.id, "pending"])

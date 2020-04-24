@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>ketchups</h1>
+  <% @pending_ketchups.each do |ketchup| %>
+    <a href="/ketchups/<%= ketchup.id %>"><p>Ketchup request from <%= ketchup.trip.user.full_name %></p></a>
+    <%= link_to 'Confirm', ketchup_path(ketchup), method: :patch || :put, class: 'btn btn-flat' %>
+    <%= link_to 'Decline', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
+  <% end %>
+</div>
+
+
