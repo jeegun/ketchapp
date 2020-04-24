@@ -1,7 +1,7 @@
 require 'google/apis/calendar_v3'
 
 class KetchupsController < ApplicationController
-  before_action :set_ketchup, only: [:show, :destroy]
+  before_action :set_ketchup, only: [:show, :update, :destroy]
 
   def show
     @year = @ketchup.start_date.strftime('%Y')
@@ -42,6 +42,20 @@ class KetchupsController < ApplicationController
       @friends = User.where(["home_city = ?", @trip.location])
       @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
       render 'trips/show'
+    end
+  end
+
+  def update
+    if @ketchup.status == 'pending'
+      @ketchup.status = 'confirmed'
+      @ketchup.save
+      redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
+    else
+      if @ketchup.update(ketchup_params)
+        redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
+      else
+        render :edit
+      end
     end
   end
 

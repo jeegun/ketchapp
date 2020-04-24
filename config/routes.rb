@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'users/:id/trips', to: 'users#trip', as: :users_trip
   get 'users/:id/friend_requests', to: 'users#friend_request', as: :users_friend_request
   get 'users/:id/saves', to: 'users#save', as: :users_save
+  get 'users/:id/ketchups', to: 'users#ketchup', as: :users_ketchup
 
   resources :trips do
     resources :ketchups, only: [:create]
