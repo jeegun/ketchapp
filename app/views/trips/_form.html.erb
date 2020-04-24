@@ -5,7 +5,7 @@
   <%#= f.submit "Search your friends", class: "btn btn-flat" %>
 <%# end %>
 
-<%= form_with model: @trip, local: true, data: { controller: :places, action: "google-maps-callback@window->places#initializeMap" } do |form| %>
+<%= form_with model: @trip, local: true, data: { controller: :autocomplete, action: "google-search-callback@window->autocomplete#initializeMap" } do |form| %>
 
   <div class="form-group">
     <%= form.label :start_date %>
@@ -18,13 +18,9 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: 'form-control', data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
+    <%= form.label "Enter a city" %>
+    <%= form.text_field :location, class: 'form-control', data: { target: "autocomplete.field", action: "keydown->autocomplete#preventSubmit" } %>
   </div>
-
-  <%= content_tag :latitude, nil, data: { target: "places.latitude" } %>
-  <%= content_tag :longitude, nil, data: { target: "places.longitude" } %>
-  <%= content_tag :div, nil, data: { target: "places.map" } %>
 
   <div class="actions">
     <%= form.submit "Search your friends", class: 'btn btn-flat' %>

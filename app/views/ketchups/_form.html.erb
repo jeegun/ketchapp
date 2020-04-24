@@ -10,38 +10,3 @@
   <%= f.input :message %>
   <%= f.submit "Send ketchup request", class: "btn btn-flat" %>
 <% end %>
-
-
-<%= form_with model: @trip, local: true, data: { controller: :places, action: "google-maps-callback@window->places#initializeMap" } do |form| %>
-
-  <div class="form-group">
-    <%= form.label :start_date %>
-    <%= form.text_field :start_date, type: "date", class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :end_date %>
-    <%= form.text_field :end_date, type: "date", class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :search %>
-    <%= form.search_field :search, name: nil, class: 'form-control', data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :latitude %>
-    <%= form.text_field :latitude, class: 'form-control', data: { target: "places.latitude" } %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :longitude %>
-    <%= form.text_field :longitude, class: 'form-control', data: { target: "places.longitude" } %>
-  </div>
-
-  <%= content_tag :div, nil, data: { target: "places.map" }, class: 'map' %>
-
-  <div class="actions">
-    <%= form.submit class: 'btn btn-flat' %>
-  </div>
-<% end %>
