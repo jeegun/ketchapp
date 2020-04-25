@@ -5,7 +5,11 @@
         <div class="ketchup">
           <div class="card-vertical-ketchup">
             <div class="card-vertical-ketchup-infos">
-              <h1>Ketchup with <%= @ketchup.user.full_name %></h1>
+              <% if current_user == @ketchup.user %>
+                <h1>Ketchup with <%= @ketchup.trip.user.full_name %></h1>
+              <% else %>
+                <h1>Ketchup with <%= @ketchup.user.full_name %></h1>
+              <% end %>
               <div class="card-vertical-ketchup-btn">
                 <!-- link to chat will be implemented after chat function -->
                 <%= link_to 'Chat', '', class: 'btn btn-ghost' %>
