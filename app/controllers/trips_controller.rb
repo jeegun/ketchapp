@@ -1,10 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @trip = Trip.all
-  end
-
   def show
     @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
     @ketchup = Ketchup.new
