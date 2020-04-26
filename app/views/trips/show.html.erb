@@ -69,11 +69,18 @@
 
         <div class="ketchups">
           <% if @trip.ketchups.any? %>
-            <ul>
-              <% @trip.ketchups.each do |ketchup| %>
-                <li><%= link_to "Ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></li>
+            <h3>Pending ketchup</h3>
+            <% @trip.ketchups.each do |ketchup| %>
+              <% if ketchup.status == 'pending' %>
+                <p><%= link_to "Ketchup requested to #{ketchup.user.full_name}", ketchup_path(ketchup) %></p>
               <% end %>
-            </ul>
+            <% end %>
+            <h3>Confirmed ketchup</h3>
+            <% @trip.ketchups.each do |ketchup| %>
+              <% if ketchup.status == 'confirmed' %>
+                <p><%= link_to "Confirmed ketchup with #{ketchup.user.full_name}", ketchup_path(ketchup) %></p>
+              <% end %>
+            <% end %>
           <% else %>
             <p>No ketchup yet</p>
           <% end %>
