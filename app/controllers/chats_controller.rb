@@ -16,13 +16,16 @@ class ChatsController < ApplicationController
     # checking if there is existing chat between two and if so redirecting to that chat
     if Chat.where(["sender_id = ? AND recipient_id = ?", current_user.id, params[:user_id]]).present?
       @existing = Chat.where(["sender_id = ? AND recipient_id = ?", current_user.id, params[:user_id]]).first
+      authorize @existing
       redirect_to chat_path(@existing)
     elsif Chat.where(["sender_id = ? AND recipient_id = ?", params[:user_id], current_user.id]).present?
       @existing = Chat.where(["sender_id = ? AND recipient_id = ?", params[:user_id], current_user.id]).first
+      authorize @existing
       redirect_to chat_path(@existing)
     else
     # if chat dosen't exist create new one
       @chat = Chat.new
+      authorize @chat
       @chat.recipient_id = params[:user_id]
       @chat.sender = current_user
       if @chat.save
@@ -41,6 +44,7 @@ class ChatsController < ApplicationController
 
   def set_chat
     @chat = Chat.find(params[:id])
+    authorize @chat
   end
 
   def chat_params
