@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
   end
 
+  def notifications
+    @user = current_user
+    @notifications = Notification.where(recipient: current_user).order("created_at DESC")
+  end
+
   def friend_request
     @user = User.find(params[:id])
     authorize @user

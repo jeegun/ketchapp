@@ -35,6 +35,7 @@ class KetchupsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @ketchup.trip = @trip
     @ketchup.status = "pending"
+    Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
     if @ketchup.save
       unless current_user.access_token.nil?
         GoogleCalendarWrapper.create(@ketchup, current_user)
@@ -52,9 +53,11 @@ class KetchupsController < ApplicationController
     if @ketchup.status == 'pending'
       @ketchup.status = 'confirmed'
       @ketchup.save
+      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     else
       if @ketchup.update(ketchup_params)
+        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else
         render :edit
@@ -63,6 +66,7 @@ class KetchupsController < ApplicationController
   end
 
   def destroy
+    Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
     @ketchup.destroy
     if @ketchup.trip.user == current_user
       redirect_to trip_path(@ketchup.trip_id)
