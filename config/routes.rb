@@ -10,11 +10,13 @@ Rails.application.routes.draw do
     resources :friendships, only: [:create]
   end
 
-  resources :notifications do
+  resources :notifications, only: [:index, :create, :show] do
     collection do
       post :mark_as_read
     end
   end
+
+  get 'users/:id/notifications', to: 'users#notifications', as: :users_notifications
 
   resources :friendships, only: [:destroy]
 
