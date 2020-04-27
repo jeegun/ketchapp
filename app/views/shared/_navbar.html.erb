@@ -19,16 +19,16 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items"></div>
         </li>
         <li class="nav-item">
-          <%= link_to "Friend Requests", users_friend_request_path(current_user), class: "nav-link" %>
+          <%= link_to "Friends", user_friends_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Ketchups", users_ketchup_path(current_user), class: "nav-link" %>
+          <%= link_to "Ketchups", user_ketchups_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Saved", users_save_path(current_user), class: "nav-link" %>
+          <%= link_to "Saved", user_saves_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "My Trips", users_trip_path(current_user), class: "nav-link" %>
+          <%= link_to "My Trips", user_trips_path(current_user), class: "nav-link" %>
         </li>
 
         <li class="nav-item dropdown">

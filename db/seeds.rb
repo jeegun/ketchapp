@@ -339,12 +339,16 @@ puts "-" * 60
 puts "Cleaning database"
 puts "-" * 60
 
+Notification.destroy_all
+puts "Destroyed all notifications"
+Message.destroy_all
+puts "Destroyed all messages"
+Chat.destroy_all
+puts "Destroyed all chats"
 Friendship.destroy_all
 puts "Destroyed all friendships"
 FriendRequest.destroy_all
 puts "Destroyed all friend requests"
-Notification.destroy_all
-puts "Destroyed all notifications"
 Ketchup.destroy_all
 puts "Destroyed all ketchups"
 Trip.destroy_all
@@ -398,6 +402,12 @@ Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Fake
 Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '333 333 333', email: 'juan@gmail.com')
 Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 013', email: 'joyce@gmail.com')
 Contact.create!(user_id: 14, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '666 666 666', email: 'bcn@gmail.com')
+Contact.create!(user_id: 25, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 006', email: 'nadang@gmail.com')
+Contact.create!(user_id: 26, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '777 777 777', email: 'sangsoo@gmail.com')
+Contact.create!(user_id: 26, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 011', email: 'jiggy@gmail.com')
+Contact.create!(user_id: 25, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '888 888 888', email: 'jensen@gmail.com')
+Contact.create!(user_id: 25, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '000 000 014', email: 'gunman@gmail.com')
+Contact.create!(user_id: 26, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, phone_number: '999 999 999', email: 'jeegun@gmail.com')
 
 puts "-" * 60
 puts "Contacts created"
@@ -532,7 +542,35 @@ Friendship.create!(friend_sender_id: 24, friend_receiver_id: 14)
 Friendship.create!(friend_sender_id: 14, friend_receiver_id: 20)
 
 puts "-" * 60
-puts "Friendhips created"
+puts "Friendships created"
+puts "-" * 60
+puts "=" * 60
+puts "-" * 60
+puts "Creating notifications"
+puts "-" * 60
+
+Notification.create!(recipient_id: 6, actor_id: 12, action: 'sent you a', notifiable_id: 2, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 6, actor_id: 18, action: 'sent you a', notifiable_id: 4, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 6, actor_id: 23, action: 'sent you a', notifiable_id: 6, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 11, actor_id: 5, action: 'sent you a', notifiable_id: 8, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 11, actor_id: 13, action: 'sent you a', notifiable_id: 10, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 11, actor_id: 22, action: 'sent you a', notifiable_id: 12, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 14, actor_id: 5, action: 'sent you a', notifiable_id: 14, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 14, actor_id: 9, action: 'sent you a', notifiable_id: 16, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 14, actor_id: 21, action: 'sent you a', notifiable_id: 18, notifiable_type: 'FriendRequest')
+Notification.create!(recipient_id: 6, actor_id: 7, action: 'has accepted your', notifiable_id: 2, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 6, actor_id: 16, action: 'has accepted your', notifiable_id: 4, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 6, actor_id: 22, action: 'has accepted your', notifiable_id: 6, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 11, actor_id: 4, action: 'has accepted your', notifiable_id: 8, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 11, actor_id: 15, action: 'has accepted your', notifiable_id: 10, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 11, actor_id: 23, action: 'has accepted your', notifiable_id: 12, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 14, actor_id: 1, action: 'has accepted your', notifiable_id: 14, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 14, actor_id: 10, action: 'has accepted your', notifiable_id: 16, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 14, actor_id: 20, action: 'has accepted your', notifiable_id: 18, notifiable_type: 'Friendship')
+
+
+puts "-" * 60
+puts "Notifications created"
 puts "-" * 60
 
 puts "=" * 60

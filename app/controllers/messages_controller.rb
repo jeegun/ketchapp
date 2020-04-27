@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
+    authorize @message
     @chat = Chat.find(params[:chat_id])
     @message.chat = @chat
     @message.user = current_user
@@ -13,6 +14,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:user_id, :body)
+    params.require(:message).permit(:body)
   end
 end

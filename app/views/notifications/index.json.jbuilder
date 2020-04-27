@@ -8,8 +8,8 @@ json.array! @notifications do |notification|
   json.notifiable do
     json.type "#{notification.notifiable.class.to_s.underscore.humanize.downcase}"
   end
-  json.all users_notifications_path(notification.notifiable)
+  json.all user_notifications_path(notification.notifiable)
   # JSON url to link to. anchor links to the request itself and takes us down to the notifiable friend request
-  json.url users_friend_request_path(notification.notifiable)
-    # users_ketchup_path(notification.notifiable, anchor: dom_id(notification.notifiable))
+  json.url user_friends_path(notification.recipient)
+    # user_ketchups_path(notification.notifiable, anchor: dom_id(notification.notifiable))
 end

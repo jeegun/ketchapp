@@ -9,6 +9,7 @@ class KetchupsController < ApplicationController
     @day = @ketchup.start_date.strftime('%d')
     @hour = @ketchup.start_date.strftime('%H')
     @minute = @ketchup.start_date.strftime('%M')
+    @chat = Chat.new
     # converting time difference between end_time and start_time to duration in min
     time_diff = ((@ketchup.end_date - @ketchup.start_date) / 60).to_i
     if time_diff >= 60
@@ -30,6 +31,7 @@ class KetchupsController < ApplicationController
 
   def create
     @ketchup = Ketchup.new(ketchup_params)
+    authorize @ketchup
     @trip = Trip.find(params[:trip_id])
     @ketchup.trip = @trip
     @ketchup.status = "pending"
@@ -42,6 +44,7 @@ class KetchupsController < ApplicationController
     else
       @friends = User.where(["home_city = ?", @trip.location])
       @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
+      @chat = Chat.new
       render 'trips/show'
     end
   end
@@ -65,17 +68,22 @@ class KetchupsController < ApplicationController
   def destroy
     Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
     @ketchup.destroy
-    redirect_to trip_path(@ketchup.trip_id)
+    if @ketchup.trip.user == current_user
+      redirect_to trip_path(@ketchup.trip_id)
+    else
+      redirect_to root_path
+    end
   end
 
   private
 
   def set_ketchup
     @ketchup = Ketchup.find(params[:id])
+    authorize @ketchup
   end
 
   def ketchup_params
-    params.require(:ketchup).permit(:trip_id, :start_time, :duration, :location, :message, :start_date, :end_date, :status, :user_id)
+    params.require(:ketchup).permit(:start_time, :duration, :location, :message, :start_date, :end_date, :status, :user_id)
   end
 
 end

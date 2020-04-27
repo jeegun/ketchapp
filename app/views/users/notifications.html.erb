@@ -1,8 +1,0 @@
-<div class="container">
-      <% @notifications.each do |notification| %>
-      <p><img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= notification.actor.lewagon_username %>">
-      <%= notification.actor.full_name %> (<%= notification.created_at %>)</p>
-      <p><%= notification.action %>
-      <%= notification.notifiable_type.downcase %></p>
-      <% end %>
-</div>

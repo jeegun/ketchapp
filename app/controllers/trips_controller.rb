@@ -1,10 +1,6 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @trip = Trip.all
-  end
-
   def show
     @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
     @ketchup = Ketchup.new
@@ -17,12 +13,9 @@ class TripsController < ApplicationController
     @chat = Chat.new
   end
 
-  def new
-    @trip = Trip.new
-  end
-
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
     @trip.user = current_user
     @trip.location = (@trip.location.split(' ').map { |e| e.capitalize! }).join(' ')
     @trip.status = "saved"
@@ -31,9 +24,6 @@ class TripsController < ApplicationController
     else
       render 'pages/home'
     end
-  end
-
-  def edit
   end
 
   def update
@@ -59,6 +49,7 @@ class TripsController < ApplicationController
 
   def set_trip
     @trip = Trip.find(params[:id])
+    authorize @trip
   end
 
   def trip_params
