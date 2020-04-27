@@ -1,31 +1,24 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:trip, :save, :ketchup, :notification, :friend]
+
   def trip
-    @user = User.find(params[:id])
-    authorize @user
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
   end
 
   def save
-    @user = User.find(params[:id])
-    authorize @user
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"])
   end
 
   def ketchup
-    @user = User.find(params[:id])
-    authorize @user
     @pending_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "pending"])
     @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
   end
 
-  def notifications
-    @user = current_user
-    @notifications = Notification.where(recipient: current_user).order("created_at DESC")
+  def notification
+    @notifications = Notification.where(recipient: @user).order("created_at DESC")
   end
 
-  def friend_request
-    @user = User.find(params[:id])
-    authorize @user
+  def friend
     @sent_requests = FriendRequest.where(["sender_id = ? AND status = ?", @user.id, "pending"])
     @received_requests = FriendRequest.where(["receiver_id = ? AND status = ?", @user.id, "pending"])
     @friendship = Friendship.new
@@ -47,5 +40,12 @@ class UsersController < ApplicationController
       end
     end
     @requestable_users.compact!
+  end
+
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+    authorize @user
   end
 end

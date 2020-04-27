@@ -16,16 +16,16 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'users/:id/notifications', to: 'users#notifications', as: :users_notifications
 
   resources :friendships, only: [:destroy]
 
   root to: 'pages#home'
 
-  get 'users/:id/trips', to: 'users#trip', as: :users_trip
-  get 'users/:id/friend_requests', to: 'users#friend_request', as: :users_friend_request
-  get 'users/:id/saves', to: 'users#save', as: :users_save
-  get 'users/:id/ketchups', to: 'users#ketchup', as: :users_ketchup
+  get 'users/:id/notifications', to: 'users#notification', as: :user_notifications
+  get 'users/:id/trips', to: 'users#trip', as: :user_trips
+  get 'users/:id/friends', to: 'users#friend', as: :user_friends
+  get 'users/:id/saves', to: 'users#save', as: :user_saves
+  get 'users/:id/ketchups', to: 'users#ketchup', as: :user_ketchups
 
   resources :trips do
     resources :ketchups, only: [:create]

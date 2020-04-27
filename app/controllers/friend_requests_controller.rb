@@ -9,12 +9,12 @@ class FriendRequestsController < ApplicationController
     @friend_request.status = 'pending'
     Notification.create(recipient: @friend_request.receiver, actor: current_user, action: "sent you a", notifiable: @friend_request)
     @friend_request.save!
-    redirect_to users_friend_request_path(current_user), notice: 'Request sent.'
+    redirect_to user_friends_path(current_user), notice: 'Request sent.'
   end
 
   def update
     if @friend_request.update(friend_request_params)
-      redirect_to users_friend_request_path(current_user)
+      redirect_to user_friends_path(current_user)
     else
       render :edit
     end
@@ -22,7 +22,7 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     @friend_request.destroy
-    redirect_to users_friend_request_path(current_user)
+    redirect_to user_friends_path(current_user)
   end
 
   private

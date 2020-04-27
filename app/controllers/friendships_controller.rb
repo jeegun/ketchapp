@@ -10,12 +10,12 @@ class FriendshipsController < ApplicationController
     @friendship.save!
     Notification.create(recipient: @friendship.friend_sender, actor: @friendship.friend_receiver, action: "has accepted your", notifiable: @friendship)
     request.destroy
-    redirect_to users_friend_request_path(current_user)
+    redirect_to user_friends_path(current_user)
   end
 
   def destroy
     @friendship.destroy
-    redirect_to users_friend_request_path(current_user)
+    redirect_to user_friend_requests_path(current_user)
   end
 
   private

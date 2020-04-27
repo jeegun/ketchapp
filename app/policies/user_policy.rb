@@ -17,7 +17,11 @@ class UserPolicy < ApplicationPolicy
     user_is_page_owner?
   end
 
-  def friend_request?
+  def notification?
+    user_is_page_owner?
+  end
+
+  def friend?
     user_is_page_owner?
   end
 
