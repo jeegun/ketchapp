@@ -12,7 +12,15 @@
               <% end %>
               <div class="card-vertical-ketchup-btn">
                 <!-- link to chat will be implemented after chat function -->
-                <%= link_to 'Chat', '', class: 'btn btn-ghost' %>
+                <% if current_user == @ketchup.user %>
+                  <%= simple_form_for [@ketchup.trip.user, @chat] do |f| %>
+                    <%= f.submit 'Chat', class: 'btn btn-flat' %>
+                  <% end %>
+                <% elsif current_user == @ketchup.trip.user %>
+                  <%= simple_form_for [@ketchup.user, @chat] do |f| %>
+                    <%= f.submit 'Chat', class: 'btn btn-flat' %>
+                  <% end %>
+                <% end %>
               </div>
               <div class="info">
                 <div class="item"><p>Date:</p></div>

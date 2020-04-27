@@ -18,7 +18,7 @@
     <h1>Friends list</h1>
     <% current_user.friends.sort.reverse.each do |friend| %>
       <% if friend.friend_sender == current_user %>
-        <p><%= friend.friend_receiver.full_name %></p>
+        <p id="friendship_<%= friend.id %>"><%= friend.friend_receiver.full_name %></p>
       <% else %>
         <p><%= friend.friend_sender.full_name %></p>
       <% end %>
@@ -35,7 +35,7 @@
   <div class="lists" style="display: none;">
     <h1>Received requests</h1>
     <% @received_requests.each do |request| %>
-      <p><%= request.sender.full_name %> sent you a request</p>
+      <p id="friend_request_<%= request.id %>"><%= request.sender.full_name %> sent you a request</p>
       <%= simple_form_for [request, @friendship] do |f| %>
         <%= f.submit "Accept", class: "btn btn-ghost" %>
       <% end %>
