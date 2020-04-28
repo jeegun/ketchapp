@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_094738) do
+ActiveRecord::Schema.define(version: 2020_04_26_181557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,17 @@ ActiveRecord::Schema.define(version: 2020_04_21_094738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipient_id", "sender_id"], name: "index_chats_on_recipient_id_and_sender_id", unique: true
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
   create_table "friend_requests", force: :cascade do |t|
@@ -75,16 +86,14 @@ ActiveRecord::Schema.define(version: 2020_04_21_094738) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.boolean "read"
-    t.string "content"
-    t.bigint "ketchup_id"
-    t.bigint "trip_id"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ketchup_id"], name: "index_notifications_on_ketchup_id"
-    t.index ["trip_id"], name: "index_notifications_on_trip_id"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.integer "recipient_id"
+    t.integer "actor_id"
+    t.datetime "read_at"
+    t.string "action"
+    t.integer "notifiable_id"
+    t.string "notifiable_type"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -122,12 +131,10 @@ ActiveRecord::Schema.define(version: 2020_04_21_094738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contacts", "users"
   add_foreign_key "ketchups", "trips"
   add_foreign_key "ketchups", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
-  add_foreign_key "notifications", "ketchups"
-  add_foreign_key "notifications", "trips"
-  add_foreign_key "notifications", "users"
   add_foreign_key "trips", "users"
 end

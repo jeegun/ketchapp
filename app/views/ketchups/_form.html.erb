@@ -14,7 +14,7 @@
 <%= form_with model: [@trip, @ketchup], local: true, data: { controller: :places, action: "google-search-callback@window->places#initializeMap" } do |form| %>
   <div class="form-group">
     <%= form.label 'Choose a friend to ketchup with:' %>
-    <%= form.collection_select :user, @friends, :id, :full_name, class: 'form-control' %>
+    <%= form.collection_select :user_id, @friends, :id, :full_name, class: 'form-control' %>
   </div>
 
   <div class="form-group">
