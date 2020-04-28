@@ -17,7 +17,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     authorize @trip
     @trip.user = current_user
-    @trip.location = (@trip.location.split(' ').map { |e| e.capitalize! }).join(' ')
+    @trip.location = @trip.location.split(",")[0]
     @trip.status = "saved"
     if @trip.save
       redirect_to trip_path(@trip)

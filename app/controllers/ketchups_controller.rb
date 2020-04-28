@@ -45,6 +45,7 @@ class KetchupsController < ApplicationController
       @friends = User.where(["home_city = ?", @trip.location])
       @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
       @chat = Chat.new
+      @friend_request = FriendRequest.new
       render 'trips/show'
     end
   end
@@ -83,7 +84,7 @@ class KetchupsController < ApplicationController
   end
 
   def ketchup_params
-    params.require(:ketchup).permit(:start_time, :duration, :location, :message, :start_date, :end_date, :status, :user_id)
+    params.require(:ketchup).permit(:trip_id, :location, :latitude, :longitude, :message, :start_date, :end_date, :status, :user_id)
   end
 
 end

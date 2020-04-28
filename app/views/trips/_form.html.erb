@@ -1,6 +1,30 @@
-<%= simple_form_for(@trip) do |f| %>
-  <%= f.input :start_date, as: :date %>
-  <%= f.input :end_date, as: :date %>
-  <%= f.input :location, as: :string %>
-  <%= f.submit "Search your friends", class: "btn btn-flat" %>
+<%#= simple_form_for @trip, data: { controller: :places, action: "google-maps-callback@window->places#initializeMap" } do |f| %>
+  <%#= f.input :start_date, as: :date %>
+  <%#= f.input :end_date, as: :date %>
+  <%#= f.input :location, as: :string, data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
+  <%#= f.submit "Search your friends", class: "btn btn-flat" %>
+<%# end %>
+
+<%= form_with model: @trip, local: true, data: { controller: :places, action: "google-search-callback@window->places#initializeMap" } do |form| %>
+
+  <div class="form-group">
+    <%= form.label :start_date %>
+    <%= form.text_field :start_date, type: "date", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_date %>
+    <%= form.text_field :end_date, type: "date", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Enter a city" %>
+    <%= form.text_field :location, class: 'form-control', data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
+    <%= form.text_field :latitude, type: "hidden", data: { target: "places.latitude" }, class: 'form-control' %>
+    <%= form.text_field :longitude, type: "hidden", data: { target: "places.longitude" }, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Search your friends", class: 'btn btn-flat' %>
+  </div>
 <% end %>
