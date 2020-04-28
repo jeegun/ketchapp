@@ -3,23 +3,26 @@ class FriendshipsController < ApplicationController
 
   def create
     @friendship = Friendship.new
+    authorize @friendship
     request = FriendRequest.find(params[:friend_request_id])
     @friendship.friend_sender = request.sender
     @friendship.friend_receiver = request.receiver
     @friendship.save!
+    Notification.create(recipient: @friendship.friend_sender, actor: @friendship.friend_receiver, action: "has accepted your", notifiable: @friendship)
     request.destroy
-    redirect_to root_path
+    redirect_to user_friends_path(current_user)
   end
 
   def destroy
-    @friend_request.destroy
-    redirect_to root_path
+    @friendship.destroy
+    redirect_to user_friend_requests_path(current_user)
   end
 
   private
 
-  def set_friend_request
+  def set_friendship
     @friendship = Friendship.find(params[:id])
+    authorize @friendship
   end
 
   def friend_request_params
