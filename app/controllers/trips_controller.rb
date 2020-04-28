@@ -1,9 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update, :destroy, :make_google_calendar_reservations]
-
-  def index
-    @trip = Trip.all
-  end
+  before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def show
     @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
@@ -14,17 +10,12 @@ class TripsController < ApplicationController
     @end_year = @trip.end_date.strftime('%Y')
     @end_month = @trip.end_date.strftime('%b')
     @end_day = @trip.end_date.strftime('%d')
-    @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
-    @friend_request = FriendRequest.new
     @chat = Chat.new
-  end
-
-  def new
-    @trip = Trip.new
   end
 
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
     @trip.user = current_user
     @trip.location = @trip.location.split(",")[0]
     @trip.status = "saved"
@@ -35,12 +26,18 @@ class TripsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    @trip.update(trip_params)
-    redirect_to @trip, notice: 'Trip updated!'
+    if @trip.status == 'saved'
+      @trip.status = 'confirmed'
+      @trip.save
+      redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
+    else
+      if @trip.update(trip_params)
+        redirect_to trip_path(@trip), notice: 'Trip updated!'
+      else
+        render :edit
+      end
+    end
   end
 
   def destroy
@@ -48,15 +45,11 @@ class TripsController < ApplicationController
     redirect_to root_path, notice: 'Trip removed.'
   end
 
-  def make_google_calendar_reservations
-    @calendar = GoogleCalWrapper.new(current_user)
-    @calendar.book_rooms(@trip)
-  end
-
   private
 
   def set_trip
     @trip = Trip.find(params[:id])
+    authorize @trip
   end
 
   def trip_params

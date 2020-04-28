@@ -1,0 +1,47 @@
+.my-message-bubble {
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background: $ketchup;
+  color: $mayo;
+  padding: 16px;
+  text-align: right;
+  position: relative;
+}
+
+.other-message-bubble {
+  border-radius: 10px;
+  margin-bottom: 16px;
+  background: $mayo;
+  color: $ketchup;
+  padding: 16px;
+  position: relative;
+}
+.my-message-bubble p, .other-message-bubble p {
+  margin-bottom: 0;
+}
+
+.my-msg:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid $ketchup;
+  border-right: 15px solid transparent;
+  border-top: 15px solid $ketchup;
+  border-bottom: 15px solid transparent;
+  right: -16px;
+  top: 0px;
+}
+
+.other-msg:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid $mayo;
+  border-top: 15px solid $mayo;
+  border-bottom: 15px solid transparent;
+  left: -16px;
+  top: 0px;
+}
