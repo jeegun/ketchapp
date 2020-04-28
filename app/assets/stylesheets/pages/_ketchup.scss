@@ -7,8 +7,9 @@
 .ketchup {
   flex: 0 0 40%;
 }
-.map {
+#map {
   flex: 0 0 60%;
+  width: 100%;
   background: $mustard;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;

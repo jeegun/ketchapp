@@ -59,7 +59,7 @@ class KetchupsController < ApplicationController
   end
 
   def ketchup_params
-    params.require(:ketchup).permit(:trip_id, :start_time, :end_time, :location, :latitude, :longitude, :message, :start_date, :end_date, :status, :user_id)
+    params.require(:ketchup).permit(:trip_id, :location, :latitude, :longitude, :message, :start_date, :end_date, :status, :user_id)
   end
 
 end

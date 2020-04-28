@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <%= form.label "Where do you want to Ketchup" %>
-    <%= form.search_field :location, name: nil, class: 'form-control', data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
+    <%= form.text_field :location, class: 'form-control', data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
     <%= form.text_field :latitude, type: "hidden", data: { target: "places.latitude" }, class: 'form-control' %>
     <%= form.text_field :longitude, type: "hidden", data: { target: "places.longitude" }, class: 'form-control' %>
   </div>

@@ -1,3 +1,5 @@
+// tutorial: https://www.driftingruby.com/episodes/google-maps-api-with-stimulusjs
+
 import { Controller} from "stimulus"
 
 export default class extends Controller {
