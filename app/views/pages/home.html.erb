@@ -19,35 +19,26 @@
    </div>
  </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    let input = document.getElementById('trip_location');
+    let autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
+    autocomplete.setFields(['geometry', 'name']);
+    autocomplete.addListener('place_changed', fillInForm);
+    function fillInForm() {
+      let place = autocomplete.getPlace()
 
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="cards">
-        <div class="card-vertical"> -->
-          <!-- temporary img for cards and need to update infos -->
-          <!--
-          <img src="<%= image_path('trip') %>" />
-          <div class="card-vertical-infos">
-            <h2>Set up your next trip</h2>
-            <p>Start setting your next trip with destination and dates!</p>
-          </div>
-        </div>
-        <div class="card-vertical">
-          <img src="<%= image_path('friends') %>" />
-          <div class="card-vertical-infos">
-            <h2>See your friends</h2>
-            <p>Short description here!</p>
-          </div>
-        </div>
-        <div class="card-vertical">
-          <img src="<%= image_path('ketchup') %>" />
-          <div class="card-vertical-infos">
-            <h2>Let's ketchup!</h2>
-            <p>Short description here!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      window.alert("No details available for input: '" + place.name + "'");
+      return;
+    }
+
+    document.getElementById('trip_latitude').value = place.geometry.location.lat()
+    document.getElementById('trip_longitude').value = place.geometry.location.lng()
+    }
+  }
+</script>
+
