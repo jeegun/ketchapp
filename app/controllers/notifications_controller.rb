@@ -5,8 +5,10 @@ class NotificationsController < ApplicationController
   end
 
   def mark_as_read
-    @notifications = policy_scope(Notification).order(created_at: :desc)
-    @notifications.update_all(read_at: Time.zone.now)
-    render json: {success: true}
+    # @notifications = policy_scope(Notification).order(created_at: :desc)
+    notification = notification.find(data-id)
+    # check how to refer to data-id in this method
+    notification.update!(read_at: Time.zone.now)
+    # render json: {success: true}
   end
 end

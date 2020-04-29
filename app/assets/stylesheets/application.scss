@@ -36,3 +36,7 @@ a:hover {
 .unread {
   border-left: 3px solid red;
 }
+
+.container {
+  min-height: calc(100vh - 81px - 100px)
+}
