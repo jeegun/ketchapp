@@ -1,1 +1,33 @@
 // Specific CSS for your home-page
+.stripe {
+    width: 100%;
+    background-color: #0F1721;
+    padding: 70px;
+}
+
+.home-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-info > .info {
+  color: white;
+  padding: 70px;
+}
+
+.stripe > h2 {
+  text-align: center;
+  font-family: 'Permanent Marker';
+  color: white;
+}
+
+h3, p {
+  font-family: 'Overpass';
+}
+
+.info > i {
+  font-size: 50px;
+  justify-content: center;
+  padding: 15px;
+}

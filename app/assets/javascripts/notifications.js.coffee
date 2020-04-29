@@ -4,7 +4,7 @@ class Notifications
     @setup() if @notifications.length > 0
 
   setup: ->
-    $("[data-behavior='notifications-link']").on "click", @handleClick
+    $("[data-behavior='notification-item']").on "click", @handleClick
     $.ajax(
       url: "/notifications.json"
       dataType: "JSON"
@@ -18,12 +18,13 @@ class Notifications
       datatype: "JSON"
       method: "POST"
       success: ->
-        $("[data-behavior='unread-count']").text("")
+        $("[data-behavior='unread-count']").text(0)
     )
   handleSuccess: (data) =>
+    console.log(data);
     if data.length > 0
       items = $.map data, (notification) ->
-        "<a class='dropdown-item' href='#{notification.url}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
+        "<a class='dropdown-item' data-behavior='notification-item' data-id='#{notification.id}' href='#{notification.url}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a>"
       $("[data-behavior='unread-count']").text(items.length)
       $("[data-behavior='notification-items']").html(items)
     else
