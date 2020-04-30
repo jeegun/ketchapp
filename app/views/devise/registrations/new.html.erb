@@ -23,7 +23,7 @@
           <%= f.input :password_confirmation,
                       required: true,
                       input_html: { autocomplete: "new-password" } %>
-          <%= f.input :home_city, label: 'Home city', placeholder: 'Current city' %>
+          <%= f.input :home_city, label: 'Home city', placeholder: 'Current city', onkeypress: "return event.keyCode!=13" %>
           <%= f.input :latitude, as: :hidden, class: 'form-control' %>
           <%= f.input :longitude, as: :hidden, class: 'form-control' %>
         </div>
