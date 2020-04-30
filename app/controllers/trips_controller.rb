@@ -17,7 +17,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     authorize @trip
     @trip.user = current_user
-    @trip.location = @trip.location.split(",")[0]
+    # @trip.location = @trip.location.split(",")[0]
     @trip.status = "saved"
     if @trip.save
       redirect_to trip_path(@trip)
@@ -53,6 +53,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:start_date, :end_date, :location)
+    params.require(:trip).permit(:start_date, :end_date, :location, :latitude, :longitude)
   end
 end

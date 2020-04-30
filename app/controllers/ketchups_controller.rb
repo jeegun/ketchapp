@@ -35,11 +35,11 @@ class KetchupsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @ketchup.trip = @trip
     @ketchup.status = "pending"
-    Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
     if @ketchup.save
       unless current_user.access_token.nil?
         GoogleCalendarWrapper.create(@ketchup, current_user)
       end
+      Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
       redirect_to ketchup_path(@ketchup), notice: 'Ketchup created.'
     else
       @friends = User.where(["home_city = ?", @trip.location])

@@ -7,8 +7,8 @@ class FriendRequestsController < ApplicationController
     @friend_request.receiver = User.find(params[:user_id])
     @friend_request.sender = current_user
     @friend_request.status = 'pending'
-    Notification.create(recipient: @friend_request.receiver, actor: current_user, action: "sent you a", notifiable: @friend_request)
     @friend_request.save!
+    Notification.create(recipient: @friend_request.receiver, actor: current_user, action: "sent you a", notifiable: @friend_request)
     redirect_to user_friends_path(current_user), notice: 'Request sent.'
   end
 
