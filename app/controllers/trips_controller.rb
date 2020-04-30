@@ -2,7 +2,12 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def show
-    @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
+    maxLat = @trip.latitude + 0.5
+    minLat = @trip.latitude - 0.5
+    maxLng = @trip.longitude + 0.5
+    minLng = @trip.longitude - 0.5
+    @friends = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng)
+    @friends = @friends.where(["NOT id = ?", current_user.id])
     @ketchup = Ketchup.new
     @start_year = @trip.start_date.strftime('%Y')
     @start_month = @trip.start_date.strftime('%b')
@@ -17,7 +22,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     authorize @trip
     @trip.user = current_user
-    @trip.location = @trip.location.split(",")[0]
+    # @trip.location = @trip.location.split(",")[0]
     @trip.status = "saved"
     if @trip.save
       redirect_to trip_path(@trip)
@@ -53,6 +58,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:start_date, :end_date, :location)
+    params.require(:trip).permit(:start_date, :end_date, :location, :latitude, :longitude)
   end
 end

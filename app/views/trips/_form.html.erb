@@ -5,26 +5,28 @@
   <%#= f.submit "Search your friends", class: "btn btn-flat" %>
 <%# end %>
 
-<%= form_with model: @trip, local: true, data: { controller: :places, action: "google-search-callback@window->places#initializeMap" } do |form| %>
+<%= form_with model: @trip, local: true, class: 'trip-form' do |form| %>
+  <div class="d-flex justify-content-center">
+    <div class="form-group" style="flex: 1 0 25%;">
+      <%= form.label :start_date %>
+      <%= form.text_field :start_date, type: "date", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :start_date %>
-    <%= form.text_field :start_date, type: "date", class: 'form-control' %>
-  </div>
+    <div class="form-group" style="flex: 1 0 25%;">
+      <%= form.label :end_date %>
+      <%= form.text_field :end_date, type: "date", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :end_date %>
-    <%= form.text_field :end_date, type: "date", class: 'form-control' %>
-  </div>
+    <div class="form-group" style="flex: 1 0 25%;">
+      <%= form.label "City" %>
+      <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city", onkeypress: "return event.keyCode!=13" %>
+      <%= form.text_field :latitude, type: "hidden", class: 'form-control' %>
+      <%= form.text_field :longitude, type: "hidden", class: 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label "Enter a city" %>
-    <%= form.text_field :location, class: 'form-control', data: { target: "places.field", action: "keydown->places#preventSubmit" } %>
-    <%= form.text_field :latitude, type: "hidden", data: { target: "places.latitude" }, class: 'form-control' %>
-    <%= form.text_field :longitude, type: "hidden", data: { target: "places.longitude" }, class: 'form-control' %>
-  </div>
+    <div class="actions" style="flex: 0 0 12%; display: flex; align-items: center;">
+      <%= form.submit "Search friends", class: 'btn btn-flat mt-0' %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit "Search your friends", class: 'btn btn-flat' %>
   </div>
 <% end %>
