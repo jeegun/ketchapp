@@ -16,6 +16,7 @@ class TripsController < ApplicationController
     @end_month = @trip.end_date.strftime('%b')
     @end_day = @trip.end_date.strftime('%d')
     @chat = Chat.new
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def create

@@ -27,6 +27,7 @@ class KetchupsController < ApplicationController
     # else
     #   @duration = "#{@ketchup.duration}m"
     # end
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def create

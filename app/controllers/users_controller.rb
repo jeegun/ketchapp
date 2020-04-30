@@ -3,22 +3,27 @@ class UsersController < ApplicationController
 
   def trip
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def save
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"])
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def ketchup
     @pending_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "pending"])
     @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def notification
-    @notifications = Notification.where(recipient: @user).order("created_at DESC")
+    @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def friend
+    @notifications = Notification.where(recipient: current_user).unread
     @sent_requests = FriendRequest.where(["sender_id = ? AND status = ?", @user.id, "pending"])
     @received_requests = FriendRequest.where(["receiver_id = ? AND status = ?", @user.id, "pending"])
     @friendship = Friendship.new

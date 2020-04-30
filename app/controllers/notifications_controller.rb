@@ -4,11 +4,16 @@ class NotificationsController < ApplicationController
     @notifications = policy_scope(Notification).order(created_at: :desc)
   end
 
-  def mark_as_read
-    # @notifications = policy_scope(Notification).order(created_at: :desc)
-    notification = notification.find(data-id)
-    # check how to refer to data-id in this method
-    notification.update!(read_at: Time.zone.now)
-    # render json: {success: true}
+  def update
+    @notification = Notification.find(params[:id])
+    authorize @notification
+    if @notification.read_at.nil?
+      @notification.update!(read_at: Time.zone.now)
+    end
+    if @notification.notifiable_type == "Friendship" || @notification.notifiable_type == "FriendRequest"
+      redirect_to  user_friends_path(@notification.recipient)
+    elsif @notification.notifiable_type == "Ketchup"
+      redirect_to user_ketchups_path(@notification.recipient)
+   end
   end
 end

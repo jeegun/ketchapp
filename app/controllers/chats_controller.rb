@@ -10,6 +10,7 @@ class ChatsController < ApplicationController
     @messages = @chat.messages
     @my_messages = @chat.messages.where(["user_id = ?", current_user.id])
     @other_messages = @chat.messages.where(["user_id = ?", @chat.opposed_user(current_user).id])
+    @notifications = Notification.where(recipient: current_user).unread
   end
 
   def create
