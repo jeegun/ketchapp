@@ -2,7 +2,12 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def show
-    @friends = User.where(["home_city = ? AND NOT id = ?", @trip.location, current_user.id])
+    maxLat = @trip.latitude + 0.5
+    minLat = @trip.latitude - 0.5
+    maxLng = @trip.longitude + 0.5
+    minLng = @trip.longitude - 0.5
+    @friends = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng)
+    @friends = @friends.where(["NOT id = ?", current_user.id])
     @ketchup = Ketchup.new
     @start_year = @trip.start_date.strftime('%Y')
     @start_month = @trip.start_date.strftime('%b')
