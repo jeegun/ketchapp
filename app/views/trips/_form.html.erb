@@ -19,7 +19,7 @@
 
     <div class="form-group" style="flex: 1 0 25%;">
       <%= form.label "City" %>
-      <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city" %>
+      <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city", onkeypress: "return event.keyCode!=13" %>
       <%= form.text_field :latitude, type: "hidden", class: 'form-control' %>
       <%= form.text_field :longitude, type: "hidden", class: 'form-control' %>
     </div>
