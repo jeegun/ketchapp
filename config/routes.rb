@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :friendships, only: [:create]
   end
 
-  resources :notifications, only: [:index, :create, :show] do
+  resources :notifications, only: [:index, :create, :show, :update] do
     collection do
       post :mark_as_read
     end

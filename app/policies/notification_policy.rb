@@ -5,7 +5,7 @@ class NotificationPolicy < ApplicationPolicy
     end
   end
 
-  def mark_as_read?
+  def update?
     user_is_recipient?
   end
 

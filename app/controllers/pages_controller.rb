@@ -3,5 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @trip = Trip.new
+    @notifications = Notification.where(recipient: current_user).unread
   end
 end
