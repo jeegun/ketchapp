@@ -56,6 +56,8 @@ class KetchupsController < ApplicationController
       @ketchup.status = 'confirmed'
       @ketchup.save
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
+      KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
+      KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     else
       if @ketchup.update(ketchup_params)
