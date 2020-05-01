@@ -30,7 +30,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
   validates :first_name, :last_name, presence: true
-  after_create :send_welcome_email
+  # after_create :send_welcome_email
 
   def full_name
     return "#{first_name} #{last_name}"
@@ -76,6 +76,6 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
-    UserMailer.with(user: self).welcome.deliver_now
+    # UserMailer.with(user: self).welcome.deliver_now
   end
 end

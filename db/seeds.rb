@@ -567,7 +567,18 @@ Notification.create!(recipient_id: 11, actor_id: 23, action: 'has accepted your'
 Notification.create!(recipient_id: 14, actor_id: 1, action: 'has accepted your', notifiable_id: 14, notifiable_type: 'Friendship')
 Notification.create!(recipient_id: 14, actor_id: 10, action: 'has accepted your', notifiable_id: 16, notifiable_type: 'Friendship')
 Notification.create!(recipient_id: 14, actor_id: 20, action: 'has accepted your', notifiable_id: 18, notifiable_type: 'Friendship')
-
+Notification.create!(recipient_id: 11, actor_id: 3, action: 'has confirmed your', notifiable_id: 4, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 6, actor_id: 13, action: 'has confirmed your', notifiable_id: 17, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 6, actor_id: 16, action: 'has confirmed your', notifiable_id: 18, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 14, actor_id: 1, action: 'has confirmed your', notifiable_id: 19, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 14, actor_id: 4, action: 'has confirmed your', notifiable_id: 20, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 11, actor_id: 13, action: 'has confirmed your', notifiable_id: 23, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 11, actor_id: 15, action: 'has sent you a request to', notifiable_id: 26, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 11, actor_id: 2, action: 'has sent you a request to', notifiable_id: 28, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 6, actor_id: 19, action: 'has sent you a request to', notifiable_id: 30, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 6, actor_id: 12, action: 'has sent you a request to', notifiable_id: 32, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 14, actor_id: 5, action: 'has sent you a request to', notifiable_id: 34, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 14, actor_id: 7, action: 'has sent you a request to', notifiable_id: 36, notifiable_type: 'Ketchup')
 
 puts "-" * 60
 puts "Notifications created"
