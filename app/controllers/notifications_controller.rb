@@ -1,12 +1,12 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  def index
-    @notifications = policy_scope(Notification).order(created_at: :desc)
-  end
+  before_action :set_notification, only: [:update]
+
+  # def index
+  #   @notifications = policy_scope(Notification).order(created_at: :desc)
+  # end
 
   def update
-    @notification = Notification.find(params[:id])
-    authorize @notification
     if @notification.read_at.nil?
       @notification.update!(read_at: Time.zone.now)
     end
@@ -15,5 +15,12 @@ class NotificationsController < ApplicationController
     elsif @notification.notifiable_type == "Ketchup"
       redirect_to user_ketchups_path(@notification.recipient)
    end
+  end
+
+  private
+
+  def set_notification
+    @notification = Notification.find(params[:id])
+    authorize @notification
   end
 end
