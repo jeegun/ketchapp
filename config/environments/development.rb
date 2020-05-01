@@ -1,5 +1,6 @@
 Rails.application.configure do
-  config.action_mailer.delivery_method = :smtp
+  # if we change :letter_opener to :smtp it will send real email
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { host: "http://localhost:3000" }
   # Settings specified here will take precedence over those in config/application.rb.
 
