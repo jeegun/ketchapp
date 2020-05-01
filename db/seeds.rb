@@ -117,7 +117,7 @@ users_data = [
     last_name: "Daniel",
     home_city: "Yonkers, NY, USA",
     latitude: 40.9312099,
-    longitude: 73.89874689999999,
+    longitude: -73.89874689999999,
     phone_number: "000 000 011",
     lewagon_username: "jiggyjensen"
   },

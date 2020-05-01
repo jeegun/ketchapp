@@ -30,6 +30,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
   validates :first_name, :last_name, presence: true
+  after_create :send_welcome_email
 
   def full_name
     return "#{first_name} #{last_name}"
@@ -49,7 +50,6 @@ class User < ApplicationRecord
       return user
     end
   end
-
 
   def expired?
     expires_at < Time.current.to_i
@@ -71,5 +71,11 @@ class User < ApplicationRecord
 
   def chats
     self.chats_as_recipient + self.chats_as_sender
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome.deliver_now
   end
 end
