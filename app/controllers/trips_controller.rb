@@ -17,6 +17,7 @@ class TripsController < ApplicationController
     @end_day = @trip.end_date.strftime('%d')
     @chat = Chat.new
     @notifications = Notification.where(recipient: current_user).unread
+    @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
     @start_date = @trip.start_date.strftime('%b %d, %Y %I:%M %p')
     @end_date = @trip.end_date.strftime('%b %d, %Y 11:30 PM')
   end
