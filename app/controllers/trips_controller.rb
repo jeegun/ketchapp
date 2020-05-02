@@ -17,12 +17,20 @@ class TripsController < ApplicationController
     @end_day = @trip.end_date.strftime('%d')
     @chat = Chat.new
     @notifications = Notification.where(recipient: current_user).unread
+    @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
+    @start_date = @trip.start_date.strftime('%b %d, %Y %I:%M %p')
+    @end_date = @trip.end_date.strftime('%b %d, %Y 11:30 PM')
   end
 
   def create
     @trip = Trip.new(trip_params)
     authorize @trip
     @trip.user = current_user
+    dates = params[:trip][:dates].split(' - ')
+    start_date = dates.first
+    end_date = dates.last
+    @trip.start_date = Date.parse(start_date)
+    @trip.end_date = Date.parse(end_date)
     # @trip.location = @trip.location.split(",")[0]
     @trip.status = "saved"
     if @trip.save
