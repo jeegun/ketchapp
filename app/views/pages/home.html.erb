@@ -43,11 +43,12 @@
   $(document).ready(function() {
     $('input[class="daterange form-control"]').daterangepicker({
       autoApply: true,
-      startDate: <%= Date.today %>,
-      endDate: <%= Date.today %>,
+      minDate: '<%= @today %>',
+      startDate: '<%= @today %>',
+      endDate: '<%= @today %>',
       opens: "center",
       locale: {
-        format: 'DD MMM, YYYY'
+        format: 'MMM DD, YYYY'
       }
     });
   });

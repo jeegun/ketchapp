@@ -4,5 +4,6 @@ class PagesController < ApplicationController
   def home
     @trip = Trip.new
     @notifications = Notification.where(recipient: current_user).unread
+    @today = Date.today.strftime('%b %d, %Y')
   end
 end

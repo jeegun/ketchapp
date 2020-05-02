@@ -14,6 +14,7 @@ class NotificationsController < ApplicationController
       redirect_to  user_friends_path(@notification.recipient)
     elsif @notification.notifiable_type == "Ketchup"
       redirect_to user_ketchups_path(@notification.recipient)
+      # redirect_to ketchup_path(@notification.notifiable_id)
    end
   end
 
