@@ -1,7 +1,7 @@
 <%= render 'shared/banner' %>
 <div class="stripe">
   <h2>How KetchUp works</h2>
-  <div class="home-info">
+  <div class="home-info text-center">
    <div class="info">
     <i class="fas fa-users"></i>
      <h3>Find, connect & chat</h3>
@@ -40,5 +40,16 @@
     document.getElementById('trip_longitude').value = place.geometry.location.lng()
     }
   }
+  $(document).ready(function() {
+    $('input[class="daterange form-control"]').daterangepicker({
+      autoApply: true,
+      startDate: <%= Date.today %>,
+      endDate: <%= Date.today %>,
+      opens: "center",
+      locale: {
+        format: 'DD MMM, YYYY'
+      }
+    });
+  });
 </script>
 

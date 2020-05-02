@@ -6,25 +6,16 @@
 <%# end %>
 
 <%= form_with model: @trip, local: true, class: 'trip-form' do |form| %>
-  <div class="d-flex justify-content-center">
-    <div class="form-group" style="flex: 1 0 25%;">
-      <%= form.label :start_date %>
-      <%= form.text_field :start_date, type: "date", class: 'form-control' %>
+  <div class="d-flex col-8 offset-2">
+    <div class="form-group" style="flex: 0 0 40%;">
+      <%= form.text_field :dates, class: "daterange form-control" %>
     </div>
-
-    <div class="form-group" style="flex: 1 0 25%;">
-      <%= form.label :end_date %>
-      <%= form.text_field :end_date, type: "date", class: 'form-control' %>
-    </div>
-
-    <div class="form-group" style="flex: 1 0 25%;">
-      <%= form.label "City" %>
+    <div class="form-group" style="flex: 0 0 40%;">
       <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city", onkeypress: "return event.keyCode!=13" %>
       <%= form.text_field :latitude, type: "hidden", class: 'form-control' %>
       <%= form.text_field :longitude, type: "hidden", class: 'form-control' %>
     </div>
-
-    <div class="actions" style="flex: 0 0 12%; display: flex; align-items: center;">
+    <div class="actions" style="flex: 0 0 20%;">
       <%= form.submit "Search friends", class: 'btn btn-flat mt-0' %>
     </div>
 

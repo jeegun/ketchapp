@@ -23,8 +23,16 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     authorize @trip
     @trip.user = current_user
+    dates = params[:trip][:dates]
+    start_date = dates.split(' - ').first
+    start_date = Date.parse(start_date)
+    end_date = dates.split(' - ').last
+    end_date = Date.parse(end_date)
+    @trip.start_date = start_date
+    @trip.end_date = end_date
     # @trip.location = @trip.location.split(",")[0]
     @trip.status = "saved"
+    raise
     if @trip.save
       redirect_to trip_path(@trip)
     else
