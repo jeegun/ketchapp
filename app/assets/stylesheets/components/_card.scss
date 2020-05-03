@@ -81,25 +81,22 @@
   bottom: 0;
   width: 100%;
   display: flex;
-}
-
-.card-vertical-friend .card-vertical-friend-btn > form {
-  flex: 0 0 50%;
+  form {
+    flex: 0 0 50%;
+  }
 }
 
 .card-vertical-friend .card-vertical-friend-btn .btn-ghost {
   width: 100%;
   border-radius: 0;
   padding: 8px 16px;
-}
-
-.btn-left {
-  border-bottom-left-radius: 10px !important;
-}
-
- .btn-right {
-  border-bottom-right-radius: 10px !important;
-  flex: 0 0 50%;
+  &.btn-left {
+    border-bottom-left-radius: 10px !important;
+  }
+  &.btn-right {
+    border-bottom-right-radius: 10px !important;
+    flex: 0 0 50%;
+  }
 }
 
 .cards-trips {

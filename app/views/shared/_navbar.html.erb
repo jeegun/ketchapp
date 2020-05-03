@@ -22,25 +22,25 @@
                 <% end %>
               </span>
           </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <div class="dropdown-menu notification-drop" aria-labelledby="dropdownMenu1">
           <% if @notifications.present? %>
             <% @notifications.each do |notification| %>
               <%= link_to notification.actor.full_name + " " + notification.action + " " + notification.notifiable_type.to_s.underscore.humanize.downcase, notification_path(notification), method: :patch || :put, class: 'dropdown-item' %>
             <% end %>
           <% end %>
-          <%= link_to "See All", user_notifications_path(current_user), class: 'dropdown-item' %>
+          <%= link_to "See All", user_notifications_path(current_user), class: 'dropdown-item text-center all' %>
         </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <% if request.url.split('/').last == 'friends' %> active<% end %>">
           <%= link_to "Friends", user_friends_path(current_user), class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <% if request.url.split('/').last == 'ketchups' %> active<% end %>">
           <%= link_to "Ketchups", user_ketchups_path(current_user), class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <% if request.url.split('/').last == 'saves' %> active<% end %>">
           <%= link_to "Saved", user_saves_path(current_user), class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item <% if request.url.split('/').last == 'trips' %> active<% end %>">
           <%= link_to "My Trips", user_trips_path(current_user), class: "nav-link" %>
         </li>
 
