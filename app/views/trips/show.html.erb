@@ -49,8 +49,10 @@
             </div>
             <div class="card-vertical-friend-btn">
               <%= simple_form_for [friend, @chat], html: { id: "new_chat_#{friend.id}" } do |f| %>
-                <%= f.submit "Start a chat", class: 'btn btn-ghost mb-0' %>
+                <%= f.submit "Chat", class: 'btn btn-ghost btn-left mb-0' %>
               <% end %>
+              <%= link_to 'Ketchup', '', data: { toggle: "modal", target: "#createKetchup#{friend.id}" }, class: 'btn btn-ghost btn-right mb-0' %>
+
               <%#= link_to 'Start a chat', chats_path(user_id: friend.id), method: :post, class: 'btn btn-ghost mb-0' %>
             </div>
           </div>
