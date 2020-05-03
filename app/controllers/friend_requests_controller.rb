@@ -12,13 +12,13 @@ class FriendRequestsController < ApplicationController
     redirect_to user_friends_path(current_user), notice: 'Request sent.'
   end
 
-  def update
-    if @friend_request.update(friend_request_params)
-      redirect_to user_friends_path(current_user)
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   if @friend_request.update(friend_request_params)
+  #     redirect_to user_friends_path(current_user)
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   def destroy
     @friend_request.destroy

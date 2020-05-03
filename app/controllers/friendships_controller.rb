@@ -8,8 +8,9 @@ class FriendshipsController < ApplicationController
     @friendship.friend_sender = request.sender
     @friendship.friend_receiver = request.receiver
     @friendship.save!
-    Notification.create(recipient: @friendship.friend_sender, actor: @friendship.friend_receiver, action: "has accepted your", notifiable: @friendship)
-    request.destroy
+    Notification.create(recipient: @friendship.friend_sender, actor: @friendship.friend_receiver, action: "has accepted your", notifiable: request)
+    request.status = 'accepted'
+    request.save!
     redirect_to user_friends_path(current_user)
   end
 
