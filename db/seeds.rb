@@ -573,12 +573,19 @@ Notification.create!(recipient_id: 6, actor_id: 16, action: 'has confirmed your'
 Notification.create!(recipient_id: 14, actor_id: 1, action: 'has confirmed your', notifiable_id: 19, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 4, action: 'has confirmed your', notifiable_id: 20, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 11, actor_id: 13, action: 'has confirmed your', notifiable_id: 23, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 11, actor_id: 15, action: 'is coming to your town from Jul 2 to Jul 9', notifiable_id: 19, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 11, actor_id: 2, action: 'is coming to your town from Jul 2 to Jul 13', notifiable_id: 20, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 6, actor_id: 19, action: 'is coming to your town from Jul 10 to Aug 2', notifiable_id: 21, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 6, actor_id: 12, action: 'is coming to your town from Jul 18 to Jul 22', notifiable_id: 22, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 14, actor_id: 5, action: 'is coming to your town from Jul 21 to Jul 30', notifiable_id: 23, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 14, actor_id: 7, action: 'is coming to your town from Jul 28 to Aug 8', notifiable_id: 24, notifiable_type: 'Trip')
 Notification.create!(recipient_id: 11, actor_id: 15, action: 'has sent you a request to', notifiable_id: 26, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 11, actor_id: 2, action: 'has sent you a request to', notifiable_id: 28, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 6, actor_id: 19, action: 'has sent you a request to', notifiable_id: 30, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 6, actor_id: 12, action: 'has sent you a request to', notifiable_id: 32, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 5, action: 'has sent you a request to', notifiable_id: 34, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 7, action: 'has sent you a request to', notifiable_id: 36, notifiable_type: 'Ketchup')
+
 
 puts "-" * 60
 puts "Notifications created"

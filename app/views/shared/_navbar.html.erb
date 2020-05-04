@@ -3,12 +3,9 @@
     <!-- <img src="https://img.talkandroid.com/uploads/2014/03/ketchup.png" alt="logo"> -->
     <span style='color: #EDE5CC; font-weight:700; font-size: 37px; font-family: Permanent Marker;'>KetchUp</span>
   <% end %>
-
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
@@ -24,8 +21,13 @@
           </a>
           <div class="dropdown-menu notification-drop" aria-labelledby="dropdownMenu1">
             <% if @notifications.present? %>
+              <!-- limited to lastest 10 for now -->
               <% @notifications.first(10).each do |notification| %>
-                <%= link_to notification.actor.full_name + " " + notification.action + " " + notification.notifiable_type.to_s.underscore.humanize.downcase, notification_path(notification), method: :patch || :put, class: 'dropdown-item' %>
+                <% if notification.notifiable_type == 'Trip' %>
+                  <%= link_to notification.actor.full_name + " " + notification.action, notification_path(notification), method: :patch || :put, class: 'dropdown-item' %>
+                <% else %>
+                  <%= link_to notification.actor.full_name + " " + notification.action + " " + notification.notifiable_type.to_s.underscore.humanize.downcase, notification_path(notification), method: :patch || :put, class: 'dropdown-item' %>
+                <% end %>
               <% end %>
             <% end %>
             <%= link_to "See All", user_notifications_path(current_user), class: 'dropdown-item text-center all' %>

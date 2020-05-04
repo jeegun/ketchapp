@@ -46,3 +46,16 @@
     opacity: 1;
   }
 }
+
+.notification .notification-actions a.btn-flat {
+  color: $mayo !important;
+}
+
+.notification .notification-actions .btn-flat, .notification .notification-actions .btn-ghost {
+  margin-left: 16px;
+  font-size: 14px;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}

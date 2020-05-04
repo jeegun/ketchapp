@@ -39,15 +39,9 @@ class TripsController < ApplicationController
   def update
     if @trip.status == 'saved'
       @trip.update!(status: 'confirmed')
-      @people_in_radius_in_contact = @people_in_radius.map do |people|
-        if current_user.match_contacts?(people)
-          people
-        end
-      end
-      @people_in_radius_in_contact.compact!
-      @people_in_radius_in_contact.each do |people|
+      @people_to_show.each do |people|
         if current_user.is_friend?(people)
-          Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date} to #{@trip.end_date}", notifiable: @trip)
+          Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date.strftime('%b')} #{@trip.start_date.strftime('%d')} to #{@trip.end_date.strftime('%b')} #{@trip.end_date.strftime('%d')}", notifiable: @trip)
         end
       end
       redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
@@ -78,6 +72,7 @@ class TripsController < ApplicationController
     maxLng = @trip.longitude + 0.5
     minLng = @trip.longitude - 0.5
     people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
+    # added @ because we need this for ketchup create form
     @people_in_radius_are_friends = (people_in_radius.map { |people| people if current_user.is_friend?(people) }).compact!
     people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact!
     # should we also add people who you sent or you received friend request in this list?

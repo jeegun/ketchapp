@@ -67,29 +67,37 @@ class User < ApplicationRecord
     self.chats_as_recipient + self.chats_as_sender
   end
 
+  # contacts user can invite to ketchup app
   def non_matching_contacts
-    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact!
+    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact! if self.contacts.present?
   end
 
+  # contacts that matches users already signed up
   def matching_contacts
-    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact!
+    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact! if self.contacts.present?
   end
 
+  # check if the person is in the contact list
   def match_contacts?(other)
-    self.matching_contacts.include?(other)
+    self.matching_contacts.include?(other) if self.matching_contacts.present?
   end
 
+  # contacts already signed up but not friend nor sent nor received request
   def requestable_contacts
-    requestable_contacts = self.matching_contacts.map do |contact|
-      contact if (!self.is_friend?(contact) && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
+    if self.matching_contacts.present?
+      requestable_contacts = self.matching_contacts.map do |contact|
+        contact if (!self.is_friend?(contact) && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
+      end
+      requestable_contacts.compact!
     end
-    requestable_contacts.compact!
   end
 
+  # check if friend request was already sent
   def sent_friend_request?(other)
     FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, other.id, "pending"]).present?
   end
 
+  # check if friend request was already received
   def received_friend_request?(other)
     FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", other.id, self.id, "pending"]).present?
   end

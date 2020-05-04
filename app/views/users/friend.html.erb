@@ -44,16 +44,20 @@
   </div>
   <div class="lists" style="display: none;">
     <h1>People you may know</h1>
-    <% current_user.requestable_contacts.each do |user| %>
-      <p><%= user.full_name %></p>
-      <%= simple_form_for [user, @friend_request] do |f| %>
-        <%= f.submit "Friend request", class: "btn btn-ghost" %>
+    <% if current_user.requestable_contacts %>
+      <% current_user.requestable_contacts.each do |user| %>
+        <p><%= user.full_name %></p>
+        <%= simple_form_for [user, @friend_request] do |f| %>
+          <%= f.submit "Friend request", class: "btn btn-ghost" %>
+        <% end %>
       <% end %>
     <% end %>
-    <% current_user.non_matching_contacts.each do |contact| %>
-      <% if contact.invited_at.nil? %>
-        <p><%= (contact.first_name + ' ' + contact.last_name) %></p>
-        <%= link_to 'Send invite to Ketchapp', contact_path(contact), method: :patch || :put, class: 'btn btn-flat' %>
+    <% if current_user.non_matching_contacts %>
+      <% current_user.non_matching_contacts.each do |contact| %>
+        <% if contact.invited_at.nil? %>
+          <p><%= contact.first_name + ' ' + contact.last_name %></p>
+          <%= link_to 'Send invite to Ketchapp', contact_path(contact), method: :patch || :put, class: 'btn btn-flat' %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

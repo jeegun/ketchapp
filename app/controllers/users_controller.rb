@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def notification
     @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
     @friendship = Friendship.new
+    @chat = Chat.new
   end
 
   def friend

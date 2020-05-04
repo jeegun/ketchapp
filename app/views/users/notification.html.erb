@@ -15,8 +15,13 @@
               <% end %>
               <%= link_to "Decline", friend_request_path(notification.notifiable_id), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
             <% elsif (notification.notifiable_type == 'Ketchup') && (notification.action == 'has sent you a request to') && Ketchup.find(notification.notifiable_id).status == "pending" %>
-              <%= link_to 'Confirm', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :patch || :put, class: 'btn btn-flat', style: 'color: #EDE5CC;' %>
+              <%= link_to 'Confirm', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :patch || :put, class: 'btn btn-flat' %>
               <%= link_to 'Decline', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
+            <% elsif notification.notifiable_type == 'Trip' %>
+              <%= link_to 'Ketchup', '#', class: 'btn btn-flat' %>
+              <%= simple_form_for [notification.actor, @chat], html: { id: "new_chat_#{notification.actor.id}" } do |f| %>
+                <%= f.submit "Chat", class: 'btn btn-ghost ml-3' %>
+              <% end %>
             <% else %>
               <a href="#">Dismiss <i class="fas fa-times"></i></i></a>
             <% end %>
