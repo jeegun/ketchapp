@@ -1,13 +1,8 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :set_people_to_show, only: [:show, :update]
 
   def show
-    maxLat = @trip.latitude + 0.5
-    minLat = @trip.latitude - 0.5
-    maxLng = @trip.longitude + 0.5
-    minLng = @trip.longitude - 0.5
-    @friends = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng)
-    @friends = @friends.where(["NOT id = ?", current_user.id])
     @ketchup = Ketchup.new
     @start_year = @trip.start_date.strftime('%Y')
     @start_month = @trip.start_date.strftime('%b')
@@ -16,7 +11,8 @@ class TripsController < ApplicationController
     @end_month = @trip.end_date.strftime('%b')
     @end_day = @trip.end_date.strftime('%d')
     @chat = Chat.new
-    @notifications = Notification.where(recipient: current_user).unread
+    @friend_request = FriendRequest.new
+    @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
     @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
     @start_date = @trip.start_date.strftime('%b %d, %Y %I:%M %p')
     @end_date = @trip.end_date.strftime('%b %d, %Y 11:30 PM')
@@ -42,8 +38,18 @@ class TripsController < ApplicationController
 
   def update
     if @trip.status == 'saved'
-      @trip.status = 'confirmed'
-      @trip.save
+      @trip.update!(status: 'confirmed')
+      @people_in_radius_in_contact = @people_in_radius.map do |people|
+        if current_user.match_contacts?(people)
+          people
+        end
+      end
+      @people_in_radius_in_contact.compact!
+      @people_in_radius_in_contact.each do |people|
+        if current_user.is_friend?(people)
+          Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date} to #{@trip.end_date}", notifiable: @trip)
+        end
+      end
       redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
     else
       if @trip.update(trip_params)
@@ -64,6 +70,18 @@ class TripsController < ApplicationController
   def set_trip
     @trip = Trip.find(params[:id])
     authorize @trip
+  end
+
+  def set_people_to_show
+    maxLat = @trip.latitude + 0.5
+    minLat = @trip.latitude - 0.5
+    maxLng = @trip.longitude + 0.5
+    minLng = @trip.longitude - 0.5
+    people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
+    @people_in_radius_are_friends = (people_in_radius.map { |people| people if current_user.is_friend?(people) }).compact!
+    people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact!
+    # should we also add people who you sent or you received friend request in this list?
+    @people_to_show = (@people_in_radius_are_friends + people_in_radius_in_contact).uniq
   end
 
   def trip_params

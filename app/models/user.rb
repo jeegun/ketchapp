@@ -59,18 +59,39 @@ class User < ApplicationRecord
     self.friendships_as_friend_sender + self.friendships_as_friend_receiver
   end
 
-  def is_friend?(me, other)
-    if Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", me, other]).any?
-      return true
-    elsif Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", other, me]).any?
-      return true
-    else
-      return false
-    end
+  def is_friend?(other)
+    Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", self.id, other.id]).present? || Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", other.id, self.id]).present?
   end
 
   def chats
     self.chats_as_recipient + self.chats_as_sender
+  end
+
+  def non_matching_contacts
+    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact!
+  end
+
+  def matching_contacts
+    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact!
+  end
+
+  def match_contacts?(other)
+    self.matching_contacts.include?(other)
+  end
+
+  def requestable_contacts
+    requestable_contacts = self.matching_contacts.map do |contact|
+      contact if (!self.is_friend?(contact) && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
+    end
+    requestable_contacts.compact!
+  end
+
+  def sent_friend_request?(other)
+    FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, other.id, "pending"]).present?
+  end
+
+  def received_friend_request?(other)
+    FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", other.id, self.id, "pending"]).present?
   end
 
   private

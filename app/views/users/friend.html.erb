@@ -2,7 +2,7 @@
   <ul class="list-inline tabs-underlined">
     <!-- tabs without js function need to add js to show the right div -->
     <li>
-      <p class="tab-underlined active">Friends</p>
+      <p class="tab-underlined active-tab">Friends</p>
     </li>
     <li>
       <p class="tab-underlined">Sent</p>
@@ -44,13 +44,13 @@
   </div>
   <div class="lists" style="display: none;">
     <h1>People you may know</h1>
-    <% @requestable_users.each do |user| %>
+    <% current_user.requestable_contacts.each do |user| %>
       <p><%= user.full_name %></p>
       <%= simple_form_for [user, @friend_request] do |f| %>
         <%= f.submit "Friend request", class: "btn btn-ghost" %>
       <% end %>
     <% end %>
-    <% @non_matching_contacts.each do |contact| %>
+    <% current_user.non_matching_contacts.each do |contact| %>
       <% if contact.invited_at.nil? %>
         <p><%= (contact.first_name + ' ' + contact.last_name) %></p>
         <%= link_to 'Send invite to Ketchapp', contact_path(contact), method: :patch || :put, class: 'btn btn-flat' %>
@@ -77,10 +77,10 @@
     tab.addEventListener('click', e => {
       e.preventDefault()
       showBlock(tabIndex)
-      const active = document.querySelector('.active');
-      event.currentTarget.classList.toggle('active');
-      if (active !== null) {
-        active.classList.remove('active');
+      const activeTab = document.querySelector('.active-tab');
+      event.currentTarget.classList.toggle('active-tab');
+      if (activeTab !== null) {
+        activeTab.classList.remove('active-tab');
       }
     })
   }

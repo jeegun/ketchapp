@@ -83,6 +83,9 @@
   display: flex;
   form {
     flex: 0 0 50%;
+    &.center {
+      flex: 0 0 100%;
+    }
   }
 }
 
@@ -90,6 +93,11 @@
   width: 100%;
   border-radius: 0;
   padding: 8px 16px;
+  margin: 0;
+  &.btn-center {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+  }
   &.btn-left {
     border-bottom-left-radius: 10px !important;
   }
@@ -97,6 +105,10 @@
     border-bottom-right-radius: 10px !important;
     flex: 0 0 50%;
   }
+}
+
+.disabled {
+  opacity: 0.6;
 }
 
 .cards-trips {

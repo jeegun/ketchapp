@@ -32,6 +32,15 @@
     color: $mustard;
     opacity: 0.5;
   }
+  &:active {
+    color: $mustard;
+    opacity: 0.5;
+  }
+}
+
+.navbar-light .navbar-nav .show > .nav-link {
+  color: $mustard;
+  opacity: 0.5;
 }
 
 .navbar-light .navbar-nav .active > .nav-link {

@@ -27,7 +27,7 @@ class KetchupsController < ApplicationController
     # else
     #   @duration = "#{@ketchup.duration}m"
     # end
-    @notifications = Notification.where(recipient: current_user).unread
+    @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
   end
 
   def create
@@ -54,8 +54,9 @@ class KetchupsController < ApplicationController
 
   def update
     if @ketchup.status == 'pending'
-      @ketchup.status = 'confirmed'
-      @ketchup.save
+      @ketchup.update!(status: 'confirmed')
+      notification = Notification.find_by(recipient: current_user, action: "has sent you a request to", notifiable: @ketchup)
+      notification.update!(read_at: Time.zone.now) if notification.read_at.nil?
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
