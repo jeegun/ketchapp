@@ -11,7 +11,7 @@ class TripsController < ApplicationController
     @end_month = @trip.end_date.strftime('%b')
     @end_day = @trip.end_date.strftime('%d')
     @chat = Chat.new
-    @friend_request = FriendRequest.new
+    @connect_request = ConnectRequest.new
     @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
     @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
     @start_date = @trip.start_date.strftime('%b %d, %Y %I:%M %p')
@@ -40,7 +40,7 @@ class TripsController < ApplicationController
     if @trip.status == 'saved'
       @trip.update!(status: 'confirmed')
       @people_to_show.each do |people|
-        if current_user.is_friend?(people)
+        if current_user.is_connection?(people)
           Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date.strftime('%b')} #{@trip.start_date.strftime('%d')} to #{@trip.end_date.strftime('%b')} #{@trip.end_date.strftime('%d')}", notifiable: @trip)
         end
       end
@@ -73,10 +73,10 @@ class TripsController < ApplicationController
     minLng = @trip.longitude - 0.5
     people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
     # added @ because we need this for ketchup create form
-    @people_in_radius_are_friends = (people_in_radius.map { |people| people if current_user.is_friend?(people) }).compact!
+    @people_in_radius_are_connections = (people_in_radius.map { |people| people if current_user.is_connection?(people) }).compact!
     people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact!
-    # should we also add people who you sent or you received friend request in this list?
-    @people_to_show = (@people_in_radius_are_friends + people_in_radius_in_contact).uniq
+    # should we also add people who you sent or you received connect request in this list?
+    @people_to_show = (@people_in_radius_are_connections + people_in_radius_in_contact).uniq
   end
 
   def trip_params

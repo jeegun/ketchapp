@@ -33,8 +33,8 @@
             <%= link_to "See All", user_notifications_path(current_user), class: 'dropdown-item text-center all' %>
           </div>
         </li>
-        <li class="nav-item <%= "active" if request.url.split('/').last == 'friends' %>">
-          <%= link_to "Friends", user_friends_path(current_user), class: "nav-link" %>
+        <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
+          <%= link_to "Connections", user_connections_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item <%= "active" if request.url.split('/').last == 'ketchups' %>">
           <%= link_to "Ketchups", user_ketchups_path(current_user), class: "nav-link" %>

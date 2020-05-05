@@ -10,9 +10,9 @@ json.array! @notifications do |notification|
     json.type "#{notification.notifiable.class.to_s.underscore.humanize.downcase}"
   end
   json.all user_notifications_path(notification.notifiable)
-  # JSON url to link to. anchor links to the request itself and takes us down to the notifiable friend request
-  if notification.notifiable_type == "Friendship" || notification.notifiable_type == "FriendRequest"
-    json.url user_friends_path(notification.recipient)
+  # JSON url to link to. anchor links to the request itself and takes us down to the notifiable connect request
+  if notification.notifiable_type == "Connection" || notification.notifiable_type == "ConnectRequest"
+    json.url user_connections_path(notification.recipient)
   elsif notification.notifiable_type == "Ketchup"
     json.url user_ketchups_path(notification.recipient)
   end

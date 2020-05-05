@@ -3,24 +3,24 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :trips, dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
-  has_many :friend_requests_as_sender,
+  has_many :connect_requests_as_sender,
          foreign_key: :sender_id,
-         class_name: :FriendRequest,
+         class_name: :ConnectRequest,
          dependent: :destroy
-  has_many :friend_requests_as_receiver,
+  has_many :connect_requests_as_receiver,
          foreign_key: :receiver_id,
-         class_name: :FriendRequest,
+         class_name: :ConnectRequest,
          dependent: :destroy
-  has_many :friendships_as_friend_sender,
-      foreign_key: :friend_sender_id,
-      class_name: :Friendship,
+  has_many :connections_as_connection_sender,
+      foreign_key: :connection_sender_id,
+      class_name: :Connection,
       dependent: :destroy
-  has_many :friendships_as_friend_receiver,
-       foreign_key: :friend_receiver_id,
-       class_name: :Friendship,
+  has_many :connections_as_connection_receiver,
+       foreign_key: :connection_receiver_id,
+       class_name: :Connection,
        dependent: :destroy
-  has_many :friend_senders, through: :friendships_as_friend_receiver, dependent: :destroy
-  has_many :friend_receivers, through: :friendships_as_friend_sender, dependent: :destroy
+  has_many :connection_senders, through: :connections_as_connection_receiver, dependent: :destroy
+  has_many :connection_receivers, through: :connections_as_connection_sender, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :chats_as_recipient, foreign_key: :recipient_id, class_name: :Chat, dependent: :destroy
   has_many :chats_as_sender, foreign_key: :sender_id, class_name: :Chat, dependent: :destroy
@@ -55,12 +55,12 @@ class User < ApplicationRecord
     expires_at < Time.current.to_i
   end
 
-  def friends
-    self.friendships_as_friend_sender + self.friendships_as_friend_receiver
+  def connections
+    self.connections_as_connection_sender + self.connections_as_connection_receiver
   end
 
-  def is_friend?(other)
-    Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", self.id, other.id]).present? || Friendship.where(["friend_sender_id =? AND friend_receiver_id =?", other.id, self.id]).present?
+  def is_connection?(other)
+    Connection.where(["connection_sender_id =? AND connection_receiver_id =?", self.id, other.id]).present? || Connection.where(["connection_sender_id =? AND connection_receiver_id =?", other.id, self.id]).present?
   end
 
   def chats
@@ -82,24 +82,24 @@ class User < ApplicationRecord
     self.matching_contacts.include?(other) if self.matching_contacts.present?
   end
 
-  # contacts already signed up but not friend nor sent nor received request
+  # contacts already signed up but not connection nor sent nor received request
   def requestable_contacts
     if self.matching_contacts.present?
       requestable_contacts = self.matching_contacts.map do |contact|
-        contact if (!self.is_friend?(contact) && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
+        contact if (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
       end
       requestable_contacts.compact!
     end
   end
 
-  # check if friend request was already sent
-  def sent_friend_request?(other)
-    FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, other.id, "pending"]).present?
+  # check if connect request was already sent
+  def sent_connect_request?(other)
+    ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, other.id, "pending"]).present?
   end
 
-  # check if friend request was already received
-  def received_friend_request?(other)
-    FriendRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", other.id, self.id, "pending"]).present?
+  # check if connect request was already received
+  def received_connect_request?(other)
+    ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", other.id, self.id, "pending"]).present?
   end
 
   private

@@ -1,5 +1,5 @@
 <%#= simple_form_for [@trip, @ketchup], data: { controller: "places", action: "google-maps-callback@window->places#initializeMap" } do |f| %>
-  <%#= f.association :user, collection: @friends, label: 'Friends', :label_method => :full_name, :value_method => :id, prompt: "Choose a friend" %>
+  <%#= f.association :user, collection: @people_in_radius_are_connections, label: 'Connections', :label_method => :full_name, :value_method => :id, prompt: "Choose a connection" %>
   <%#= f.input :start_date, label: 'Start date & time (UTC)' %>
   <%#= f.input :end_date, label: 'End date & time (UTC)' %>
   <%#= f.input :start_time %>
@@ -13,8 +13,8 @@
 
 <%= form_with model: [@trip, @ketchup], local: true, id: 'ketchup-form' do |form| %>
   <div class="form-group">
-    <%= form.label 'Choose a friend to ketchup with:' %>
-    <%= form.collection_select :user_id, @people_in_radius_are_friends, :id, :full_name, class: 'form-control' %>
+    <%= form.label 'Choose a connection to ketchup with:' %>
+    <%= form.collection_select :user_id, @people_in_radius_are_connections, :id, :full_name, class: 'form-control' %>
   </div>
 
   <div class="form-group">

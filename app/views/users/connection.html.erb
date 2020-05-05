@@ -2,7 +2,7 @@
   <ul class="list-inline tabs-underlined">
     <!-- tabs without js function need to add js to show the right div -->
     <li>
-      <p class="tab-underlined active-tab">Friends</p>
+      <p class="tab-underlined active-tab">Connections</p>
     </li>
     <li>
       <p class="tab-underlined">Sent</p>
@@ -11,16 +11,16 @@
       <p class="tab-underlined">Received</p>
     </li>
     <li>
-      <p class="tab-underlined">Add friends from your contact list</p>
+      <p class="tab-underlined">Add connections from your contact list</p>
     </li>
   </ul>
   <div class="lists">
-    <h1>Friends list</h1>
-    <% current_user.friends.sort.reverse.each do |friend| %>
-      <% if friend.friend_sender == current_user %>
-        <p id="friendship_<%= friend.id %>"><%= friend.friend_receiver.full_name %></p>
+    <h1>Connections list</h1>
+    <% current_user.connections.sort.reverse.each do |connection| %>
+      <% if connection.connection_sender == current_user %>
+        <p><%= connection.connection_receiver.full_name %></p>
       <% else %>
-        <p><%= friend.friend_sender.full_name %></p>
+        <p><%= connection.connection_sender.full_name %></p>
       <% end %>
     <% end %>
   </div>
@@ -28,18 +28,18 @@
     <h1>Sent requests</h1>
     <% @sent_requests.each do |request| %>
       <p>Sent request to <%= request.receiver.full_name %></p>
-      <%= link_to "Cancel", friend_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+      <%= link_to "Cancel", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
 
     <% end %>
   </div>
   <div class="lists" style="display: none;">
     <h1>Received requests</h1>
     <% @received_requests.each do |request| %>
-      <p id="friend_request_<%= request.id %>"><%= request.sender.full_name %> sent you a request</p>
-      <%= simple_form_for [request, @friendship] do |f| %>
+      <p id="connect_request_<%= request.id %>"><%= request.sender.full_name %> sent you a request</p>
+      <%= simple_form_for [request, @connection] do |f| %>
         <%= f.submit "Accept", class: "btn btn-ghost" %>
       <% end %>
-      <%= link_to "Decline", friend_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+      <%= link_to "Decline", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
     <% end %>
   </div>
   <div class="lists" style="display: none;">
@@ -47,8 +47,8 @@
     <% if current_user.requestable_contacts %>
       <% current_user.requestable_contacts.each do |user| %>
         <p><%= user.full_name %></p>
-        <%= simple_form_for [user, @friend_request] do |f| %>
-          <%= f.submit "Friend request", class: "btn btn-ghost" %>
+        <%= simple_form_for [user, @connect_request] do |f| %>
+          <%= f.submit "Connect request", class: "btn btn-ghost" %>
         <% end %>
       <% end %>
     <% end %>

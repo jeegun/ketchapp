@@ -37,32 +37,32 @@
           <% end %>
         </div>
       </div>
-      <!-- friends div -->
-      <div class="cards-friends">
+      <!-- connections div -->
+      <div class="cards-connections">
         <% @people_to_show.each do |people| %>
-              <div class="card-vertical-friend">
+              <div class="card-vertical-connection">
                 <img src="https://kitt.lewagon.com/placeholder/users/<%= people.lewagon_username %>" />
-                <div class="card-vertical-friend-infos">
+                <div class="card-vertical-connection-infos">
                   <h3><%= people.full_name %></h3>
                   <!-- <p>Available dates: </p> -->
                   <br>
                 </div>
-                <div class="card-vertical-friend-btn">
-                  <% if current_user.is_friend?(people) %>
+                <div class="card-vertical-connection-btn">
+                  <% if current_user.is_connection?(people) %>
                     <%= simple_form_for [people, @chat], html: { id: "new_chat_#{people.id}" } do |f| %>
                       <%= f.submit "Chat", class: 'btn btn-ghost btn-left mb-0' %>
                     <% end %>
                     <%= link_to 'Ketchup', '', data: { toggle: "modal", target: "#createKetchup#{people.id}" }, class: 'btn btn-ghost btn-right mb-0' %>
-                  <% elsif current_user.sent_friend_request?(people) %>
+                  <% elsif current_user.sent_connect_request?(people) %>
                     <button class='btn-ghost btn-center disabled' disabled="disabled">Sent</button>
-                  <% elsif current_user.received_friend_request?(people) %>
+                  <% elsif current_user.received_connect_request?(people) %>
                     <button class='btn-ghost btn-center disabled' disabled="disabled">Received</button>
                   <% else %>
-                    <%= simple_form_for [people, @friend_request], html: { class: 'new_friend_request center', id: "new_friend_request_#{people.id}" } do |f| %>
-                      <%= f.submit "Friend request", class: "btn btn-ghost btn-center mb-0" %>
+                    <%= simple_form_for [people, @connect_request], html: { class: 'new_connect_request center', id: "new_connect_request_#{people.id}" } do |f| %>
+                      <%= f.submit "Connect request", class: "btn btn-ghost btn-center mb-0" %>
                     <% end %>
                   <% end %>
-                  <%#= link_to 'Start a chat', chats_path(user_id: friend.id), method: :post, class: 'btn btn-ghost mb-0' %>
+                  <%#= link_to 'Start a chat', chats_path(user_id: people.id), method: :post, class: 'btn btn-ghost mb-0' %>
                 </div>
               </div>
         <% end %>

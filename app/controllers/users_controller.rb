@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:trip, :save, :ketchup, :notification, :friend]
-  before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :friend]
+  before_action :set_user, only: [:trip, :save, :ketchup, :notification, :connection]
+  before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection]
 
   def trip
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
@@ -17,15 +17,15 @@ class UsersController < ApplicationController
 
   def notification
     @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
-    @friendship = Friendship.new
+    @connection = Connection.new
     @chat = Chat.new
   end
 
-  def friend
-    @sent_requests = FriendRequest.where(["sender_id = ? AND status = ?", @user.id, "pending"])
-    @received_requests = FriendRequest.where(["receiver_id = ? AND status = ?", @user.id, "pending"])
-    @friendship = Friendship.new
-    @friend_request = FriendRequest.new
+  def connection
+    @sent_requests = ConnectRequest.where(["sender_id = ? AND status = ?", @user.id, "pending"])
+    @received_requests = ConnectRequest.where(["receiver_id = ? AND status = ?", @user.id, "pending"])
+    @connection = Connection.new
+    @connect_request = ConnectRequest.new
   end
 
   private

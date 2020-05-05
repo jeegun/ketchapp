@@ -44,10 +44,10 @@ class KetchupsController < ApplicationController
       Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
       redirect_to ketchup_path(@ketchup), notice: 'Ketchup created.'
     else
-      @friends = User.where(["home_city = ?", @trip.location])
+      @connections = User.where(["home_city = ?", @trip.location])
       @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
       @chat = Chat.new
-      @friend_request = FriendRequest.new
+      @connect_request = ConnectRequest.new
       render 'trips/show'
     end
   end
