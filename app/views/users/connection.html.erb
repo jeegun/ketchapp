@@ -11,11 +11,10 @@
       <p class="tab-underlined">Received</p>
     </li>
     <li>
-      <p class="tab-underlined">Add connections from your contact list</p>
+      <p class="tab-underlined">People you may know</p>
     </li>
   </ul>
   <div class="lists">
-    <h1>Connections list</h1>
     <% current_user.connections.sort.reverse.each do |connection| %>
       <% if connection.connection_sender == current_user %>
         <p><%= connection.connection_receiver.full_name %></p>
@@ -25,7 +24,6 @@
     <% end %>
   </div>
   <div class="lists" style="display: none;">
-    <h1>Sent requests</h1>
     <% @sent_requests.each do |request| %>
       <p>Sent request to <%= request.receiver.full_name %></p>
       <%= link_to "Cancel", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
@@ -33,7 +31,6 @@
     <% end %>
   </div>
   <div class="lists" style="display: none;">
-    <h1>Received requests</h1>
     <% @received_requests.each do |request| %>
       <p id="connect_request_<%= request.id %>"><%= request.sender.full_name %> sent you a request</p>
       <%= simple_form_for [request, @connection] do |f| %>
@@ -43,7 +40,6 @@
     <% end %>
   </div>
   <div class="lists" style="display: none;">
-    <h1>People you may know</h1>
     <% if current_user.requestable_contacts %>
       <% current_user.requestable_contacts.each do |user| %>
         <p><%= user.full_name %></p>

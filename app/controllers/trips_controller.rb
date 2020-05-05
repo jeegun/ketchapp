@@ -41,7 +41,11 @@ class TripsController < ApplicationController
       @trip.update!(status: 'confirmed')
       @people_to_show.each do |people|
         if current_user.is_connection?(people)
-          Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date.strftime('%b')} #{@trip.start_date.strftime('%d')} to #{@trip.end_date.strftime('%b')} #{@trip.end_date.strftime('%d')}", notifiable: @trip)
+          if @trip.start_date.strftime('%b') == @trip.end_date.strftime('%b')
+            Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date.strftime('%b')} #{@trip.start_date.strftime('%d')} to #{@trip.end_date.strftime('%d')}", notifiable: @trip)
+          else
+            Notification.create(recipient: people, actor: current_user, action: "is coming to your town from #{@trip.start_date.strftime('%b')} #{@trip.start_date.strftime('%d')} to #{@trip.end_date.strftime('%b')} #{@trip.end_date.strftime('%d')}", notifiable: @trip)
+          end
         end
       end
       redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
