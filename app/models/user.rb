@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many :ketchup_requests, through: :trips, source: :ketchups
   has_many :ketchups
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
   validates :first_name, :last_name, presence: true
   # after_create :send_welcome_email
 
@@ -36,19 +36,17 @@ class User < ApplicationRecord
     return "#{first_name} #{last_name}"
   end
 
-  def self.find_for_google_oauth2(auth)
-    # hash 'auth' is the object that is returned from google when an API request
-    # is made. 'info' and 'credentials' are hashes within 'auth'
-    data = auth.info
-    user = User.where(email: auth.info.email).create do |user|
-      user.email = auth.info.email
-      user.password = '123456'
-      user.expires_at = auth.credentials.expires_at.to_i
-      user.access_token = auth.credentials.token
-      user.refresh_token = auth.credentials.refresh_token
-      user.save
-      return user
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(:email => data["email"]).first
+
+    unless user
+      password = Devise.friendly_token[0,20]
+      user = User.create(name: data["name"], email: data["email"],
+        password: password, password_confirmation: password
+      )
     end
+    user
   end
 
   def expired?
