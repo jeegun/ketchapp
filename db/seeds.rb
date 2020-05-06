@@ -345,10 +345,10 @@ Message.destroy_all
 puts "Destroyed all messages"
 Chat.destroy_all
 puts "Destroyed all chats"
-Friendship.destroy_all
-puts "Destroyed all friendships"
-FriendRequest.destroy_all
-puts "Destroyed all friend requests"
+Connection.destroy_all
+puts "Destroyed all connections"
+ConnectRequest.destroy_all
+puts "Destroyed all connect requests"
 Ketchup.destroy_all
 puts "Destroyed all ketchups"
 Trip.destroy_all
@@ -492,93 +492,100 @@ puts "Ketchups created"
 puts "-" * 60
 puts "=" * 60
 puts "-" * 60
-puts "Creating friend requests"
+puts "Creating connect requests"
 puts "-" * 60
 
-FriendRequest.create!(sender_id: 6, receiver_id: 8, status: 'pending')
-FriendRequest.create!(sender_id: 12, receiver_id: 6, status: 'pending')
-FriendRequest.create!(sender_id: 6, receiver_id: 15, status: 'pending')
-FriendRequest.create!(sender_id: 18, receiver_id: 6, status: 'pending')
-FriendRequest.create!(sender_id: 6, receiver_id: 24, status: 'pending')
-FriendRequest.create!(sender_id: 23, receiver_id: 6, status: 'pending')
-FriendRequest.create!(sender_id: 11, receiver_id: 2, status: 'pending')
-FriendRequest.create!(sender_id: 5, receiver_id: 11, status: 'pending')
-FriendRequest.create!(sender_id: 11, receiver_id: 17, status: 'pending')
-FriendRequest.create!(sender_id: 13, receiver_id: 11, status: 'pending')
-FriendRequest.create!(sender_id: 11, receiver_id: 20, status: 'pending')
-FriendRequest.create!(sender_id: 22, receiver_id: 11, status: 'pending')
-FriendRequest.create!(sender_id: 14, receiver_id: 3, status: 'pending')
-FriendRequest.create!(sender_id: 5, receiver_id: 14, status: 'pending')
-FriendRequest.create!(sender_id: 14, receiver_id: 7, status: 'pending')
-FriendRequest.create!(sender_id: 9, receiver_id: 14, status: 'pending')
-FriendRequest.create!(sender_id: 14, receiver_id: 19, status: 'pending')
-FriendRequest.create!(sender_id: 21, receiver_id: 14, status: 'pending')
+ConnectRequest.create!(sender_id: 6, receiver_id: 8, status: 'pending')
+ConnectRequest.create!(sender_id: 12, receiver_id: 6, status: 'pending')
+ConnectRequest.create!(sender_id: 6, receiver_id: 15, status: 'pending')
+ConnectRequest.create!(sender_id: 18, receiver_id: 6, status: 'pending')
+ConnectRequest.create!(sender_id: 6, receiver_id: 24, status: 'pending')
+ConnectRequest.create!(sender_id: 23, receiver_id: 6, status: 'pending')
+ConnectRequest.create!(sender_id: 11, receiver_id: 2, status: 'pending')
+ConnectRequest.create!(sender_id: 5, receiver_id: 11, status: 'pending')
+ConnectRequest.create!(sender_id: 11, receiver_id: 17, status: 'pending')
+ConnectRequest.create!(sender_id: 13, receiver_id: 11, status: 'pending')
+ConnectRequest.create!(sender_id: 11, receiver_id: 20, status: 'pending')
+ConnectRequest.create!(sender_id: 22, receiver_id: 11, status: 'pending')
+ConnectRequest.create!(sender_id: 14, receiver_id: 3, status: 'pending')
+ConnectRequest.create!(sender_id: 5, receiver_id: 14, status: 'pending')
+ConnectRequest.create!(sender_id: 14, receiver_id: 7, status: 'pending')
+ConnectRequest.create!(sender_id: 9, receiver_id: 14, status: 'pending')
+ConnectRequest.create!(sender_id: 14, receiver_id: 19, status: 'pending')
+ConnectRequest.create!(sender_id: 21, receiver_id: 14, status: 'pending')
 
 puts "-" * 60
-puts "Friend requests created"
+puts "Connect requests created"
 puts "-" * 60
 puts "=" * 60
 puts "-" * 60
-puts "Creating friendships"
+puts "Creating connections"
 puts "-" * 60
 
-Friendship.create!(friend_sender_id: 9, friend_receiver_id: 6)
-Friendship.create!(friend_sender_id: 6, friend_receiver_id: 7)
-Friendship.create!(friend_sender_id: 13, friend_receiver_id: 6)
-Friendship.create!(friend_sender_id: 6, friend_receiver_id: 16)
-Friendship.create!(friend_sender_id: 19, friend_receiver_id: 6)
-Friendship.create!(friend_sender_id: 6, friend_receiver_id: 22)
-Friendship.create!(friend_sender_id: 1, friend_receiver_id: 11)
-Friendship.create!(friend_sender_id: 11, friend_receiver_id: 4)
-Friendship.create!(friend_sender_id: 16, friend_receiver_id: 11)
-Friendship.create!(friend_sender_id: 11, friend_receiver_id: 15)
-Friendship.create!(friend_sender_id: 21, friend_receiver_id: 11)
-Friendship.create!(friend_sender_id: 11, friend_receiver_id: 23)
-Friendship.create!(friend_sender_id: 2, friend_receiver_id: 14)
-Friendship.create!(friend_sender_id: 14, friend_receiver_id: 1)
-Friendship.create!(friend_sender_id: 8, friend_receiver_id: 14)
-Friendship.create!(friend_sender_id: 14, friend_receiver_id: 10)
-Friendship.create!(friend_sender_id: 24, friend_receiver_id: 14)
-Friendship.create!(friend_sender_id: 14, friend_receiver_id: 20)
+Connection.create!(connection_sender_id: 9, connection_receiver_id: 6)
+Connection.create!(connection_sender_id: 6, connection_receiver_id: 7)
+Connection.create!(connection_sender_id: 13, connection_receiver_id: 6)
+Connection.create!(connection_sender_id: 6, connection_receiver_id: 16)
+Connection.create!(connection_sender_id: 19, connection_receiver_id: 6)
+Connection.create!(connection_sender_id: 6, connection_receiver_id: 22)
+Connection.create!(connection_sender_id: 1, connection_receiver_id: 11)
+Connection.create!(connection_sender_id: 11, connection_receiver_id: 4)
+Connection.create!(connection_sender_id: 16, connection_receiver_id: 11)
+Connection.create!(connection_sender_id: 11, connection_receiver_id: 15)
+Connection.create!(connection_sender_id: 21, connection_receiver_id: 11)
+Connection.create!(connection_sender_id: 11, connection_receiver_id: 23)
+Connection.create!(connection_sender_id: 2, connection_receiver_id: 14)
+Connection.create!(connection_sender_id: 14, connection_receiver_id: 1)
+Connection.create!(connection_sender_id: 8, connection_receiver_id: 14)
+Connection.create!(connection_sender_id: 14, connection_receiver_id: 10)
+Connection.create!(connection_sender_id: 24, connection_receiver_id: 14)
+Connection.create!(connection_sender_id: 14, connection_receiver_id: 20)
 
 puts "-" * 60
-puts "Friendships created"
+puts "Connections created"
 puts "-" * 60
 puts "=" * 60
 puts "-" * 60
 puts "Creating notifications"
 puts "-" * 60
 
-Notification.create!(recipient_id: 6, actor_id: 12, action: 'sent you a', notifiable_id: 2, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 6, actor_id: 18, action: 'sent you a', notifiable_id: 4, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 6, actor_id: 23, action: 'sent you a', notifiable_id: 6, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 11, actor_id: 5, action: 'sent you a', notifiable_id: 8, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 11, actor_id: 13, action: 'sent you a', notifiable_id: 10, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 11, actor_id: 22, action: 'sent you a', notifiable_id: 12, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 14, actor_id: 5, action: 'sent you a', notifiable_id: 14, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 14, actor_id: 9, action: 'sent you a', notifiable_id: 16, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 14, actor_id: 21, action: 'sent you a', notifiable_id: 18, notifiable_type: 'FriendRequest')
-Notification.create!(recipient_id: 6, actor_id: 7, action: 'has accepted your', notifiable_id: 2, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 6, actor_id: 16, action: 'has accepted your', notifiable_id: 4, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 6, actor_id: 22, action: 'has accepted your', notifiable_id: 6, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 11, actor_id: 4, action: 'has accepted your', notifiable_id: 8, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 11, actor_id: 15, action: 'has accepted your', notifiable_id: 10, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 11, actor_id: 23, action: 'has accepted your', notifiable_id: 12, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 14, actor_id: 1, action: 'has accepted your', notifiable_id: 14, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 14, actor_id: 10, action: 'has accepted your', notifiable_id: 16, notifiable_type: 'Friendship')
-Notification.create!(recipient_id: 14, actor_id: 20, action: 'has accepted your', notifiable_id: 18, notifiable_type: 'Friendship')
+Notification.create!(recipient_id: 6, actor_id: 12, action: 'sent you a', notifiable_id: 2, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 6, actor_id: 18, action: 'sent you a', notifiable_id: 4, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 6, actor_id: 23, action: 'sent you a', notifiable_id: 6, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 11, actor_id: 5, action: 'sent you a', notifiable_id: 8, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 11, actor_id: 13, action: 'sent you a', notifiable_id: 10, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 11, actor_id: 22, action: 'sent you a', notifiable_id: 12, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 14, actor_id: 5, action: 'sent you a', notifiable_id: 14, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 14, actor_id: 9, action: 'sent you a', notifiable_id: 16, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 14, actor_id: 21, action: 'sent you a', notifiable_id: 18, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 6, actor_id: 7, action: 'has accepted your', notifiable_id: 2, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 6, actor_id: 16, action: 'has accepted your', notifiable_id: 4, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 6, actor_id: 22, action: 'has accepted your', notifiable_id: 6, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 11, actor_id: 4, action: 'has accepted your', notifiable_id: 8, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 11, actor_id: 15, action: 'has accepted your', notifiable_id: 10, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 11, actor_id: 23, action: 'has accepted your', notifiable_id: 12, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 14, actor_id: 1, action: 'has accepted your', notifiable_id: 14, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 14, actor_id: 10, action: 'has accepted your', notifiable_id: 16, notifiable_type: 'ConnectRequest')
+Notification.create!(recipient_id: 14, actor_id: 20, action: 'has accepted your', notifiable_id: 18, notifiable_type: 'ConnectRequest')
 Notification.create!(recipient_id: 11, actor_id: 3, action: 'has confirmed your', notifiable_id: 4, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 6, actor_id: 13, action: 'has confirmed your', notifiable_id: 17, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 6, actor_id: 16, action: 'has confirmed your', notifiable_id: 18, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 1, action: 'has confirmed your', notifiable_id: 19, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 4, action: 'has confirmed your', notifiable_id: 20, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 11, actor_id: 13, action: 'has confirmed your', notifiable_id: 23, notifiable_type: 'Ketchup')
+Notification.create!(recipient_id: 11, actor_id: 15, action: 'is coming to your town from Jul 2 to Jul 9', notifiable_id: 19, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 11, actor_id: 2, action: 'is coming to your town from Jul 2 to Jul 13', notifiable_id: 20, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 6, actor_id: 19, action: 'is coming to your town from Jul 10 to Aug 2', notifiable_id: 21, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 6, actor_id: 12, action: 'is coming to your town from Jul 18 to Jul 22', notifiable_id: 22, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 14, actor_id: 5, action: 'is coming to your town from Jul 21 to Jul 30', notifiable_id: 23, notifiable_type: 'Trip')
+Notification.create!(recipient_id: 14, actor_id: 7, action: 'is coming to your town from Jul 28 to Aug 8', notifiable_id: 24, notifiable_type: 'Trip')
 Notification.create!(recipient_id: 11, actor_id: 15, action: 'has sent you a request to', notifiable_id: 26, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 11, actor_id: 2, action: 'has sent you a request to', notifiable_id: 28, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 6, actor_id: 19, action: 'has sent you a request to', notifiable_id: 30, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 6, actor_id: 12, action: 'has sent you a request to', notifiable_id: 32, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 5, action: 'has sent you a request to', notifiable_id: 34, notifiable_type: 'Ketchup')
 Notification.create!(recipient_id: 14, actor_id: 7, action: 'has sent you a request to', notifiable_id: 36, notifiable_type: 'Ketchup')
+
 
 puts "-" * 60
 puts "Notifications created"

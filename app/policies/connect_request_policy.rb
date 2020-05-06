@@ -1,4 +1,4 @@
-class FriendshipPolicy < ApplicationPolicy
+class ConnectRequestPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -9,6 +9,10 @@ class FriendshipPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    user_is_sender? || user_is_receiver?
+  end
+
   def destroy?
     user_is_sender? || user_is_receiver?
   end
@@ -16,10 +20,10 @@ class FriendshipPolicy < ApplicationPolicy
   private
 
   def user_is_sender?
-    record.friend_sender == user
+    record.sender == user
   end
 
   def user_is_receiver?
-    record.friend_receiver == user
+    record.receiver == user
   end
 end

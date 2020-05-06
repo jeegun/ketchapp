@@ -21,7 +21,7 @@ class UserPolicy < ApplicationPolicy
     user_is_page_owner?
   end
 
-  def friend?
+  def connection?
     user_is_page_owner?
   end
 
