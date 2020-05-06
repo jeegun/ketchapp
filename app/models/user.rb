@@ -38,11 +38,11 @@ class User < ApplicationRecord
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.where(:email => data["email"]).first
+    user = User.where(:email => data.email).first
 
     unless user
       password = Devise.friendly_token[0,20]
-      user = User.create(name: data["name"], email: data["email"],
+      user = User.create(first_name: data.first_name, last_name: data.last_name, email: data.email,
         password: password, password_confirmation: password
       )
     end
@@ -67,12 +67,12 @@ class User < ApplicationRecord
 
   # contacts user can invite to ketchup app
   def non_matching_contacts
-    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact! if self.contacts.present?
+    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact if self.contacts.present?
   end
 
   # contacts that matches users already signed up
   def matching_contacts
-    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact! if self.contacts.present?
+    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact if self.contacts.present?
   end
 
   # check if the person is in the contact list
@@ -82,12 +82,7 @@ class User < ApplicationRecord
 
   # contacts already signed up but not connection nor sent nor received request
   def requestable_contacts
-    if self.matching_contacts.present?
-      requestable_contacts = self.matching_contacts.map do |contact|
-        contact if (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
-      end
-      requestable_contacts.compact!
-    end
+    requestable_contacts = self.matching_contacts.map { |contact| contact if (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?) }.compact if self.matching_contacts.present?
   end
 
   # check if connect request was already sent
