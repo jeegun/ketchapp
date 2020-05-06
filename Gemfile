@@ -22,7 +22,10 @@ gem 'faker'
 gem 'google-api-client', '~> 0.34'
 gem 'coffee-rails'
 gem 'jquery-rails'
+gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
 gem 'pundit'
+gem 'letter_opener', group: :development
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -8,6 +8,7 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "daterangepicker";
 
 // Your CSS partials
 @import "components/index";
@@ -39,4 +40,9 @@ a:hover {
 
 .container {
   min-height: calc(100vh - 81px - 100px)
+}
+
+.daterangepicker th {
+  background: white !important;
+  color: black !important;
 }

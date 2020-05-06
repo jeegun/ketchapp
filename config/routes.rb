@@ -10,11 +10,12 @@ Rails.application.routes.draw do
     resources :friendships, only: [:create]
   end
 
-  resources :notifications, only: [:index, :create, :show, :update] do
-    collection do
-      post :mark_as_read
-    end
-  end
+  resources :notifications, only: [:index, :create, :show, :update]
+  # do
+  #   collection do
+  #     post :mark_as_read
+  #   end
+  # end
 
 
   resources :friendships, only: [:destroy]
@@ -36,5 +37,7 @@ Rails.application.routes.draw do
   resources :chats, only: [:show] do
     resources :messages, only: [:create]
   end
+
+  resources :contacts, only: [:update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

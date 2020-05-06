@@ -33,8 +33,9 @@ class KetchupsController < ApplicationController
   def create
     @ketchup = Ketchup.new(ketchup_params)
     authorize @ketchup
-    @trip = Trip.find(params[:trip_id])
-    @ketchup.trip = @trip
+    trip = Trip.find(params[:trip_id])
+    @ketchup.trip = trip
+    @ketchup.end_date = @ketchup.start_date + params[:ketchup][:duration].to_i.minute
     @ketchup.status = "pending"
     if @ketchup.save
       unless current_user.access_token.nil?
@@ -56,6 +57,8 @@ class KetchupsController < ApplicationController
       @ketchup.status = 'confirmed'
       @ketchup.save
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
+      KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
+      KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     else
       if @ketchup.update(ketchup_params)
