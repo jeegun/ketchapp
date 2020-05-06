@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FriendRequestPolicyTest < ActiveSupport::TestCase
+class ConnectRequestPolicyTest < ActiveSupport::TestCase
   def test_scope
   end
 

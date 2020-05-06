@@ -23,6 +23,26 @@ ActiveRecord::Schema.define(version: 2020_05_01_144258) do
     t.index ["recipient_id", "sender_id"], name: "index_chats_on_recipient_id_and_sender_id", unique: true
   end
 
+  create_table "connect_requests", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_connect_requests_on_receiver_id"
+    t.index ["sender_id", "receiver_id"], name: "index_connect_requests_on_sender_id_and_receiver_id", unique: true
+    t.index ["sender_id"], name: "index_connect_requests_on_sender_id"
+  end
+
+  create_table "connections", force: :cascade do |t|
+    t.integer "connection_sender_id"
+    t.integer "connection_receiver_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["connection_receiver_id"], name: "index_connections_on_connection_receiver_id"
+    t.index ["connection_sender_id"], name: "index_connections_on_connection_sender_id"
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -33,26 +53,6 @@ ActiveRecord::Schema.define(version: 2020_05_01_144258) do
     t.datetime "updated_at", null: false
     t.datetime "invited_at"
     t.index ["user_id"], name: "index_contacts_on_user_id"
-  end
-
-  create_table "friend_requests", force: :cascade do |t|
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.string "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
-    t.index ["sender_id", "receiver_id"], name: "index_friend_requests_on_sender_id_and_receiver_id", unique: true
-    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
-  end
-
-  create_table "friendships", force: :cascade do |t|
-    t.integer "friend_sender_id"
-    t.integer "friend_receiver_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["friend_receiver_id"], name: "index_friendships_on_friend_receiver_id"
-    t.index ["friend_sender_id"], name: "index_friendships_on_friend_sender_id"
   end
 
   create_table "google_calendar_wrappers", force: :cascade do |t|

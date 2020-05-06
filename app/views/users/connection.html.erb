@@ -1,0 +1,87 @@
+<div class="container">
+  <ul class="list-inline tabs-underlined">
+    <!-- tabs without js function need to add js to show the right div -->
+    <li>
+      <p class="tab-underlined active-tab">Connections</p>
+    </li>
+    <li>
+      <p class="tab-underlined">Sent</p>
+    </li>
+    <li>
+      <p class="tab-underlined">Received</p>
+    </li>
+    <li>
+      <p class="tab-underlined">People you may know</p>
+    </li>
+  </ul>
+  <div class="lists">
+    <% current_user.connections.sort.reverse.each do |connection| %>
+      <% if connection.connection_sender == current_user %>
+        <p><%= connection.connection_receiver.full_name %></p>
+      <% else %>
+        <p><%= connection.connection_sender.full_name %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="lists" style="display: none;">
+    <% @sent_requests.each do |request| %>
+      <p>Sent request to <%= request.receiver.full_name %></p>
+      <%= link_to "Cancel", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+
+    <% end %>
+  </div>
+  <div class="lists" style="display: none;">
+    <% @received_requests.each do |request| %>
+      <p id="connect_request_<%= request.id %>"><%= request.sender.full_name %> sent you a request</p>
+      <%= simple_form_for [request, @connection] do |f| %>
+        <%= f.submit "Accept", class: "btn btn-ghost" %>
+      <% end %>
+      <%= link_to "Decline", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+    <% end %>
+  </div>
+  <div class="lists" style="display: none;">
+    <% if current_user.requestable_contacts %>
+      <% current_user.requestable_contacts.each do |user| %>
+        <p><%= user.full_name %></p>
+        <%= simple_form_for [user, @connect_request] do |f| %>
+          <%= f.submit "Connect request", class: "btn btn-ghost" %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if current_user.non_matching_contacts %>
+      <% current_user.non_matching_contacts.each do |contact| %>
+        <% if contact.invited_at.nil? %>
+          <p><%= contact.first_name + ' ' + contact.last_name %></p>
+          <%= link_to 'Send invite to Ketchapp', contact_path(contact), method: :patch || :put, class: 'btn btn-flat' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<script>
+  const tabs = document.querySelectorAll('.tab-underlined')
+  const lists = document.querySelectorAll('.lists')
+  const entries = function*(iterable) {
+    let i = 0;
+    for (item of iterable) {
+      yield [i++, item]
+    }
+  }
+  const showBlock = index => {
+    for (const [blockIndex, block] of entries(lists)) {
+      block.style.display = blockIndex === index ? 'block' : 'none'
+    }
+  }
+  showBlock(0)
+  for (const [tabIndex, tab] of entries(tabs)) {
+    tab.addEventListener('click', e => {
+      e.preventDefault()
+      showBlock(tabIndex)
+      const activeTab = document.querySelector('.active-tab');
+      event.currentTarget.classList.toggle('active-tab');
+      if (activeTab !== null) {
+        activeTab.classList.remove('active-tab');
+      }
+    })
+  }
+</script>
