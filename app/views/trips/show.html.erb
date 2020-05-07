@@ -33,7 +33,7 @@
             <%= link_to 'Confirm this trip', trip_path(@trip), method: :patch || :put, class: 'btn btn-flat mt-3 mr-2' %>
           <% elsif @trip.status == 'confirmed' %>
             <%= link_to 'Change dates', '', data: { toggle: "modal", target: "#tripEditModal" }, class: 'btn btn-ghost mt-3 mr-2' %>
-            <%= link_to 'Delete trip', trip_path(@trip), method: :delete, data: {confirm: 'Delete trip and associated ketchups?'}, class: 'btn btn-ghost mt-3 mr-2' %>
+            <%= link_to 'Delete trip', trip_path(@trip), method: :patch || :put, data: {confirm: 'Delete trip and associated ketchups?'}, class: 'btn btn-ghost mt-3 mr-2' %>
             <%= link_to 'Create another trip', root_path, class: 'btn btn-flat mt-3 mr-2' %>
           <% end %>
         </div>

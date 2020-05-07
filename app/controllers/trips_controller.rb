@@ -45,6 +45,11 @@ class TripsController < ApplicationController
       @trip.status = 'confirmed'
       @trip.save
       redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
+    elsif @trip.status == 'confirmed'
+      @trip.status = 'cancelled'
+      @trip.save
+      @trip.user = current_user
+      redirect_to user_trips_path(@trip.user), notice: 'Trip cancelled!'
     else
       if @trip.update(trip_params)
         redirect_to trip_path(@trip), notice: 'Trip updated!'
