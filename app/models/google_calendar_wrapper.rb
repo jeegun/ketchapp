@@ -45,38 +45,29 @@ class GoogleCalendarWrapper
 
   def self.create(ketchup, user)
     client = get_google_calendar_client user
-    event = gcal_get_event ketchup
+    event = get_event ketchup
     event = Google::Apis::CalendarV3::Event.new(event)
     client.insert_event(CALENDAR_ID, event)
   end
 
-  def self.gcal_edit(ketchup, user)
+  def self.edit(ketchup, user)
     client = get_google_calendar_client user
-    event = gcal_get_event ketchup
+    event = get_event ketchup
     event = Google::Apis::CalendarV3::Event.new(event)
     client.update_event(CALENDAR_ID, event.id, event)
   end
 
-  def self.gcal_delete(event_id, user)
+  def self.delete(event_id, user)
     client = get_google_calendar_client user
     client.delete_event(CALENDAR_ID, event_id)
   end
 
-  def self.gcal_get(event_id, user)
+  def self.get(event_id, user)
     client = configure_client(current_user)
     client.get_event(CALENDAR_ID, event_id)
   end
 
-  def calendar_id(ketchup)
-    response = @client.execute(api_method:
-      @service.calendar_list.list)
-    calendars = JSON.parse(response.body)
-    calendar = calendars["items"].select {|cal|
-      cal["id"].downcase == ketchup.calendar_id}
-    calendar["id"]
-  end
-
-  def self.gcal_get_event ketchup
+  def self.get_event ketchup
     event = {
       summary: "Your ketchup with #{ketchup.user.full_name}",
       description: ketchup.message,
@@ -85,7 +76,12 @@ class GoogleCalendarWrapper
       ),
       end: Google::Apis::CalendarV3::EventDateTime.new(
         date_time: ketchup.end_date.strftime('%FT%T%z')
-      )
+      ),
+      sendNotifications: true,
+      reminders: {
+        use_default: true
+      }
     }
+
   end
 end
