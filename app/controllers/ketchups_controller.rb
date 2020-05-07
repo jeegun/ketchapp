@@ -61,6 +61,12 @@ class KetchupsController < ApplicationController
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
+    elsif @ketchup.status == 'confirmed'
+      @ketchup.status = 'cancelled'
+      @ketchup.save
+      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
+      @ketchup.trip.user = current_user
+      redirect_to user_ketchups_path(@ketchup.trip.user), notice: 'Ketchup cancelled!'
     else
       if @ketchup.update(ketchup_params)
         Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)

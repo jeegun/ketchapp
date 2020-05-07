@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :ketchups, only: [:create]
   end
 
-  resources :ketchups, only: [:show, :update, :destroy]
+  resources :ketchups, only: [:show, :update, :edit, :destroy]
 
   resources :chats, only: [:show] do
     resources :messages, only: [:create]
