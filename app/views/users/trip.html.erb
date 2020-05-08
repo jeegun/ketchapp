@@ -11,6 +11,9 @@
             <li>
               <p class="tab-underlined">Past (<%= @trips.count %>)</p>
             </li>
+            <li>
+              <p class="tab-underlined">Recent searches</p>
+            </li>
           </ul>
         </div>
         <div>
@@ -38,6 +41,26 @@
         <% end %>
       </div>
       <!-- need past ketchups div here -->
+      <!-- recent searches div -->
+      <div>
+        <% if @searches.any? %>
+          <div class="cards-trips">
+            <% @searches.each do |trip| %>
+              <div class="card-vertical-trip">
+                <a href="/trips/<%= trip.id %>">
+                  <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                  <div class="card-vertical-trip-infos">
+                    <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                    <h4>Trip to <%= trip.location %></h4>
+                  </div>
+                </a>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>No saved search</p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
