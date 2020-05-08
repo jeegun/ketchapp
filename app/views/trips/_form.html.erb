@@ -6,7 +6,7 @@
 <%# end %>
 
 <%= form_with model: @trip, local: true, class: 'trip-form' do |form| %>
-  <div class="d-flex col-8 offset-2">
+  <div class="trip-form col-xs-12 col-md-8 offset-md-2">
     <div class="form-group" style="flex: 0 0 40%;">
       <%= form.text_field :dates, class: "daterange form-control" %>
     </div>
