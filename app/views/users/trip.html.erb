@@ -3,16 +3,16 @@
     <div class="col-12">
       <div class="d-flex justify-content-between">
         <div  style="flex: 0 0 70%">
-          <ul class="list-inline tabs-underlined">
+          <ul class="nav list-inline tabs-underlined" role="tablist">
             <!-- tabs without js function need to add js to show the right div -->
-            <li>
-              <p class="tab-underlined active-tab">Upcoming (<%= @trips.count %>)</p>
+            <li class="nav-item">
+              <p class="nav-link active tab-underlined active-tab" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="confirmed" aria-selected="true">Upcoming (<%= @trips.count %>)</p>
             </li>
-            <li>
-              <p class="tab-underlined">Past (<%= @trips.count %>)</p>
+            <li class="nav-item">
+              <p class="nav-link tab-underlined" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past (<%= @trips.count %>)</p>
             </li>
-            <li>
-              <p class="tab-underlined">Recent searches</p>
+            <li class="nav-item">
+              <p class="nav-link tab-underlined" id="searches-tab" data-toggle="tab" href="#searches" role="tab" aria-controls="searches" aria-selected="false">Recent searches</p>
             </li>
           </ul>
         </div>
@@ -21,45 +21,49 @@
         </div>
       </div>
       <!-- upcoming ketchups div -->
-      <div>
-        <% if @trips.any? %>
-          <div class="cards-trips">
-            <% @trips.each do |trip| %>
-              <div class="card-vertical-trip">
-                <a href="/trips/<%= trip.id %>">
-                  <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
-                  <div class="card-vertical-trip-infos">
-                    <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
-                    <h4>Trip to <%= trip.location %></h4>
-                  </div>
-                </a>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p>No trip yet</p>
-        <% end %>
-      </div>
-      <!-- need past ketchups div here -->
-      <!-- recent searches div -->
-      <div>
-        <% if @searches.any? %>
-          <div class="cards-trips">
-            <% @searches.each do |trip| %>
-              <div class="card-vertical-trip">
-                <a href="/trips/<%= trip.id %>">
-                  <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
-                  <div class="card-vertical-trip-infos">
-                    <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
-                    <h4>Trip to <%= trip.location %></h4>
-                  </div>
-                </a>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p>No saved search</p>
-        <% end %>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+          <% if @trips.any? %>
+            <div class="cards-trips">
+              <% @trips.each do |trip| %>
+                <div class="card-vertical-trip">
+                  <a href="/trips/<%= trip.id %>">
+                    <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                    <div class="card-vertical-trip-infos">
+                      <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                      <h4>Trip to <%= trip.location %></h4>
+                    </div>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No trip yet</p>
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+        <!-- need past ketchups div here -->
+        </div>
+        <!-- recent searches div -->
+        <div class="tab-pane fade" id="searches" role="tabpanel" aria-labelledby="searches-tab">
+          <% if @searches.any? %>
+            <div class="cards-trips">
+              <% @searches.each do |trip| %>
+                <div class="card-vertical-trip">
+                  <a href="/trips/<%= trip.id %>">
+                    <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                    <div class="card-vertical-trip-infos">
+                      <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                      <h4>Trip to <%= trip.location %></h4>
+                    </div>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No saved search</p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
