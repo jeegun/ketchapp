@@ -2,7 +2,7 @@
   <%- resource_class.omniauth_providers.each do |provider| %>
     <div class="row">
       <div class="col-8 offset-2">
-        <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-ghost', style: "width: 100%;" do %> <div class="d-flex"><div style="flex: 0 0 20%;"><%= image_tag('google.png', width: 25, height:25) %></div><div style="flex: 0 0 80%;">Sign in with Google account</div></div> <% end %>
+        <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-ghost', style: "width: 100%;" do %> <div class="d-flex"><div style="flex: 0 0 20%;"><%= image_tag('google.png', width: 25, height:25) %></div><div style="flex: 0 0 80%;">Sign in with Google account</div></div> <% end %>
       </div>
     </div>
   <% end %>

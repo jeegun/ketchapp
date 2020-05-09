@@ -44,7 +44,20 @@ class KetchupsController < ApplicationController
       Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
       redirect_to ketchup_path(@ketchup), notice: 'Ketchup created.'
     else
-      @connections = User.where(["home_city = ?", @trip.location])
+      @trip = Trip.find(params[:trip_id])
+      maxLat = @trip.latitude + 0.5
+      minLat = @trip.latitude - 0.5
+      maxLng = @trip.longitude + 0.5
+      minLng = @trip.longitude - 0.5
+      people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
+      # added @ because we need this for ketchup create form
+      @people_in_radius_are_connections = (people_in_radius.map { |people| people if current_user.is_connection?(people) }).compact
+      people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact
+      # should we also add people who you sent or you received connect request in this list?
+      @people_to_show = (@people_in_radius_are_connections + people_in_radius_in_contact).uniq
+      @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
+      @start_date = @trip.start_date.strftime('%b %d, %Y %I:%M %p')
+      @end_date = @trip.end_date.strftime('%b %d, %Y 11:30 PM')
       @ketchups = Ketchup.where(["trip_id = ?", @trip.id])
       @chat = Chat.new
       @connect_request = ConnectRequest.new
