@@ -33,13 +33,13 @@ h3, p {
   padding: 1rem;
 }
 
-@media (max-width: 575.98px) {
+@media screen and (max-width: 575.98px) {
   .banner {
     padding: 3rem 1.25rem;
   }
 }
 
-@media (max-width: 991.98px) {
+@media screen and (max-width: 991.98px) {
   .home-info {
     grid-template-columns: 1fr;
   }
