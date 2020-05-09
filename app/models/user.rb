@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many :ketchup_requests, through: :trips, source: :ketchups
   has_many :ketchups
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
   validates :first_name, :last_name, presence: true
   # after_create :send_welcome_email
 
@@ -36,19 +36,17 @@ class User < ApplicationRecord
     return "#{first_name} #{last_name}"
   end
 
-  def self.find_for_google_oauth2(auth)
-    # hash 'auth' is the object that is returned from google when an API request
-    # is made. 'info' and 'credentials' are hashes within 'auth'
-    data = auth.info
-    user = User.where(email: auth.info.email).create do |user|
-      user.email = auth.info.email
-      user.password = '123456'
-      user.expires_at = auth.credentials.expires_at.to_i
-      user.access_token = auth.credentials.token
-      user.refresh_token = auth.credentials.refresh_token
-      user.save
-      return user
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(:email => data.email).first
+
+    unless user
+      password = Devise.friendly_token[0,20]
+      user = User.create(first_name: data.first_name, last_name: data.last_name, email: data.email,
+        password: password, password_confirmation: password
+      )
     end
+    user
   end
 
   def expired?
@@ -69,12 +67,12 @@ class User < ApplicationRecord
 
   # contacts user can invite to ketchup app
   def non_matching_contacts
-    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact! if self.contacts.present?
+    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact if self.contacts.present?
   end
 
   # contacts that matches users already signed up
   def matching_contacts
-    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact! if self.contacts.present?
+    matching_contacts = (self.contacts.map { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).first }).compact if self.contacts.present?
   end
 
   # check if the person is in the contact list
@@ -84,12 +82,7 @@ class User < ApplicationRecord
 
   # contacts already signed up but not connection nor sent nor received request
   def requestable_contacts
-    if self.matching_contacts.present?
-      requestable_contacts = self.matching_contacts.map do |contact|
-        contact if (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?)
-      end
-      requestable_contacts.compact!
-    end
+    requestable_contacts = self.matching_contacts.map { |contact| contact if (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?) }.compact if self.matching_contacts.present?
   end
 
   # check if connect request was already sent

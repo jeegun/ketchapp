@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   resources :users, only: [:destroy] do
     resources :connect_requests, only: [:create]
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :ketchups, only: [:create]
   end
 
-  resources :ketchups, only: [:show, :update, :destroy]
+  resources :ketchups, only: [:show, :update, :edit, :destroy]
 
   resources :chats, only: [:show] do
     resources :messages, only: [:create]

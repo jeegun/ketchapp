@@ -49,12 +49,17 @@
                     <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
                     <%= link_to 'Decline', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
                   <% else %>
-                    <%= link_to 'Edit', '', class: 'btn btn-flat' %>
-                    <%= link_to 'Cancel', '', class: 'btn btn-ghost' %>
+                    <%= link_to 'Edit', edit_ketchup_path(@ketchup), class: 'btn btn-flat' %>
+                    <%= link_to 'Cancel', ketchup_path(@ketchup), method: :patch || :put, data: {confirm: 'Cancel ketchup?'}, class: 'btn btn-ghost' %>
                   <% end %>
                 <% elsif current_user == @ketchup.trip.user %>
-                  <%= link_to 'Edit', '', class: 'btn btn-flat' %>
-                  <%= link_to 'Cancel', '', class: 'btn btn-ghost' %>
+                  <% if @ketchup.status == 'pending' %>
+                    <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
+                    <%= link_to 'Cancel', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
+                  <% else %>
+                    <%= link_to 'Edit', edit_ketchup_path(@ketchup), class: 'btn btn-flat' %>
+                    <%= link_to 'Cancel', ketchup_path(@ketchup), method: :patch || :put, data: {confirm: 'Cancel ketchup?'}, class: 'btn btn-ghost' %>
+                  <% end %>
                 <% end %>
               </div>
             </div>

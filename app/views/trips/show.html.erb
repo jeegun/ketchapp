@@ -3,7 +3,7 @@
     <div class="col-12">
       <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
       <div class="d-flex justify-content-between">
-        <div style="flex: 0 0 60%">
+        <div style="flex: 0 0 55%">
           <% if @trip.status == 'saved' %>
             <ul class="list-inline tabs-underlined">
               <!-- tabs without js function need to add js to show the right div -->
@@ -33,7 +33,8 @@
             <%= link_to 'Confirm this trip', trip_path(@trip), method: :patch || :put, class: 'btn btn-flat mt-3 mr-2' %>
           <% elsif @trip.status == 'confirmed' %>
             <%= link_to 'Change dates', '', data: { toggle: "modal", target: "#tripEditModal" }, class: 'btn btn-ghost mt-3 mr-2' %>
-            <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-2' %>
+            <%= link_to 'Delete trip', trip_path(@trip), method: :patch || :put, data: {confirm: 'Delete trip and associated ketchups?'}, class: 'btn btn-ghost mt-3 mr-2' %>
+            <%= link_to 'Create another trip', root_path, class: 'btn btn-flat mt-3 mr-2' %>
           <% end %>
         </div>
       </div>
