@@ -1,14 +1,14 @@
-.navbar-lewagon {
+.navbar-ketchup {
   justify-content: space-between;
   background: #961617;
   padding: 8px 28px;
 }
 
-.navbar-lewagon .navbar-collapse {
+.navbar-ketchup .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-ketchup .navbar-brand img {
   width: 130px;
 }
 
@@ -26,7 +26,7 @@
   width: 50px;
 }
 
-.navbar-light .navbar-nav .nav-link {
+.navbar-nav .nav-link {
   color: $mayo;
   &:hover {
     color: $mustard;
@@ -38,12 +38,12 @@
   }
 }
 
-.navbar-light .navbar-nav .show > .nav-link {
+.navbar-nav .show > .nav-link {
   color: $mustard;
   opacity: 0.5;
 }
 
-.navbar-light .navbar-nav .active > .nav-link {
+.navbar-nav .active > .nav-link {
   color: $mustard;
 }
 
@@ -68,4 +68,11 @@
 
 .notification-drop .all {
   background: white;
+}
+
+.logo {
+  color: #EDE5CC;
+  font-weight:700;
+  font-size: 2.25rem;
+  font-family: Permanent Marker;
 }
