@@ -3,10 +3,8 @@
     <!-- <img src="https://img.talkandroid.com/uploads/2014/03/ketchup.png" alt="logo"> -->
     KetchUp
   <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <button class="navbar-toggler" type="button" id="open-btn">&#9776;</button>
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <!-- more nav items needed such as chat -->
@@ -45,7 +43,6 @@
         <li class="nav-item <%= "active" if request.url.split('/').last == 'trips' %>">
           <%= link_to "Trips", user_trips_path(current_user), class: "nav-link" %>
         </li>
-
         <li class="nav-item dropdown">
           <% if current_user.lewagon_username %>
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{current_user.lewagon_username}", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -69,3 +66,20 @@
     </ul>
   </div>
 </div>
+<div id="mySidenav" class="sidenav">
+  <a class="closebtn" id="close-btn">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+<script>
+  const open = document.getElementById("open-btn");
+  const close = document.getElementById("close-btn");
+  open.addEventListener('click', e => {
+    document.getElementById("mySidenav").style.width = "50vw";
+  })
+  close.addEventListener('click', e => {
+    document.getElementById("mySidenav").style.width = "0";
+  })
+</script>

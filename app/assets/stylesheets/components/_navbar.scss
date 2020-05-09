@@ -13,12 +13,29 @@
 }
 
 .navbar-brand {
-  color: #EDE5CC;
+  color: $mayo;
   font-weight:700;
   font-size: 2.25rem;
   font-family: Permanent Marker;
   padding: 0;
   &:hover {
+    color: $mustard;
+    opacity: 0.5;
+  }
+  &:active {
+    color: $mustard;
+    opacity: 0.5;
+  }
+}
+
+.navbar-toggler {
+  font-size: 1.5rem;
+  color: $mayo;
+  &:hover {
+    color: $mustard;
+    opacity: 0.5;
+  }
+  &:active {
     color: $mustard;
     opacity: 0.5;
   }
@@ -82,6 +99,41 @@
 .notification-drop .all {
   background: white;
 }
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background: $mayo;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: $ketchup;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: $mustard;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
 
 @media screen and (min-width: 768px) and (max-width: 991.98px){
   .nav-item {
