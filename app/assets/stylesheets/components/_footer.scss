@@ -8,10 +8,12 @@
   color: rgba(0,0,0,0.3);
   margin-bottom: 0;
 }
+
 .footer-links {
   display: flex;
   align-items: center;
 }
+
 .footer-links a {
   color: $mayo;
   opacity: 0.3;
@@ -19,9 +21,11 @@
   font-size: 1.5rem;
   padding: 0px 0.625rem;
 }
+
 .footer-links a:hover {
   opacity: 1;
 }
+
 .footer .fa-heart {
   color: #D23333;
 }
@@ -41,5 +45,6 @@
   }
   .footer-copyright {
     text-align: center;
+    padding-top: 0.5rem
   }
 }
