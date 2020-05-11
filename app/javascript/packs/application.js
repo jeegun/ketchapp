@@ -10,8 +10,5 @@ import "bootstrap";
 // }
 
 // Function for tabs to become active
-$(document).ready(function(){
-  $(".nav-item").click(function(){
-    $(this).toggleClass("active");
-  });
-});
+
+
