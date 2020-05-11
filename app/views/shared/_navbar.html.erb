@@ -37,9 +37,6 @@
         <li class="nav-item <%= "active" if request.url.split('/').last == 'ketchups' %>">
           <%= link_to "Ketchups", user_ketchups_path(current_user), class: "nav-link" %>
         </li>
-        <li class="nav-item <%= "active" if request.url.split('/').last == 'saves' %>">
-          <%= link_to "Saved", user_saves_path(current_user), class: "nav-link" %>
-        </li>
         <li class="nav-item <%= "active" if request.url.split('/').last == 'trips' %>">
           <%= link_to "Trips", user_trips_path(current_user), class: "nav-link" %>
         </li>
