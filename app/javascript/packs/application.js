@@ -8,3 +8,7 @@ import "bootstrap";
 //   event.args = args
 //   window.dispatchEvent(event)
 // }
+
+// Function for tabs to become active
+
+
