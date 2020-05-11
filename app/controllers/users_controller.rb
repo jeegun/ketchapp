@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def trip
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
-    @searches = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"])
+    @searches = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"]).where("created_at > ?", 7.days.ago)
   end
 
   def ketchup

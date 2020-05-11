@@ -5,13 +5,13 @@
         <div  style="flex: 0 0 70%">
           <ul class="nav list-inline tabs-underlined" role="tablist">
             <!-- tabs without js function need to add js to show the right div -->
-            <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
+            <li class="nav-item">
               <p class="nav-link active tab-underlined active-tab" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="confirmed" aria-selected="true">Current / Upcoming (<%= @trips.where("end_date >= ?", Date.today).count %>)</p>
             </li>
-            <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
+            <li class="nav-item">
               <p class="nav-link tab-underlined" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past (<%= @trips.where("end_date < ?", Date.today).count %>)</p>
             </li>
-            <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
+            <li class="nav-item">
               <p class="nav-link tab-underlined" id="searches-tab" data-toggle="tab" href="#searches" role="tab" aria-controls="searches" aria-selected="false">Recent searches</p>
             </li>
           </ul>
@@ -81,7 +81,7 @@
               <% end %>
             </div>
           <% else %>
-            <p>No saved search</p>
+            <p>No recent searches</p>
           <% end %>
         </div>
       </div>
