@@ -8,14 +8,20 @@
   margin-bottom: 1rem;
   background: $mayo;
   color: $ketchup;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   border: 1px solid rgb(235,235,235);
   border-radius: 4px;
+  justify-content: space-between;
+}
+
+.notification .notification-head {
+ display: flex;
+ align-items: center;
 }
 
 .notification .notification-content {
   flex-grow: 1;
-  padding: 0 24px;
+  padding: 0 1.5rem;
 }
 
 .notification p {
@@ -39,8 +45,8 @@
 
 .notification .notification-actions a {
   color: $ketchup;
-  margin-left: 16px;
-  font-size: 14px;
+  margin-left: 1rem;
+  font-size: 0.825rem;
   opacity: 0.7;
   &:hover {
     opacity: 1;
@@ -52,10 +58,25 @@
 }
 
 .notification .notification-actions .btn-flat, .notification .notification-actions .btn-ghost {
-  margin-left: 16px;
-  font-size: 14px;
+  margin-left: 1rem;
+  font-size: 0.825rem;
   opacity: 0.7;
   &:hover {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .notification {
+    flex-wrap: wrap;
+  }
+  .notification .notification-actions {
+    justify-content: center;
+    width: 100%;
+    display: none;
+  }
+  .notification:hover .notification-actions {
+    display: flex;
+    padding-top: 0.5rem;
   }
 }
