@@ -5,13 +5,13 @@
         <div  style="flex: 0 0 70%">
           <ul class="nav list-inline tabs-underlined" role="tablist">
             <!-- tabs without js function need to add js to show the right div -->
-            <li class="nav-item">
-              <p class="nav-link active tab-underlined active-tab" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="confirmed" aria-selected="true">Upcoming (<%= @trips.count %>)</p>
+            <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
+              <p class="nav-link active tab-underlined active-tab" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="confirmed" aria-selected="true">Current / Upcoming (<%= @trips.where("end_date >= ?", Date.today).count %>)</p>
             </li>
-            <li class="nav-item">
-              <p class="nav-link tab-underlined" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past (<%= @trips.count %>)</p>
+            <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
+              <p class="nav-link tab-underlined" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past (<%= @trips.where("end_date < ?", Date.today).count %>)</p>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <%= "active" if request.url.split('/').last == 'connections' %>">
               <p class="nav-link tab-underlined" id="searches-tab" data-toggle="tab" href="#searches" role="tab" aria-controls="searches" aria-selected="false">Recent searches</p>
             </li>
           </ul>
@@ -23,26 +23,46 @@
       <!-- upcoming ketchups div -->
       <div class="tab-content">
         <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
-          <% if @trips.any? %>
+          <% if @trips.where("end_date >= ?", Date.today).any? %>
             <div class="cards-trips">
               <% @trips.each do |trip| %>
-                <div class="card-vertical-trip">
-                  <a href="/trips/<%= trip.id %>">
-                    <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
-                    <div class="card-vertical-trip-infos">
-                      <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
-                      <h4>Trip to <%= trip.location %></h4>
-                    </div>
-                  </a>
-                </div>
+                <% if trip.end_date >= Date.today %>
+                  <div class="card-vertical-trip">
+                    <a href="/trips/<%= trip.id %>">
+                      <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                      <div class="card-vertical-trip-infos">
+                        <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                        <h4>Trip to <%= trip.location %></h4>
+                      </div>
+                    </a>
+                  </div>
+                <% end %>
               <% end %>
             </div>
           <% else %>
-            <p>No trip yet</p>
+            <p>No upcoming trips</p>
           <% end %>
         </div>
         <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
-        <!-- need past ketchups div here -->
+          <% if @trips.where("end_date < ?", Date.today).any? %>
+            <div class="cards-trips">
+              <% @trips.each do |trip| %>
+                <% if trip.end_date < Date.today %>
+                  <div class="card-vertical-trip">
+                    <a href="/trips/<%= trip.id %>">
+                      <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                      <div class="card-vertical-trip-infos">
+                        <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                        <h4>Trip to <%= trip.location %></h4>
+                      </div>
+                    </a>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No past trips</p>
+          <% end %>
         </div>
         <!-- recent searches div -->
         <div class="tab-pane fade" id="searches" role="tabpanel" aria-labelledby="searches-tab">
