@@ -1,12 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="notifications col-8 offset-2">
+    <div class="notifications col-12 col-lg-8 offset-lg-2">
       <% @my_notifications.each do |notification| %>
         <div class="notification">
-          <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= notification.actor.lewagon_username %>">
-          <div class="notification-content">
-            <p><small><%= notification.created_at %></small></p>
-            <p><strong><%= notification.actor.full_name %></strong> <%= notification.action %> <%= notification.notifiable_type.to_s.underscore.humanize.downcase if notification.notifiable_type != 'Trip' %>.</p>
+          <div class="notification-head">
+            <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= notification.actor.lewagon_username %>">
+            <div class="notification-content">
+              <p><small><%= notification.month %> <%= notification.day %>, <%= notification.year %></small></p>
+              <p><strong><%= notification.actor.full_name %></strong> <%= notification.action %> <%= notification.notifiable_type.to_s.underscore.humanize.downcase if notification.notifiable_type != 'Trip' %></p>
+            </div>
           </div>
           <div class="notification-actions">
             <% if (notification.notifiable_type == 'ConnectRequest') && (notification.action == 'sent you a') && ConnectRequest.find(notification.notifiable_id).status == "pending" %>
@@ -31,4 +33,3 @@
     </div>
   </div>
 </div>
-

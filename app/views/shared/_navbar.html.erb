@@ -1,12 +1,10 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-md navbar-ketchup">
   <%= link_to root_path, class: "navbar-brand" do %>
     <!-- <img src="https://img.talkandroid.com/uploads/2014/03/ketchup.png" alt="logo"> -->
-    <span style='color: #EDE5CC; font-weight:700; font-size: 37px; font-family: Permanent Marker;'>KetchUp</span>
+    KetchUp
   <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <button class="navbar-toggler" type="button" id="open-btn">&#9776;</button>
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <!-- more nav items needed such as chat -->
@@ -40,9 +38,8 @@
           <%= link_to "Ketchups", user_ketchups_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item <%= "active" if request.url.split('/').last == 'trips' %>">
-          <%= link_to "My Trips", user_trips_path(current_user), class: "nav-link" %>
+          <%= link_to "Trips", user_trips_path(current_user), class: "nav-link" %>
         </li>
-
         <li class="nav-item dropdown">
           <% if current_user.lewagon_username %>
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{current_user.lewagon_username}", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
@@ -66,3 +63,44 @@
     </ul>
   </div>
 </div>
+<% if user_signed_in? %>
+  <div id="mySidenav" class="sidenav">
+    <a class="closebtn" id="close-btn">&times;</a>
+    <%= link_to edit_user_registration_path do %>
+      <% if current_user.lewagon_username %>
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{current_user.lewagon_username}", class: "avatar mr-2" %>
+      <% else %>
+        <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", class: "avatar mr-2" %>
+      <% end %>
+      <%= current_user.full_name %>
+    <% end %>
+    <%= link_to user_notifications_path(current_user) do %>
+      Notifications
+      <span class="unread-count">
+      <% if @notifications.present? %>
+        (<%= @notifications.length %>)
+        <% end %>
+      </span>
+    <% end %>
+    <%= link_to "Trips", user_trips_path(current_user) %>
+    <%= link_to "Ketchups", user_ketchups_path(current_user) %>
+    <%= link_to "Connections", user_connections_path(current_user) %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+  </div>
+<% else %>
+  <div id="mySidenav" class="sidenav">
+    <a class="closebtn" id="close-btn">&times;</a>
+    <%= link_to "Login", new_user_session_path %>
+    <%= link_to "Sign Up", new_user_registration_path %>
+  </div>
+<% end %>
+<script>
+  const open = document.getElementById("open-btn");
+  const close = document.getElementById("close-btn");
+  open.addEventListener('click', e => {
+    document.getElementById("mySidenav").style.width = "70vw";
+  })
+  close.addEventListener('click', e => {
+    document.getElementById("mySidenav").style.width = "0";
+  })
+</script>
