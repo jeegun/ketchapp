@@ -1,32 +1,35 @@
-.navbar-lewagon {
+.navbar-ketchup {
   justify-content: space-between;
   background: #961617;
-  padding: 8px 28px;
+  padding: 0.5rem 1.75rem;
 }
 
-.navbar-lewagon .navbar-collapse {
+.navbar-ketchup .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 130px;
+.navbar-ketchup .navbar-brand img {
+  width: 8rem;
 }
 
 .navbar-brand {
-  font-weight: 700;
-  font-size: 28px;
-}
-.nav-item {
-  padding-right: 32px;
-  font-size: 18px;
-  color: white;
+  color: $mayo;
+  font-weight:700;
+  font-size: 2.25rem;
+  font-family: Permanent Marker;
+  padding: 0;
+  &:hover {
+    color: $mustard;
+    opacity: 0.5;
+  }
+  &:active {
+    color: $mustard;
+    opacity: 0.5;
+  }
 }
 
-.nav-item > .avatar {
-  width: 50px;
-}
-
-.navbar-light .navbar-nav .nav-link {
+.navbar-toggler {
+  font-size: 1.5rem;
   color: $mayo;
   &:hover {
     color: $mustard;
@@ -38,23 +41,50 @@
   }
 }
 
-.navbar-light .navbar-nav .show > .nav-link {
+.navbar-nav {
+  align-items: center;
+}
+
+.navbar-nav .nav-link {
+  color: $mayo;
+  &:hover {
+    color: $mustard;
+    opacity: 0.5;
+  }
+  &:active {
+    color: $mustard;
+    opacity: 0.5;
+  }
+}
+
+.navbar-nav .show > .nav-link {
   color: $mustard;
   opacity: 0.5;
 }
 
-.navbar-light .navbar-nav .active > .nav-link {
+.navbar-nav .active > .nav-link {
   color: $mustard;
 }
 
+.nav-item {
+  padding-left: 2rem;
+  font-size: 1.125rem;
+  color: white;
+}
+
+.nav-item > .avatar {
+  width: 3rem;
+}
+
 .fa-bell {
-  font-size: 25px;
+  font-size: 1.5rem;
   margin: 0px;
 }
 
 .notification-drop {
   padding: 0;
 }
+
 .notification-drop a {
   color: $ketchup;
   opacity: 0.7;
@@ -68,4 +98,45 @@
 
 .notification-drop .all {
   background: white;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background: $mayo;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  text-decoration: none;
+  font-size: 1.25rem;
+  color: $ketchup;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: $mustard;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 991.98px){
+  .nav-item {
+    padding-left: 1rem;
+  }
 }

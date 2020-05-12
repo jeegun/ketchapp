@@ -1,3 +1,12 @@
+.tabs-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tabs {
+  flex: 0 0 70%;
+}
+
 .tabs-underlined {
   display: flex;
   align-items: center;
@@ -19,4 +28,17 @@
   opacity: 1;
   border-bottom: 3px solid $ketchup;
   font-weight: 700;
+}
+
+.tabs-btn {
+  flex: 0 0 30%;
+}
+
+@media screen and (max-width: 767.98px) {
+  .tabs {
+    flex: 0 0 100%;
+  }
+  .tabs-btn {
+    display: none;
+  }
 }

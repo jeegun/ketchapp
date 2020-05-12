@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div class="d-flex justify-content-between">
-        <div  style="flex: 0 0 70%">
+      <div class="tabs-container">
+        <div class="tabs">
           <ul class="nav list-inline tabs-underlined" role="tablist">
             <!-- tabs without js function need to add js to show the right div -->
             <li class="nav-item">
@@ -17,7 +17,7 @@
           </ul>
         </div>
         <div>
-          <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-3' %>
+          <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-3 tabs-btn' %>
         </div>
       </div>
       <!-- upcoming ketchups div -->

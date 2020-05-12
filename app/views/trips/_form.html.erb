@@ -6,17 +6,17 @@
 <%# end %>
 
 <%= form_with model: @trip, local: true, class: 'trip-form' do |form| %>
-  <div class="d-flex col-8 offset-2">
-    <div class="form-group" style="flex: 0 0 40%;">
+  <div class="trip-form col-xs-12 col-md-8 offset-md-2">
+    <div class="form-group" style="flex: 0 0 35%;">
       <%= form.text_field :dates, class: "daterange form-control" %>
     </div>
-    <div class="form-group" style="flex: 0 0 40%;">
+    <div class="form-group" style="flex: 0 0 35%;">
       <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city", onkeypress: "return event.keyCode!=13" %>
       <%= form.text_field :latitude, type: "hidden", class: 'form-control' %>
       <%= form.text_field :longitude, type: "hidden", class: 'form-control' %>
     </div>
-    <div class="actions" style="flex: 0 0 20%;">
-      <%= form.submit "Search connections", class: 'btn btn-flat mt-0' %>
+    <div class="actions" style="flex: 0 0 30%;">
+      <%= form.submit "Search connections", class: 'btn btn-flat mt-0 select-btn' %>
     </div>
 
   </div>
