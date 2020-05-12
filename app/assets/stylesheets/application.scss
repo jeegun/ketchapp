@@ -26,6 +26,10 @@ h2 {
   color: $ketchup;
 }
 
+h5 {
+  color: $ketchup;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -45,4 +49,8 @@ a:hover {
 .daterangepicker th {
   background: white !important;
   color: black !important;
+}
+
+div.pac-container {
+    z-index: 99999999999 !important;
 }

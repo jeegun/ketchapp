@@ -1,7 +1,7 @@
 require 'google/apis/calendar_v3'
 
 class KetchupsController < ApplicationController
-  before_action :set_ketchup, only: [:show, :update, :edit, :destroy]
+  before_action :set_ketchup, only: [:show, :update, :destroy]
 
   def show
     @year = @ketchup.start_date.strftime('%Y')
@@ -11,23 +11,18 @@ class KetchupsController < ApplicationController
     @minute = @ketchup.start_date.strftime('%M')
     @chat = Chat.new
     # converting time difference between end_time and start_time to duration in min
-    time_diff = ((@ketchup.end_date - @ketchup.start_date) / 60).to_i
-    if time_diff >= 60
-      h = time_diff / 60
-      m = time_diff % 60
+    @time_diff = ((@ketchup.end_date - @ketchup.start_date) / 60).to_i
+    if @time_diff >= 60
+      h = @time_diff / 60
+      m = @time_diff % 60
       m == 0 ? @duration = "#{h}h" : @duration = "#{h}h #{m}m"
     else
-      @duration = "#{time_diff}m"
+      @duration = "#{@time_diff}m"
     end
-
-    # if @ketchup.duration >= 60
-    #   h = @ketchup.duration / 60
-    #   m = @ketchup.duration % 60
-    #   m == 0 ? @duration = "#{h}h" : @duration = "#{h}h #{m}m"
-    # else
-    #   @duration = "#{@ketchup.duration}m"
-    # end
     @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
+    @default_date = @ketchup.start_date.strftime('%b %d, %Y %I:%M %p')
+    @start_date = @ketchup.trip.start_date.strftime('%b %d, %Y %I:%M %p')
+    @end_date = @ketchup.trip.end_date.strftime('%b %d, %Y 11:30 PM')
   end
 
   def create
@@ -65,10 +60,6 @@ class KetchupsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
-
   def update
     if @ketchup.status == 'pending'
       @ketchup.update!(status: 'confirmed')
@@ -84,9 +75,10 @@ class KetchupsController < ApplicationController
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       @ketchup.trip.user = current_user
       redirect_to user_ketchups_path(@ketchup.trip.user), notice: 'Ketchup cancelled!'
-    else
+    elsif params[:commit] == 'Edit'
       if @ketchup.update(ketchup_params)
-        GoogleCalendarWrapper.edit(@ketchup, current_user)
+        @ketchup.update(end_date: @ketchup.start_date + params[:ketchup][:duration].to_i.minute)
+        # GoogleCalendarWrapper.edit(@ketchup, current_user)
         Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else

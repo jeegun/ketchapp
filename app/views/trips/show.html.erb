@@ -135,15 +135,15 @@
       autocomplete.setFields(['geometry', 'name']);
       autocomplete.addListener('place_changed', fillInForm);
       function fillInForm() {
-        let place = autocomplete.getPlace()
-      if (!place.geometry) {
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
-        window.alert("No details available for input: '" + place.name + "'");
-        return;
-      }
-      document.getElementById('ketchup_latitude').value = place.geometry.location.lat()
-      document.getElementById('ketchup_longitude').value = place.geometry.location.lng()
+        let place = autocomplete.getPlace();
+        if (!place.geometry) {
+          // User entered the name of a Place that was not suggested and
+          // pressed the Enter key, or the Place Details request failed.
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+        document.getElementById('ketchup_latitude').value = place.geometry.location.lat()
+        document.getElementById('ketchup_longitude').value = place.geometry.location.lng()
       }
     }
   }
