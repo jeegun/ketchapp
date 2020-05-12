@@ -1,7 +1,7 @@
 require 'google/apis/calendar_v3'
 
 class KetchupsController < ApplicationController
-  before_action :set_ketchup, only: [:show, :update, :destroy]
+  before_action :set_ketchup, only: [:show, :update, :edit, :destroy]
 
   def show
     @year = @ketchup.start_date.strftime('%Y')
@@ -65,6 +65,10 @@ class KetchupsController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
   def update
     if @ketchup.status == 'pending'
       @ketchup.update!(status: 'confirmed')
@@ -74,7 +78,7 @@ class KetchupsController < ApplicationController
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
-    elsif @ketchup.status == 'confirmed'
+    elsif params[:commit] == 'Cancel'
       @ketchup.status = 'cancelled'
       @ketchup.save
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
@@ -82,6 +86,7 @@ class KetchupsController < ApplicationController
       redirect_to user_ketchups_path(@ketchup.trip.user), notice: 'Ketchup cancelled!'
     else
       if @ketchup.update(ketchup_params)
+        GoogleCalendarWrapper.edit(@ketchup, current_user)
         Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else
