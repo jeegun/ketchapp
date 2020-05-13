@@ -76,7 +76,11 @@ class KetchupsController < ApplicationController
       elsif current_user == @ketchup.trip.user
         Notification.create(recipient: @ketchup.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       end
-      redirect_to user_ketchups_path(@ketchup.trip.user), notice: 'Ketchup cancelled!'
+      if current_user == @ketchup.user
+        redirect_to user_ketchups_path(@ketchup.user), notice: 'Ketchup cancelled!'
+      elsif current_user == @ketchup.trip.user
+        redirect_to trip_path(@ketchup.trip), notice: 'Ketchup cancelled!'
+      end
     elsif params[:commit] == 'Edit'
       if @ketchup.update(ketchup_params)
         @ketchup.update(end_date: @ketchup.start_date + params[:ketchup][:duration].to_i.minute)
@@ -94,8 +98,9 @@ class KetchupsController < ApplicationController
   end
 
   def destroy
-    Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
     @ketchup.destroy
+      Notification.find_by(notifiable: @ketchup).destroy
+      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
     if @ketchup.trip.user == current_user
       redirect_to trip_path(@ketchup.trip_id)
     else

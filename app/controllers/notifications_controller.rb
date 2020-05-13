@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_notification, only: [:update]
+  before_action :set_notification, only: [:update, :destroy]
 
   # def index
   #   @notifications = policy_scope(Notification).order(created_at: :desc)
@@ -18,6 +18,11 @@ class NotificationsController < ApplicationController
     elsif @notification.notifiable_type == "Trip"
       redirect_to user_notifications_path(@notification.recipient)
    end
+  end
+
+  def destroy
+    @notification.destroy
+    @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
   end
 
   private
