@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
     @connection = Connection.new
     @chat = Chat.new
+    @ketchup = Ketchup.new
+
   end
 
   def connection

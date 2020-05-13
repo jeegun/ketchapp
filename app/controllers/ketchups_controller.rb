@@ -11,23 +11,18 @@ class KetchupsController < ApplicationController
     @minute = @ketchup.start_date.strftime('%M')
     @chat = Chat.new
     # converting time difference between end_time and start_time to duration in min
-    time_diff = ((@ketchup.end_date - @ketchup.start_date) / 60).to_i
-    if time_diff >= 60
-      h = time_diff / 60
-      m = time_diff % 60
+    @time_diff = ((@ketchup.end_date - @ketchup.start_date) / 60).to_i
+    if @time_diff >= 60
+      h = @time_diff / 60
+      m = @time_diff % 60
       m == 0 ? @duration = "#{h}h" : @duration = "#{h}h #{m}m"
     else
-      @duration = "#{time_diff}m"
+      @duration = "#{@time_diff}m"
     end
-
-    # if @ketchup.duration >= 60
-    #   h = @ketchup.duration / 60
-    #   m = @ketchup.duration % 60
-    #   m == 0 ? @duration = "#{h}h" : @duration = "#{h}h #{m}m"
-    # else
-    #   @duration = "#{@ketchup.duration}m"
-    # end
     @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
+    @default_date = @ketchup.start_date.strftime('%b %d, %Y %I:%M %p')
+    @start_date = @ketchup.trip.start_date.strftime('%b %d, %Y %I:%M %p')
+    @end_date = @ketchup.trip.end_date.strftime('%b %d, %Y 11:30 PM')
   end
 
   def create
@@ -67,22 +62,30 @@ class KetchupsController < ApplicationController
 
   def update
     if @ketchup.status == 'pending'
-      @ketchup.update!(status: 'confirmed')
+      @ketchup.update(status: 'confirmed')
       notification = Notification.find_by(recipient: current_user, action: "has sent you a request to", notifiable: @ketchup)
-      notification.update!(read_at: Time.zone.now) if notification.read_at.nil?
+      notification.update(read_at: Time.zone.now) if notification.read_at.nil?
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
-    elsif @ketchup.status == 'confirmed'
-      @ketchup.status = 'cancelled'
-      @ketchup.save
-      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
-      @ketchup.trip.user = current_user
+    elsif params[:commit] == 'Cancel'
+      @ketchup.update(status: 'cancelled')
+      if current_user == @ketchup.user
+        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
+      elsif current_user == @ketchup.trip.user
+        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
+      end
       redirect_to user_ketchups_path(@ketchup.trip.user), notice: 'Ketchup cancelled!'
-    else
+    elsif params[:commit] == 'Edit'
       if @ketchup.update(ketchup_params)
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        @ketchup.update(end_date: @ketchup.start_date + params[:ketchup][:duration].to_i.minute)
+        # GoogleCalendarWrapper.edit(@ketchup, current_user)
+        if current_user == @ketchup.user
+          Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        elsif current_user == @ketchup.trip.user
+          Notification.create(recipient: @ketchup.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        end
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else
         render :edit

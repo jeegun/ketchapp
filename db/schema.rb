@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_144258) do
+ActiveRecord::Schema.define(version: 2020_05_12_134804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2020_05_01_144258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "end_date"
+    t.string "event"
+    t.text "cancel_reason"
     t.index ["trip_id"], name: "index_ketchups_on_trip_id"
     t.index ["user_id"], name: "index_ketchups_on_user_id"
   end
