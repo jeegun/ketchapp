@@ -33,3 +33,77 @@
     </div>
   </div>
 </div>
+<!-- <div class="modal fade" id="ketchupCreateModal" tabindex="-1" role="dialog" aria-labelledby="ketchupCreateModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ketchupCreateModalLabel">Change dates</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-left">
+        <%#= form_with model: @ketchup, local: true, id: 'ketchup-form' do |form| %>
+          <div class="d-flex justify-content-between">
+            <div class="form-group">
+            <%#= form.label 'Start date & time (UTC)' %>
+            <%#= form.text_field :start_date, class: 'daterange form-control' %>
+            </div>
+            <div class="form-group">
+              <%#= form.label 'Duration (in min)' %>
+              <%#= form.text_field :duration, type: "number", value: @time_diff, min: 30, step: 15, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%#= form.label "Where do you want to Ketchup" %>
+            <%#= form.text_field :location, class: 'form-control', onkeypress: "return event.keyCode!=13" %>
+            <%#= form.text_field :latitude, type: "hidden", class: 'form-control' %>
+            <%#= form.text_field :longitude, type: "hidden", class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%#= form.label :message %>
+            <%#= form.text_area :message, class: 'form-control' %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <%#= form.submit "Send ketchup request", class: 'btn btn-flat' %>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%#= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    var input = document.getElementById('ketchup_location');
+    var autocomplete = new google.maps.places.Autocomplete(input, {types: ['establishment']});
+    autocomplete.setFields(['geometry', 'name']);
+    autocomplete.addListener('place_changed', fillInForm);
+    function fillInForm() {
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+      document.getElementById('ketchup_latitude').value = place.geometry.location.lat()
+      document.getElementById('ketchup_longitude').value = place.geometry.location.lng()
+    }
+  }
+  $(document).ready(function() {
+    $('input[class="daterange form-control"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker: true,
+      timePicker24Hour: true,
+      timePickerIncrement: 15,
+      startDate: '<%#= @default_date %>',
+      minDate: '<%#= @start_date %>',
+      maxDate: '<%#= @end_date %>',
+      opens: "right",
+      locale: {
+        format: 'MMM DD, YYYY hh:mm A'
+      }
+    });
+  });
+</script> -->

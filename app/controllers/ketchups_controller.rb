@@ -62,24 +62,30 @@ class KetchupsController < ApplicationController
 
   def update
     if @ketchup.status == 'pending'
-      @ketchup.update!(status: 'confirmed')
+      @ketchup.update(status: 'confirmed')
       notification = Notification.find_by(recipient: current_user, action: "has sent you a request to", notifiable: @ketchup)
-      notification.update!(read_at: Time.zone.now) if notification.read_at.nil?
+      notification.update(read_at: Time.zone.now) if notification.read_at.nil?
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     elsif params[:commit] == 'Cancel'
-      @ketchup.status = 'cancelled'
-      @ketchup.save
-      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
-      @ketchup.trip.user = current_user
+      @ketchup.update(status: 'cancelled')
+      if current_user == @ketchup.user
+        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
+      elsif current_user == @ketchup.trip.user
+        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
+      end
       redirect_to user_ketchups_path(@ketchup.trip.user), notice: 'Ketchup cancelled!'
     elsif params[:commit] == 'Edit'
       if @ketchup.update(ketchup_params)
         @ketchup.update(end_date: @ketchup.start_date + params[:ketchup][:duration].to_i.minute)
         # GoogleCalendarWrapper.edit(@ketchup, current_user)
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        if current_user == @ketchup.user
+          Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        elsif current_user == @ketchup.trip.user
+          Notification.create(recipient: @ketchup.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        end
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else
         render :edit
