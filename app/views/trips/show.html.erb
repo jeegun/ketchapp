@@ -97,7 +97,38 @@
           <!-- will be button to open modal once implemented -->
           <%= link_to 'Create new ketchup', '#' %>
           <!-- will move this from to modal -->
-          <%= render 'ketchups/form' %>
+          <%= form_with model: [@trip, @ketchup], local: true, id: 'ketchup-form' do |form| %>
+            <div class="form-group">
+              <%= form.label 'Choose a connection to ketchup with:' %>
+              <%= form.collection_select :user_id, @people_in_radius_are_connections, :id, :full_name, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label 'Start date & time (UTC)' %>
+              <%= form.text_field :start_date, class: 'daterange form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label 'Duration (in min)' %>
+              <%= form.text_field :duration, type: "number", value: 30, min: 30, step: 15, class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label "Where do you want to Ketchup" %>
+              <%= form.text_field :location, class: 'form-control', onkeypress: "return event.keyCode!=13" %>
+              <%= form.text_field :latitude, type: "hidden", class: 'form-control' %>
+              <%= form.text_field :longitude, type: "hidden", class: 'form-control' %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :message %>
+              <%= form.text_area :message, class: 'form-control' %>
+            </div>
+
+            <div class="actions">
+              <%= form.submit "Send ketchup request", class: 'btn btn-flat' %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
