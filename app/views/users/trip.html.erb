@@ -3,16 +3,16 @@
     <div class="col-12">
       <div class="tabs-container">
         <div class="tabs">
-          <ul class="nav list-inline tabs-underlined" role="tablist">
+          <ul class="list-inline tabs-underlined">
             <!-- tabs without js function need to add js to show the right div -->
-            <li class="nav-item">
-              <p class="tab-underlined active-tab" id="upcoming-tab" data-toggle="tab" href="#upcoming" role="tab" aria-controls="confirmed" aria-selected="true">Current / Upcoming (<%= @trips.where("end_date >= ?", Date.today).count %>)</p>
+            <li>
+              <p class="tab-underlined active-tab">Current / Upcoming (<%= @trips.where("end_date >= ?", Date.today).count %>)</p>
             </li>
-            <li class="nav-item">
-              <p class="tab-underlined" id="past-tab" data-toggle="tab" href="#past" role="tab" aria-controls="past" aria-selected="false">Past (<%= @trips.where("end_date < ?", Date.today).count %>)</p>
+            <li>
+              <p class="tab-underlined">Past (<%= @trips.where("end_date < ?", Date.today).count %>)</p>
             </li>
-            <li class="nav-item">
-              <p class="tab-underlined" id="searches-tab" data-toggle="tab" href="#searches" role="tab" aria-controls="searches" aria-selected="false">Recent searches</p>
+            <li>
+              <p class="tab-underlined">Recent searches</p>
             </li>
           </ul>
         </div>
@@ -22,7 +22,7 @@
       </div>
       <!-- upcoming ketchups div -->
       <div class="tab-content">
-        <div class="tab-pane fade show active" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
+        <div class="lists">
           <% if @trips.where("end_date >= ?", Date.today).any? %>
             <div class="cards-trips">
               <% @trips.each do |trip| %>
@@ -43,7 +43,7 @@
             <p>No upcoming trips</p>
           <% end %>
         </div>
-        <div class="tab-pane fade" id="past" role="tabpanel" aria-labelledby="past-tab">
+        <div class="lists">
           <% if @trips.where("end_date < ?", Date.today).any? %>
             <div class="cards-trips">
               <% @trips.each do |trip| %>
@@ -65,7 +65,7 @@
           <% end %>
         </div>
         <!-- recent searches div -->
-        <div class="tab-pane fade" id="searches" role="tabpanel" aria-labelledby="searches-tab">
+        <div class="lists">
           <% if @searches.any? %>
             <div class="cards-trips">
               <% @searches.each do |trip| %>
@@ -88,3 +88,31 @@
     </div>
   </div>
 </div>
+<script>
+  const tabs = document.querySelectorAll('.tab-underlined')
+  const lists = document.querySelectorAll('.lists')
+  const entries = function*(iterable) {
+    let i = 0;
+    for (item of iterable) {
+      yield [i++, item]
+    }
+  }
+  const showBlock = index => {
+    for (const [blockIndex, block] of entries(lists)) {
+      block.style.display = blockIndex === index ? 'block' : 'none'
+    }
+  }
+  showBlock(0)
+  for (const [tabIndex, tab] of entries(tabs)) {
+    tab.addEventListener('click', e => {
+      e.preventDefault()
+      showBlock(tabIndex)
+      const activeTab = document.querySelector('.active-tab');
+      event.currentTarget.classList.toggle('active-tab');
+      if (activeTab !== null) {
+        activeTab.classList.remove('active-tab');
+      }
+    })
+  }
+</script>
+
