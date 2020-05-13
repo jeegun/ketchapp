@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="cover-photo">
+      <% if @user.photo.attached? %>
+    <%= cl_image_tag @user.photo.key, class: "profile" %>
+      <% else %>
+      <!--- will need to change this to a placeholder image !--->
+      <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{@user.lewagon_username}", class: "profile" %>
+      <% end %>
+      <div class="profile-name"><%= @user.full_name %></div>
+     <i class="fas fa-map-marker-alt"></i> Home City: <%= @user.home_city %>
+     <br>
+      <button class="btn-flat">Chat</button>
+    </div>
+</div>
