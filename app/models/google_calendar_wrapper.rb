@@ -47,7 +47,8 @@ class GoogleCalendarWrapper
     client = get_google_calendar_client user
     event = get_event ketchup
     event = Google::Apis::CalendarV3::Event.new(event)
-    client.insert_event(CALENDAR_ID, event)
+    created_event = client.insert_event(CALENDAR_ID, event)
+    ketchup.update(event: created_event.id)
   end
 
   def self.edit(ketchup, user)
@@ -78,14 +79,12 @@ class GoogleCalendarWrapper
       end: Google::Apis::CalendarV3::EventDateTime.new(
         date_time: ketchup.end_date.strftime('%FT%T%z')
       ),
-      sendNotifications: true,
+      # sendNotifications: true,
       reminders: {
         use_default: true
       }
     }
-
     event[:id] = ketchup.event if ketchup.event
-
     event
   end
 end

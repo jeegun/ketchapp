@@ -36,9 +36,6 @@ class KetchupsController < ApplicationController
     @ketchup.end_date = @ketchup.start_date + params[:ketchup][:duration].to_i.minute
     @ketchup.status = "pending"
     if @ketchup.save
-      unless current_user.access_token.nil?
-        GoogleCalendarWrapper.create(@ketchup, current_user)
-      end
       if @ketchup.trip.user == current_user
         Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
       elsif @ketchup.user == current_user
@@ -84,6 +81,12 @@ class KetchupsController < ApplicationController
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
+      unless @ketchup.trip.user.access_token.nil?
+        GoogleCalendarWrapper.create(@ketchup, @ketchup.trip.user)
+      end
+      unless @ketchup.user.access_token.nil?
+        GoogleCalendarWrapper.create(@ketchup, @ketchup.user)
+      end
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     elsif params[:commit] == 'Cancel'
       @ketchup.update(status: 'cancelled')
@@ -91,6 +94,12 @@ class KetchupsController < ApplicationController
         Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       elsif current_user == @ketchup.trip.user
         Notification.create(recipient: @ketchup.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
+      end
+      unless @ketchup.trip.user.access_token.nil?
+        GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.trip.user)
+      end
+      unless @ketchup.user.access_token.nil?
+        GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.user)
       end
       if current_user == @ketchup.user
         redirect_to user_ketchups_path(@ketchup.user), notice: 'Ketchup cancelled!'
@@ -100,11 +109,16 @@ class KetchupsController < ApplicationController
     elsif params[:commit] == 'Edit'
       if @ketchup.update(ketchup_params)
         @ketchup.update(end_date: @ketchup.start_date + params[:ketchup][:duration].to_i.minute)
-        # GoogleCalendarWrapper.edit(@ketchup, current_user)
         if current_user == @ketchup.user
           Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
         elsif current_user == @ketchup.trip.user
           Notification.create(recipient: @ketchup.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
+        end
+        unless @ketchup.trip.user.access_token.nil?
+          GoogleCalendarWrapper.edit(@ketchup, @ketchup.trip.user)
+        end
+        unless @ketchup.user.access_token.nil?
+          GoogleCalendarWrapper.edit(@ketchup, @ketchup.user)
         end
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else
