@@ -41,26 +41,26 @@
 </div>
 <% @my_trip_notifications.each do |notification| %>
   <div class="modal fade" id="ketchupCreateModal-<%= notification.notifiable_id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCreateModalLabel" aria-hidden="true">
-    <%= render 'ketchups/form', trip: Trip.find(notification.notifiable_id), ketchup: @ketchup, notification: notification %>
+    <%= render 'ketchups/form_from_notification', trip: Trip.find(notification.notifiable_id), ketchup: @ketchup, notification: notification %>
   </div>
 <% end %>
 <script>
   function initMap() {
     <% @my_trip_notifications.each do |notification| %>
       var input<%= notification.notifiable_id %> = document.getElementById('ketchup_location_<%= notification.notifiable_id %>');
-      var autocomplete = new google.maps.places.Autocomplete(input<%= notification.notifiable_id %>, {types: ['establishment']});
-      autocomplete.setFields(['geometry', 'name']);
-      autocomplete.addListener('place_changed', fillInForm);
-      function fillInForm() {
-        var place = autocomplete.getPlace();
-        if (!place.geometry) {
+      var autocomplete<%= notification.notifiable_id %> = new google.maps.places.Autocomplete(input<%= notification.notifiable_id %>, {types: ['establishment']});
+      autocomplete<%= notification.notifiable_id %>.setFields(['geometry', 'name']);
+      autocomplete<%= notification.notifiable_id %>.addListener('place_changed', fillInForm<%= notification.notifiable_id %>);
+      function fillInForm<%= notification.notifiable_id %>() {
+        var place<%= notification.notifiable_id %> = autocomplete<%= notification.notifiable_id %>.getPlace();
+        if (!place<%= notification.notifiable_id %>.geometry) {
           // User entered the name of a Place that was not suggested and
           // pressed the Enter key, or the Place Details request failed.
-          window.alert("No details available for input: '" + place.name + "'");
+          window.alert("No details available for input: '" + place<%= notification.notifiable_id %>.name + "'");
           return;
         }
-        document.getElementById('ketchup_latitude_<%= notification.notifiable_id %>').value = place.geometry.location.lat()
-        document.getElementById('ketchup_longitude_<%= notification.notifiable_id %>').value = place.geometry.location.lng()
+        document.getElementById('ketchup_latitude_<%= notification.notifiable_id %>').value = place<%= notification.notifiable_id %>.geometry.location.lat()
+        document.getElementById('ketchup_longitude_<%= notification.notifiable_id %>').value = place<%= notification.notifiable_id %>.geometry.location.lng()
       }
     <% end %>
   }

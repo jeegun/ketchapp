@@ -1,7 +1,7 @@
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="ketchupCreateModalLabel">Request ketchup</h5>
+      <h5 class="modal-title" id="ketchupCreateModalLabel">Request ketchup to <%= notification.actor.full_name %></h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -21,8 +21,8 @@
         <div class="form-group">
           <%= form.label "Where do you want to Ketchup" %>
           <%= form.text_field :location, class: 'form-control', id: 'ketchup_location_' + notification.notifiable_id.to_s, onkeypress: "return event.keyCode!=13" %>
-          <%= form.text_field :latitude, type: "hidden", class: 'form-control', id: 'ketchup_latitude_' + notification.notifiable_id.to_s %>
-          <%= form.text_field :longitude, type: "hidden", class: 'form-control', id: 'ketchup_longitude_' + notification.notifiable_id.to_s %>
+          <%= form.text_field :latitude, type: "hidden", id: 'ketchup_latitude_' + notification.notifiable_id.to_s %>
+          <%= form.text_field :longitude, type: "hidden", id: 'ketchup_longitude_' + notification.notifiable_id.to_s %>
         </div>
         <div class="form-group">
           <%= form.label :message %>
