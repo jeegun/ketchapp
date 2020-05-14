@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
   def notification
     @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
+    @my_trip_notifications = @my_notifications.where(notifiable_type: 'Trip')
     @connection = Connection.new
     @chat = Chat.new
     @ketchup = Ketchup.new

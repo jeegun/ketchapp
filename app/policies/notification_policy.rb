@@ -9,6 +9,10 @@ class NotificationPolicy < ApplicationPolicy
     user_is_recipient?
   end
 
+  def destroy?
+    user_is_recipient?
+  end
+
   private
 
   def user_is_recipient?
