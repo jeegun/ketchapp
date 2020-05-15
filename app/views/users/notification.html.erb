@@ -11,7 +11,11 @@
             <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= notification.actor.lewagon_username %>">
             <div class="notification-content">
               <p><small><%= notification.month %> <%= notification.day %>, <%= notification.year %></small></p>
-              <p><strong><%= notification.actor.full_name %></strong> <%= notification.action %> <%= notification.notifiable_type.to_s.underscore.humanize.downcase if notification.notifiable_type != 'Trip' %></p>
+              <p>
+                <strong><%= notification.actor.full_name %></strong> <%= notification.action %>
+                <%= notification.notifiable_type.to_s.underscore.humanize.downcase if notification.notifiable_type != 'Trip' %>
+                <em style="opacity: 0.7;"><%= Ketchup.find(notification.notifiable_id).cancel_reason if (notification.notifiable_type == 'Ketchup' && notification.action == 'has cancelled your') %></em>
+              </p>
             </div>
           </div>
           <div class="notification-actions">
