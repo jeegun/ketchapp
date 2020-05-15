@@ -17,13 +17,15 @@ class ConnectionsController < ApplicationController
 
   def destroy
     @connection.destroy
+    connect_request = ConnectRequest.find_by(sender: @connection.connection_sender, receiver: @connection.connection_receiver, status: 'accepted')
+    connect_request.destroy
     redirect_to user_connections_path(current_user)
   end
 
   private
 
   def set_connection
-    @connection = connection.find(params[:id])
+    @connection = Connection.find(params[:id])
     authorize @connection
   end
 

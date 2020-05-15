@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:trip, :save, :ketchup, :notification, :connection, :show]
-  before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection]
+  before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection, :show]
 
   def show
   end

@@ -1,14 +1,35 @@
 <div class="container">
-    <div class="cover-photo">
-      <% if @user.photo.attached? %>
-    <%= cl_image_tag @user.photo.key, class: "profile" %>
-      <% else %>
-      <!--- will need to change this to a placeholder image !--->
+  <div class="cover-photo">
+    <% if @user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, class: "profile" %>
+    <% else %>
+    <!--- will need to change this to a placeholder image !--->
       <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{@user.lewagon_username}", class: "profile" %>
-      <% end %>
-      <div class="profile-name"><%= @user.full_name %></div>
-     <i class="fas fa-map-marker-alt"></i> Home City: <%= @user.home_city %>
-     <br>
-      <button class="btn-flat">Chat</button>
+    <% end %>
+    <div class="profile-name"><%= @user.full_name %></div>
+    <div class="profile-infos">
+      <p><i class="fas fa-map-marker-alt"></i> Home City: <%= @user.home_city %></p>
+    <% if @user == current_user %>
+      <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
+      <p><i class="far fa-envelope"></i> Email: <%= link_to @user.email, @user.email %></p>
     </div>
+      <%= link_to "Edit Account", edit_user_registration_path, class: "btn btn-flat" %>
+    <% elsif current_user.is_connection?(@user) %>
+      <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
+      <p><i class="far fa-envelope"></i> Email: <%= link_to @user.email, @user.email %></p>
+    </div>
+      <%= link_to "Chat", '', class: "btn btn-flat" %>
+      <%= link_to "Unconnect", connection_path(Connection.find_by(connection_sender: current_user, connection_receiver: @user) || Connection.find_by(connection_sender: @user, connection_receiver: current_user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+    <% elsif current_user.sent_connect_request?(@user) %>
+    </div>
+      <%= link_to "Sent request", '', class: "btn btn-flat" %>
+    <% elsif current_user.received_connect_request?(@user) %>
+    </div>
+      <%= link_to "Received request", '', class: "btn btn-flat" %>
+    <% else %>
+    </div>
+      <%= link_to "Send connect request", '', class: "btn btn-flat" %>
+    <% end %>
+
+  </div>
 </div>
