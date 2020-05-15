@@ -18,7 +18,7 @@
                 <p class="tab-underlined active-tab">People (<%= @people_to_show.count %>)</p>
               </li>
               <li>
-                <p class="tab-underlined">Ketchups (<%= @trip.ketchups.count %>)</p>
+                <p class="tab-underlined">Ketchups (<%= @trip.ketchups.where.not(["status= ?", "cancelled"]).count %>)</p>
               </li>
               <% unless current_user.access_token.nil? %>
                 <li>

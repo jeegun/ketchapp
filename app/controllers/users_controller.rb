@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   def ketchup
     @pending_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "pending"])
     @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
+    @active_ketchups = @pending_ketchups + @confirmed_ketchups
   end
 
   def notification

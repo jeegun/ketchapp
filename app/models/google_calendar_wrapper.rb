@@ -45,14 +45,23 @@ class GoogleCalendarWrapper
 
   def self.create(ketchup, user)
     client = get_google_calendar_client user
-    event = get_event ketchup
+    if ketchup.user == user
+      event = get_event ketchup
+    elsif ketchup.trip.user == user
+      event = get_event_other ketchup
+    end
     event = Google::Apis::CalendarV3::Event.new(event)
-    client.insert_event(CALENDAR_ID, event)
+    created_event = client.insert_event(CALENDAR_ID, event)
+    ketchup.update(event: created_event.id)
   end
 
   def self.edit(ketchup, user)
     client = get_google_calendar_client user
-    event = get_event ketchup
+    if ketchup.user == user
+      event = get_event ketchup
+    elsif ketchup.trip.user == user
+      event = get_event_other ketchup
+    end
     event = Google::Apis::CalendarV3::Event.new(event)
     client.update_event(CALENDAR_ID, event.id, event)
   end
@@ -69,6 +78,26 @@ class GoogleCalendarWrapper
 
   def self.get_event ketchup
     event = {
+      summary: "Your ketchup with #{ketchup.trip.user.full_name}",
+      location: ketchup.location,
+      description: ketchup.message,
+      start: Google::Apis::CalendarV3::EventDateTime.new(
+        date_time: ketchup.start_date.strftime('%FT%T%z')
+      ),
+      end: Google::Apis::CalendarV3::EventDateTime.new(
+        date_time: ketchup.end_date.strftime('%FT%T%z')
+      ),
+      # sendNotifications: true,
+      reminders: {
+        use_default: true
+      }
+    }
+    event[:id] = ketchup.event if ketchup.event
+    event
+  end
+
+  def self.get_event_other ketchup
+    event = {
       summary: "Your ketchup with #{ketchup.user.full_name}",
       location: ketchup.location,
       description: ketchup.message,
@@ -78,14 +107,12 @@ class GoogleCalendarWrapper
       end: Google::Apis::CalendarV3::EventDateTime.new(
         date_time: ketchup.end_date.strftime('%FT%T%z')
       ),
-      sendNotifications: true,
+      # sendNotifications: true,
       reminders: {
         use_default: true
       }
     }
-
     event[:id] = ketchup.event if ketchup.event
-
     event
   end
 end
