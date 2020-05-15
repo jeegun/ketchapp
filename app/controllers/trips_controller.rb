@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :set_trip, only: [:show, :update, :destroy]
   before_action :set_people_to_show, only: [:show, :update]
 
   def show
