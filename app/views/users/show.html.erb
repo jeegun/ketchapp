@@ -28,7 +28,9 @@
       <%= link_to "Received request", '', class: "btn btn-flat" %>
     <% else %>
     </div>
-      <%= link_to "Send connect request", '', class: "btn btn-flat" %>
+      <%= simple_form_for [@user, @connect_request] do |f| %>
+        <%= f.submit "Connect request", class: "btn btn-flat" %>
+      <% end %>
     <% end %>
 
   </div>
