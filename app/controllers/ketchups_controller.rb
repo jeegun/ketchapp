@@ -83,7 +83,6 @@ class KetchupsController < ApplicationController
       elsif current_user == @ketchup.trip.user
         Notification.create(recipient: @ketchup.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       end
-      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       unless @ketchup.trip.user.access_token.nil?
