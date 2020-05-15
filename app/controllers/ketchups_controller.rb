@@ -31,6 +31,7 @@ class KetchupsController < ApplicationController
     trip = Trip.find(params[:trip_id])
     @ketchup.trip = trip
     @ketchup.end_date = @ketchup.start_date + params[:ketchup][:duration].to_i.minute
+    @ketchup.creator = current_user.id
     @ketchup.status = "pending"
     if @ketchup.save
       unless current_user.access_token.nil?
