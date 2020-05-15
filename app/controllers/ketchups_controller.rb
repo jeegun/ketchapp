@@ -78,6 +78,11 @@ class KetchupsController < ApplicationController
       @ketchup.update(status: 'confirmed')
       notification = Notification.find_by(recipient: current_user, action: "has sent you a request to", notifiable: @ketchup)
       notification.update(read_at: Time.zone.now) if notification.read_at.nil?
+      if current_user == @ketchup.user
+        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
+      elsif current_user == @ketchup.trip.user
+        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
+      end
       Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
@@ -89,17 +94,17 @@ class KetchupsController < ApplicationController
       end
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     elsif params[:commit] == 'Cancel'
-      @ketchup.update(status: 'cancelled')
+      @ketchup.update(status: 'cancelled', cancel_reason: params[:ketchup][:cancel_reason])
       if current_user == @ketchup.user
         Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       elsif current_user == @ketchup.trip.user
         Notification.create(recipient: @ketchup.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       end
       unless @ketchup.trip.user.access_token.nil?
-        GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.trip.user)
+        GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.trip.user) if GoogleCalendarWrapper.get(@ketchup.event, @ketchup.trip.user).status == "confirmed"
       end
       unless @ketchup.user.access_token.nil?
-        GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.user)
+        GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.user) if GoogleCalendarWrapper.get(@ketchup.event, @ketchup.user).status == "confirmed"
       end
       if current_user == @ketchup.user
         redirect_to user_ketchups_path(@ketchup.user), notice: 'Ketchup cancelled!'
@@ -115,10 +120,10 @@ class KetchupsController < ApplicationController
           Notification.create(recipient: @ketchup.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
         end
         unless @ketchup.trip.user.access_token.nil?
-          GoogleCalendarWrapper.edit(@ketchup, @ketchup.trip.user)
+          GoogleCalendarWrapper.edit(@ketchup, @ketchup.trip.user) if GoogleCalendarWrapper.get(@ketchup.event, @ketchup.trip.user)
         end
         unless @ketchup.user.access_token.nil?
-          GoogleCalendarWrapper.edit(@ketchup, @ketchup.user)
+          GoogleCalendarWrapper.edit(@ketchup, @ketchup.user) if GoogleCalendarWrapper.get(@ketchup.event, @ketchup.user)
         end
         redirect_to ketchup_path(@ketchup), notice: 'Ketchup updated!'
       else
@@ -130,7 +135,11 @@ class KetchupsController < ApplicationController
   def destroy
     @ketchup.destroy
       Notification.find_by(notifiable: @ketchup).destroy
-      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
+      if current_user == @ketchup.user
+        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
+      elsif current_user == @ketchup.trip.user
+        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
+      end
     if @ketchup.trip.user == current_user
       redirect_to trip_path(@ketchup.trip_id)
     else
@@ -146,7 +155,7 @@ class KetchupsController < ApplicationController
   end
 
   def ketchup_params
-    params.require(:ketchup).permit(:trip_id, :location, :latitude, :longitude, :message, :start_date, :end_date, :status, :user_id)
+    params.require(:ketchup).permit(:trip_id, :location, :latitude, :longitude, :message, :start_date, :end_date, :status, :user_id, :cancel_reason)
   end
 
 end
