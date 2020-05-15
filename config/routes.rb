@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :connections, only: [:create]
   end
 
-  resources :notifications, only: [:index, :create, :show, :update]
+  resources :notifications, only: [:update, :destroy]
   # do
   #   collection do
   #     post :mark_as_read

@@ -5,12 +5,12 @@
         <div class="ketchup">
           <div class="card-vertical-ketchup">
             <div class="card-vertical-ketchup-infos">
-              <% if current_user == @ketchup.user %>
-                <h1>Ketchup with <%= @ketchup.trip.user.full_name %></h1>
-              <% elsif current_user == @ketchup.trip.user %>
-                <h1>Ketchup with <%= @ketchup.user.full_name %></h1>
-              <% end %>
-              <div class="card-vertical-ketchup-btn">
+              <div class="card-vertical-ketchup-title">
+                <% if current_user == @ketchup.user %>
+                  <h2>Ketchup with<br><%= @ketchup.trip.user.full_name %></h2>
+                <% elsif current_user == @ketchup.trip.user %>
+                  <h2>Ketchup with<br><%= @ketchup.user.full_name %></h2>
+                <% end %>
                 <!-- link to chat will be implemented after chat function -->
                 <% if current_user == @ketchup.user %>
                   <%= simple_form_for [@ketchup.trip.user, @chat] do |f| %>
@@ -24,7 +24,7 @@
               </div>
               <div class="info">
                 <div class="item"><p>Date:</p></div>
-                <div class="content"><p><%= @month %> <%= @day %> <%= @year %></p></div>
+                <div class="content"><p><%= @month %> <%= @day %>, <%= @year %></p></div>
               </div>
               <div class="info">
                 <div class="item"><p>Time:</p></div>
@@ -49,16 +49,15 @@
                     <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
                     <%= link_to 'Decline', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
                   <% else %>
-                    <%= link_to 'Edit', edit_ketchup_path(@ketchup), class: 'btn btn-flat' %>
-                    <%= link_to 'Cancel', ketchup_path(@ketchup), method: :patch || :put, data: {confirm: 'Cancel ketchup?'}, class: 'btn btn-ghost' %>
+                    <%= link_to 'Edit', '', data: { toggle: "modal", target: "#ketchupEditModal" }, class: 'btn btn-flat' %>
+                    <%= link_to 'Cancel', '', data: { toggle: "modal", target: "#ketchupCancelModal" }, class: 'btn btn-ghost' %>
                   <% end %>
                 <% elsif current_user == @ketchup.trip.user %>
                   <% if @ketchup.status == 'pending' %>
-                    <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
                     <%= link_to 'Cancel', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
                   <% else %>
-                    <%= link_to 'Edit', edit_ketchup_path(@ketchup), class: 'btn btn-flat' %>
-                    <%= link_to 'Cancel', ketchup_path(@ketchup), method: :patch || :put, data: {confirm: 'Cancel ketchup?'}, class: 'btn btn-ghost' %>
+                    <%= link_to 'Edit', '', data: { toggle: "modal", target: "#ketchupEditModal" }, class: 'btn btn-flat' %>
+                    <%= link_to 'Cancel', '', data: { toggle: "modal", target: "#ketchupCancelModal" }, class: 'btn btn-ghost' %>
                   <% end %>
                 <% end %>
               </div>
@@ -66,15 +65,107 @@
           </div>
         </div>
         <div id="map"></div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
-        <script>
-          function initMap() {
-            var ketchupLocation = {lat: <%= @ketchup.latitude %>, lng: <%= @ketchup.longitude %>};
-            var map = new google.maps.Map(document.getElementById('map'), {zoom: 17, center: ketchupLocation});
-            var marker = new google.maps.Marker({position: ketchupLocation, map: map});
-          }
-        </script>
       </div>
     </div>
   </div>
 </div>
+<div class="modal fade" id="ketchupEditModal" tabindex="-1" role="dialog" aria-labelledby="ketchupEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ketchupEditModalLabel">Edit ketchup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-left">
+        <%= form_with model: @ketchup, local: true, id: 'ketchup-form' do |form| %>
+          <div class="d-flex justify-content-between">
+            <div class="form-group">
+            <%= form.label 'Start date & time (UTC)' %>
+            <%= form.text_field :start_date, class: 'daterange form-control' %>
+            </div>
+            <div class="form-group">
+              <%= form.label 'Duration (in min)' %>
+              <%= form.text_field :duration, type: "number", value: @time_diff, min: 30, step: 15, class: 'form-control' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= form.label "Where do you want to Ketchup" %>
+            <%= form.text_field :location, class: 'form-control', onkeypress: "return event.keyCode!=13" %>
+            <%= form.text_field :latitude, type: "hidden" %>
+            <%= form.text_field :longitude, type: "hidden" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :message %>
+            <%= form.text_area :message, class: 'form-control' %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <%= form.submit "Edit", class: 'btn btn-flat' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="ketchupCancelModal" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ketchupCancelModalLabel">Cancel ketchup</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-left">
+        <%= form_with model: @ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
+          <div class="form-group">
+            <%= form.label :Please_tell_your_connection_why! %>
+            <%= form.text_field :cancel_reason, class: 'form-control' %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <%= form.submit "Cancel", class: 'btn btn-flat' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    var ketchupLocation = {lat: <%= @ketchup.latitude %>, lng: <%= @ketchup.longitude %>};
+    var map = new google.maps.Map(document.getElementById('map'), {zoom: 17, center: ketchupLocation});
+    var marker = new google.maps.Marker({position: ketchupLocation, map: map});
+    var input = document.getElementById('ketchup_location');
+    var autocomplete = new google.maps.places.Autocomplete(input, {types: ['establishment']});
+    autocomplete.setFields(['geometry', 'name']);
+    autocomplete.addListener('place_changed', fillInForm);
+    function fillInForm() {
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      }
+      document.getElementById('ketchup_latitude').value = place.geometry.location.lat()
+      document.getElementById('ketchup_longitude').value = place.geometry.location.lng()
+    }
+  }
+  $(document).ready(function() {
+    $('input[class="daterange form-control"]').daterangepicker({
+      singleDatePicker: true,
+      timePicker: true,
+      timePicker24Hour: true,
+      timePickerIncrement: 15,
+      startDate: '<%= @default_date %>',
+      minDate: '<%= @start_date %>',
+      maxDate: '<%= @end_date %>',
+      opens: "right",
+      locale: {
+        format: 'MMM DD, YYYY hh:mm A'
+      }
+    });
+  });
+</script>

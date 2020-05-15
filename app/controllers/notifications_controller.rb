@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_notification, only: [:update]
+  before_action :set_notification, only: [:update, :destroy]
 
   # def index
   #   @notifications = policy_scope(Notification).order(created_at: :desc)
@@ -13,9 +13,16 @@ class NotificationsController < ApplicationController
     if @notification.notifiable_type == "Connections" || @notification.notifiable_type == "ConnectRequest"
       redirect_to  user_connections_path(@notification.recipient)
     elsif @notification.notifiable_type == "Ketchup"
-      redirect_to user_ketchups_path(@notification.recipient)
-      # redirect_to ketchup_path(@notification.notifiable_id)
+      redirect_to ketchup_path(@notification.notifiable_id)
+      # redirect_to user_ketchups_path(@notification.recipient)
+    elsif @notification.notifiable_type == "Trip"
+      redirect_to user_notifications_path(@notification.recipient)
    end
+  end
+
+  def destroy
+    @notification.destroy
+    @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
   end
 
   private

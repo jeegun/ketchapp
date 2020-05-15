@@ -7,10 +7,7 @@ class UsersController < ApplicationController
 
   def trip
     @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
-  end
-
-  def save
-    @trips = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"])
+    @searches = Trip.where(["user_id = ? AND status= ?", @user.id, "saved"]).where("created_at > ?", 30.days.ago)
   end
 
   def ketchup
@@ -20,8 +17,11 @@ class UsersController < ApplicationController
 
   def notification
     @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
+    @my_trip_notifications = @my_notifications.where(notifiable_type: 'Trip')
     @connection = Connection.new
     @chat = Chat.new
+    @ketchup = Ketchup.new
+
   end
 
   def connection

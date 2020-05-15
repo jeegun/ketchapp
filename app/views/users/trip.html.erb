@@ -1,43 +1,118 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div class="d-flex justify-content-between">
-        <div  style="flex: 0 0 70%">
+      <div class="tabs-container">
+        <div class="tabs">
           <ul class="list-inline tabs-underlined">
             <!-- tabs without js function need to add js to show the right div -->
             <li>
-              <p class="tab-underlined active-tab">Upcoming (<%= @trips.count %>)</p>
+              <p class="tab-underlined active-tab">Current / Upcoming (<%= @trips.where("end_date >= ?", Date.today).count %>)</p>
             </li>
             <li>
-              <p class="tab-underlined">Past (<%= @trips.count %>)</p>
+              <p class="tab-underlined">Past (<%= @trips.where("end_date < ?", Date.today).count %>)</p>
+            </li>
+            <li>
+              <p class="tab-underlined">Recent searches</p>
             </li>
           </ul>
         </div>
         <div>
-          <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-3' %>
+          <%= link_to 'Create new trip', root_path, class: 'btn btn-flat mt-3 mr-3 tabs-btn' %>
         </div>
       </div>
       <!-- upcoming ketchups div -->
-      <div>
-        <% if @trips.any? %>
-          <div class="cards-trips">
-            <% @trips.each do |trip| %>
-              <div class="card-vertical-trip">
-                <a href="/trips/<%= trip.id %>">
-                  <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
-                  <div class="card-vertical-trip-infos">
-                    <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
-                    <h4>Trip to <%= trip.location %></h4>
+      <div class="tab-content">
+        <div class="lists">
+          <% if @trips.where("end_date >= ?", Date.today).any? %>
+            <div class="cards-trips">
+              <% @trips.each do |trip| %>
+                <% if trip.end_date >= Date.today %>
+                  <div class="card-vertical-trip">
+                    <a href="/trips/<%= trip.id %>">
+                      <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                      <div class="card-vertical-trip-infos">
+                        <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                        <h4>Trip to <%= trip.location %></h4>
+                      </div>
+                    </a>
                   </div>
-                </a>
-              </div>
-            <% end %>
-          </div>
-        <% else %>
-          <p>No trip yet</p>
-        <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No upcoming trips</p>
+          <% end %>
+        </div>
+        <div class="lists">
+          <% if @trips.where("end_date < ?", Date.today).any? %>
+            <div class="cards-trips">
+              <% @trips.each do |trip| %>
+                <% if trip.end_date < Date.today %>
+                  <div class="card-vertical-trip">
+                    <a href="/trips/<%= trip.id %>">
+                      <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                      <div class="card-vertical-trip-infos">
+                        <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                        <h4>Trip to <%= trip.location %></h4>
+                      </div>
+                    </a>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No past trips</p>
+          <% end %>
+        </div>
+        <!-- recent searches div -->
+        <div class="lists">
+          <% if @searches.any? %>
+            <div class="cards-trips">
+              <% @searches.each do |trip| %>
+                <div class="card-vertical-trip">
+                  <a href="/trips/<%= trip.id %>">
+                    <img src="https://source.unsplash.com/featured/?<%= trip.location %>,city" />
+                    <div class="card-vertical-trip-infos">
+                      <p><%= trip.start_date.strftime('%b') %> <%= trip.start_date.strftime('%d') %> <%= trip.start_date.strftime('%Y') if trip.start_date.year != trip.end_date.year %> - <%= trip.end_date.strftime('%b') if trip.start_date.month != trip.end_date.month %> <%= trip.end_date.strftime('%d') %> <%= trip.end_date.strftime('%Y')  %></p>
+                      <h4>Trip to <%= trip.location %></h4>
+                    </div>
+                  </a>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p>No recent searches</p>
+          <% end %>
+        </div>
       </div>
-      <!-- need past ketchups div here -->
     </div>
   </div>
 </div>
+<script>
+  const tabs = document.querySelectorAll('.tab-underlined')
+  const lists = document.querySelectorAll('.lists')
+  const entries = function*(iterable) {
+    let i = 0;
+    for (item of iterable) {
+      yield [i++, item]
+    }
+  }
+  const showBlock = index => {
+    for (const [blockIndex, block] of entries(lists)) {
+      block.style.display = blockIndex === index ? 'block' : 'none'
+    }
+  }
+  showBlock(0)
+  for (const [tabIndex, tab] of entries(tabs)) {
+    tab.addEventListener('click', e => {
+      e.preventDefault()
+      showBlock(tabIndex)
+      const activeTab = document.querySelector('.active-tab');
+      event.currentTarget.classList.toggle('active-tab');
+      if (activeTab !== null) {
+        activeTab.classList.remove('active-tab');
+      }
+    })
+  }
+</script>
+

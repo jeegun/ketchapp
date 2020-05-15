@@ -107,8 +107,8 @@
 .cards-trips {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 32px;
-  margin: 32px auto;
+  grid-gap: 2rem;
+  margin: 2rem auto;
 }
 
 .card-vertical-trip {
@@ -159,6 +159,11 @@
   margin: 8px 0;
 }
 
+.card-vertical-ketchup-title {
+  display: flex;
+  justify-content: space-between;
+}
+
 .card-vertical-ketchup .card-vertical-ketchup-infos {
   padding: 16px;
 }
@@ -173,6 +178,12 @@
 
 .card-vertical-ketchup .card-vertical-ketchup-infos >.info > .content {
   flex: 0 0 80%;
+}
+
+.card-vertical-ketchup-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
 
 .profile {
@@ -206,3 +217,15 @@
   margin: 0px;
 }
 
+@media screen and (max-width: 767.98px) {
+  .cards-trips {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .cards-trips {
+    grid-template-columns: 1fr 1fr;
+  }
+}
