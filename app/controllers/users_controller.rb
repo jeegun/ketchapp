@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def ketchup
     @pending_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "pending"])
     @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
+    @myketchups = Ketchup.all
   end
 
   def notification
@@ -17,7 +18,6 @@ class UsersController < ApplicationController
     @connection = Connection.new
     @chat = Chat.new
     @ketchup = Ketchup.new
-
   end
 
   def connection
