@@ -20,7 +20,7 @@
           </div>
           <div class="notification-actions">
             <% if (notification.notifiable_type == 'ConnectRequest') && (notification.action == 'sent you a') && ConnectRequest.find(notification.notifiable_id).status == "pending" %>
-              <%= simple_form_for [ConnectRequest.find(notification.notifiable_id), @connection] do |f| %>
+              <%= simple_form_for [ConnectRequest.find(notification.notifiable_id), @connection], html: { id: "new_connection_#{notification.notifiable_id}" } do |f| %>
                 <%= f.submit "Accept", class: "btn btn-flat" %>
               <% end %>
               <%= link_to "Decline", connect_request_path(notification.notifiable_id), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
@@ -69,7 +69,7 @@
     <% end %>
   }
   <% @my_trip_notifications.each do |notification| %>
-    $(document).ready(function() {
+    document.addEventListener("DOMContentLoaded", function() {
       $('#ketchup_start_date_<%= notification.notifiable_id %>').daterangepicker({
         singleDatePicker: true,
         timePicker: true,

@@ -11,7 +11,7 @@
             <div style="flex: 0 0 45%"><%= f.input :first_name %></div>
             <div style="flex: 0 0 45%"><%= f.input :last_name %></div>
           </div>
-          <%= f.input :email, required: true, autofocus: true %>
+          <%= f.input :email, required: true, autofocus: true, input_html: { autocomplete: "email" } %>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -53,20 +53,18 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
 <script>
   function initMap() {
-    let input = document.getElementById('user_home_city');
-    let autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
+    var input = document.getElementById('user_home_city');
+    var autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
     autocomplete.setFields(['geometry', 'name']);
     autocomplete.addListener('place_changed', fillInForm);
     function fillInForm() {
-      let place = autocomplete.getPlace()
-
+      var place = autocomplete.getPlace()
     if (!place.geometry) {
       // User entered the name of a Place that was not suggested and
       // pressed the Enter key, or the Place Details request failed.
       window.alert("No details available for input: '" + place.name + "'");
       return;
     }
-
     document.getElementById('user_latitude').value = place.geometry.location.lat()
     document.getElementById('user_longitude').value = place.geometry.location.lng()
     }
