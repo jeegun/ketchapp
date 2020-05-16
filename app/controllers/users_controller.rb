@@ -4,6 +4,8 @@ class UsersController < ApplicationController
 
   def show
     @connect_request = ConnectRequest.new
+    @connection = Connection.new
+    @chat = Chat.new
   end
 
   def trip

@@ -27,7 +27,6 @@
     <% @sent_requests.each do |request| %>
       <p>Sent request to <%= request.receiver.full_name %></p>
       <%= link_to "Cancel", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
-
     <% end %>
   </div>
   <div class="lists" style="display: none;">

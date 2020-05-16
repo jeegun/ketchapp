@@ -1,37 +1,53 @@
 <div class="container">
-  <div class="cover-photo">
-    <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, class: "profile" %>
-    <% else %>
-    <!--- will need to change this to a placeholder image !--->
-      <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{@user.lewagon_username}", class: "profile" %>
-    <% end %>
-    <div class="profile-name"><%= @user.full_name %></div>
-    <div class="profile-infos">
-      <p><i class="fas fa-map-marker-alt"></i> Home City: <%= @user.home_city %></p>
-    <% if @user == current_user %>
-      <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
-      <p><i class="far fa-envelope"></i> Email: <%= link_to @user.email, @user.email %></p>
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="profile-container">
+        <% if @user.photo.attached? %>
+          <%= cl_image_tag @user.photo.key, class: "profile-photo" %>
+        <% else %>
+        <!--- will need to change this to a placeholder image !--->
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{@user.lewagon_username}", class: "profile-photo" %>
+        <% end %>
+        <div class="profile-name"><%= @user.full_name %></div>
+        <div class="profile-infos">
+          <p><i class="fas fa-map-marker-alt"></i> Home City: <%= @user.home_city %></p>
+        <% if @user == current_user %>
+          <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
+          <p><i class="far fa-envelope"></i> Email: <%= link_to @user.email, @user.email %></p>
+        </div>
+          <%= link_to "Edit Account", edit_user_registration_path, class: "btn btn-flat" %>
+        <% elsif current_user.is_connection?(@user) %>
+          <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
+          <p><i class="far fa-envelope"></i> Email: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></p>
+        </div>
+        <div class="profile-btn">
+          <%= simple_form_for [@user, @chat] do |f| %>
+            <%= f.submit 'Chat', class: 'btn btn-flat' %>
+          <% end %>
+          <%= link_to "Unconnect", connection_path(Connection.find_by(connection_sender: current_user, connection_receiver: @user) || Connection.find_by(connection_sender: @user, connection_receiver: current_user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+        </div>
+        <% elsif current_user.sent_connect_request?(@user) %>
+        </div>
+        <div class="profile-btn">
+          <%= link_to "Cancel connect request", connect_request_path(ConnectRequest.find_by(sender: current_user, receiver: @user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+        </div>
+        <% elsif current_user.received_connect_request?(@user) %>
+        </div>
+        <div class="profile-btn">
+          <%= simple_form_for [ConnectRequest.find_by(sender: @user, receiver: current_user), @connection] do |f| %>
+            <%= f.submit "Accept connect request", class: "btn btn-flat" %>
+          <% end %>
+          <%= link_to "Decline", connect_request_path(ConnectRequest.find_by(sender: @user, receiver: current_user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+        </div>
+        <% else %>
+        </div>
+        <div class="profile-btn">
+          <%= simple_form_for [@user, @connect_request] do |f| %>
+            <%= f.submit "Connect request", class: "btn btn-flat" %>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
     </div>
-      <%= link_to "Edit Account", edit_user_registration_path, class: "btn btn-flat" %>
-    <% elsif current_user.is_connection?(@user) %>
-      <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
-      <p><i class="far fa-envelope"></i> Email: <%= link_to @user.email, @user.email %></p>
-    </div>
-      <%= link_to "Chat", '', class: "btn btn-flat" %>
-      <%= link_to "Unconnect", connection_path(Connection.find_by(connection_sender: current_user, connection_receiver: @user) || Connection.find_by(connection_sender: @user, connection_receiver: current_user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
-    <% elsif current_user.sent_connect_request?(@user) %>
-    </div>
-      <%= link_to "Sent request", '', class: "btn btn-flat" %>
-    <% elsif current_user.received_connect_request?(@user) %>
-    </div>
-      <%= link_to "Received request", '', class: "btn btn-flat" %>
-    <% else %>
-    </div>
-      <%= simple_form_for [@user, @connect_request] do |f| %>
-        <%= f.submit "Connect request", class: "btn btn-flat" %>
-      <% end %>
-    <% end %>
-
   </div>
 </div>
