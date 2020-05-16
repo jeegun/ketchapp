@@ -12,7 +12,7 @@
             <div class="notification-content">
               <p><small><%= notification.month %> <%= notification.day %>, <%= notification.year %></small></p>
               <p>
-                <strong><%= notification.actor.full_name %></strong> <%= notification.action %>
+                <%= link_to notification.actor.full_name, user_path(notification.actor), style: 'font-weight:700;' %> <%= notification.action %>
                 <%= notification.notifiable_type.to_s.underscore.humanize.downcase if notification.notifiable_type != 'Trip' %>
                 <em style="opacity: 0.7;"><%= Ketchup.find(notification.notifiable_id).cancel_reason if (notification.notifiable_type == 'Ketchup' && notification.action == 'has cancelled your') %></em>
               </p>

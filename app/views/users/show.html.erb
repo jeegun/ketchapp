@@ -6,7 +6,7 @@
           <%= cl_image_tag @user.photo.key, class: "profile-photo" %>
         <% else %>
         <!--- will need to change this to a placeholder image !--->
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{@user.lewagon_username}", class: "profile-photo" %>
+          <%= image_tag 'profile.png', class: "profile-photo" %>
         <% end %>
         <div class="profile-name"><%= @user.full_name %></div>
         <div class="profile-infos">

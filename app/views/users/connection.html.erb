@@ -17,21 +17,21 @@
   <div class="lists">
     <% current_user.connections.sort.reverse.each do |connection| %>
       <% if connection.connection_sender == current_user %>
-        <p><%= connection.connection_receiver.full_name %></p>
+        <p><%= link_to connection.connection_receiver.full_name, user_path(connection.connection_receiver) %></p>
       <% else %>
-        <p><%= connection.connection_sender.full_name %></p>
+        <p><%= link_to connection.connection_sender.full_name, user_path(connection.connection_sender) %></p>
       <% end %>
     <% end %>
   </div>
   <div class="lists" style="display: none;">
     <% @sent_requests.each do |request| %>
-      <p>Sent request to <%= request.receiver.full_name %></p>
+      <p>Sent request to <%= link_to request.receiver.full_name, user_path(request.receiver) %></p>
       <%= link_to "Cancel", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
     <% end %>
   </div>
   <div class="lists" style="display: none;">
     <% @received_requests.each do |request| %>
-      <p id="connect_request_<%= request.id %>"><%= request.sender.full_name %> sent you a request</p>
+      <p><%= link_to request.sender.full_name, user_path(request.sender) %> sent you a request</p>
       <%= simple_form_for [request, @connection] do |f| %>
         <%= f.submit "Accept", class: "btn btn-ghost" %>
       <% end %>
@@ -41,7 +41,7 @@
   <div class="lists" style="display: none;">
     <% if current_user.requestable_contacts %>
       <% current_user.requestable_contacts.each do |user| %>
-        <p><%= user.full_name %></p>
+        <p><%= link_to user.full_name, user_path(user) %></p>
         <%= simple_form_for [user, @connect_request] do |f| %>
           <%= f.submit "Connect request", class: "btn btn-ghost" %>
         <% end %>

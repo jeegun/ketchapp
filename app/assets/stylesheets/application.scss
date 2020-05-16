@@ -30,8 +30,12 @@ h5 {
   color: $ketchup;
 }
 
-a:hover {
-  text-decoration: none;
+a {
+  color: $ketchup;
+  &:hover {
+    text-decoration: none;
+    color: $mustard;
+  }
 }
 
 .form-group > label {
