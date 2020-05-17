@@ -58,3 +58,8 @@ a {
 div.pac-container {
     z-index: 99999999999 !important;
 }
+
+.cropper-container.cropper-bg {
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
