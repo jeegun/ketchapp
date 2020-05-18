@@ -55,7 +55,7 @@
         <p>Sent</p>
       </div>
       <% @myketchups.each do |ketchup| %>
-        <% if current_user.id == ketchup.creator && ketchup.start_date >= Date.today %>
+        <% if ketchup.start_date >= Date.today %>
           <div class="ketchup">
             <div class="ketchup-head">
               <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= ketchup.user.lewagon_username %>">
