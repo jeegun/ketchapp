@@ -34,6 +34,7 @@ class KetchupsController < ApplicationController
       @ketchup.user = current_user
     end
     @ketchup.end_date = @ketchup.start_date + params[:ketchup][:duration].to_i.minute
+    @ketchup.creator = current_user.id
     @ketchup.status = "pending"
     if @ketchup.save
       if @ketchup.trip.user == current_user
@@ -142,7 +143,7 @@ class KetchupsController < ApplicationController
     if @ketchup.trip.user == current_user
       redirect_to trip_path(@ketchup.trip_id)
     else
-      redirect_to root_path
+      redirect_to user_ketchups_path(current_user)
     end
   end
 
