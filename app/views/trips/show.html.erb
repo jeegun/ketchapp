@@ -161,7 +161,7 @@
   }
   <% @people_to_show.each do |people| %>
     <% if current_user.is_connection?(people) %>
-      document.addEventListener("DOMContentLoaded", function()
+      document.addEventListener("DOMContentLoaded", function() {
         $('#ketchup_start_date_<%= people.id %>').daterangepicker({
           singleDatePicker: true,
           timePicker: true,
