@@ -40,7 +40,7 @@
     document.getElementById('trip_longitude').value = place.geometry.location.lng()
     }
   }
-  $(document).ready(function() {
+  document.addEventListener("DOMContentLoaded", function() {
     $('input[class="daterange form-control"]').daterangepicker({
       autoApply: true,
       minDate: '<%= @today %>',

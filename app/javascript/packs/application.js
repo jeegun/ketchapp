@@ -1,4 +1,6 @@
 import "bootstrap";
+import "cropperjs/dist/cropper.css";
+
 import { previewImageOnFileSelect } from '../components/photo_preview.js';
 
 previewImageOnFileSelect();

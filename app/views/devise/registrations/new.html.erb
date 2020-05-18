@@ -26,14 +26,34 @@
           <%= f.input :home_city, label: 'Home city', placeholder: 'Current city', onkeypress: "return event.keyCode!=13" %>
           <%= f.input :latitude, as: :hidden%>
           <%= f.input :longitude, as: :hidden %>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none', id: 'photo-input' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a profile photo' %>
         </div>
-
+        <div id="photo-preview"></div>
         <div class="form-actions">
           <%= f.button :submit, "Sign up", class: 'btn-flat mb-4', style: "width: 100%;" %>
         </div>
       <% end %>
 
       <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
+<button style="display: none;" id="open-modal" data-toggle="modal" data-target="#photoModal"></button>
+<div class="modal fade bd-example-modal-lg" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="photoModalLabel">Crop profile photo</h5>
+        <button data-dismiss="modal" aria-label="Close" style="display: none;" id="close-modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <canvas id="canvas" style="width: 400px;">
+        </canvas>
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button id='btnCrop'>Crop</button>
+        <button id='btnReset'>Reset</button>
+      </div>
     </div>
   </div>
 </div>

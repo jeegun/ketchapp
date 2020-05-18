@@ -30,8 +30,12 @@ h5 {
   color: $ketchup;
 }
 
-a:hover {
-  text-decoration: none;
+a {
+  color: $ketchup;
+  &:hover {
+    text-decoration: none;
+    color: $mustard;
+  }
 }
 
 .form-group > label {
@@ -53,4 +57,9 @@ a:hover {
 
 div.pac-container {
     z-index: 99999999999 !important;
+}
+
+.cropper-container.cropper-bg {
+  min-width: 100% !important;
+  max-width: 100% !important;
 }

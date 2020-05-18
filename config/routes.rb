@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
-  resources :users, only: [:destroy, :show] do
+  resources :users, only: [:show] do
     resources :connect_requests, only: [:create]
     resources :chats, only: [:create]
   end
 
-  resources :connect_requests, only: [:update, :destroy] do
+  resources :connect_requests, only: [:destroy] do
     resources :connections, only: [:create]
   end
 
@@ -25,14 +25,13 @@ Rails.application.routes.draw do
   get 'users/:id/notifications', to: 'users#notification', as: :user_notifications
   get 'users/:id/trips', to: 'users#trip', as: :user_trips
   get 'users/:id/connections', to: 'users#connection', as: :user_connections
-  get 'users/:id/saves', to: 'users#save', as: :user_saves
   get 'users/:id/ketchups', to: 'users#ketchup', as: :user_ketchups
 
-  resources :trips do
+  resources :trips, only: [:show, :create, :update, :destroy] do
     resources :ketchups, only: [:create]
   end
 
-  resources :ketchups, only: [:show, :update, :edit, :destroy]
+  resources :ketchups, only: [:show, :update, :destroy]
 
   resources :chats, only: [:show] do
     resources :messages, only: [:create]

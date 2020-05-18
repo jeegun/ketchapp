@@ -11,12 +11,13 @@ class NotificationsController < ApplicationController
       @notification.update!(read_at: Time.zone.now)
     end
     if @notification.notifiable_type == "Connections" || @notification.notifiable_type == "ConnectRequest"
-      redirect_to  user_connections_path(@notification.recipient)
+      redirect_to  user_path(@notification.actor)
     elsif @notification.notifiable_type == "Ketchup"
       redirect_to ketchup_path(@notification.notifiable_id)
       # redirect_to user_ketchups_path(@notification.recipient)
     elsif @notification.notifiable_type == "Trip"
-      redirect_to user_notifications_path(@notification.recipient)
+      redirect_to  user_path(@notification.actor)
+      # redirect_to user_notifications_path(@notification.recipient)
    end
   end
 

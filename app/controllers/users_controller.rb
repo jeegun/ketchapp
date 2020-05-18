@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:trip, :save, :ketchup, :notification, :connection, :show]
-  before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection]
+  before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection, :show]
 
   def show
+    @connect_request = ConnectRequest.new
+    @connection = Connection.new
+    @chat = Chat.new
   end
 
   def trip

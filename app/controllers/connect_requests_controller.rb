@@ -1,5 +1,5 @@
 class ConnectRequestsController < ApplicationController
-  before_action :set_connect_request, only: [:update, :destroy]
+  before_action :set_connect_request, only: [:destroy]
 
   def create
     @connect_request = ConnectRequest.new
@@ -12,16 +12,10 @@ class ConnectRequestsController < ApplicationController
     redirect_to user_connections_path(current_user), notice: 'Request sent.'
   end
 
-  # def update
-  #   if @connect_request.update(connect_request_params)
-  #     redirect_to user_connects_path(current_user)
-  #   else
-  #     render :edit
-  #   end
-  # end
-
   def destroy
+    notification = Notification.find_by(notifiable: @connect_request)
     @connect_request.destroy
+    notification.destroy
     redirect_to user_connections_path(current_user)
   end
 

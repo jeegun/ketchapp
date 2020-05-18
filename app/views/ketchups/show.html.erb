@@ -8,9 +8,9 @@
               <div class="card-vertical-ketchup-infos">
                 <div class="card-vertical-ketchup-title">
                   <% if current_user == @ketchup.user %>
-                    <h2>Ketchup with<br><%= @ketchup.trip.user.full_name %></h2>
+                    <h2>Ketchup with<br><%= link_to @ketchup.trip.user.full_name, user_path(@ketchup.trip.user) %></h2>
                   <% elsif current_user == @ketchup.trip.user %>
-                    <h2>Ketchup with<br><%= @ketchup.user.full_name %></h2>
+                    <h2>Ketchup with<br><%= link_to @ketchup.user.full_name, user_path(@ketchup.user) %></h2>
                   <% end %>
                   <!-- link to chat will be implemented after chat function -->
                   <% if current_user == @ketchup.user %>
@@ -155,7 +155,7 @@
       document.getElementById('ketchup_longitude').value = place.geometry.location.lng()
     }
   }
-  $(document).ready(function() {
+  document.addEventListener("DOMContentLoaded", function() {
     $('input[class="daterange form-control"]').daterangepicker({
       singleDatePicker: true,
       timePicker: true,
