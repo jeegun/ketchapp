@@ -1,20 +1,9 @@
 import Cropper from 'cropperjs';
 const canvas  = document.getElementById("canvas");
 const preview = document.getElementById('photo-preview');
-const previewImageOnFileSelect = () => {
-  // select the photo input
-  let input = document.getElementById('photo-input');
-  if (input) {
-    // add a listener to know when a new picture is uploaded
-    input.addEventListener('change', () => {
-      // we call the displayPreview function (which retrieves the image url and displays it)
-      displayPreview(input);
-    })
-  }
-}
 
 const dataURLtoFile = (dataurl, filename) => {
-  var arr = dataurl.split(','),
+  let arr = dataurl.split(','),
       mime = arr[0].match(/:(.*?);/)[1],
       bstr = atob(arr[1]),
       n = bstr.length,
@@ -37,15 +26,14 @@ const displayPreview = (input) => {
         context.canvas.height = img.height;
         context.canvas.width  = img.width;
         context.drawImage(img, 0, 0);
-        var cropper = new Cropper(canvas, {
+        let cropper = new Cropper(canvas, {
           aspectRatio: 1 / 1,
           viewMode: 1
         });
         document.getElementById('btnCrop').addEventListener('click', () => {
           // Get a string base 64 data url
-          var croppedImageDataURL = cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096}).toDataURL("image/png");
-          console.log(croppedImageDataURL);
-          var croppedImage = document.createElement("IMG");
+          const croppedImageDataURL = cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096}).toDataURL("image/png");
+          const croppedImage = document.createElement("IMG");
           croppedImage.classList.add('w-100');
           croppedImage.src = croppedImageDataURL;
           const child = preview.lastElementChild;
@@ -70,5 +58,15 @@ const displayPreview = (input) => {
     document.getElementById("open").click();
   }
 }
-
+const previewImageOnFileSelect = () => {
+  // select the photo input
+  let input = document.getElementById('photo-input');
+  if (input) {
+    // add a listener to know when a new picture is uploaded
+    input.addEventListener('change', () => {
+      // we call the displayPreview function (which retrieves the image url and displays it)
+      displayPreview(input);
+    })
+  }
+}
 export { previewImageOnFileSelect };
