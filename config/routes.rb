@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
-  resources :users, only: [:destroy] do
+  resources :users, only: [:destroy, :show] do
     resources :connect_requests, only: [:create]
     resources :chats, only: [:create]
   end
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :connections, only: [:create]
   end
 
-  resources :notifications, only: [:index, :create, :show, :update]
+  resources :notifications, only: [:update, :destroy]
   # do
   #   collection do
   #     post :mark_as_read

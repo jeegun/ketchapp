@@ -1,71 +1,73 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div class="ketchup-container">
-        <div class="ketchup">
-          <div class="card-vertical-ketchup">
-            <div class="card-vertical-ketchup-infos">
-              <div class="card-vertical-ketchup-title">
-                <% if current_user == @ketchup.user %>
-                  <h2>Ketchup with<br><%= @ketchup.trip.user.full_name %></h2>
-                <% elsif current_user == @ketchup.trip.user %>
-                  <h2>Ketchup with<br><%= @ketchup.user.full_name %></h2>
-                <% end %>
-                <!-- link to chat will be implemented after chat function -->
-                <% if current_user == @ketchup.user %>
-                  <%= simple_form_for [@ketchup.trip.user, @chat] do |f| %>
-                    <%= f.submit 'Chat', class: 'btn btn-flat' %>
+      <% unless @ketchup.status == 'cancelled' %>
+        <div class="ketchup-container">
+          <div class="ketchup">
+            <div class="card-vertical-ketchup">
+              <div class="card-vertical-ketchup-infos">
+                <div class="card-vertical-ketchup-title">
+                  <% if current_user == @ketchup.user %>
+                    <h2>Ketchup with<br><%= @ketchup.trip.user.full_name %></h2>
+                  <% elsif current_user == @ketchup.trip.user %>
+                    <h2>Ketchup with<br><%= @ketchup.user.full_name %></h2>
                   <% end %>
-                <% elsif current_user == @ketchup.trip.user %>
-                  <%= simple_form_for [@ketchup.user, @chat] do |f| %>
-                    <%= f.submit 'Chat', class: 'btn btn-flat' %>
+                  <!-- link to chat will be implemented after chat function -->
+                  <% if current_user == @ketchup.user %>
+                    <%= simple_form_for [@ketchup.trip.user, @chat] do |f| %>
+                      <%= f.submit 'Chat', class: 'btn btn-flat' %>
+                    <% end %>
+                  <% elsif current_user == @ketchup.trip.user %>
+                    <%= simple_form_for [@ketchup.user, @chat] do |f| %>
+                      <%= f.submit 'Chat', class: 'btn btn-flat' %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div>
-              <div class="info">
-                <div class="item"><p>Date:</p></div>
-                <div class="content"><p><%= @month %> <%= @day %>, <%= @year %></p></div>
-              </div>
-              <div class="info">
-                <div class="item"><p>Time:</p></div>
-                <div class="content"><p><%= @hour %>:<%= @minute %></p></div>
-              </div>
-              <div class="info">
-                <div class="item"><p>Duration:</p></div>
-                <div class="content"><p><%= @duration %></p></div>
-              </div>
-              <div class="info">
-                <div class="item"><p>Location:</p></div>
-                <div class="content"><p><%= @ketchup.location %></p></div>
-              </div>
-              <div class="info">
-                <div class="item"><p>Message:</p></div>
-                <div class="content"><p><%= @ketchup.message %></p></div>
-              </div>
-              <div class="card-vertical-ketchup-btn">
-                <!-- add modal to edit or cancel the ketchup -->
-                <% if current_user == @ketchup.user %>
-                  <% if @ketchup.status == 'pending' %>
-                    <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
-                    <%= link_to 'Decline', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
-                  <% else %>
-                    <%= link_to 'Edit', '', data: { toggle: "modal", target: "#ketchupEditModal" }, class: 'btn btn-flat' %>
-                    <%= link_to 'Cancel', '', data: { toggle: "modal", target: "#ketchupCancelModal" }, class: 'btn btn-ghost' %>
+                </div>
+                <div class="info">
+                  <div class="item"><p>Date:</p></div>
+                  <div class="content"><p><%= @month %> <%= @day %>, <%= @year %></p></div>
+                </div>
+                <div class="info">
+                  <div class="item"><p>Time:</p></div>
+                  <div class="content"><p><%= @hour %>:<%= @minute %></p></div>
+                </div>
+                <div class="info">
+                  <div class="item"><p>Duration:</p></div>
+                  <div class="content"><p><%= @duration %></p></div>
+                </div>
+                <div class="info">
+                  <div class="item"><p>Location:</p></div>
+                  <div class="content"><p><%= @ketchup.location %></p></div>
+                </div>
+                <div class="info">
+                  <div class="item"><p>Message:</p></div>
+                  <div class="content"><p><%= @ketchup.message %></p></div>
+                </div>
+                <div class="card-vertical-ketchup-btn">
+                  <!-- add modal to edit or cancel the ketchup -->
+                  <% if current_user == @ketchup.user %>
+                    <% if @ketchup.status == 'pending' %>
+                      <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
+                      <%= link_to 'Decline', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
+                    <% else %>
+                      <%= link_to 'Edit', '', data: { toggle: "modal", target: "#ketchupEditModal" }, class: 'btn btn-flat' %>
+                      <%= link_to 'Cancel', '', data: { toggle: "modal", target: "#ketchupCancelModal" }, class: 'btn btn-ghost' %>
+                    <% end %>
+                  <% elsif current_user == @ketchup.trip.user %>
+                    <% if @ketchup.status == 'pending' %>
+                      <%= link_to 'Cancel', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
+                    <% else %>
+                      <%= link_to 'Edit', '', data: { toggle: "modal", target: "#ketchupEditModal" }, class: 'btn btn-flat' %>
+                      <%= link_to 'Cancel', '', data: { toggle: "modal", target: "#ketchupCancelModal" }, class: 'btn btn-ghost' %>
+                    <% end %>
                   <% end %>
-                <% elsif current_user == @ketchup.trip.user %>
-                  <% if @ketchup.status == 'pending' %>
-                    <%= link_to 'Cancel', ketchup_path(@ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
-                  <% else %>
-                    <%= link_to 'Edit', '', data: { toggle: "modal", target: "#ketchupEditModal" }, class: 'btn btn-flat' %>
-                    <%= link_to 'Cancel', '', data: { toggle: "modal", target: "#ketchupCancelModal" }, class: 'btn btn-ghost' %>
-                  <% end %>
-                <% end %>
+                </div>
               </div>
             </div>
           </div>
+          <div id="map"></div>
         </div>
-        <div id="map"></div>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
@@ -73,7 +75,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ketchupEditModalLabel">Change dates</h5>
+        <h5 class="modal-title" id="ketchupEditModalLabel">Edit ketchup</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -93,8 +95,8 @@
           <div class="form-group">
             <%= form.label "Where do you want to Ketchup" %>
             <%= form.text_field :location, class: 'form-control', onkeypress: "return event.keyCode!=13" %>
-            <%= form.text_field :latitude, type: "hidden", class: 'form-control' %>
-            <%= form.text_field :longitude, type: "hidden", class: 'form-control' %>
+            <%= form.text_field :latitude, type: "hidden" %>
+            <%= form.text_field :longitude, type: "hidden" %>
           </div>
           <div class="form-group">
             <%= form.label :message %>

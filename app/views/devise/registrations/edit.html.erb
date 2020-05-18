@@ -29,9 +29,11 @@
                       required: true,
                       input_html: { autocomplete: "current-password" } %>
           <%= f.input :home_city, label: 'Home city', placeholder: 'Current city', onkeypress: "return event.keyCode!=13" %>
-          <%= f.input :latitude, as: :hidden, class: 'form-control' %>
-          <%= f.input :longitude, as: :hidden, class: 'form-control' %>
+          <%= f.input :latitude, as: :hidden %>
+          <%= f.input :longitude, as: :hidden %>
           <%= f.input :phone_number %>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none', id: 'photo-input' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a profile photo' %>
+          <%= image_tag "", width: 300, class: "hidden", id: "photo-preview" %>
         </div>
 
         <div class="form-actions">

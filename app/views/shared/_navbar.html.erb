@@ -11,10 +11,8 @@
         <li class="nav-item btn-group <%= "active" if request.url.split('/').last == 'notifications' %>">
           <a class="dropdown-toggle nav-link" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell"></i>
-              <span class="unread-count">
-                <% if @notifications.present? %>
-                  <%= @notifications.length %>
-                <% end %>
+              <span class="unread-count" id="unread-count">
+                <%= @notifications.length if @notifications.present? %>
               </span>
           </a>
           <div class="dropdown-menu notification-drop" aria-labelledby="dropdownMenu1">
@@ -48,7 +46,7 @@
           <% end %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Another action", "#", class: "dropdown-item" %>
+            <%= link_to "My Profile", user_path(current_user), class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>

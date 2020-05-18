@@ -5,6 +5,10 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def trip?
     user_is_page_owner?
   end
@@ -30,4 +34,5 @@ class UserPolicy < ApplicationPolicy
   def user_is_page_owner?
     record == user
   end
+
 end
