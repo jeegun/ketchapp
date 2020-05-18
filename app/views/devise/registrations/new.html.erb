@@ -38,14 +38,13 @@
     </div>
   </div>
 </div>
-<button style="display: none;" id="open" data-toggle="modal" data-target="#photoModal"></button>
+<button style="display: none;" id="open-modal" data-toggle="modal" data-target="#photoModal"></button>
 <div class="modal fade bd-example-modal-lg" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <h5 class="modal-title" id="photoModalLabel">Crop profile photo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="display: none;" id="closeModal">
-        </button>
+        <button data-dismiss="modal" aria-label="Close" style="display: none;" id="close-modal"></button>
       </div>
       <div class="modal-body text-center">
         <canvas id="canvas" style="width: 400px;">

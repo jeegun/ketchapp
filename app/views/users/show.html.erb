@@ -24,7 +24,7 @@
           <%= simple_form_for [@user, @chat] do |f| %>
             <%= f.submit 'Chat', class: 'btn btn-flat' %>
           <% end %>
-          <%= link_to "Unconnect", connection_path(Connection.find_by(connection_sender: current_user, connection_receiver: @user) || Connection.find_by(connection_sender: @user, connection_receiver: current_user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+          <%= link_to "Disconnect", connection_path(Connection.find_by(connection_sender: current_user, connection_receiver: @user) || Connection.find_by(connection_sender: @user, connection_receiver: current_user)), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
         </div>
         <% elsif current_user.sent_connect_request?(@user) %>
         </div>

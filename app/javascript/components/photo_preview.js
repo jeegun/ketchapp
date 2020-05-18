@@ -33,20 +33,27 @@ const displayPreview = (input) => {
         document.getElementById('btnCrop').addEventListener('click', () => {
           // Get a string base 64 data url
           const croppedImageDataURL = cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096}).toDataURL("image/png");
+          // Create a img tag with base 64 data url
           const croppedImage = document.createElement("IMG");
           croppedImage.classList.add('w-100');
           croppedImage.src = croppedImageDataURL;
+          // Get rid of existing cropped image preview if there is any
           const child = preview.lastElementChild;
           if (child) {
             preview.removeChild(child);
           }
+          // Append cropped image to preview
           preview.appendChild(croppedImage);
+          // Convert base 64 data url to a file
           var file = dataURLtoFile(croppedImageDataURL,'profile.png');
+          // Create a FileList and and the created file
           let list = new DataTransfer();
           list.items.add(file);
           let myFileList = list.files;
+          // Replace input files with files containing the cropped image file
           input.files = myFileList;
-          document.getElementById('closeModal').click();
+          // Close modal
+          document.getElementById('close-modal').click();
         });
         document.getElementById('btnReset').addEventListener('click', () => {
           cropper.reset();
@@ -55,7 +62,7 @@ const displayPreview = (input) => {
       img.src = event.currentTarget.result;
     }
     reader.readAsDataURL(input.files[0])
-    document.getElementById("open").click();
+    document.getElementById("open-modal").click();
   }
 }
 const previewImageOnFileSelect = () => {
