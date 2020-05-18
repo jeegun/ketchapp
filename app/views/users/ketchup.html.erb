@@ -9,7 +9,11 @@
           <% if ketchup.start_date >= Date.today %>
             <div class="ketchup">
               <div class="ketchup-head">
-                <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= ketchup.trip.user.lewagon_username %>">
+                <% if ketchup.trip.user.photo.attached? %>
+                  <%= cl_image_tag ketchup.trip.user.photo.key, class: "avatar" %>
+                <% else %>
+                  <%= image_tag 'profile.png', class: "avatar" %>
+                <% end %>
                 <div class="ketchup-content">
                   <p><small><%= ketchup.created_at.strftime("%B") %> <%= ketchup.created_at.day %>, <%= ketchup.created_at.year %></small></p>
                   <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %> </p>
@@ -31,7 +35,11 @@
           <% if ketchup.start_date >= Date.today %>
             <div class="ketchup">
               <div class="ketchup-head">
-                <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= ketchup.trip.user.lewagon_username %>">
+                <% if ketchup.trip.user.photo.attached? %>
+                  <%= cl_image_tag ketchup.trip.user.photo.key, class: "avatar" %>
+                <% else %>
+                  <%= image_tag 'profile.png', class: "avatar" %>
+                <% end %>
                 <div class="ketchup-content">
                   <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %> </p>
                   <p><small>When: <%= ketchup.start_date %></small></p>
@@ -58,7 +66,11 @@
         <% if ketchup.start_date >= Date.today %>
           <div class="ketchup">
             <div class="ketchup-head">
-              <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= ketchup.user.lewagon_username %>">
+              <% if ketchup.user.photo.attached? %>
+                <%= cl_image_tag ketchup.user.photo.key, class: "avatar" %>
+              <% else %>
+                <%= image_tag 'profile.png', class: "avatar" %>
+              <% end %>
               <div class="ketchup-content">
                 <p><%= link_to "#{ketchup.user.full_name} (#{ketchup.trip.location})", ketchup_path(ketchup) %></p>
                 <p><small>When: <%= ketchup.start_date %></small></p>

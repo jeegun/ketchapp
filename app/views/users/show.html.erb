@@ -5,7 +5,6 @@
         <% if @user.photo.attached? %>
           <%= cl_image_tag @user.photo.key, class: "profile-photo" %>
         <% else %>
-        <!--- will need to change this to a placeholder image !--->
           <%= image_tag 'profile.png', class: "profile-photo" %>
         <% end %>
         <div class="profile-name"><%= @user.full_name %></div>

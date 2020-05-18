@@ -146,7 +146,6 @@ ActiveRecord::Schema.define(version: 2020_05_15_072101) do
     t.string "phone_number"
     t.float "latitude"
     t.float "longitude"
-    t.string "lewagon_username"
     t.string "first_name"
     t.string "last_name"
     t.string "access_token"

@@ -22,7 +22,11 @@
     </div>
     <div class="current-chat">
       <div class="d-flex pl-3">
-        <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= @chat.opposed_user(current_user).lewagon_username %>">
+        <% if @chat.opposed_user(current_user).photo.attached? %>
+          <%= cl_image_tag @chat.opposed_user(current_user).photo.key, class: "avatar" %>
+        <% else %>
+          <%= image_tag 'profile.png', class: "avatar" %>
+        <% end %>
         <h2><%= @chat.opposed_user(current_user).full_name %></h2>
       </div>
       <div class="messages">

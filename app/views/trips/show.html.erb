@@ -45,7 +45,11 @@
         <div class="cards-connections">
           <% @people_to_show.each do |people| %>
               <div class="card-vertical-connection">
-                <img src="https://kitt.lewagon.com/placeholder/users/<%= people.lewagon_username %>" />
+                <% if people.photo.attached? %>
+                  <%= cl_image_tag people.photo.key %>
+                <% else %>
+                  <%= image_tag 'profile.png' %>
+                <% end %>
                 <div class="card-vertical-connection-infos">
                   <a href="/users/<%= people.id %>">
                     <h3><%= people.full_name %></h3>

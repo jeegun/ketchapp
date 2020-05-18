@@ -8,8 +8,7 @@ users_data = [
     home_city: "Sant Cugat del Vallès, Spain",
     latitude: 41.4720702,
     longitude: 2.086515399999999,
-    phone_number: "000 000 001",
-    lewagon_username: "EllynBsc"
+    phone_number: "000 000 001"
   },
   {
     email: "avalon@gmail.com",
@@ -19,8 +18,7 @@ users_data = [
     home_city: "Badalona, Spain",
     latitude: 41.4469883,
     longitude: 2.2450325,
-    phone_number: "000 000 002",
-    lewagon_username: "Avalonvdhorst"
+    phone_number: "000 000 002"
   },
   {
     email: "alexander@gmail.com",
@@ -30,8 +28,7 @@ users_data = [
     home_city: "Hospitalet de Llobregat, Spain",
     latitude: 41.3661865,
     longitude: 2.1164942,
-    phone_number: "000 000 003",
-    lewagon_username: "ajdubovoy"
+    phone_number: "000 000 003"
   },
   {
     email: "prima@gmail.com",
@@ -41,8 +38,7 @@ users_data = [
     home_city: "Barcelona, Spain",
     latitude: 41.38506389999999,
     longitude: 2.1734035,
-    phone_number: "000 000 004",
-    lewagon_username: "primaulia"
+    phone_number: "000 000 004"
   },
   {
     email: "louise@gmail.com",
@@ -52,8 +48,7 @@ users_data = [
     home_city: "Castelldefels, Spain",
     latitude: 41.2800161,
     longitude: 1.9766294,
-    phone_number: "000 000 005",
-    lewagon_username: "LouiseDarche"
+    phone_number: "000 000 005"
   },
   {
     email: "sangsoo@gmail.com",
@@ -63,8 +58,7 @@ users_data = [
     home_city: "Barcelona, Spain",
     latitude: 41.38506389999999,
     longitude: 2.1734035,
-    phone_number: "000 000 006",
-    lewagon_username: "sangsoora"
+    phone_number: "000 000 006"
   },
   {
     email: "valerie@gmail.com",
@@ -74,8 +68,7 @@ users_data = [
     home_city: "New York City, NY, USA",
     latitude: 40.7127753,
     longitude: -74.0059728,
-    phone_number: "000 000 007",
-    lewagon_username: "valerieschraauwers"
+    phone_number: "000 000 007"
   },
   {
     email: "claire@gmail.com",
@@ -85,8 +78,7 @@ users_data = [
     home_city: "Fort Lee, NJ, USA",
     latitude: 40.8509333,
     longitude: -73.9701381,
-    phone_number: "000 000 008",
-    lewagon_username: "claire-gtr"
+    phone_number: "000 000 008"
   },
   {
     email: "fanny@gmail.com",
@@ -96,8 +88,7 @@ users_data = [
     home_city: "New York, NY, USA",
     latitude: 40.7127753,
     longitude: -74.0059728,
-    phone_number: "000 000 009",
-    lewagon_username: "fanny-rojon"
+    phone_number: "000 000 009"
   },
   {
     email: "lorenzo@gmail.com",
@@ -107,8 +98,7 @@ users_data = [
     home_city: "Hempstead, NY, USA",
     latitude: 40.70621279999999,
     longitude: -73.6187397,
-    phone_number: "000 000 010",
-    lewagon_username: "ldeld"
+    phone_number: "000 000 010"
   },
   {
     email: "jensen@gmail.com",
@@ -118,8 +108,7 @@ users_data = [
     home_city: "Yonkers, NY, USA",
     latitude: 40.9312099,
     longitude: -73.89874689999999,
-    phone_number: "000 000 011",
-    lewagon_username: "jiggyjensen"
+    phone_number: "000 000 011"
   },
   {
     email: "juan@gmail.com",
@@ -129,8 +118,7 @@ users_data = [
     home_city: "Jersey City, NJ, USA",
     latitude: 40.7177545,
     longitude: -74.0431435,
-    phone_number: "000 000 012",
-    lewagon_username: "TheJuanAndOnly99"
+    phone_number: "000 000 012"
   },
   {
     email: "joyce@gmail.com",
@@ -140,8 +128,7 @@ users_data = [
     home_city: "Los Angeles, CA, USA",
     latitude: 34.0522342,
     longitude: -118.2436849,
-    phone_number: "000 000 013",
-    lewagon_username: "Joyckc"
+    phone_number: "000 000 013"
   },
   {
     email: "jeegun@gmail.com",
@@ -151,8 +138,7 @@ users_data = [
     home_city: "Anaheim, CA, USA",
     latitude: 33.83659319999999,
     longitude: -117.9143012,
-    phone_number: "000 000 014",
-    lewagon_username: "jeegun"
+    phone_number: "000 000 014"
   },
   {
     email: "maxime@gmail.com",
@@ -162,8 +148,7 @@ users_data = [
     home_city: "Long Beach, CA, USA",
     latitude: 33.7700504,
     longitude: -118.1937395,
-    phone_number: "000 000 015",
-    lewagon_username: "Max51555"
+    phone_number: "000 000 015"
   },
   {
     email: "laura@gmail.com",
@@ -173,8 +158,7 @@ users_data = [
     home_city: "Santa Monica, CA, USA",
     latitude: 34.0194543,
     longitude: -118.4911912,
-    phone_number: "000 000 016",
-    lewagon_username: "lhelmert"
+    phone_number: "000 000 016"
   },
   {
     email: "robert@gmail.com",
@@ -184,8 +168,7 @@ users_data = [
     home_city: "Carson, CA, USA",
     latitude: 33.8316745,
     longitude: -118.281693,
-    phone_number: "000 000 017",
-    lewagon_username: "RobOwenKing"
+    phone_number: "000 000 017"
   },
   {
     email: "tamas@gmail.com",
@@ -195,8 +178,7 @@ users_data = [
     home_city: "Los Angeles, CA, USA",
     latitude: 34.0522342,
     longitude: -118.2436849,
-    phone_number: "000 000 018",
-    lewagon_username: "tomapapp"
+    phone_number: "000 000 018"
   },
   {
     email: "elena@gmail.com",
@@ -206,8 +188,7 @@ users_data = [
     home_city: "Seoul, South Korea",
     latitude: 37.566535,
     longitude: 126.9779692,
-    phone_number: "000 000 019",
-    lewagon_username: "elenavigo"
+    phone_number: "000 000 019"
   },
   {
     email: "michael@gmail.com",
@@ -217,8 +198,7 @@ users_data = [
     home_city: "Goyang, Gyeonggi-do, South Korea",
     latitude: 37.6583599,
     longitude: 126.8320201,
-    phone_number: "000 000 020",
-    lewagon_username: "michaelwlaschitz"
+    phone_number: "000 000 020"
   },
   {
     email: "leon@gmail.com",
@@ -228,8 +208,7 @@ users_data = [
     home_city: "Guri-si, Gyeonggi-do, South Korea",
     latitude: 37.59431240000001,
     longitude: 127.1295646,
-    phone_number: "000 000 021",
-    lewagon_username: "leonellerbrock"
+    phone_number: "000 000 021"
   },
   {
     email: "raphael@gmail.com",
@@ -239,8 +218,7 @@ users_data = [
     home_city: "Seoul, South Korea",
     latitude: 37.566535,
     longitude: 126.9779692,
-    phone_number: "000 000 022",
-    lewagon_username: "raph-dav"
+    phone_number: "000 000 022"
   },
   {
     email: "antoine@gmail.com",
@@ -250,8 +228,7 @@ users_data = [
     home_city: "Bucheon-si, Gyeonggi-do, South Korea",
     latitude: 37.5034138,
     longitude: 126.7660309,
-    phone_number: "000 000 023",
-    lewagon_username: "Boukto2708"
+    phone_number: "000 000 023"
   },
   {
     email: "ry@gmail.com",
@@ -261,8 +238,7 @@ users_data = [
     home_city: "Gwacheon, Gyeonggi-do, South Korea",
     latitude: 37.429246,
     longitude: 126.9874451,
-    phone_number: "000 000 024",
-    lewagon_username: "ryellingson"
+    phone_number: "000 000 024"
   },
   {
     email: "marin@gmail.com",
@@ -272,8 +248,7 @@ users_data = [
     home_city: "Mumbai, Maharashtra, India",
     latitude: 19.0759837,
     longitude: 72.8776559,
-    phone_number: "000 000 025",
-    lewagon_username: "Marin-b"
+    phone_number: "000 000 025"
   },
   {
     email: "cassandre@gmail.com",
@@ -283,8 +258,7 @@ users_data = [
     home_city: "Navi Mumbai, Maharashtra, India",
     latitude: 19.0330488,
     longitude: 73.0296625,
-    phone_number: "000 000 026",
-    lewagon_username: "CassandreHouze"
+    phone_number: "000 000 026"
   },
   {
     email: "ikram@gmail.com",
@@ -294,8 +268,7 @@ users_data = [
     home_city: "Thane, Maharashtra, India",
     latitude: 19.2183307,
     longitude: 72.9780897,
-    phone_number: "000 000 027",
-    lewagon_username: "IkramAkhlaq"
+    phone_number: "000 000 027"
   },
   {
     email: "marco@gmail.com",
@@ -305,8 +278,7 @@ users_data = [
     home_city: "Bhiwandi, Maharashtra, India",
     latitude: 19.2812547,
     longitude: 73.0482912,
-    phone_number: "000 000 028",
-    lewagon_username: "marcdebiolley"
+    phone_number: "000 000 028"
   },
   {
     email: "emiliano@gmail.com",
@@ -316,8 +288,7 @@ users_data = [
     home_city: "Mumbai, Maharashtra, India",
     latitude: 19.0759837,
     longitude: 72.8776559,
-    phone_number: "000 000 029",
-    lewagon_username: "dogaruemiliano"
+    phone_number: "000 000 029"
   },
   {
     email: "abder@gmail.com",
@@ -327,8 +298,7 @@ users_data = [
     home_city: "Dombivli, Maharashtra, India",
     latitude: 19.2094006,
     longitude: 73.0939483,
-    phone_number: "000 000 030",
-    lewagon_username: "Abder007"
+    phone_number: "000 000 030"
   }
 ]
 
