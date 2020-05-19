@@ -71,7 +71,7 @@ class KetchupsController < ApplicationController
   end
 
   def update
-    if params[:commit] == 'Confirm'
+    if @ketchup.status == 'pending'
       @ketchup.update(status: 'confirmed')
       notification = Notification.find_by(recipient: current_user, action: "has sent you a request to", notifiable: @ketchup)
       notification.update(read_at: Time.zone.now) if notification.read_at.nil?
