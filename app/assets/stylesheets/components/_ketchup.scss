@@ -82,11 +82,7 @@
   border: none;
   border-radius: 3rem;
   font-size: 0.75rem;
-  animation: blinker 1s linear infinite;
 }
-@keyframes blinker {
-      50% { opacity: 0; }
-      }
 
 .pending {
   background-image: linear-gradient(to bottom right, #fc6076, #ff9a44, #ef9d43, #e75516);

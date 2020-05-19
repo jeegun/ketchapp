@@ -4,57 +4,67 @@
       <div class="ketchups-header">
         <p>Received</p>
       </div>
-      <% if @pending_ketchups.any? %>
-        <% @pending_ketchups.each do |ketchup| %>
-          <% if ketchup.start_date >= Date.today %>
-            <div class="ketchup">
-              <div class="ketchup-head">
+      <% if @received_ketchups.any? %>
+        <% @received_ketchups.each do |ketchup| %>
+          <div class="ketchup">
+            <div class="ketchup-head">
+              <% if ketchup.trip.user == current_user && ketchup.creator != current_user.id %>
+                <% if ketchup.user.photo.attached? %>
+                  <%= cl_image_tag ketchup.user.photo.key, class: "avatar" %>
+                <% else %>
+                  <%= image_tag 'profile.png', class: "avatar" %>
+                <% end %>
+              <% elsif ketchup.user == current_user && ketchup.creator != current_user.id %>
                 <% if ketchup.trip.user.photo.attached? %>
                   <%= cl_image_tag ketchup.trip.user.photo.key, class: "avatar" %>
                 <% else %>
                   <%= image_tag 'profile.png', class: "avatar" %>
                 <% end %>
-                <div class="ketchup-content">
-                  <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
-                  <p><small><%= ketchup.created_at.strftime("%B") %> <%= ketchup.created_at.day %>, <%= ketchup.created_at.year %></small></p>
-                  <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %> </p>
-                  <p><small>When: <%= ketchup.start_date %></small></p>
-                  <p><small>Where: <%= ketchup.location %></small></p>
-                </div>
-              </div>
-              <div class="ketchup-actions">
-                <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" %>
-                <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
-      <% if @confirmed_ketchups.any? %>
-        <% @confirmed_ketchups.each do |ketchup| %>
-          <% if ketchup.start_date >= Date.today %>
-            <div class="ketchup">
-              <div class="ketchup-head">
-                <% if ketchup.trip.user.photo.attached? %>
-                  <%= cl_image_tag ketchup.trip.user.photo.key, class: "avatar" %>
-                <% else %>
-                  <%= image_tag 'profile.png', class: "avatar" %>
+              <% end %>
+              <div class="ketchup-content">
+                <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
+                <% if ketchup.trip.user == current_user && ketchup.creator != current_user.id %>
+                  <p><%= link_to "#{ketchup.user.full_name}", ketchup_path(ketchup) %></p>
+                <% elsif ketchup.user == current_user && ketchup.creator != current_user.id %>
+                  <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %></p>
                 <% end %>
-                <div class="ketchup-content">
-                  <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
-                  <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %> </p>
-                  <p><small>When: <%= ketchup.start_date %></small></p>
-                  <p><small>Where: <%= ketchup.location %></small></p>
-                </div>
+                <p><small>When: <%= ketchup.start_date.strftime('%b %d, %Y %I:%M %p') %></small></p>
+                <p><small>Where: <%= ketchup.location %></small></p>
               </div>
-              <div class="ketchup-actions">
-                <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" %>
+            </div>
+            <div class="ketchup-actions">
+              <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" if ketchup.status == 'pending' %>
+              <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" if ketchup.status == 'pending' %>
+              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %>
+            </div>
+          </div>
+          <% if ketchup.status == 'confirmed' %>
+            <div class="modal fade" id="ketchupCancelModal-<%= ketchup.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="ketchupCancelModalLabel">Cancel ketchup </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-left">
+                    <%= form_with model: ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
+                      <div class="form-group">
+                        <%= form.label :Please_tell_your_connection_why! %>
+                        <%= form.text_field :cancel_reason, class: 'form-control' %>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <%= form.submit "Cancel", class: 'btn btn-flat' %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
           <% end %>
         <% end %>
-      <% end %>
-      <% if @pending_ketchups.empty? && @confirmed_ketchups.empty? %>
+      <% elsif @received_ketchups.empty? %>
         <p>No ketchup requests received</p>
       <% end %>
     </div>
@@ -62,29 +72,62 @@
       <div class="ketchups-header">
         <p>Sent</p>
       </div>
-      <% @myketchups.each do |ketchup| %>
-        <% if ketchup.start_date >= Date.today %>
-          <div class="ketchup">
-            <div class="ketchup-head">
+      <% @sent_ketchups.each do |ketchup| %>
+        <div class="ketchup">
+          <div class="ketchup-head">
+            <% if ketchup.trip.user == current_user && ketchup.creator == current_user.id %>
               <% if ketchup.user.photo.attached? %>
                 <%= cl_image_tag ketchup.user.photo.key, class: "avatar" %>
               <% else %>
                 <%= image_tag 'profile.png', class: "avatar" %>
               <% end %>
-              <div class="ketchup-content">
-                <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
+            <% elsif ketchup.user == current_user && ketchup.creator == current_user.id %>
+              <% if ketchup.trip.user.photo.attached? %>
+                <%= cl_image_tag ketchup.trip.user.photo.key, class: "avatar" %>
+              <% else %>
+                <%= image_tag 'profile.png', class: "avatar" %>
+              <% end %>
+            <% end %>
+            <div class="ketchup-content">
+              <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
+              <% if ketchup.trip.user == current_user && ketchup.creator == current_user.id %>
                 <p><%= link_to "#{ketchup.user.full_name} (#{ketchup.trip.location})", ketchup_path(ketchup) %></p>
-                <p><small>When: <%= ketchup.start_date %></small></p>
-                <p><small>Where: <%= ketchup.location %></small></p>
-              </div>
-            </div>
-            <div class="ketchup-actions">
-              <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" %>
+              <% elsif ketchup.user == current_user && ketchup.creator == current_user.id %>
+                <p><%= link_to "#{ketchup.trip.user.full_name} (#{ketchup.trip.location})", ketchup_path(ketchup) %></p>
+              <% end %>
+              <p><small>When: <%= ketchup.start_date.strftime('%b %d, %Y %I:%M %p') %></small></p>
+              <p><small>Where: <%= ketchup.location %></small></p>
             </div>
           </div>
-        <% end %>
+          <div class="ketchup-actions">
+            <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" %>
+          </div>
+        </div>
+        <div class="modal fade" id="ketchupCancelModal-<%= ketchup.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ketchupCancelModalLabel">Cancel ketchup</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body text-left">
+                <%= form_with model: ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
+                  <div class="form-group">
+                    <%= form.label :Please_tell_your_connection_why! %>
+                    <%= form.text_field :cancel_reason, class: 'form-control' %>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <%= form.submit "Cancel", class: 'btn btn-flat' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-      <% if @myketchups.empty? %>
+      <% if @sent_ketchups.empty? %>
         <p>No ketchup requests sent</p>
       <% end %>
     </div>

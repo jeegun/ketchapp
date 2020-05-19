@@ -65,7 +65,7 @@
     <a class="closebtn" id="close-btn">&times;</a>
     <%= link_to edit_user_registration_path do %>
       <% if current_user.photo.attached? %>
-        <%= image_tag current_user.photo.key, class: "avatar mr-2" %>
+        <%= cl_image_tag current_user.photo.key, class: "avatar mr-2" %>
       <% else %>
         <%= image_tag 'profile.png', class: "avatar mr-2" %>
       <% end %>
