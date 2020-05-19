@@ -76,6 +76,26 @@
   }
 }
 
+.pending, .confirmed {
+  color: $ketchup;
+  cursor: default !important;
+  border: none;
+  border-radius: 3rem;
+  font-size: 0.75rem;
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+      50% { opacity: 0; }
+      }
+
+.pending {
+  background-image: linear-gradient(to bottom right, #fc6076, #ff9a44, #ef9d43, #e75516);
+}
+
+.confirmed {
+  background-image: linear-gradient(to bottom right, #25aae1, #40e495, #30dd8a, #2bb673);
+}
+
 @media screen and (max-width: 991.98px) {
   .ketchup {
     flex-wrap: wrap;

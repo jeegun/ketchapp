@@ -15,6 +15,7 @@
                   <%= image_tag 'profile.png', class: "avatar" %>
                 <% end %>
                 <div class="ketchup-content">
+                  <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
                   <p><small><%= ketchup.created_at.strftime("%B") %> <%= ketchup.created_at.day %>, <%= ketchup.created_at.year %></small></p>
                   <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %> </p>
                   <p><small>When: <%= ketchup.start_date %></small></p>
@@ -22,7 +23,6 @@
                 </div>
               </div>
               <div class="ketchup-actions">
-                <p><small><%= ketchup.status %></small></p>
                 <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" %>
                 <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" %>
               </div>
@@ -41,13 +41,13 @@
                   <%= image_tag 'profile.png', class: "avatar" %>
                 <% end %>
                 <div class="ketchup-content">
+                  <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
                   <p><%= link_to "#{ketchup.trip.user.full_name}", ketchup_path(ketchup) %> </p>
                   <p><small>When: <%= ketchup.start_date %></small></p>
                   <p><small>Where: <%= ketchup.location %></small></p>
                 </div>
               </div>
               <div class="ketchup-actions">
-                <p><small><%= ketchup.status %></small></p>
                 <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" %>
               </div>
             </div>
@@ -72,13 +72,13 @@
                 <%= image_tag 'profile.png', class: "avatar" %>
               <% end %>
               <div class="ketchup-content">
+                <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
                 <p><%= link_to "#{ketchup.user.full_name} (#{ketchup.trip.location})", ketchup_path(ketchup) %></p>
                 <p><small>When: <%= ketchup.start_date %></small></p>
                 <p><small>Where: <%= ketchup.location %></small></p>
               </div>
             </div>
             <div class="ketchup-actions">
-              <p><small><%= ketchup.status %></small></p>
               <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" %>
             </div>
           </div>

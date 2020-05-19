@@ -95,6 +95,7 @@ class KetchupsController < ApplicationController
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     elsif params[:commit] == 'Cancel'
       @ketchup.update(status: 'cancelled', cancel_reason: params[:ketchup][:cancel_reason])
+      Notification.where(notifiable: @ketchup).each { |notification| notification.destroy}
       if current_user == @ketchup.user
         Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       elsif current_user == @ketchup.trip.user
@@ -134,12 +135,12 @@ class KetchupsController < ApplicationController
 
   def destroy
     @ketchup.destroy
-      Notification.find_by(notifiable: @ketchup).destroy
-      if current_user == @ketchup.user
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
-      elsif current_user == @ketchup.trip.user
-        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
-      end
+    Notification.where(notifiable: @ketchup).each { |notification| notification.destroy }
+    if current_user == @ketchup.user
+      Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
+    elsif current_user == @ketchup.trip.user
+      Notification.create(recipient: @ketchup.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
+    end
     if @ketchup.trip.user == current_user
       redirect_to trip_path(@ketchup.trip_id)
     else

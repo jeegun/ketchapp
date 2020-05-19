@@ -13,9 +13,8 @@ class ConnectRequestsController < ApplicationController
   end
 
   def destroy
-    notification = Notification.find_by(notifiable: @connect_request)
     @connect_request.destroy
-    notification.destroy
+    Notification.find_by(notifiable: @connect_request).destroy
     redirect_to user_connections_path(current_user)
   end
 

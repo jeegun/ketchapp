@@ -49,14 +49,9 @@ class TripsController < ApplicationController
         end
       end
       redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
-    elsif @trip.status == 'confirmed'
-      @trip.status = 'cancelled'
-      @trip.save
-      @trip.user = current_user
-      redirect_to user_trips_path(@trip.user), notice: 'Trip deleted!'
     else
       if @trip.update(trip_params)
-        redirect_to trip_path(@trip), notice: 'Trip updated!'
+        redirect_to trip_path(@trip), notice: 'Trip dates have been updated!'
       else
         render :edit
       end
@@ -64,8 +59,15 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip.destroy
-    redirect_to root_path, notice: 'Trip removed.'
+    if @trip.status == 'saved'
+      @trip.destroy
+      redirect_to root_path, notice: 'Search removed.'
+    elsif @trip.status == 'confirmed'
+      @trip.ketchups.each { |ketchup| Notification.where(notifiable: ketchup).each { |notification| notification.destroy} }
+      Notification.where(notifiable: @trip).each { |notification| notification.destroy }
+      @trip.destroy
+      redirect_to root_path, notice: 'Trip has been deleted.'
+    end
   end
 
   private
