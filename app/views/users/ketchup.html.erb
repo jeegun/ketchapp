@@ -15,9 +15,9 @@
               <% end %>
               <div class="ketchup-content">
                 <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
-                <p><a href="/ketchups/<%= ketchup.id %>"><%= ketchup.opposed_user(current_user).full_name %>(<%= ketchup.trip.location %>)</a></p>
+                <p><a href="/ketchups/<%= ketchup.id %>"><%= ketchup.opposed_user(current_user).full_name %> (<%= ketchup.trip.location.split(',')[0] %>)</a></p>
                 <p><small>When: <%= ketchup.start_date.strftime('%b %d, %Y %I:%M %p') %></small></p>
-                <p><small>Where: <%= ketchup.location %></small></p>
+                <p><small>Where: <%= ketchup.location.split(',')[0] %></small></p>
               </div>
             </div>
             <div class="ketchup-actions">
@@ -51,9 +51,9 @@
               <% end %>
               <div class="ketchup-content">
                 <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
-                <p><a href="/ketchups/<%= ketchup.id %>"><%= ketchup.opposed_user(current_user).full_name %>(<%= ketchup.trip.location %>)</a></p>
+                <p><a href="/ketchups/<%= ketchup.id %>"><%= ketchup.opposed_user(current_user).full_name %> (<%= ketchup.trip.location.split(',')[0] %>)</a></p>
                 <p><small>When: <%= ketchup.start_date.strftime('%b %d, %Y %I:%M %p') %></small></p>
-                <p><small>Where: <%= ketchup.location %></small></p>
+                <p><small>Where: <%= ketchup.location.split(',')[0] %></small></p>
               </div>
             </div>
             <div class="ketchup-actions">
