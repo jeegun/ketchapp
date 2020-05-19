@@ -5,9 +5,9 @@ App.chat = App.cable.subscriptions.create("ChatChannel", {
   disconnected: function() {
     console.log('Disconnected from the chat channel');
   },
-  received: function() {
+  received: function(data) {
     var messages = $('#chatbox');
-    messages.append(['message']);
+    messages.append(data['message']);
     messages.scrollTop(messages[0].scrollHeight);
   }
 });
