@@ -1,0 +1,21 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="ketchupCancelModalLabel">Cancel ketchup with <%= ketchup.opposed_user(current_user).full_name %></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body text-left">
+      <%= form_with model: ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
+        <div class="form-group">
+          <%= form.label :Please_tell_your_connection_why! %>
+          <%= form.text_field :cancel_reason, class: 'form-control' %>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <%= form.submit "Cancel", class: 'btn btn-flat' %>
+      <% end %>
+    </div>
+  </div>
+</div>

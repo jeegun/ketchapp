@@ -7,20 +7,10 @@
             <div class="card-vertical-ketchup">
               <div class="card-vertical-ketchup-infos">
                 <div class="card-vertical-ketchup-title">
-                  <% if current_user == @ketchup.user %>
-                    <h2>Ketchup with<br><%= link_to @ketchup.trip.user.full_name, user_path(@ketchup.trip.user) %></h2>
-                  <% elsif current_user == @ketchup.trip.user %>
-                    <h2>Ketchup with<br><%= link_to @ketchup.user.full_name, user_path(@ketchup.user) %></h2>
-                  <% end %>
+                  <h2>Ketchup with<br><%= link_to @ketchup.opposed_user(current_user).full_name, user_path(@ketchup.opposed_user(current_user)) %></h2>
                   <!-- link to chat will be implemented after chat function -->
-                  <% if current_user == @ketchup.user %>
-                    <%= simple_form_for [@ketchup.trip.user, @chat] do |f| %>
-                      <%= f.submit 'Chat', class: 'btn btn-flat' %>
-                    <% end %>
-                  <% elsif current_user == @ketchup.trip.user %>
-                    <%= simple_form_for [@ketchup.user, @chat] do |f| %>
-                      <%= f.submit 'Chat', class: 'btn btn-flat' %>
-                    <% end %>
+                  <%= simple_form_for [@ketchup.opposed_user(current_user), @chat] do |f| %>
+                    <%= f.submit 'Chat', class: 'btn btn-flat' %>
                   <% end %>
                 </div>
                 <div class="info">
@@ -44,7 +34,6 @@
                   <div class="content"><p><%= @ketchup.message %></p></div>
                 </div>
                 <div class="card-vertical-ketchup-btn">
-                  <!-- add modal to edit or cancel the ketchup -->
                   <% if @ketchup.status == 'pending' %>
                     <% if current_user.id != @ketchup.creator %>
                       <%= link_to 'Confirm', ketchup_path(@ketchup), method: :patch || :put, class: 'btn btn-flat' %>
@@ -70,7 +59,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ketchupEditModalLabel">Edit ketchup</h5>
+        <h5 class="modal-title" id="ketchupEditModalLabel">Edit ketchup with <%= @ketchup.opposed_user(current_user).full_name %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -106,27 +95,7 @@
   </div>
 </div>
 <div class="modal fade" id="ketchupCancelModal" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ketchupCancelModalLabel">Cancel ketchup</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-left">
-        <%= form_with model: @ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
-          <div class="form-group">
-            <%= form.label :Please_tell_your_connection_why! %>
-            <%= form.text_field :cancel_reason, class: 'form-control' %>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <%= form.submit "Cancel", class: 'btn btn-flat' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render 'ketchups/cancel_form', ketchup: @ketchup %>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
 <script>
