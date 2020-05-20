@@ -48,8 +48,8 @@ class KetchupsController < ApplicationController
         minLng = @trip.longitude - 0.5
         people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
         # added @ because we need this for ketchup create form
-        @people_in_radius_are_connections = (people_in_radius.map { |people| people if current_user.is_connection?(people) }).compact
-        people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact
+        @people_in_radius_are_connections = (people_in_radius.select { |people| current_user.is_connection?(people) })
+        people_in_radius_in_contact = (people_in_radius.select { |people| current_user.match_contacts?(people) })
         # should we also add people who you sent or you received connect request in this list?
         @people_to_show = (@people_in_radius_are_connections + people_in_radius_in_contact).uniq
         @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')

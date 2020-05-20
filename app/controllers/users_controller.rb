@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @active_ketchups = Ketchup.where(["user_id = ? AND start_date >= ? AND NOT status= ? AND NOT creator =?", @user.id, Date.today, "cancelled", @user.id])
     @my_trips = Trip.where(user: @user)
     @my_trips_ketchups = @my_trips.map { |trip| Ketchup.where(["trip_id = ? AND start_date >= ? AND NOT status= ? AND NOT creator =?", trip.id, Date.today, 'cancelled', @user.id]).compact }
-    @my_trips_ketchups = @my_trips_ketchups.map { |ketchup| ketchup unless ketchup == [] }.compact
+    @my_trips_ketchups = @my_trips_ketchups.select { |ketchup| ketchup != [] }
     if @my_trips_ketchups == []
       @received_ketchups = @active_ketchups
     else

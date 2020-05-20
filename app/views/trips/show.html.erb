@@ -1,19 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h1>
+      <h2 class="mt-4">Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h2>
       <div class="d-flex justify-content-between">
         <div style="flex: 0 0 55%">
           <% if @trip.status == 'saved' %>
             <ul class="list-inline tabs-underlined">
-              <!-- tabs without js function need to add js to show the right div -->
               <li>
                 <p class="tab-underlined active-tab">People (<%= @people_to_show.count %>)</p>
               </li>
             </ul>
           <% else %>
             <ul class="list-inline tabs-underlined">
-              <!-- tabs without js function need to add js to show the right div -->
               <li>
                 <p class="tab-underlined active-tab">People (<%= @people_to_show.count %>)</p>
               </li>
@@ -85,50 +83,32 @@
           <div class="ketchups trip">
             <% if @trip.ketchups.any? %>
               <% @trip.ketchups.each do |ketchup| %>
-                <div class="ketchup">
-                  <div class="ketchup-head">
-                    <% if ketchup.user.photo.attached? %>
-                      <%= cl_image_tag ketchup.user.photo.key, class: "avatar" %>
-                    <% else %>
-                      <%= image_tag 'profile.png', class: "avatar" %>
-                    <% end %>
-                    <div class="ketchup-content">
-                      <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
-                      <p><%= link_to "#{ketchup.user.full_name}", ketchup_path(ketchup) %></p>
-                      <p><small>When: <%= ketchup.start_date.strftime('%b %d, %Y %I:%M %p') %></small></p>
-                      <p><small>Where: <%= ketchup.location %></small></p>
-                    </div>
-                  </div>
-                  <div class="ketchup-actions">
-                    <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" if ketchup.status == 'pending' && ketchup.creator != current_user.id %>
-                    <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" if ketchup.status == 'pending' %>
-                    <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %>
-                  </div>
-                </div>
-                <% if ketchup.status == 'confirmed' %>
-                  <div class="modal fade" id="ketchupCancelModal-<%= ketchup.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="ketchupCancelModalLabel">Cancel ketchup </h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body text-left">
-                          <%= form_with model: ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
-                            <div class="form-group">
-                              <%= form.label :Please_tell_your_connection_why! %>
-                              <%= form.text_field :cancel_reason, class: 'form-control' %>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                          <%= form.submit "Cancel", class: 'btn btn-flat' %>
-                          <% end %>
-                        </div>
+                <% unless ketchup.status == 'cancelled' %>
+                  <div class="ketchup">
+                    <div class="ketchup-head">
+                      <% if ketchup.user.photo.attached? %>
+                        <%= cl_image_tag ketchup.user.photo.key, class: "avatar" %>
+                      <% else %>
+                        <%= image_tag 'profile.png', class: "avatar" %>
+                      <% end %>
+                      <div class="ketchup-content">
+                        <button class="<%= ketchup.status %>"><%= ketchup.status %></button>
+                        <p><%= link_to "#{ketchup.user.full_name}", ketchup_path(ketchup) %></p>
+                        <p><small>When: <%= ketchup.start_date.strftime('%b %d, %Y %I:%M %p') %></small></p>
+                        <p><small>Where: <%= ketchup.location %></small></p>
                       </div>
                     </div>
+                    <div class="ketchup-actions">
+                      <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" if ketchup.status == 'pending' && ketchup.creator != current_user.id %>
+                      <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" if ketchup.status == 'pending' %>
+                      <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %>
+                    </div>
                   </div>
+                  <% if ketchup.status == 'confirmed' %>
+                    <div class="modal fade" id="ketchupCancelModal-<%= ketchup.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
+                      <%= render 'ketchups/cancel_form', ketchup: ketchup %>
+                    </div>
+                  <% end %>
                 <% end %>
               <% end %>
             <% else %>

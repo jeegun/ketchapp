@@ -22,8 +22,8 @@
             </div>
             <div class="ketchup-actions">
               <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" if ketchup.status == 'pending' %>
-              <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" if ketchup.status == 'pending' %>
-              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %>
+              <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "fas fa-times" if ketchup.status == 'pending' %>
+              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "fas fa-times" if ketchup.status == 'confirmed' %>
             </div>
           </div>
           <% if ketchup.status == 'confirmed' %>
@@ -58,7 +58,7 @@
             </div>
             <div class="ketchup-actions">
               <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" if ketchup.status == 'pending' %>
-              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %>
+              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "fas fa-times" if ketchup.status == 'confirmed' %>
             </div>
           </div>
           <div class="modal fade" id="ketchupCancelModal-<%= ketchup.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCancelModalLabel" aria-hidden="true">
