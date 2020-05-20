@@ -8,6 +8,7 @@ App.chat = App.cable.subscriptions.create("ChatChannel", {
   received: function(data) {
     var messages = $('#chatbox');
     messages.append(data['message']);
+    messages.addClass('my-message-bubble my-msg');
     messages.scrollTop(messages[0].scrollHeight);
   }
 });
