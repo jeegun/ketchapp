@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2 class="mt-4">Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %> <%= @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %> <%= @end_year %></h2>
+      <h2 class="mt-4">Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %><%= ', ' + @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %>, <%= @end_year %></h2>
       <div class="d-flex justify-content-between">
         <div style="flex: 0 0 55%">
           <% if @trip.status == 'saved' %>
