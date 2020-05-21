@@ -54,6 +54,9 @@ GEM
       msgpack (~> 1.0)
     bootstrap-daterangepicker-rails (3.0.4)
       railties (>= 4.0)
+    bootstrap-tooltip-rails (0.1)
+      rails (>= 3.1)
+      thor
     builder (3.2.4)
     byebug (11.1.1)
     cloudinary (1.12.0)
@@ -299,6 +302,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootsnap
   bootstrap-daterangepicker-rails
+  bootstrap-tooltip-rails
   cloudinary (~> 1.12.0)
   coffee-rails
   devise

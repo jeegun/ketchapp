@@ -24,16 +24,16 @@
           </div>
           <div class="notification-actions">
             <% if (notification.notifiable_type == 'ConnectRequest') && (notification.action == 'sent you a') && ConnectRequest.find(notification.notifiable_id).status == "pending" %>
-              <%= link_to '', connect_request_connections_path(ConnectRequest.find(notification.notifiable_id)), method: :post, class: 'fas fa-check' %>
-              <%= link_to '', connect_request_path(notification.notifiable_id), data: { confirm: "Are you sure?" }, method: :delete, class: 'fas fa-times' %>
+              <%= link_to '', connect_request_connections_path(ConnectRequest.find(notification.notifiable_id)), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Connect', class: 'fas fa-check' %>
+              <%= link_to '', connect_request_path(notification.notifiable_id), data: { confirm: "Are you sure?" }, method: :delete, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'fas fa-times' %>
             <% elsif (notification.notifiable_type == 'Ketchup') && (notification.action == 'has sent you a request to') && Ketchup.find(notification.notifiable_id).status == "pending" %>
-              <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :patch || :put, class: 'fas fa-check' %>
-              <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :delete, data: {confirm: 'Are you sure?'}, class: 'fas fa-times' %>
+              <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :patch || :put, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Accept', class: 'fas fa-check' %>
+              <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :delete, data: {confirm: 'Are you sure?'}, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'fas fa-times' %>
             <% elsif notification.notifiable_type == 'Trip' %>
-              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{notification.notifiable_id}" }, class: 'fas fa-wine-bottle', id: "ketchup-#{notification.notifiable_id}" %>
-              <%= link_to '', user_chats_path(notification.actor), method: :post, class: 'fas fa-comment' %>
+              <span data-toggle="tooltip" data-placement="bottom" data-original-title="Ketchup"><%= link_to '', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{notification.notifiable_id}" }, class: 'fas fa-wine-bottle', id: "ketchup-#{notification.notifiable_id}" %></span>
+              <%= link_to '', user_chats_path(notification.actor), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
             <% else %>
-              <%= link_to '', notification_path(notification), method: :delete, remote: true, class: 'fas fa-times' %>
+              <%= link_to '', notification_path(notification), method: :delete, remote: true, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Dismiss', class: 'fas fa-times' %>
             <% end %>
           </div>
         </div>
@@ -83,6 +83,9 @@
       });
     });
   <% end %>
+  document.addEventListener("DOMContentLoaded", function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=initMap" async defer></script>
 
