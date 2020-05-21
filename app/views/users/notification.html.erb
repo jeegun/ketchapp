@@ -8,7 +8,11 @@
           <div class="notification" data-notification-id='<%= notification.id %>' style="background: white;">
         <% end %>
           <div class="notification-head">
-            <img class="avatar" src="https://kitt.lewagon.com/placeholder/users/<%= notification.actor.lewagon_username %>">
+            <% if notification.actor.photo.attached? %>
+              <%= cl_image_tag notification.actor.photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag 'profile.png', class: "avatar" %>
+            <% end %>
             <div class="notification-content">
               <p><small><%= notification.month %> <%= notification.day %>, <%= notification.year %></small></p>
               <p>
@@ -20,22 +24,16 @@
           </div>
           <div class="notification-actions">
             <% if (notification.notifiable_type == 'ConnectRequest') && (notification.action == 'sent you a') && ConnectRequest.find(notification.notifiable_id).status == "pending" %>
-              <%= simple_form_for [ConnectRequest.find(notification.notifiable_id), @connection], html: { id: "new_connection_#{notification.notifiable_id}" } do |f| %>
-                <%= f.submit "Accept", class: "btn btn-flat" %>
-              <% end %>
-              <%= link_to "Decline", connect_request_path(notification.notifiable_id), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
+              <%= link_to '', connect_request_connections_path(ConnectRequest.find(notification.notifiable_id)), method: :post, class: 'fas fa-check' %>
+              <%= link_to '', connect_request_path(notification.notifiable_id), data: { confirm: "Are you sure?" }, method: :delete, class: 'fas fa-times' %>
             <% elsif (notification.notifiable_type == 'Ketchup') && (notification.action == 'has sent you a request to') && Ketchup.find(notification.notifiable_id).status == "pending" %>
-              <%= link_to 'Confirm', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :patch || :put, class: 'btn btn-flat' %>
-              <%= link_to 'Decline', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-ghost' %>
+              <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :patch || :put, class: 'fas fa-check' %>
+              <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :delete, data: {confirm: 'Are you sure?'}, class: 'fas fa-times' %>
             <% elsif notification.notifiable_type == 'Trip' %>
-              <%= link_to 'Ketchup', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{notification.notifiable_id}" }, class: 'btn btn-flat', id: "ketchup-#{notification.notifiable_id}" %>
-              <%= simple_form_for [notification.actor, @chat], html: { id: "new_chat_#{notification.actor.id}" } do |f| %>
-                <%= f.submit "Chat", class: 'btn btn-ghost ml-3' %>
-              <% end %>
+              <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{notification.notifiable_id}" }, class: 'fas fa-wine-bottle', id: "ketchup-#{notification.notifiable_id}" %>
+              <%= link_to '', user_chats_path(notification.actor), method: :post, class: 'fas fa-comment' %>
             <% else %>
-              <%= link_to notification_path(notification), method: :delete, remote: true do%>
-                Dismiss <i class="fas fa-times"></i>
-              <% end %>
+              <%= link_to '', notification_path(notification), method: :delete, remote: true, class: 'fas fa-times' %>
             <% end %>
           </div>
         </div>

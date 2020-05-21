@@ -14,10 +14,16 @@ class UsersController < ApplicationController
   end
 
   def ketchup
-    @pending_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "pending"])
-    @confirmed_ketchups = Ketchup.where(["user_id = ? AND status= ?", @user.id, "confirmed"])
-    @active_ketchups = @pending_ketchups + @confirmed_ketchups
-    @myketchups = Ketchup.where(creator: current_user.id)
+    @active_ketchups = Ketchup.where(["user_id = ? AND start_date >= ? AND NOT status= ? AND NOT creator =?", @user.id, Date.today, "cancelled", @user.id])
+    @my_trips = Trip.where(user: @user)
+    @my_trips_ketchups = @my_trips.map { |trip| Ketchup.where(["trip_id = ? AND start_date >= ? AND NOT status= ? AND NOT creator =?", trip.id, Date.today, 'cancelled', @user.id]).compact }
+    @my_trips_ketchups = @my_trips_ketchups.select { |ketchup| ketchup != [] }
+    if @my_trips_ketchups == []
+      @received_ketchups = @active_ketchups
+    else
+      @received_ketchups = @active_ketchups + @my_trips_ketchups.first
+    end
+    @sent_ketchups = Ketchup.where(["start_date >= ? AND NOT status= ? AND creator =?", Date.today, "cancelled", @user.id])
   end
 
   def notification

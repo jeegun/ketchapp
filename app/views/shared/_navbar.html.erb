@@ -39,8 +39,8 @@
           <%= link_to "Trips", user_trips_path(current_user), class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
-          <% if current_user.lewagon_username %>
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/#{current_user.lewagon_username}", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% if current_user.photo.attached? %>
+            <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% else %>
             <%= image_tag 'profile.png', class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% end %>
@@ -64,10 +64,10 @@
   <div id="mySidenav" class="sidenav">
     <a class="closebtn" id="close-btn">&times;</a>
     <%= link_to edit_user_registration_path do %>
-      <% if current_user.lewagon_username %>
-        <%= image_tag 'profile.png', class: "avatar mr-2" %>
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, class: "avatar mr-2" %>
       <% else %>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", class: "avatar mr-2" %>
+        <%= image_tag 'profile.png', class: "avatar mr-2" %>
       <% end %>
       <%= current_user.full_name %>
     <% end %>

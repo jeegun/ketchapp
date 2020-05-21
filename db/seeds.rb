@@ -8,8 +8,7 @@ users_data = [
     home_city: "Sant Cugat del Vallès, Spain",
     latitude: 41.4720702,
     longitude: 2.086515399999999,
-    phone_number: "000 000 001",
-    lewagon_username: "EllynBsc"
+    phone_number: "000 000 001"
   },
   {
     email: "avalon@gmail.com",
@@ -19,8 +18,7 @@ users_data = [
     home_city: "Badalona, Spain",
     latitude: 41.4469883,
     longitude: 2.2450325,
-    phone_number: "000 000 002",
-    lewagon_username: "Avalonvdhorst"
+    phone_number: "000 000 002"
   },
   {
     email: "alexander@gmail.com",
@@ -30,8 +28,7 @@ users_data = [
     home_city: "Hospitalet de Llobregat, Spain",
     latitude: 41.3661865,
     longitude: 2.1164942,
-    phone_number: "000 000 003",
-    lewagon_username: "ajdubovoy"
+    phone_number: "000 000 003"
   },
   {
     email: "prima@gmail.com",
@@ -41,8 +38,7 @@ users_data = [
     home_city: "Barcelona, Spain",
     latitude: 41.38506389999999,
     longitude: 2.1734035,
-    phone_number: "000 000 004",
-    lewagon_username: "primaulia"
+    phone_number: "000 000 004"
   },
   {
     email: "louise@gmail.com",
@@ -52,8 +48,7 @@ users_data = [
     home_city: "Castelldefels, Spain",
     latitude: 41.2800161,
     longitude: 1.9766294,
-    phone_number: "000 000 005",
-    lewagon_username: "LouiseDarche"
+    phone_number: "000 000 005"
   },
   {
     email: "sangsoo@gmail.com",
@@ -63,8 +58,7 @@ users_data = [
     home_city: "Barcelona, Spain",
     latitude: 41.38506389999999,
     longitude: 2.1734035,
-    phone_number: "000 000 006",
-    lewagon_username: "sangsoora"
+    phone_number: "000 000 006"
   },
   {
     email: "valerie@gmail.com",
@@ -74,8 +68,7 @@ users_data = [
     home_city: "New York City, NY, USA",
     latitude: 40.7127753,
     longitude: -74.0059728,
-    phone_number: "000 000 007",
-    lewagon_username: "valerieschraauwers"
+    phone_number: "000 000 007"
   },
   {
     email: "claire@gmail.com",
@@ -85,8 +78,7 @@ users_data = [
     home_city: "Fort Lee, NJ, USA",
     latitude: 40.8509333,
     longitude: -73.9701381,
-    phone_number: "000 000 008",
-    lewagon_username: "claire-gtr"
+    phone_number: "000 000 008"
   },
   {
     email: "fanny@gmail.com",
@@ -96,8 +88,7 @@ users_data = [
     home_city: "New York, NY, USA",
     latitude: 40.7127753,
     longitude: -74.0059728,
-    phone_number: "000 000 009",
-    lewagon_username: "fanny-rojon"
+    phone_number: "000 000 009"
   },
   {
     email: "lorenzo@gmail.com",
@@ -107,8 +98,7 @@ users_data = [
     home_city: "Hempstead, NY, USA",
     latitude: 40.70621279999999,
     longitude: -73.6187397,
-    phone_number: "000 000 010",
-    lewagon_username: "ldeld"
+    phone_number: "000 000 010"
   },
   {
     email: "jensen@gmail.com",
@@ -118,8 +108,7 @@ users_data = [
     home_city: "Yonkers, NY, USA",
     latitude: 40.9312099,
     longitude: -73.89874689999999,
-    phone_number: "000 000 011",
-    lewagon_username: "jiggyjensen"
+    phone_number: "000 000 011"
   },
   {
     email: "juan@gmail.com",
@@ -129,8 +118,7 @@ users_data = [
     home_city: "Jersey City, NJ, USA",
     latitude: 40.7177545,
     longitude: -74.0431435,
-    phone_number: "000 000 012",
-    lewagon_username: "TheJuanAndOnly99"
+    phone_number: "000 000 012"
   },
   {
     email: "joyce@gmail.com",
@@ -140,8 +128,7 @@ users_data = [
     home_city: "Los Angeles, CA, USA",
     latitude: 34.0522342,
     longitude: -118.2436849,
-    phone_number: "000 000 013",
-    lewagon_username: "Joyckc"
+    phone_number: "000 000 013"
   },
   {
     email: "jeegun@gmail.com",
@@ -151,8 +138,7 @@ users_data = [
     home_city: "Anaheim, CA, USA",
     latitude: 33.83659319999999,
     longitude: -117.9143012,
-    phone_number: "000 000 014",
-    lewagon_username: "jeegun"
+    phone_number: "000 000 014"
   },
   {
     email: "maxime@gmail.com",
@@ -162,8 +148,7 @@ users_data = [
     home_city: "Long Beach, CA, USA",
     latitude: 33.7700504,
     longitude: -118.1937395,
-    phone_number: "000 000 015",
-    lewagon_username: "Max51555"
+    phone_number: "000 000 015"
   },
   {
     email: "laura@gmail.com",
@@ -173,8 +158,7 @@ users_data = [
     home_city: "Santa Monica, CA, USA",
     latitude: 34.0194543,
     longitude: -118.4911912,
-    phone_number: "000 000 016",
-    lewagon_username: "lhelmert"
+    phone_number: "000 000 016"
   },
   {
     email: "robert@gmail.com",
@@ -184,8 +168,7 @@ users_data = [
     home_city: "Carson, CA, USA",
     latitude: 33.8316745,
     longitude: -118.281693,
-    phone_number: "000 000 017",
-    lewagon_username: "RobOwenKing"
+    phone_number: "000 000 017"
   },
   {
     email: "tamas@gmail.com",
@@ -195,8 +178,7 @@ users_data = [
     home_city: "Los Angeles, CA, USA",
     latitude: 34.0522342,
     longitude: -118.2436849,
-    phone_number: "000 000 018",
-    lewagon_username: "tomapapp"
+    phone_number: "000 000 018"
   },
   {
     email: "elena@gmail.com",
@@ -206,8 +188,7 @@ users_data = [
     home_city: "Seoul, South Korea",
     latitude: 37.566535,
     longitude: 126.9779692,
-    phone_number: "000 000 019",
-    lewagon_username: "elenavigo"
+    phone_number: "000 000 019"
   },
   {
     email: "michael@gmail.com",
@@ -217,8 +198,7 @@ users_data = [
     home_city: "Goyang, Gyeonggi-do, South Korea",
     latitude: 37.6583599,
     longitude: 126.8320201,
-    phone_number: "000 000 020",
-    lewagon_username: "michaelwlaschitz"
+    phone_number: "000 000 020"
   },
   {
     email: "leon@gmail.com",
@@ -228,8 +208,7 @@ users_data = [
     home_city: "Guri-si, Gyeonggi-do, South Korea",
     latitude: 37.59431240000001,
     longitude: 127.1295646,
-    phone_number: "000 000 021",
-    lewagon_username: "leonellerbrock"
+    phone_number: "000 000 021"
   },
   {
     email: "raphael@gmail.com",
@@ -239,8 +218,7 @@ users_data = [
     home_city: "Seoul, South Korea",
     latitude: 37.566535,
     longitude: 126.9779692,
-    phone_number: "000 000 022",
-    lewagon_username: "raph-dav"
+    phone_number: "000 000 022"
   },
   {
     email: "antoine@gmail.com",
@@ -250,8 +228,7 @@ users_data = [
     home_city: "Bucheon-si, Gyeonggi-do, South Korea",
     latitude: 37.5034138,
     longitude: 126.7660309,
-    phone_number: "000 000 023",
-    lewagon_username: "Boukto2708"
+    phone_number: "000 000 023"
   },
   {
     email: "ry@gmail.com",
@@ -261,8 +238,7 @@ users_data = [
     home_city: "Gwacheon, Gyeonggi-do, South Korea",
     latitude: 37.429246,
     longitude: 126.9874451,
-    phone_number: "000 000 024",
-    lewagon_username: "ryellingson"
+    phone_number: "000 000 024"
   },
   {
     email: "marin@gmail.com",
@@ -272,8 +248,7 @@ users_data = [
     home_city: "Mumbai, Maharashtra, India",
     latitude: 19.0759837,
     longitude: 72.8776559,
-    phone_number: "000 000 025",
-    lewagon_username: "Marin-b"
+    phone_number: "000 000 025"
   },
   {
     email: "cassandre@gmail.com",
@@ -283,8 +258,7 @@ users_data = [
     home_city: "Navi Mumbai, Maharashtra, India",
     latitude: 19.0330488,
     longitude: 73.0296625,
-    phone_number: "000 000 026",
-    lewagon_username: "CassandreHouze"
+    phone_number: "000 000 026"
   },
   {
     email: "ikram@gmail.com",
@@ -294,8 +268,7 @@ users_data = [
     home_city: "Thane, Maharashtra, India",
     latitude: 19.2183307,
     longitude: 72.9780897,
-    phone_number: "000 000 027",
-    lewagon_username: "IkramAkhlaq"
+    phone_number: "000 000 027"
   },
   {
     email: "marco@gmail.com",
@@ -305,8 +278,7 @@ users_data = [
     home_city: "Bhiwandi, Maharashtra, India",
     latitude: 19.2812547,
     longitude: 73.0482912,
-    phone_number: "000 000 028",
-    lewagon_username: "marcdebiolley"
+    phone_number: "000 000 028"
   },
   {
     email: "emiliano@gmail.com",
@@ -316,8 +288,7 @@ users_data = [
     home_city: "Mumbai, Maharashtra, India",
     latitude: 19.0759837,
     longitude: 72.8776559,
-    phone_number: "000 000 029",
-    lewagon_username: "dogaruemiliano"
+    phone_number: "000 000 029"
   },
   {
     email: "abder@gmail.com",
@@ -327,8 +298,7 @@ users_data = [
     home_city: "Dombivli, Maharashtra, India",
     latitude: 19.2094006,
     longitude: 73.0939483,
-    phone_number: "000 000 030",
-    lewagon_username: "Abder007"
+    phone_number: "000 000 030"
   }
 ]
 
@@ -434,7 +404,7 @@ Trip.create!(start_date: Date.new(2020, 8, 2), end_date: Date.new(2020, 8, 9), l
 Trip.create!(start_date: Date.new(2020, 8, 10), end_date: Date.new(2020, 8, 2), location: 'Seoul', status: 'saved', latitude: 37.5665, longitude: 126.9780, user_id: 14)
 Trip.create!(start_date: Date.new(2020, 8, 18), end_date: Date.new(2020, 8, 22), location: 'Seoul', status: 'saved', latitude: 37.5665, longitude: 126.9780, user_id: 11)
 Trip.create!(start_date: Date.new(2020, 8, 21), end_date: Date.new(2020, 8, 30), location: 'Mumbai', status: 'saved', latitude: 19.0760, longitude: 72.8777, user_id: 11)
-Trip.create!(start_date: Date.new(2020, 8, 28), end_date: Date.new(2020, 8, 8), location: 'Mumbai', status: 'saved', latitude: 19.0760, longitude: 72.8777, user_id: 6)
+Trip.create!(start_date: Date.new(2020, 8, 28), end_date: Date.new(2020, 9, 8), location: 'Mumbai', status: 'saved', latitude: 19.0760, longitude: 72.8777, user_id: 6)
 Trip.create!(start_date: Date.new(2020, 9, 2), end_date: Date.new(2020, 9, 9), location: 'New York City', status: 'confirmed', latitude: 40.7128, longitude: -74.0060, user_id: 15)
 Trip.create!(start_date: Date.new(2020, 9, 2), end_date: Date.new(2020, 9, 13), location: 'New York City', status: 'confirmed', latitude: 40.7128, longitude: -74.0060, user_id: 2)
 Trip.create!(start_date: Date.new(2020, 9, 10), end_date: Date.new(2020, 10, 2), location: 'Barcelona', status: 'confirmed', latitude: 41.3851, longitude: 2.1734, user_id: 19)
@@ -453,39 +423,39 @@ puts "-" * 60
 Ketchup.create!(start_date: DateTime.new(2019, 12, 24, 18, 00, 0), end_date: DateTime.new(2019, 12, 24, 22, 00, 0), message: 'Meeting with Fanny at a cafe in Met and walking around Central Park on Christams eve', location: 'Petrie Court', status: 'confirmed', latitude: 40.779091, longitude: -73.964564, user_id: 9, trip_id: 2, creator: 6)
 Ketchup.create!(start_date: DateTime.new(2019, 12, 26, 15, 30, 0), end_date: DateTime.new(2019, 12, 26, 16, 00, 0), message: 'Short coffee with Avalon to ask some questions about Le Wagon Bootcamp', location: 'Starbucks', status: 'confirmed', latitude: 41.388799, longitude: 2.171932, user_id: 2, trip_id: 1, creator: 11)
 Ketchup.create!(start_date: DateTime.new(2019, 12, 30, 17, 00, 0), end_date: DateTime.new(2019, 12, 30, 18, 00, 0), message: 'Catching up with Marin in one of most famous hotels in Mumbai', location: 'The Taj Mahal Palace', status: 'confirmed', latitude: 18.921717, longitude: 72.833117, user_id: 25, trip_id: 3, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 1, 2, 13, 00, 0), end_date: DateTime.new(2020, 1, 2, 14, 15, 0), message: 'Decent lunch with Alexander in one of my favorite restaurants in Barcelona', location: 'Hissop', status: 'confirmed', latitude: 41.394384, longitude: 2.148091, user_id: 3, trip_id: 1, creator: 6)
+Ketchup.create!(start_date: DateTime.new(2020, 1, 2, 13, 00, 0), end_date: DateTime.new(2020, 1, 2, 14, 15, 0), message: 'Decent lunch with Alexander in one of my favorite restaurants in Barcelona', location: 'Hissop', status: 'confirmed', latitude: 41.394384, longitude: 2.148091, user_id: 3, trip_id: 1, creator: 11)
 Ketchup.create!(start_date: DateTime.new(2020, 1, 2, 20, 30, 0), end_date: DateTime.new(2020, 1, 2, 22, 00, 0), message: 'Perfect and luxurious restaurant to have dinner and some drinks afterward', location: 'Nuba', status: 'confirmed', latitude: 41.393353, longitude: 2.135817, user_id: 5, trip_id: 1, creator: 11)
 Ketchup.create!(start_date: DateTime.new(2020, 1, 10, 11, 00, 0), end_date: DateTime.new(2020, 1, 10, 13, 00, 0), message: 'Early lunch with Cassandre in best restaurant in Mumbai', location: 'Bombay Cantin', status: 'confirmed', latitude: 19.003244, longitude: 72.827576, user_id: 26, trip_id: 3, creator: 14)
 Ketchup.create!(start_date: DateTime.new(2020, 1, 18, 14, 00, 0), end_date: DateTime.new(2020, 1, 18, 15, 15, 0), message: 'Late lunch at Italian restaurant in Coney Island', location: 'Gargiulo\'s', status: 'confirmed', latitude: 40.576508, longitude: -73.982406, user_id: 12, trip_id: 2, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 1, 20, 10, 00, 0), end_date: DateTime.new(2020, 1, 20, 10, 30, 0), message: 'Short morning coffee near my Airbnb to catch up with Valerie', location: 'Tin Cup Cafe', status: 'confirmed', latitude: 40.661354, longitude: -73.996859, user_id: 7, trip_id: 2, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 2, 22, 12, 00, 0), end_date: DateTime.new(2020, 2, 22, 12, 30, 0), message: 'How about having a quick tea?', location: 'Osulloc Tea House', status: 'pending', latitude: 37.574223, longitude: 126.984372, user_id: 21, trip_id: 6, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 2, 22, 19, 30, 0), end_date: DateTime.new(2020, 2, 22, 20, 30, 0), message: 'Let\'s do some picnic at the park with nice weather', location: 'Yeouido Hangang Park', status: 'pending', latitude: 37.528417, longitude: 126.934250, user_id: 20, trip_id: 6, creator: 6)
+Ketchup.create!(start_date: DateTime.new(2020, 1, 20, 10, 00, 0), end_date: DateTime.new(2020, 1, 20, 10, 30, 0), message: 'Short morning coffee near my Airbnb to catch up with Valerie', location: 'Tin Cup Cafe', status: 'confirmed', latitude: 40.661354, longitude: -73.996859, user_id: 7, trip_id: 2, creator: 6)
+Ketchup.create!(start_date: DateTime.new(2020, 2, 22, 12, 00, 0), end_date: DateTime.new(2020, 2, 22, 12, 30, 0), message: 'How about having a quick tea?', location: 'Osulloc Tea House', status: 'pending', latitude: 37.574223, longitude: 126.984372, user_id: 21, trip_id: 6, creator: 11)
+Ketchup.create!(start_date: DateTime.new(2020, 2, 22, 19, 30, 0), end_date: DateTime.new(2020, 2, 22, 20, 30, 0), message: 'Let\'s do some picnic at the park with nice weather', location: 'Yeouido Hangang Park', status: 'pending', latitude: 37.528417, longitude: 126.934250, user_id: 20, trip_id: 6, creator: 11)
 Ketchup.create!(start_date: DateTime.new(2020, 2, 24, 18, 00, 0), end_date: DateTime.new(2020, 2, 24, 20, 15, 0), message: 'Craving for some Korean meat! Vamos?', location: 'Gombawi', status: 'pending', latitude: 37.510203, longitude: 127.055203, user_id: 23, trip_id: 6, creator: 11)
 Ketchup.create!(start_date: DateTime.new(2020, 6, 1, 16, 30, 0), end_date: DateTime.new(2020, 6, 1, 17, 00, 0), message: 'Quick afternoon coffee before my afternoon meeting in Brooklyn', location: 'Starbucks', status: 'pending', latitude: 40.748985, longitude: -73.992362, user_id: 10, trip_id: 7, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 6, 8, 12, 30, 0), end_date: DateTime.new(2020, 6, 8, 13, 45, 0), message: 'Claire will be my guide to show me around one of the iconic place in the world', location: 'Times square', status: 'pending', latitude: 40.757970, longitude: -73.985549, user_id: 8, trip_id: 7, creator: 1)
-Ketchup.create!(start_date: DateTime.new(2020, 6, 8, 19, 00, 0), end_date: DateTime.new(2020, 6, 8, 23, 00, 0), message: 'Long and relaxing dinner at a restaurant with superb view', location: 'Maiella', status: 'pending', latitude: 40.747190, longitude: -73.956690, user_id: 9, trip_id: 7, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 6, 29, 9, 00, 0), end_date: DateTime.new(2020, 6, 29, 11, 30, 0), message: 'Morning hike in the mountain located in the middle of Seoul with great view', location: 'Namsan Mountain Park', status: 'confirmed', latitude: 37.550815, longitude: 126.991211, user_id: 19, trip_id: 9, creator: 14)
+Ketchup.create!(start_date: DateTime.new(2020, 6, 8, 12, 30, 0), end_date: DateTime.new(2020, 6, 8, 13, 45, 0), message: 'Claire will be my guide to show me around one of the iconic place in the world', location: 'Times square', status: 'pending', latitude: 40.757970, longitude: -73.985549, user_id: 8, trip_id: 7, creator: 14)
+Ketchup.create!(start_date: DateTime.new(2020, 6, 8, 19, 00, 0), end_date: DateTime.new(2020, 6, 8, 23, 00, 0), message: 'Long and relaxing dinner at a restaurant with superb view', location: 'Maiella', status: 'pending', latitude: 40.747190, longitude: -73.956690, user_id: 9, trip_id: 7, creator: 14)
+Ketchup.create!(start_date: DateTime.new(2020, 6, 29, 9, 00, 0), end_date: DateTime.new(2020, 6, 29, 11, 30, 0), message: 'Morning hike in the mountain located in the middle of Seoul with great view', location: 'Namsan Mountain Park', status: 'confirmed', latitude: 37.550815, longitude: 126.991211, user_id: 19, trip_id: 9, creator: 6)
 Ketchup.create!(start_date: DateTime.new(2020, 7, 1, 18, 00, 0), end_date: DateTime.new(2020, 7, 1, 19, 30, 0), message: 'Short dinner to ketchup with my man', location: 'Maple Tree House', status: 'confirmed', latitude: 37.535047, longitude: 126.993882, user_id: 24, trip_id: 9, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 7, 19, 13, 00, 0), end_date: DateTime.new(2020, 7, 19, 16, 00, 0), message: 'Long lunch at Mexican restaurant in Long Beach', location: 'Tequila Jack\'s Restaurant and Cantina', status: 'confirmed', latitude: 33.761056, longitude: -118.190132, user_id: 13, trip_id: 10, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 7, 20, 12, 00, 0), end_date: DateTime.new(2020, 7, 20, 14, 15, 0), message: 'Going to my favorite place in the world and walking around Hollywood', location: 'In-N-Out Burger', status: 'confirmed', latitude: 34.098220, longitude: -118.341672, user_id: 16, trip_id: 10, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 7, 22, 12, 30, 0), end_date: DateTime.new(2020, 7, 22, 13, 00, 0), message: 'Quick coffee with Ellyn to just say hi', location: 'Onna Coffee', status: 'confirmed', latitude: 41.398098, longitude: 2.159659, user_id: 1, trip_id: 11, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 7, 22, 21, 00, 0), end_date: DateTime.new(2020, 7, 22, 23, 00, 0), message: 'Dinner with Prima at traditional Catalan restaurant', location: 'Goliard', status: 'confirmed', latitude: 41.399828, longitude: 2.160637, user_id: 4, trip_id: 11, creator: 11)
+Ketchup.create!(start_date: DateTime.new(2020, 7, 19, 13, 00, 0), end_date: DateTime.new(2020, 7, 19, 16, 00, 0), message: 'Long lunch at Mexican restaurant in Long Beach', location: 'Tequila Jack\'s Restaurant and Cantina', status: 'confirmed', latitude: 33.761056, longitude: -118.190132, user_id: 13, trip_id: 10, creator: 6)
+Ketchup.create!(start_date: DateTime.new(2020, 7, 20, 12, 00, 0), end_date: DateTime.new(2020, 7, 20, 14, 15, 0), message: 'Going to my favorite place in the world and walking around Hollywood', location: 'In-N-Out Burger', status: 'confirmed', latitude: 34.098220, longitude: -118.341672, user_id: 16, trip_id: 10, creator: 6)
+Ketchup.create!(start_date: DateTime.new(2020, 7, 22, 12, 30, 0), end_date: DateTime.new(2020, 7, 22, 13, 00, 0), message: 'Quick coffee with Ellyn to just say hi', location: 'Onna Coffee', status: 'confirmed', latitude: 41.398098, longitude: 2.159659, user_id: 1, trip_id: 11, creator: 14)
+Ketchup.create!(start_date: DateTime.new(2020, 7, 22, 21, 00, 0), end_date: DateTime.new(2020, 7, 22, 23, 00, 0), message: 'Dinner with Prima at traditional Catalan restaurant', location: 'Goliard', status: 'confirmed', latitude: 41.399828, longitude: 2.160637, user_id: 4, trip_id: 11, creator: 14)
 Ketchup.create!(start_date: DateTime.new(2020, 7, 24, 15, 00, 0), end_date: DateTime.new(2020, 7, 24, 16, 00, 0), message: 'Enjoying the sun and walk on the beach', location: 'Platja del Bogatell', status: 'pending', latitude: 41.394380, longitude: 2.206989, user_id: 2, trip_id: 11, creator: 14)
 Ketchup.create!(start_date: DateTime.new(2020, 7, 24, 18, 00, 0), end_date: DateTime.new(2020, 7, 24, 19, 30, 0), message: 'A hike in the park with my old friend', location: 'Runyon Canyon Park', status: 'pending', latitude: 34.105657, longitude: -118.348687, user_id: 15, trip_id: 10, creator: 6)
 Ketchup.create!(start_date: DateTime.new(2020, 7, 25, 12, 00, 0), end_date: DateTime.new(2020, 7, 25, 13, 30, 0), message: 'Just chilling at the beach and we might get something to bite', location: 'Venice Beach', status: 'confirmed', latitude: 33.976975, longitude: -118.466388, user_id: 13, trip_id: 12, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 7, 26, 15, 30, 0), end_date: DateTime.new(2020, 7, 26, 18, 45, 0), message: 'Hiking in the park with this Hungarian guy with mustache', location: 'Kenneth Hahn Lower Park', status: 'pending', latitude: 34.008955, longitude: -118.369431, user_id: 18, trip_id: 12, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 3, 18, 00, 0), end_date: DateTime.new(2020, 9, 3, 21, 00, 0), message: 'Let\'s catch up and some nice meat!', location: 'The Capital Grille - Curbside Takeout & Delivery', status: 'confirmed', latitude: 40.751155, longitude: -73.974895, user_id: 11, trip_id: 19, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 5, 12, 00, 0), end_date: DateTime.new(2020, 9, 5, 12, 30, 0), message: 'How about one more coffee?', location: 'Blue Bottle Coffee', status: 'pending', latitude: 40.753063, longitude: -73.984136, user_id: 11, trip_id: 19, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 9, 12, 00, 0), end_date: DateTime.new(2020, 9, 9, 17, 00, 0), message: 'Can you show me around the famous Statue of Liberty?', location: 'Statue of Liberty National Monument', status: 'confirmed', latitude: 40.689376, longitude: -74.044628, user_id: 11, trip_id: 20, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 12, 10, 30, 0), end_date: DateTime.new(2020, 9, 12, 11, 30, 0), message: 'Craving for some nice bagel and coffee!', location: 'Ess-a-Bagel', status: 'pending', latitude: 40.756193, longitude: -73.970294, user_id: 11, trip_id: 20, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 13, 21, 00, 0), end_date: DateTime.new(2020, 9, 14, 01, 00, 0), message: 'Want some good tapas and nice wine to enjoy the evening!', location: 'El Nacional', status: 'confirmed', latitude: 41.390207, longitude: 2.167891, user_id: 6, trip_id: 21, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 17, 16, 00, 0), end_date: DateTime.new(2020, 9, 17, 18, 00, 0), message: 'Need to do some shopping and can you help me?', location: 'L\'illa Diagonal', status: 'pending', latitude: 41.389829, longitude: 2.135075, user_id: 6, trip_id: 21, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 19, 22, 00, 0), end_date: DateTime.new(2020, 9, 20, 00, 00, 0), message: 'Wanna grab some beers and say hi?', location: '4 Latas - Muntaner', status: 'confirmed', latitude: 41.393401, longitude: 2.150272, user_id: 6, trip_id: 22, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 21, 20, 00, 0), end_date: DateTime.new(2020, 9, 21, 23, 30, 0), message: 'Can you take me to Barca match? Tickets are on me!', location: 'Camp Nou', status: 'pending', latitude: 41.380606, longitude: 2.123056, user_id: 6, trip_id: 22, creator: 14)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 23, 14, 00, 0), end_date: DateTime.new(2020, 9, 23, 18, 00, 0), message: 'Heard Giants are playing Dodgers! Wanna watch how Giants bit the shit out of Dodgers!', location: 'Dodger Stadium', status: 'confirmed', latitude: 34.073620, longitude: -118.239894, user_id: 14, trip_id: 23, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 27, 12, 00, 0), end_date: DateTime.new(2020, 9, 27, 15, 30, 0), message: 'Can you have a walk with me and show around? ', location: 'Hollywood Walk of Fame', status: 'pending', latitude: 34.101543, longitude: -118.326872, user_id: 14, trip_id: 23, creator: 11)
-Ketchup.create!(start_date: DateTime.new(2020, 9, 30, 19, 00, 0), end_date: DateTime.new(2020, 9, 30, 22, 00, 0), message: 'J.Lo is coming to Staples Center. Can you please take me there?', location: 'STAPLES Center', status: 'confirmed', latitude: 34.042916, longitude: -118.267323, user_id: 14, trip_id: 24, creator: 6)
-Ketchup.create!(start_date: DateTime.new(2020, 10, 1, 18, 00, 0), end_date: DateTime.new(2020, 10, 1, 20, 00, 0), message: 'Heard this place is quite nice! Want some Korean BBQ with me?', location: 'Dream Korean BBQ', status: 'pending', latitude: 34.073582, longitude: -118.308654, user_id: 14, trip_id: 24, creator: 11)
+Ketchup.create!(start_date: DateTime.new(2020, 7, 26, 15, 30, 0), end_date: DateTime.new(2020, 7, 26, 18, 45, 0), message: 'Hiking in the park with this Hungarian guy with mustache', location: 'Kenneth Hahn Lower Park', status: 'pending', latitude: 34.008955, longitude: -118.369431, user_id: 18, trip_id: 12, creator: 11)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 3, 18, 00, 0), end_date: DateTime.new(2020, 9, 3, 21, 00, 0), message: 'Let\'s catch up and some nice meat!', location: 'The Capital Grille - Curbside Takeout & Delivery', status: 'confirmed', latitude: 40.751155, longitude: -73.974895, user_id: 11, trip_id: 19, creator: 15)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 5, 12, 00, 0), end_date: DateTime.new(2020, 9, 5, 12, 30, 0), message: 'How about one more coffee?', location: 'Blue Bottle Coffee', status: 'pending', latitude: 40.753063, longitude: -73.984136, user_id: 11, trip_id: 19, creator: 15)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 9, 12, 00, 0), end_date: DateTime.new(2020, 9, 9, 17, 00, 0), message: 'Can you show me around the famous Statue of Liberty?', location: 'Statue of Liberty National Monument', status: 'confirmed', latitude: 40.689376, longitude: -74.044628, user_id: 11, trip_id: 20, creator: 2)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 12, 10, 30, 0), end_date: DateTime.new(2020, 9, 12, 11, 30, 0), message: 'Craving for some nice bagel and coffee!', location: 'Ess-a-Bagel', status: 'pending', latitude: 40.756193, longitude: -73.970294, user_id: 11, trip_id: 20, creator: 2)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 13, 21, 00, 0), end_date: DateTime.new(2020, 9, 14, 01, 00, 0), message: 'Want some good tapas and nice wine to enjoy the evening!', location: 'El Nacional', status: 'confirmed', latitude: 41.390207, longitude: 2.167891, user_id: 6, trip_id: 21, creator: 19)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 17, 16, 00, 0), end_date: DateTime.new(2020, 9, 17, 18, 00, 0), message: 'Need to do some shopping and can you help me?', location: 'L\'illa Diagonal', status: 'pending', latitude: 41.389829, longitude: 2.135075, user_id: 6, trip_id: 21, creator: 19)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 19, 22, 00, 0), end_date: DateTime.new(2020, 9, 20, 00, 00, 0), message: 'Wanna grab some beers and say hi?', location: '4 Latas - Muntaner', status: 'confirmed', latitude: 41.393401, longitude: 2.150272, user_id: 6, trip_id: 22, creator: 12)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 21, 20, 00, 0), end_date: DateTime.new(2020, 9, 21, 23, 30, 0), message: 'Can you take me to Barca match? Tickets are on me!', location: 'Camp Nou', status: 'pending', latitude: 41.380606, longitude: 2.123056, user_id: 6, trip_id: 22, creator: 12)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 23, 14, 00, 0), end_date: DateTime.new(2020, 9, 23, 18, 00, 0), message: 'Heard Giants are playing Dodgers! Wanna watch how Giants bit the shit out of Dodgers!', location: 'Dodger Stadium', status: 'confirmed', latitude: 34.073620, longitude: -118.239894, user_id: 14, trip_id: 23, creator: 5)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 27, 12, 00, 0), end_date: DateTime.new(2020, 9, 27, 15, 30, 0), message: 'Can you have a walk with me and show around? ', location: 'Hollywood Walk of Fame', status: 'pending', latitude: 34.101543, longitude: -118.326872, user_id: 14, trip_id: 23, creator: 5)
+Ketchup.create!(start_date: DateTime.new(2020, 9, 30, 19, 00, 0), end_date: DateTime.new(2020, 9, 30, 22, 00, 0), message: 'J.Lo is coming to Staples Center. Can you please take me there?', location: 'STAPLES Center', status: 'confirmed', latitude: 34.042916, longitude: -118.267323, user_id: 14, trip_id: 24, creator: 7)
+Ketchup.create!(start_date: DateTime.new(2020, 10, 1, 18, 00, 0), end_date: DateTime.new(2020, 10, 1, 20, 00, 0), message: 'Heard this place is quite nice! Want some Korean BBQ with me?', location: 'Dream Korean BBQ', status: 'pending', latitude: 34.073582, longitude: -118.308654, user_id: 14, trip_id: 24, creator: 7)
 
 puts "-" * 60
 puts "Ketchups created"

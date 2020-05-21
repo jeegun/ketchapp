@@ -68,7 +68,7 @@ class User < ApplicationRecord
 
   # contacts user can invite to ketchup app
   def non_matching_contacts
-    non_matching_contacts = self.contacts.map { |contact| contact if User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? }.compact if self.contacts.present?
+    non_matching_contacts = self.contacts.select { |contact| User.where(["phone_number = ? OR email = ?", contact.phone_number, contact.email]).empty? } if self.contacts.present?
   end
 
   # contacts that matches users already signed up
@@ -83,7 +83,7 @@ class User < ApplicationRecord
 
   # contacts already signed up but not connection nor sent nor received request
   def requestable_contacts
-    requestable_contacts = self.matching_contacts.map { |contact| contact if (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?) }.compact if self.matching_contacts.present?
+    requestable_contacts = self.matching_contacts.select { |contact| (!self.is_connection?(contact) && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", self.id, contact.id, "pending"]).empty? && ConnectRequest.where(["sender_id = ? AND receiver_id = ? AND status = ?", contact.id, self.id, "pending"]).empty?) } if self.matching_contacts.present?
   end
 
   # check if connect request was already sent

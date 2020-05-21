@@ -37,11 +37,7 @@ class KetchupsController < ApplicationController
     @ketchup.creator = current_user.id
     @ketchup.status = "pending"
     if @ketchup.save
-      if @ketchup.trip.user == current_user
-        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
-      elsif @ketchup.user == current_user
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
-      end
+      Notification.create(recipient: @ketchup.opposed_user(current_user), actor: current_user, action: "has sent you a request to", notifiable: @ketchup)
       redirect_to ketchup_path(@ketchup), notice: 'Ketchup request sent.'
     else
       if @ketchup.trip.user == current_user
@@ -52,8 +48,8 @@ class KetchupsController < ApplicationController
         minLng = @trip.longitude - 0.5
         people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
         # added @ because we need this for ketchup create form
-        @people_in_radius_are_connections = (people_in_radius.map { |people| people if current_user.is_connection?(people) }).compact
-        people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact
+        @people_in_radius_are_connections = (people_in_radius.select { |people| current_user.is_connection?(people) })
+        people_in_radius_in_contact = (people_in_radius.select { |people| current_user.match_contacts?(people) })
         # should we also add people who you sent or you received connect request in this list?
         @people_to_show = (@people_in_radius_are_connections + people_in_radius_in_contact).uniq
         @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
@@ -79,11 +75,7 @@ class KetchupsController < ApplicationController
       @ketchup.update(status: 'confirmed')
       notification = Notification.find_by(recipient: current_user, action: "has sent you a request to", notifiable: @ketchup)
       notification.update(read_at: Time.zone.now) if notification.read_at.nil?
-      if current_user == @ketchup.user
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
-      elsif current_user == @ketchup.trip.user
-        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has confirmed your", notifiable: @ketchup)
-      end
+      Notification.create(recipient: @ketchup.opposed_user(current_user), actor: current_user, action: "has confirmed your", notifiable: @ketchup)
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_creator.deliver_now
       KetchupMailer.with(ketchup: @ketchup).confirm_ketchup_receiver.deliver_now
       unless @ketchup.trip.user.access_token.nil?
@@ -95,11 +87,8 @@ class KetchupsController < ApplicationController
       redirect_to ketchup_path(@ketchup), notice: 'This ketchup has been confirmed!'
     elsif params[:commit] == 'Cancel'
       @ketchup.update(status: 'cancelled', cancel_reason: params[:ketchup][:cancel_reason])
-      if current_user == @ketchup.user
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
-      elsif current_user == @ketchup.trip.user
-        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has cancelled your", notifiable: @ketchup)
-      end
+      Notification.where(notifiable: @ketchup).each { |notification| notification.destroy}
+      Notification.create(recipient: @ketchup.opposed_user(current_user), actor: current_user, action: "has cancelled your", notifiable: @ketchup)
       unless @ketchup.trip.user.access_token.nil?
         GoogleCalendarWrapper.delete(@ketchup.event, @ketchup.trip.user) if GoogleCalendarWrapper.get(@ketchup.event, @ketchup.trip.user).status == "confirmed"
       end
@@ -114,11 +103,7 @@ class KetchupsController < ApplicationController
     elsif params[:commit] == 'Edit'
       if @ketchup.update(ketchup_params)
         @ketchup.update(end_date: @ketchup.start_date + params[:ketchup][:duration].to_i.minute)
-        if current_user == @ketchup.user
-          Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
-        elsif current_user == @ketchup.trip.user
-          Notification.create(recipient: @ketchup.user, actor: current_user, action: "changed the details of your", notifiable: @ketchup)
-        end
+        Notification.create(recipient: @ketchup.opposed_user(current_user), actor: current_user, action: "changed the details of your", notifiable: @ketchup)
         unless @ketchup.trip.user.access_token.nil?
           GoogleCalendarWrapper.edit(@ketchup, @ketchup.trip.user) if GoogleCalendarWrapper.get(@ketchup.event, @ketchup.trip.user)
         end
@@ -134,12 +119,8 @@ class KetchupsController < ApplicationController
 
   def destroy
     @ketchup.destroy
-      Notification.find_by(notifiable: @ketchup).destroy
-      if current_user == @ketchup.user
-        Notification.create(recipient: @ketchup.trip.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
-      elsif current_user == @ketchup.trip.user
-        Notification.create(recipient: @ketchup.user, actor: current_user, action: "has declined your", notifiable: @ketchup)
-      end
+    Notification.where(notifiable: @ketchup).each { |notification| notification.destroy }
+    Notification.create(recipient: @ketchup.opposed_user(current_user), actor: current_user, action: "has declined your", notifiable: @ketchup)
     if @ketchup.trip.user == current_user
       redirect_to trip_path(@ketchup.trip_id)
     else

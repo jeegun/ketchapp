@@ -49,14 +49,9 @@ class TripsController < ApplicationController
         end
       end
       redirect_to trip_path(@trip), notice: 'This trip has been confirmed!'
-    elsif @trip.status == 'confirmed'
-      @trip.status = 'cancelled'
-      @trip.save
-      @trip.user = current_user
-      redirect_to user_trips_path(@trip.user), notice: 'Trip deleted!'
     else
       if @trip.update(trip_params)
-        redirect_to trip_path(@trip), notice: 'Trip updated!'
+        redirect_to trip_path(@trip), notice: 'Trip dates have been updated!'
       else
         render :edit
       end
@@ -64,8 +59,15 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip.destroy
-    redirect_to root_path, notice: 'Trip removed.'
+    if @trip.status == 'saved'
+      @trip.destroy
+      redirect_to root_path, notice: 'Search removed.'
+    elsif @trip.status == 'confirmed'
+      @trip.ketchups.each { |ketchup| Notification.where(notifiable: ketchup).each { |notification| notification.destroy} }
+      Notification.where(notifiable: @trip).each { |notification| notification.destroy }
+      @trip.destroy
+      redirect_to root_path, notice: 'Trip has been deleted.'
+    end
   end
 
   private
@@ -82,8 +84,8 @@ class TripsController < ApplicationController
     minLng = @trip.longitude - 0.5
     people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
     # added @ because we need this for ketchup create form
-    @people_in_radius_are_connections = (people_in_radius.map { |people| people if current_user.is_connection?(people) }).compact
-    people_in_radius_in_contact = (people_in_radius.map { |people| people if current_user.match_contacts?(people) }).compact
+    @people_in_radius_are_connections = (people_in_radius.select { |people| current_user.is_connection?(people) })
+    people_in_radius_in_contact = (people_in_radius.select { |people| current_user.match_contacts?(people) })
     # should we also add people who you sent or you received connect request in this list?
     @people_to_show = (@people_in_radius_are_connections + people_in_radius_in_contact).uniq
   end
