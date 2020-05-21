@@ -18,7 +18,7 @@ class ConnectionsController < ApplicationController
   def destroy
     connect_request = ConnectRequest.find_by(sender: @connection.connection_sender, receiver: @connection.connection_receiver, status: 'accepted')
     @connection.destroy
-    connect_request.destroy
+    connect_request.destroy if connect_request
     Notification.where(notifiable: connect_request).each { |notification| notification.destroy }
     redirect_to user_connections_path(current_user)
   end

@@ -1,0 +1,86 @@
+.connections {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+}
+
+.connection {
+  display: flex;
+  align-items: center;
+  background: $mayo;
+  color: $ketchup;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgb(235,235,235);
+  border-radius: 4px;
+  justify-content: space-between;
+}
+
+.connection .connection-head {
+ display: flex;
+ align-items: center;
+}
+
+.connection .connection-content {
+  flex-grow: 1;
+  padding: 0 1.5rem;
+}
+
+.connection p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.connection small {
+  opacity: 0.7;
+  font-weight: bold;
+}
+
+.connection .connection-actions {
+  opacity: 0.7;
+  display: flex;
+  transition: ease .3s;
+}
+
+.connection:hover .connection-actions {
+  opacity: 1;
+}
+
+.connection .connection-actions a {
+  color: $ketchup;
+  margin-left: 1rem;
+  font-size: 1rem;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.connection .connection-actions a.btn-flat {
+  color: $mayo !important;
+}
+
+.connection .connection-actions .btn-flat, .connection .connection-actions .btn-ghost {
+  margin-left: 1rem;
+  font-size: 0.825rem;
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 991.98px) {
+  .connection {
+    flex-wrap: wrap;
+  }
+  .connection .connection-actions {
+    justify-content: center;
+    width: 100%;
+    display: none;
+  }
+  .connection:hover .connection-actions {
+    display: flex;
+    padding-top: 0.5rem;
+  }
+}
