@@ -31,7 +31,7 @@
           </div>
           <div class="connection-actions">
             <%= link_to '', user_chats_path(connection.opposed_user(current_user)), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
-            <%= link_to '', connection_path(connection), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Disconnect', class: 'fas fa-times' %>
+            <%= link_to '', connection_path(connection), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Disconnect', class: 'far fa-trash-alt' %>
           </div>
         </div>
       <% end %>
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="connection-actions">
-            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Cancel request', class: 'fas fa-times' %>
+            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Cancel request', class: 'far fa-trash-alt' %>
           </div>
         </div>
       <%# end %>
@@ -76,7 +76,7 @@
           </div>
           <div class="connection-actions">
             <%#= link_to '', connect_request_connections_path(request), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Accept', class: 'fas fa-check' %>
-            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'fas fa-times' %>
+            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'far fa-trash-alt' %>
           </div>
         </div>
       <%# end %>
