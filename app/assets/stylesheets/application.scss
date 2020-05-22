@@ -9,6 +9,7 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "daterangepicker";
+@import "bootstrap/bootstrap-tooltip";
 
 // Your CSS partials
 @import "components/index";
@@ -62,4 +63,8 @@ div.pac-container {
 .cropper-container.cropper-bg {
   min-width: 100% !important;
   max-width: 100% !important;
+}
+
+.modal.fade.show {
+  opacity: 1 !important;
 }

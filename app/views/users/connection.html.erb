@@ -4,57 +4,124 @@
     <li>
       <p class="tab-underlined active-tab">Connections</p>
     </li>
-    <li>
+    <!-- <li>
       <p class="tab-underlined">Sent</p>
     </li>
     <li>
       <p class="tab-underlined">Received</p>
-    </li>
+    </li> -->
     <li>
       <p class="tab-underlined">People you may know</p>
     </li>
   </ul>
   <div class="lists">
-    <% current_user.connections.sort.reverse.each do |connection| %>
-      <% if connection.connection_sender == current_user %>
-        <p><%= link_to connection.connection_receiver.full_name, user_path(connection.connection_receiver) %></p>
-      <% else %>
-        <p><%= link_to connection.connection_sender.full_name, user_path(connection.connection_sender) %></p>
+    <div class="connections">
+      <% current_user.connections.sort.reverse.each do |connection| %>
+        <div class="connection">
+          <div class="connection-head">
+            <% if connection.opposed_user(current_user).photo.attached? %>
+              <%= cl_image_tag connection.opposed_user(current_user).photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag 'profile.png', class: "avatar" %>
+            <% end %>
+            <div class="connection-content">
+              <p><%= link_to connection.opposed_user(current_user).full_name, user_path(connection.opposed_user(current_user)), style: 'font-weight:700;' %></p>
+              <p>Home city: <%= connection.opposed_user(current_user).home_city %></p>
+            </div>
+          </div>
+          <div class="connection-actions">
+            <%= link_to '', user_chats_path(connection.opposed_user(current_user)), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
+            <%= link_to '', connection_path(connection), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Disconnect', class: 'far fa-trash-alt' %>
+          </div>
+        </div>
       <% end %>
-    <% end %>
+    </div>
+  </div>
+  <!-- <div class="lists" style="display: none;">
+    <div class="connections">
+      <%# @sent_requests.each do |request| %>
+        <div class="connection">
+          <div class="connection-head">
+            <%# if request.receiver.photo.attached? %>
+              <%#= cl_image_tag request.receiver.photo.key, class: "avatar" %>
+            <%# else %>
+              <%#= image_tag 'profile.png', class: "avatar" %>
+            <%# end %>
+            <div class="connection-content">
+              <p><%#= link_to request.receiver.full_name, user_path(request.receiver), style: 'font-weight:700;' %></p>
+              <p>Home city: <%#= request.receiver.home_city %></p>
+            </div>
+          </div>
+          <div class="connection-actions">
+            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Cancel request', class: 'far fa-trash-alt' %>
+          </div>
+        </div>
+      <%# end %>
+    </div>
   </div>
   <div class="lists" style="display: none;">
-    <% @sent_requests.each do |request| %>
-      <p>Sent request to <%= link_to request.receiver.full_name, user_path(request.receiver) %></p>
-      <%= link_to "Cancel", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
-    <% end %>
-  </div>
+    <div class="connections">
+      <%# @received_requests.each do |request| %>
+        <div class="connection">
+          <div class="connection-head">
+            <%# if request.sender.photo.attached? %>
+              <%#= cl_image_tag request.sender.photo.key, class: "avatar" %>
+            <%# else %>
+              <%#= image_tag 'profile.png', class: "avatar" %>
+            <%# end %>
+            <div class="connection-content">
+              <p><%#= link_to request.sender.full_name, user_path(request.sender), style: 'font-weight:700;' %></p>
+              <p>Home city: <%#= request.sender.home_city %></p>
+            </div>
+          </div>
+          <div class="connection-actions">
+            <%#= link_to '', connect_request_connections_path(request), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Accept', class: 'fas fa-check' %>
+            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'far fa-trash-alt' %>
+          </div>
+        </div>
+      <%# end %>
+    </div>
+  </div> -->
   <div class="lists" style="display: none;">
-    <% @received_requests.each do |request| %>
-      <p><%= link_to request.sender.full_name, user_path(request.sender) %> sent you a request</p>
-      <%= simple_form_for [request, @connection] do |f| %>
-        <%= f.submit "Accept", class: "btn btn-ghost" %>
-      <% end %>
-      <%= link_to "Decline", connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-ghost" %>
-    <% end %>
-  </div>
-  <div class="lists" style="display: none;">
-    <% if current_user.requestable_contacts %>
-      <% current_user.requestable_contacts.each do |user| %>
-        <p><%= link_to user.full_name, user_path(user) %></p>
-        <%= simple_form_for [user, @connect_request] do |f| %>
-          <%= f.submit "Connect request", class: "btn btn-ghost" %>
+    <div class="connections">
+      <% if current_user.requestable_contacts %>
+        <% current_user.requestable_contacts.each do |user| %>
+          <div class="connection">
+            <div class="connection-head">
+              <% if user.photo.attached? %>
+                <%= cl_image_tag user.photo.key, class: "avatar" %>
+              <% else %>
+                <%= image_tag 'profile.png', class: "avatar" %>
+              <% end %>
+              <div class="connection-content">
+                <p><%= link_to user.full_name, user_path(user), style: 'font-weight:700;' %></p>
+                <p>Home city: <%= user.home_city %></p>
+              </div>
+            </div>
+            <div class="connection-actions">
+              <%= link_to '', user_connect_requests_path(user), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Connect', class: 'fas fa-user-friends' %>
+            </div>
+          </div>
         <% end %>
       <% end %>
-    <% end %>
-    <% if current_user.non_matching_contacts %>
-      <% current_user.non_matching_contacts.each do |contact| %>
-        <% if contact.invited_at.nil? %>
-          <p><%= contact.first_name + ' ' + contact.last_name %></p>
-          <%= link_to 'Send invite to Ketchapp', contact_path(contact), method: :patch || :put, class: 'btn btn-flat' %>
+      <% if current_user.non_matching_contacts %>
+        <% current_user.non_matching_contacts.each do |contact| %>
+          <% if contact.invited_at.nil? %>
+            <div class="connection">
+              <div class="connection-head">
+                <%= image_tag 'profile.png', class: "avatar" %>
+                <div class="connection-content">
+                  <p style="font-weight: 700;"><%= contact.first_name + ' ' + contact.last_name %></p>
+                </div>
+              </div>
+              <div class="connection-actions">
+                <%= link_to '', contact_path(contact), method: :patch || :put, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Invite', class: 'far fa-envelope' %>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
 <script>
@@ -83,4 +150,7 @@
       }
     })
   }
+  document.addEventListener("DOMContentLoaded", function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 </script>

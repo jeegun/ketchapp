@@ -27,6 +27,7 @@ gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
 gem 'pundit'
 gem 'letter_opener', group: :development
+gem 'bootstrap-tooltip-rails'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

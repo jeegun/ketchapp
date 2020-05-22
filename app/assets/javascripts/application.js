@@ -2,5 +2,6 @@
 //= require_tree .
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap/bootstrap-tooltip
 //= require moment
 //= require daterangepicker

@@ -1,0 +1,10 @@
+.tooltip > .tooltip-inner {
+  background-color: $ketchup;
+  color: $mustard;
+  font-size: 0.75rem;
+  opacity: 0.8;
+};
+
+.tooltip.bottom .tooltip-arrow {
+  display: none;
+}
