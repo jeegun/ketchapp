@@ -40,7 +40,12 @@
               <% end %>
             </div>
           <% else %>
-            <p>No upcoming trips</p>
+            <div class="empty-trips">
+              <div class="empty-content">
+                <i class="fas fa-plane-departure"></i>
+                <p>No upcoming trips</p>
+              </div>
+            </div>
           <% end %>
         </div>
         <div class="lists">
@@ -61,7 +66,12 @@
               <% end %>
             </div>
           <% else %>
-            <p>No past trips</p>
+            <div class="empty-trips">
+              <div class="empty-content">
+                <i class="fas fa-plane-departure"></i>
+                <p>No past trips</p>
+              </div>
+            </div>
           <% end %>
         </div>
         <!-- recent searches div -->
@@ -81,7 +91,12 @@
               <% end %>
             </div>
           <% else %>
-            <p>No recent searches</p>
+            <div class="empty-trips">
+              <div class="empty-content">
+                <i class="fas fa-plane-departure"></i>
+                <p>No recent searches</p>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>

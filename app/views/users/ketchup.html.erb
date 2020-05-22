@@ -33,7 +33,12 @@
           <% end %>
         <% end %>
       <% elsif @received_ketchups.empty? %>
-        <p>No ketchup requests received</p>
+        <div class="empty-ketchups">
+          <div class="empty-content">
+            <i class="far fa-calendar-check"></i>
+            <p>No ketchup requests received</p>
+          </div>
+        </div>
       <% end %>
     </div>
     <div class="ketchups col-6">
@@ -66,7 +71,12 @@
           </div>
         <% end %>
       <% elsif @sent_ketchups.empty? %>
-        <p>No ketchup requests sent</p>
+        <div class="empty-ketchups">
+          <div class="empty-content">
+            <i class="far fa-calendar-check"></i>
+            <p>No ketchup requests sent</p>
+          </div>
+        </div>
       <% end %>
     </div>
   </div>
