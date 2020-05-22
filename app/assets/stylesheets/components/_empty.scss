@@ -36,7 +36,7 @@
 
 .empty-connections {
   display: flex;
-  min-height: calc(100vh - 14.75rem);
+  min-height: calc(100vh - 16rem);
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
@@ -67,6 +67,25 @@
 }
 
 .empty-notifications .empty-content i {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.empty-trip {
+  display: flex;
+  min-height: calc(100vh - 4.375rem - 6.25rem - 9.5rem);
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: lightgrey;
+  width: 100%;
+}
+
+.empty-trip .empty-content {
+  text-align: center;
+}
+
+.empty-trip .empty-content i {
   font-size: 4rem;
   margin-bottom: 2rem;
 }
