@@ -1,3 +1,4 @@
 document.querySelector("[data-notification-id='<%= @notification.id %>']")
   .remove();
 document.getElementById('unread-count').innerHTML = '<%= @notifications.length if @notifications.present? %>'
+document.querySelector('.tooltip-inner').remove();

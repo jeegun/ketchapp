@@ -99,9 +99,10 @@
                       </div>
                     </div>
                     <div class="ketchup-actions">
-                      <%= link_to '', ketchup_path(ketchup), method: :patch || :put, class: "fas fa-check" if ketchup.status == 'pending' && ketchup.creator != current_user.id %>
-                      <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?'}, class: "far fa-trash-alt" if ketchup.status == 'pending' %>
-                      <%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %>
+                      <%= link_to '', ketchup_path(ketchup), method: :patch || :put, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Confirm', class: "fas fa-check" if ketchup.status == 'pending' && ketchup.creator != current_user.id %>
+                      <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: "far fa-trash-alt" if ketchup.status == 'pending' && ketchup.creator != current_user.id %>
+                      <%= link_to '', ketchup_path(ketchup), method: :delete, data: {confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: 'Cancel', class: "far fa-trash-alt" if ketchup.status == 'pending' && ketchup.creator == current_user.id %>
+                      <span data-toggle="tooltip" data-placement="bottom" data-original-title="Cancel"><%= link_to '', '', data: { toggle: "modal", target: "#ketchupCancelModal-#{ketchup.id}" }, class: "far fa-trash-alt" if ketchup.status == 'confirmed' %></span>
                     </div>
                   </div>
                   <% if ketchup.status == 'confirmed' %>
@@ -220,4 +221,7 @@
       }
     })
   }
+  document.addEventListener("DOMContentLoaded", function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 </script>

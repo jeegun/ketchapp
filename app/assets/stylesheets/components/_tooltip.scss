@@ -1,7 +1,8 @@
 .tooltip > .tooltip-inner {
-  background-color: transparent;
-  color: $ketchup;
-  font-size: 1rem;
+  background-color: $ketchup;
+  color: $mustard;
+  font-size: 0.75rem;
+  opacity: 0.8;
 };
 
 .tooltip.bottom .tooltip-arrow {

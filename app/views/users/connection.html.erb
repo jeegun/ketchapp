@@ -30,8 +30,8 @@
             </div>
           </div>
           <div class="connection-actions">
-            <%= link_to '', user_chats_path(connection.opposed_user(current_user)), method: :post, class: 'fas fa-comment' %>
-            <%= link_to '', connection_path(connection), data: { confirm: "Are you sure?" }, method: :delete, class: 'fas fa-times' %>
+            <%= link_to '', user_chats_path(connection.opposed_user(current_user)), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
+            <%= link_to '', connection_path(connection), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Disconnect', class: 'fas fa-times' %>
           </div>
         </div>
       <% end %>
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="connection-actions">
-            <%#= link_to '', connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: 'fas fa-times' %>
+            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Cancel request', class: 'fas fa-times' %>
           </div>
         </div>
       <%# end %>
@@ -75,8 +75,8 @@
             </div>
           </div>
           <div class="connection-actions">
-            <%#= link_to '', connect_request_connections_path(request), method: :post, class: 'fas fa-check' %>
-            <%#= link_to '', connect_request_path(request), data: { confirm: "Are you sure?" }, method: :delete, class: 'fas fa-times' %>
+            <%#= link_to '', connect_request_connections_path(request), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Accept', class: 'fas fa-check' %>
+            <%#= link_to '', connect_request_path(request), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'fas fa-times' %>
           </div>
         </div>
       <%# end %>
@@ -99,7 +99,7 @@
               </div>
             </div>
             <div class="connection-actions">
-              <%= link_to '', user_connect_requests_path(user), method: :post, class: 'fas fa-user-friends' %>
+              <%= link_to '', user_connect_requests_path(user), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Connect', class: 'fas fa-user-friends' %>
             </div>
           </div>
         <% end %>
@@ -115,7 +115,7 @@
                 </div>
               </div>
               <div class="connection-actions">
-                <%= link_to '', contact_path(contact), method: :patch || :put, class: 'far fa-envelope' %>
+                <%= link_to '', contact_path(contact), method: :patch || :put, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Invite', class: 'far fa-envelope' %>
               </div>
             </div>
           <% end %>
@@ -150,4 +150,7 @@
       }
     })
   }
+  document.addEventListener("DOMContentLoaded", function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 </script>
