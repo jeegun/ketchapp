@@ -32,7 +32,7 @@
                 <%= link_to '', ketchup_path(Ketchup.find(notification.notifiable_id)), method: :delete, data: {confirm: 'Are you sure?', toggle: 'tooltip', placement: 'bottom' }, title: 'Decline', class: 'far fa-trash-alt' %>
               <% elsif notification.notifiable_type == 'Trip' %>
                 <span data-toggle="tooltip" data-placement="bottom" data-original-title="Ketchup"><%= link_to '', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{notification.notifiable_id}" }, class: 'far fa-calendar-check', id: "ketchup-#{notification.notifiable_id}" %></span>
-                <%= link_to '', user_chats_path(notification.actor), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
+                <%= link_to '', user_chats_path(notification.actor), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment', style: 'margin-top: 0.2rem' %>
               <% else %>
                 <%= link_to '', notification_path(notification), method: :delete, remote: true, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Dismiss', class: 'far fa-trash-alt' %>
               <% end %>

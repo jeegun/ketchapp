@@ -32,6 +32,7 @@ class TripsController < ApplicationController
     if @trip.save
       redirect_to trip_path(@trip)
     else
+      @today = Date.today.strftime('%b %d, %Y')
       render 'pages/home'
     end
   end

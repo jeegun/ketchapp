@@ -42,6 +42,13 @@ class KetchupsController < ApplicationController
     else
       if @ketchup.trip.user == current_user
         @trip = Trip.find(params[:trip_id])
+        @start_year = @trip.start_date.strftime('%Y')
+        @start_month = @trip.start_date.strftime('%b')
+        @start_day = @trip.start_date.strftime('%d')
+        @end_year = @trip.end_date.strftime('%Y')
+        @end_month = @trip.end_date.strftime('%b')
+        @end_day = @trip.end_date.strftime('%d')
+        @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
         maxLat = @trip.latitude + 0.5
         minLat = @trip.latitude - 0.5
         maxLng = @trip.longitude + 0.5
@@ -60,12 +67,17 @@ class KetchupsController < ApplicationController
         @connect_request = ConnectRequest.new
         render 'trips/show'
       elsif @ketchup.user == current_user
-        @my_notifications = Notification.where(recipient: @user).order("created_at DESC")
+        @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
+        @my_notifications = Notification.where(recipient: current_user).order("created_at DESC")
         @my_trip_notifications = @my_notifications.where(notifiable_type: 'Trip')
         @connection = Connection.new
         @chat = Chat.new
         @ketchup = Ketchup.new
         render 'users/notification'
+        # respond_to do |format|
+        #   format.html { render 'users/notification' }
+        #   format.js
+        # end
       end
     end
   end
