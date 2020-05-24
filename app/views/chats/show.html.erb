@@ -28,12 +28,12 @@
       <div class="messages" id="chatbox">
         <% @messages.each do |message| %>
           <% if @my_messages.include?(message) %>
-            <div class="col-8 offset-4 d-flex justify-content-end">
-              <div class="my-message-bubble my-msg" id="my-chat"><p><%= render 'messages/message', message: message %></p></div>
+            <div class="col-8 d-flex">
+              <p><%= render 'messages/message', message: message %></p>
             </div>
           <% elsif @other_messages.include?(message) %>
             <div class="col-8 d-flex">
-              <div class="other-message-bubble other-msg" id="other-chat"><p><%= render 'messages/message', message: message %></p></div>
+              <p><%= render 'messages/message', message: message %></p>
             </div>
           <% end %>
         <% end %>
@@ -44,4 +44,3 @@
     </div>
   </div>
 </div>
-

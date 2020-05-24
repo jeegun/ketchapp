@@ -1,14 +1,14 @@
 App.chat = App.cable.subscriptions.create("ChatChannel", {
-  connected: function() {
-    console.log('Connected to the chat channel');
-  },
-  disconnected: function() {
-    console.log('Disconnected from the chat channel');
-  },
+  connected: function() {},
+
+  disconnected: function() {},
+
   received: function(data) {
-    var messages = $('#chatbox');
-    messages.append(data['message']);
-    messages.addClass('my-message-bubble my-msg');
-    messages.scrollTop(messages[0].scrollHeight);
+    var chatbox = $('#chatbox');
+    var message = data['message']
+
+    // message.classList.add('my-message-bubble my-msg');
+    chatbox.append(message);
+    chatbox.scrollTop(chatbox[0].scrollHeight);
   }
 });
