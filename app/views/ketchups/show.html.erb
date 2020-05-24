@@ -104,8 +104,8 @@
     var map = new google.maps.Map(document.getElementById('map'), {zoom: 17, center: ketchupLocation});
     var marker = new google.maps.Marker({position: ketchupLocation, map: map});
     var input = document.getElementById('ketchup_location');
-    var southWest = new google.maps.LatLng( <%= @swLat %>, <%= @swLng %> );
-    var northEast = new google.maps.LatLng( <%= @neLat %>, <%= @neLat %> );
+    var northEast = new google.maps.LatLng( <%= @ketchup.trip.maxLat %>, <%= @ketchup.trip.maxLng %> );
+    var southWest = new google.maps.LatLng( <%= @ketchup.trip.minLat %>, <%= @ketchup.trip.minLng %> );
     var customBounds = new google.maps.LatLngBounds( southWest, northEast );
     var options = {
         bounds: customBounds,

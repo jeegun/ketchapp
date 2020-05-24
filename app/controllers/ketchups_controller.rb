@@ -23,10 +23,6 @@ class KetchupsController < ApplicationController
     @default_date = @ketchup.start_date.strftime('%b %d, %Y %I:%M %p')
     @start_date = @ketchup.trip.start_date.strftime('%b %d, %Y %I:%M %p')
     @end_date = @ketchup.trip.end_date.strftime('%b %d, %Y 11:30 PM')
-    @neLat = @ketchup.trip.latitude + 0.5
-    @neLng = @ketchup.trip.longitude + 0.5
-    @swLat = @ketchup.trip.latitude - 0.5
-    @swLng = @ketchup.trip.longitude - 0.5
   end
 
   def create
@@ -53,11 +49,7 @@ class KetchupsController < ApplicationController
         @end_month = @trip.end_date.strftime('%b')
         @end_day = @trip.end_date.strftime('%d')
         @notifications = Notification.where(recipient: current_user).order("created_at DESC").unread
-        maxLat = @trip.latitude + 0.5
-        minLat = @trip.latitude - 0.5
-        maxLng = @trip.longitude + 0.5
-        minLng = @trip.longitude - 0.5
-        people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
+        people_in_radius = User.where(latitude: @trip.minLat..@trip.maxLat, longitude: @trip.minLng..@trip.maxLng).where(["NOT id = ?", current_user.id])
         # added @ because we need this for ketchup create form
         @people_in_radius_are_connections = (people_in_radius.select { |people| current_user.is_connection?(people) })
         people_in_radius_in_contact = (people_in_radius.select { |people| current_user.match_contacts?(people) })

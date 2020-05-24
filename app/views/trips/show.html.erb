@@ -168,8 +168,8 @@
     <% @people_to_show.each do |people| %>
       <% if current_user.is_connection?(people) %>
         var input<%= people.id %> = document.getElementById('ketchup_location_<%= people.id %>');
-        var southWest = new google.maps.LatLng( <%= @swLat %>, <%= @swLng %> );
-        var northEast = new google.maps.LatLng( <%= @neLat %>, <%= @neLat %> );
+        var northEast = new google.maps.LatLng( <%= @trip.maxLat %>, <%= @trip.maxLng %> );
+        var southWest = new google.maps.LatLng( <%= @trip.minLat %>, <%= @trip.minLng %> );
         var customBounds = new google.maps.LatLngBounds( southWest, northEast );
         var options = {
             bounds: customBounds,

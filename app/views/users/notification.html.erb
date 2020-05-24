@@ -59,8 +59,8 @@
   function initMap() {
     <% @my_trip_notifications.each do |notification| %>
       var input<%= notification.notifiable_id %> = document.getElementById('ketchup_location_<%= notification.notifiable_id %>');
-      var southWest<%= notification.notifiable_id %> = new google.maps.LatLng( <%= Trip.find(notification.notifiable_id).latitude - 0.5 %>, <%= Trip.find(notification.notifiable_id).longitude + 0.5 %> );
-      var northEast<%= notification.notifiable_id %> = new google.maps.LatLng( <%= Trip.find(notification.notifiable_id).latitude + 0.5 %>, <%= Trip.find(notification.notifiable_id).longitude - 0.5 %> );
+      var northEast<%= notification.notifiable_id %> = new google.maps.LatLng( <%= Trip.find(notification.notifiable_id).maxLat %>, <%= Trip.find(notification.notifiable_id).maxLng %> );
+      var southWest<%= notification.notifiable_id %> = new google.maps.LatLng( <%= Trip.find(notification.notifiable_id).minLat %>, <%= Trip.find(notification.notifiable_id).minLng %> );
       var customBounds<%= notification.notifiable_id %> = new google.maps.LatLngBounds( southWest<%= notification.notifiable_id %>, northEast<%= notification.notifiable_id %> );
       var options<%= notification.notifiable_id %> = {
           bounds: customBounds<%= notification.notifiable_id %>,
