@@ -23,6 +23,10 @@ class KetchupsController < ApplicationController
     @default_date = @ketchup.start_date.strftime('%b %d, %Y %I:%M %p')
     @start_date = @ketchup.trip.start_date.strftime('%b %d, %Y %I:%M %p')
     @end_date = @ketchup.trip.end_date.strftime('%b %d, %Y 11:30 PM')
+    @neLat = @ketchup.trip.latitude + 0.5
+    @neLng = @ketchup.trip.longitude + 0.5
+    @swLat = @ketchup.trip.latitude - 0.5
+    @swLng = @ketchup.trip.longitude - 0.5
   end
 
   def create

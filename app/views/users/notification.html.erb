@@ -59,9 +59,16 @@
   function initMap() {
     <% @my_trip_notifications.each do |notification| %>
       var input<%= notification.notifiable_id %> = document.getElementById('ketchup_location_<%= notification.notifiable_id %>');
-      var autocomplete<%= notification.notifiable_id %> = new google.maps.places.Autocomplete(input<%= notification.notifiable_id %>, {types: ['establishment']});
+      var southWest<%= notification.notifiable_id %> = new google.maps.LatLng( <%= Trip.find(notification.notifiable_id).latitude - 0.5 %>, <%= Trip.find(notification.notifiable_id).longitude + 0.5 %> );
+      var northEast<%= notification.notifiable_id %> = new google.maps.LatLng( <%= Trip.find(notification.notifiable_id).latitude + 0.5 %>, <%= Trip.find(notification.notifiable_id).longitude - 0.5 %> );
+      var customBounds<%= notification.notifiable_id %> = new google.maps.LatLngBounds( southWest<%= notification.notifiable_id %>, northEast<%= notification.notifiable_id %> );
+      var options<%= notification.notifiable_id %> = {
+          bounds: customBounds<%= notification.notifiable_id %>,
+          types:  ['establishment'],
+          componentRestrictions: { country: '<%= Trip.find(notification.notifiable_id).country_code %>' }
+      };
+      var autocomplete<%= notification.notifiable_id %> = new google.maps.places.Autocomplete(input<%= notification.notifiable_id %>, options<%= notification.notifiable_id %>);
       autocomplete<%= notification.notifiable_id %>.setFields(['geometry', 'name']);
-      autocomplete<%= notification.notifiable_id %>.addListener('place_changed', fillInForm<%= notification.notifiable_id %>);
       function fillInForm<%= notification.notifiable_id %>() {
         var place<%= notification.notifiable_id %> = autocomplete<%= notification.notifiable_id %>.getPlace();
         if (!place<%= notification.notifiable_id %>.geometry) {
@@ -73,6 +80,7 @@
         document.getElementById('ketchup_latitude_<%= notification.notifiable_id %>').value = place<%= notification.notifiable_id %>.geometry.location.lat()
         document.getElementById('ketchup_longitude_<%= notification.notifiable_id %>').value = place<%= notification.notifiable_id %>.geometry.location.lng()
       }
+      autocomplete<%= notification.notifiable_id %>.addListener('place_changed', fillInForm<%= notification.notifiable_id %>);
     <% end %>
   }
   <% @my_trip_notifications.each do |notification| %>

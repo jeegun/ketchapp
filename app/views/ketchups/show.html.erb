@@ -104,9 +104,16 @@
     var map = new google.maps.Map(document.getElementById('map'), {zoom: 17, center: ketchupLocation});
     var marker = new google.maps.Marker({position: ketchupLocation, map: map});
     var input = document.getElementById('ketchup_location');
-    var autocomplete = new google.maps.places.Autocomplete(input, {types: ['establishment']});
+    var southWest = new google.maps.LatLng( <%= @swLat %>, <%= @swLng %> );
+    var northEast = new google.maps.LatLng( <%= @neLat %>, <%= @neLat %> );
+    var customBounds = new google.maps.LatLngBounds( southWest, northEast );
+    var options = {
+        bounds: customBounds,
+        types:  ['establishment'],
+        componentRestrictions: { country: '<%= @ketchup.trip.country_code %>' }
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
     autocomplete.setFields(['geometry', 'name']);
-    autocomplete.addListener('place_changed', fillInForm);
     function fillInForm() {
       var place = autocomplete.getPlace();
       if (!place.geometry) {
@@ -118,6 +125,7 @@
       document.getElementById('ketchup_latitude').value = place.geometry.location.lat()
       document.getElementById('ketchup_longitude').value = place.geometry.location.lng()
     }
+    autocomplete.addListener('place_changed', fillInForm);
   }
   document.addEventListener("DOMContentLoaded", function() {
     $('input[class="daterange form-control"]').daterangepicker({

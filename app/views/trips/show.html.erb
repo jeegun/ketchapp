@@ -168,9 +168,16 @@
     <% @people_to_show.each do |people| %>
       <% if current_user.is_connection?(people) %>
         var input<%= people.id %> = document.getElementById('ketchup_location_<%= people.id %>');
-        var autocomplete<%= people.id %> = new google.maps.places.Autocomplete(input<%= people.id %>, {types: ['establishment']});
+        var southWest = new google.maps.LatLng( <%= @swLat %>, <%= @swLng %> );
+        var northEast = new google.maps.LatLng( <%= @neLat %>, <%= @neLat %> );
+        var customBounds = new google.maps.LatLngBounds( southWest, northEast );
+        var options = {
+            bounds: customBounds,
+            types:  ['establishment'],
+            componentRestrictions: { country: '<%= @trip.country_code %>' }
+        };
+        var autocomplete<%= people.id %> = new google.maps.places.Autocomplete(input<%= people.id %>, options);
         autocomplete<%= people.id %>.setFields(['geometry', 'name']);
-        autocomplete<%= people.id %>.addListener('place_changed', fillInForm<%= people.id %>);
         function fillInForm<%= people.id %>() {
           var place<%= people.id %> = autocomplete<%= people.id %>.getPlace();
           if (!place<%= people.id %>.geometry) {
@@ -182,6 +189,7 @@
           document.getElementById('ketchup_latitude_<%= people.id %>').value = place<%= people.id %>.geometry.location.lat()
           document.getElementById('ketchup_longitude_<%= people.id %>').value = place<%= people.id %>.geometry.location.lng()
         }
+        autocomplete<%= people.id %>.addListener('place_changed', fillInForm<%= people.id %>);
       <% end %>
     <% end %>
   }

@@ -16,6 +16,10 @@ class TripsController < ApplicationController
     @default_date = @trip.start_date.strftime('%b %d, %Y 12:00 PM')
     @start_date = @trip.start_date.strftime('%b %d, %Y %I:%M %p')
     @end_date = @trip.end_date.strftime('%b %d, %Y 11:30 PM')
+    @neLat = @trip.latitude + 0.5
+    @neLng = @trip.longitude + 0.5
+    @swLat = @trip.latitude - 0.5
+    @swLng = @trip.longitude - 0.5
   end
 
   def create
@@ -92,6 +96,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:start_date, :end_date, :location, :latitude, :longitude)
+    params.require(:trip).permit(:start_date, :end_date, :location, :latitude, :longitude, :country_code)
   end
 end
