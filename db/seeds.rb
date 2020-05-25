@@ -131,7 +131,7 @@ users_data = [
     phone_number: "000 000 013"
   },
   {
-    email: "jeegun@gmail.com",
+    email: "jeegunkim@gmail.com",
     password: "123456",
     first_name: "Jeegun",
     last_name: "Kim",
