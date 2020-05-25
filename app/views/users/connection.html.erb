@@ -15,27 +15,36 @@
     </li>
   </ul>
   <div class="lists">
-    <div class="connections">
-      <% current_user.connections.sort.reverse.each do |connection| %>
-        <div class="connection">
-          <div class="connection-head">
-            <% if connection.opposed_user(current_user).photo.attached? %>
-              <%= cl_image_tag connection.opposed_user(current_user).photo.key, class: "avatar" %>
-            <% else %>
-              <%= image_tag 'profile.png', class: "avatar" %>
-            <% end %>
-            <div class="connection-content">
-              <p><%= link_to connection.opposed_user(current_user).full_name, user_path(connection.opposed_user(current_user)), style: 'font-weight:700;' %></p>
-              <p>Home city: <%= connection.opposed_user(current_user).home_city %></p>
+    <% if current_user.connections.any? %>
+      <div class="connections">
+        <% current_user.connections.sort.reverse.each do |connection| %>
+          <div class="connection">
+            <div class="connection-head">
+              <% if connection.opposed_user(current_user).photo.attached? %>
+                <%= cl_image_tag connection.opposed_user(current_user).photo.key, class: "avatar" %>
+              <% else %>
+                <%= image_tag 'profile.png', class: "avatar" %>
+              <% end %>
+              <div class="connection-content">
+                <p><%= link_to connection.opposed_user(current_user).full_name, user_path(connection.opposed_user(current_user)), style: 'font-weight:700;' %></p>
+                <p>Home city: <%= connection.opposed_user(current_user).home_city %></p>
+              </div>
+            </div>
+            <div class="connection-actions">
+              <%= link_to '', user_chats_path(connection.opposed_user(current_user)), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
+              <%= link_to '', connection_path(connection), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Disconnect', class: 'far fa-trash-alt' %>
             </div>
           </div>
-          <div class="connection-actions">
-            <%= link_to '', user_chats_path(connection.opposed_user(current_user)), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Chat', class: 'fas fa-comment' %>
-            <%= link_to '', connection_path(connection), method: :delete, data: { confirm: "Are you sure?", toggle: 'tooltip', placement: 'bottom' }, title: 'Disconnect', class: 'far fa-trash-alt' %>
-          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-connections">
+        <div class="empty-content">
+          <i class="fas fa-users"></i>
+          <p>No connections</p>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
   <!-- <div class="lists" style="display: none;">
     <div class="connections">
@@ -83,45 +92,56 @@
     </div>
   </div> -->
   <div class="lists" style="display: none;">
-    <div class="connections">
-      <% if current_user.requestable_contacts %>
-        <% current_user.requestable_contacts.each do |user| %>
-          <div class="connection">
-            <div class="connection-head">
-              <% if user.photo.attached? %>
-                <%= cl_image_tag user.photo.key, class: "avatar" %>
-              <% else %>
-                <%= image_tag 'profile.png', class: "avatar" %>
-              <% end %>
-              <div class="connection-content">
-                <p><%= link_to user.full_name, user_path(user), style: 'font-weight:700;' %></p>
-                <p>Home city: <%= user.home_city %></p>
-              </div>
-            </div>
-            <div class="connection-actions">
-              <%= link_to '', user_connect_requests_path(user), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Connect', class: 'fas fa-user-friends' %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% if current_user.non_matching_contacts %>
-        <% current_user.non_matching_contacts.each do |contact| %>
-          <% if contact.invited_at.nil? %>
+    <% if current_user.requestable_contacts || current_user.non_matching_contacts %>
+      <div class="connections">
+        <% if current_user.requestable_contacts %>
+          <% current_user.requestable_contacts.each do |user| %>
             <div class="connection">
               <div class="connection-head">
-                <%= image_tag 'profile.png', class: "avatar" %>
+                <% if user.photo.attached? %>
+                  <%= cl_image_tag user.photo.key, class: "avatar" %>
+                <% else %>
+                  <%= image_tag 'profile.png', class: "avatar" %>
+                <% end %>
                 <div class="connection-content">
-                  <p style="font-weight: 700;"><%= contact.first_name + ' ' + contact.last_name %></p>
+                  <p><%= link_to user.full_name, user_path(user), style: 'font-weight:700;' %></p>
+                  <p>Home city: <%= user.home_city %></p>
                 </div>
               </div>
               <div class="connection-actions">
-                <%= link_to '', contact_path(contact), method: :patch || :put, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Invite', class: 'far fa-envelope' %>
+                <%= link_to '', user_connect_requests_path(user), method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Connect', class: 'fas fa-users' %>
               </div>
             </div>
           <% end %>
         <% end %>
-      <% end %>
-    </div>
+        <% if current_user.non_matching_contacts %>
+          <% current_user.non_matching_contacts.each do |contact| %>
+            <% if contact.invited_at.nil? %>
+              <div class="connection">
+                <div class="connection-head">
+                  <%= image_tag 'profile.png', class: "avatar" %>
+                  <div class="connection-content">
+                    <p style="font-weight: 700;"><%= contact.first_name + ' ' + contact.last_name %></p>
+                  </div>
+                </div>
+                <div class="connection-actions">
+                  <%= link_to '', contact_path(contact), method: :patch || :put, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Invite', class: 'far fa-envelope' %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <% if !current_user.non_matching_contacts && !current_user.requestable_contacts %>
+      <div class="empty-connections">
+        <div class="empty-content">
+          <i class="fas fa-users"></i>
+          <p>No contacts</p>
+          <button class="btn-flat">Import contact</button>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 <script>

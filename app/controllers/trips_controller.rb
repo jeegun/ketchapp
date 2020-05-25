@@ -32,6 +32,7 @@ class TripsController < ApplicationController
     if @trip.save
       redirect_to trip_path(@trip)
     else
+      @today = Date.today.strftime('%b %d, %Y')
       render 'pages/home'
     end
   end
@@ -78,11 +79,7 @@ class TripsController < ApplicationController
   end
 
   def set_people_to_show
-    maxLat = @trip.latitude + 0.5
-    minLat = @trip.latitude - 0.5
-    maxLng = @trip.longitude + 0.5
-    minLng = @trip.longitude - 0.5
-    people_in_radius = User.where(latitude: minLat..maxLat, longitude: minLng..maxLng).where(["NOT id = ?", current_user.id])
+    people_in_radius = User.where(latitude: @trip.minLat..@trip.maxLat, longitude: @trip.minLng..@trip.maxLng).where(["NOT id = ?", current_user.id])
     # added @ because we need this for ketchup create form
     @people_in_radius_are_connections = (people_in_radius.select { |people| current_user.is_connection?(people) })
     people_in_radius_in_contact = (people_in_radius.select { |people| current_user.match_contacts?(people) })
@@ -91,6 +88,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:start_date, :end_date, :location, :latitude, :longitude)
+    params.require(:trip).permit(:start_date, :end_date, :location, :latitude, :longitude, :country_code)
   end
 end

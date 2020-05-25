@@ -14,6 +14,7 @@
       <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city", onkeypress: "return event.keyCode!=13" %>
       <%= form.text_field :latitude, type: "hidden" %>
       <%= form.text_field :longitude, type: "hidden" %>
+      <%= form.text_field :country_code, type: "hidden" %>
     </div>
     <div class="actions" style="flex: 0 0 30%;">
       <%= form.submit "Search connections", class: 'btn btn-flat mt-0 select-btn' %>

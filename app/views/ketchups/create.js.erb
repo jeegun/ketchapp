@@ -1,0 +1,12 @@
+function refreshForm(innerHTML) {
+  const form = document.getElementById('ketchupCreateModal-<%= @notification.notifiable_id %>');
+  form.innerHTML = innerHTML;
+}
+
+<% if @review.errors.any? %>
+  <% if request.url.split('/').last == 'notifications' %>
+    refreshForm('<%= j render "ketchups/form_from_notification", trip: Trip.find(@notification.notifiable_id), ketchup: @ketchup, notification: @notification %>');
+  <% else %>
+    refreshForm('<%= j render "ketchups/form_from_trip", trip: @trip, ketchup: @ketchup, people: @people %>');
+  <% end %>
+<% end %>

@@ -1,0 +1,91 @@
+.empty-trips {
+  display: flex;
+  min-height: calc(100vh - 15.75rem);
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: lightgrey;
+}
+
+.empty-trips .empty-content {
+  text-align: center;
+}
+
+.empty-trips .empty-content i {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.empty-ketchups {
+  display: flex;
+  min-height: calc(100vh - 15.5rem);
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: lightgrey;
+}
+
+.empty-ketchups .empty-content {
+  text-align: center;
+}
+
+.empty-ketchups .empty-content i {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.empty-connections {
+  display: flex;
+  min-height: calc(100vh - 16rem);
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: lightgrey;
+}
+
+.empty-connections .empty-content {
+  text-align: center;
+}
+
+.empty-connections .empty-content i {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.empty-notifications {
+  display: flex;
+  min-height: calc(100vh - 4.375rem - 6.25rem);
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: lightgrey;
+  width: 100%;
+}
+
+.empty-notifications .empty-content {
+  text-align: center;
+}
+
+.empty-notifications .empty-content i {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
+.empty-trip {
+  display: flex;
+  min-height: calc(100vh - 4.375rem - 6.25rem - 9.5rem);
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: lightgrey;
+  width: 100%;
+}
+
+.empty-trip .empty-content {
+  text-align: center;
+}
+
+.empty-trip .empty-content i {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}

@@ -24,21 +24,27 @@
   function initMap() {
     let input = document.getElementById('trip_location');
     let autocomplete = new google.maps.places.Autocomplete(input, {types: ['(cities)']});
-    autocomplete.setFields(['geometry', 'name']);
-    autocomplete.addListener('place_changed', fillInForm);
+    autocomplete.setFields(['address_components', 'geometry', 'name']);
     function fillInForm() {
-      let place = autocomplete.getPlace()
-
-    if (!place.geometry) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
-      window.alert("No details available for input: '" + place.name + "'");
-      return;
-    }
-
-    document.getElementById('trip_latitude').value = place.geometry.location.lat()
-    document.getElementById('trip_longitude').value = place.geometry.location.lng()
+      let place = autocomplete.getPlace();
+      if (!place.geometry) {
+        // User entered the name of a Place that was not suggested and
+        // pressed the Enter key, or the Place Details request failed.
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+      };
+      console.log(place.address_components);
+      for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        // get the country code (the "short name")
+        if (addressType == "country") {
+          document.getElementById('trip_country_code').value = place.address_components[i].short_name;
+        }
+      }
+      document.getElementById('trip_latitude').value = place.geometry.location.lat();
+      document.getElementById('trip_longitude').value = place.geometry.location.lng();
     }
+    autocomplete.addListener('place_changed', fillInForm);
   }
   document.addEventListener("DOMContentLoaded", function() {
     $('input[class="daterange form-control"]').daterangepicker({

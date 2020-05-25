@@ -4,17 +4,11 @@
       <h2 class="mt-4">Trip to <%= @trip.location %> from <%= @start_month %> <%= @start_day %><%= ', ' + @start_year if @start_year != @end_year %> to <%= @end_month %> <%= @end_day %>, <%= @end_year %></h2>
       <div class="d-flex justify-content-between">
         <div style="flex: 0 0 55%">
-          <% if @trip.status == 'saved' %>
-            <ul class="list-inline tabs-underlined">
-              <li>
-                <p class="tab-underlined active-tab">People (<%= @people_to_show.count %>)</p>
-              </li>
-            </ul>
-          <% else %>
-            <ul class="list-inline tabs-underlined">
-              <li>
-                <p class="tab-underlined active-tab">People (<%= @people_to_show.count %>)</p>
-              </li>
+          <ul class="list-inline tabs-underlined">
+            <li>
+              <p class="tab-underlined active-tab">People (<%= @people_to_show.count %>)</p>
+            </li>
+            <% if @trip.status == 'confirmed' %>
               <li>
                 <p class="tab-underlined">Ketchups (<%= @trip.ketchups.where.not(["status= ?", "cancelled"]).count %>)</p>
               </li>
@@ -23,8 +17,8 @@
                   <p class="tab-underlined">Calendar</p>
                 </li>
               <% end %>
-            </ul>
-          <% end %>
+            <% end %>
+          </ul>
         </div>
         <div>
           <% if @trip.status == 'saved' %>
@@ -39,49 +33,58 @@
       </div>
       <!-- connections div -->
       <div class="lists">
-        <div class="cards-connections">
-          <% @people_to_show.each do |people| %>
-            <div class="card-vertical-connection">
-              <% if people.photo.attached? %>
-                <%= cl_image_tag people.photo.key %>
-              <% else %>
-                <%= image_tag 'profile.png' %>
-              <% end %>
-              <div class="card-vertical-connection-infos">
-                <a href="/users/<%= people.id %>">
-                  <h3><%= people.full_name %></h3>
-                </a>
-                <!-- <p>Available dates: </p> -->
-                <br>
-              </div>
-              <div class="card-vertical-connection-btn">
-                <% if current_user.is_connection?(people) %>
-                  <%= simple_form_for [people, @chat], html: { id: "new_chat_#{people.id}" } do |f| %>
-                    <%= f.submit "Chat", class: 'btn btn-ghost btn-left mb-0' %>
-                  <% end %>
-                  <%= link_to 'Ketchup', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{people.id}" }, class: 'btn btn-ghost btn-right mb-0' %>
-                  <div class="modal fade" id="ketchupCreateModal-<%= people.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCreateModalLabel" aria-hidden="true">
-                    <%= render 'ketchups/form_from_trip', trip: @trip, ketchup: @ketchup, people: people %>
-                  </div>
-                <% elsif current_user.sent_connect_request?(people) %>
-                  <button class='btn-ghost btn-center disabled' disabled="disabled">Sent</button>
-                <% elsif current_user.received_connect_request?(people) %>
-                  <button class='btn-ghost btn-center disabled' disabled="disabled">Received</button>
+        <% if @people_to_show.any? %>
+          <div class="cards-connections">
+            <% @people_to_show.each do |people| %>
+              <div class="card-vertical-connection">
+                <% if people.photo.attached? %>
+                  <%= cl_image_tag people.photo.key %>
                 <% else %>
-                  <%= simple_form_for [people, @connect_request], html: { class: 'new_connect_request center', id: "new_connect_request_#{people.id}" } do |f| %>
-                    <%= f.submit "Connect request", class: "btn btn-ghost btn-center mb-0" %>
-                  <% end %>
+                  <%= image_tag 'profile.png' %>
                 <% end %>
+                <div class="card-vertical-connection-infos">
+                  <a href="/users/<%= people.id %>">
+                    <h3><%= people.full_name %></h3>
+                  </a>
+                  <!-- <p>Available dates: </p> -->
+                  <br>
+                </div>
+                <div class="card-vertical-connection-btn">
+                  <% if current_user.is_connection?(people) %>
+                    <%= simple_form_for [people, @chat], html: { id: "new_chat_#{people.id}" } do |f| %>
+                      <%= f.submit "Chat", class: 'btn btn-ghost btn-left mb-0' %>
+                    <% end %>
+                    <%= link_to 'Ketchup', '', data: { toggle: "modal", target: "#ketchupCreateModal-#{people.id}" }, class: 'btn btn-ghost btn-right mb-0' %>
+                    <div class="modal fade" id="ketchupCreateModal-<%= people.id %>" tabindex="-1" role="dialog" aria-labelledby="ketchupCreateModalLabel" aria-hidden="true">
+                      <%= render 'ketchups/form_from_trip', trip: @trip, ketchup: @ketchup, people: people %>
+                    </div>
+                  <% elsif current_user.sent_connect_request?(people) %>
+                    <button class='btn-ghost btn-center disabled' disabled="disabled">Sent</button>
+                  <% elsif current_user.received_connect_request?(people) %>
+                    <button class='btn-ghost btn-center disabled' disabled="disabled">Received</button>
+                  <% else %>
+                    <%= simple_form_for [people, @connect_request], html: { class: 'new_connect_request center', id: "new_connect_request_#{people.id}" } do |f| %>
+                      <%= f.submit "Connect request", class: "btn btn-ghost btn-center mb-0" %>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="empty-trip">
+            <div class="empty-content">
+              <i class="fas fa-users"></i>
+              <p>No people available in this search</p>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
       <% if @trip.status == 'confirmed' %>
         <!-- ketchups div -->
         <div class="lists">
-          <div class="ketchups trip">
-            <% if @trip.ketchups.any? %>
+          <% if @trip.ketchups.any? %>
+            <div class="ketchups trip">
               <% @trip.ketchups.each do |ketchup| %>
                 <% unless ketchup.status == 'cancelled' %>
                   <div class="ketchup">
@@ -112,10 +115,15 @@
                   <% end %>
                 <% end %>
               <% end %>
-            <% else %>
-              <p>No ketchup yet</p>
-            <% end %>
-          </div>
+            </div>
+          <% else %>
+            <div class="empty-trip">
+              <div class="empty-content">
+                <i class="far fa-calendar-check"></i>
+                <p>No ketchup</p>
+              </div>
+            </div>
+          <% end %>
         </div>
         <!-- calendar div -->
         <% unless current_user.access_token.nil? %>
@@ -160,9 +168,16 @@
     <% @people_to_show.each do |people| %>
       <% if current_user.is_connection?(people) %>
         var input<%= people.id %> = document.getElementById('ketchup_location_<%= people.id %>');
-        var autocomplete<%= people.id %> = new google.maps.places.Autocomplete(input<%= people.id %>, {types: ['establishment']});
+        var northEast = new google.maps.LatLng( <%= @trip.maxLat %>, <%= @trip.maxLng %> );
+        var southWest = new google.maps.LatLng( <%= @trip.minLat %>, <%= @trip.minLng %> );
+        var customBounds = new google.maps.LatLngBounds( southWest, northEast );
+        var options = {
+            bounds: customBounds,
+            types:  ['establishment'],
+            componentRestrictions: { country: '<%= @trip.country_code %>' }
+        };
+        var autocomplete<%= people.id %> = new google.maps.places.Autocomplete(input<%= people.id %>, options);
         autocomplete<%= people.id %>.setFields(['geometry', 'name']);
-        autocomplete<%= people.id %>.addListener('place_changed', fillInForm<%= people.id %>);
         function fillInForm<%= people.id %>() {
           var place<%= people.id %> = autocomplete<%= people.id %>.getPlace();
           if (!place<%= people.id %>.geometry) {
@@ -174,6 +189,7 @@
           document.getElementById('ketchup_latitude_<%= people.id %>').value = place<%= people.id %>.geometry.location.lat()
           document.getElementById('ketchup_longitude_<%= people.id %>').value = place<%= people.id %>.geometry.location.lng()
         }
+        autocomplete<%= people.id %>.addListener('place_changed', fillInForm<%= people.id %>);
       <% end %>
     <% end %>
   }
