@@ -1,6 +1,13 @@
-<%= simple_form_for([chat, message]) do |f| %>
+<%#= simple_form_for([chat, message]) do |f| %>
+  <!-- <div class="message-form-control form-group"> -->
+    <!-- <textarea rows="1" class="form-control text required" name="message[body]" id="message_body" placeholder="Say yo..."></textarea> -->
+    <%#= f.submit "Send", class: 'btn btn-flat'%>
+  <!-- </div> -->
+<%# end %>
+
+<%= form_with model: [@chat, @message] do |form| %>
   <div class="message-form-control form-group">
-    <textarea rows="1" class="form-control text required" name="message[body]" id="message_body" placeholder="Say yo..."></textarea>
-    <%= f.submit "Send", class: 'btn btn-flat'%>
+    <%= form.text_field :body, placeholder: "Say something...", class: "form-control" %>
+    <%= form.submit "Send", class: 'btn btn-flat' %>
   </div>
 <% end %>

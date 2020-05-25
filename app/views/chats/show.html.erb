@@ -29,15 +29,15 @@
         <% end %>
         <h2><%= @chat.opposed_user(current_user).full_name %></h2>
       </div>
-      <div class="messages">
+      <div class="messages" id="chatbox">
         <% @messages.each do |message| %>
           <% if @my_messages.include?(message) %>
-            <div class="col-8 offset-4 d-flex justify-content-end">
-              <div class="my-message-bubble my-msg"><p><%= message.body %></p></div>
+            <div class="col-8 d-flex">
+              <p><%= render 'messages/message', message: message %></p>
             </div>
           <% elsif @other_messages.include?(message) %>
             <div class="col-8 d-flex">
-              <div class="other-message-bubble other-msg"><p><%= message.body %></p></div>
+              <p><%= render 'messages/message', message: message %></p>
             </div>
           <% end %>
         <% end %>

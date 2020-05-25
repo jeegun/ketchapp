@@ -14,6 +14,8 @@
 
 .messages {
   padding: 16px;
+  height: 480px;
+  overflow-y: scroll;
 }
 
 .message-form-control {
