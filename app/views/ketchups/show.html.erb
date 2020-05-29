@@ -65,30 +65,21 @@
         </button>
       </div>
       <div class="modal-body text-left">
-        <%= form_with model: @ketchup, local: true, id: 'ketchup-form' do |form| %>
+        <%= simple_form_for @ketchup, html: {id: 'ketchup-form'} do |f| %>
           <div class="d-flex justify-content-between">
+            <%= f.input :start_date, as: :string, label: 'Start date & time (UTC)' %>
             <div class="form-group">
-            <%= form.label 'Start date & time (UTC)' %>
-            <%= form.text_field :start_date, class: 'daterange form-control' %>
-            </div>
-            <div class="form-group">
-              <%= form.label 'Duration (in min)' %>
-              <%= form.text_field :duration, type: "number", value: @time_diff, min: 30, step: 15, class: 'form-control' %>
-            </div>
+              <label for="ketchup_Duration (in min)">Duration (in min)</label>
+              <input type="number" value="30" min="30" step="15" class="form-control" id="ketchup_duration" name="ketchup[duration]">
+            </div>
           </div>
-          <div class="form-group">
-            <%= form.label "Where do you want to Ketchup" %>
-            <%= form.text_field :location, class: 'form-control', onkeypress: "return event.keyCode!=13" %>
-            <%= form.text_field :latitude, type: "hidden" %>
-            <%= form.text_field :longitude, type: "hidden" %>
-          </div>
-          <div class="form-group">
-            <%= form.label :message %>
-            <%= form.text_area :message, class: 'form-control' %>
-          </div>
+          <%= f.input :location, label: 'Where do you want to Ketchup', onkeypress: "return event.keyCode!=13" %>
+          <%= f.input :latitude, as: :hidden %>
+          <%= f.input :longitude, as: :hidden %>
+          <%= f.input :message %>
       </div>
       <div class="modal-footer">
-        <%= form.submit "Edit", class: 'btn btn-flat' %>
+        <%= f.submit "Edit", class: 'btn btn-flat' %>
         <% end %>
       </div>
     </div>
@@ -128,7 +119,7 @@
     autocomplete.addListener('place_changed', fillInForm);
   }
   document.addEventListener("DOMContentLoaded", function() {
-    $('input[class="daterange form-control"]').daterangepicker({
+    $('#ketchup_start_date').daterangepicker({
       singleDatePicker: true,
       timePicker: true,
       timePicker24Hour: true,
