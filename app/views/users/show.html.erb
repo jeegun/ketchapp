@@ -2,19 +2,26 @@
   <div class="row">
     <div class="col-6 offset-3">
       <div class="profile-container">
-        <% if @user.photo.attached? %>
-          <%= cl_image_tag @user.photo.key, class: "profile-photo" %>
-        <% else %>
-          <%= image_tag 'profile.png', class: "profile-photo" %>
+        <div class="photo-container">
+          <% if @user.photo.attached? %>
+            <%= cl_image_tag @user.photo.key, class: "profile-photo" %>
+          <% else %>
+            <%= image_tag 'profile.png', class: "profile-photo" %>
+          <% end %>
+        </div>
+        <% if @user == current_user %>
+          <%= link_to '📷', '', data: { toggle: "modal", target: "#profilePictureModal" }, class: 'btn profile-photo-update-btn' %>
         <% end %>
-        <div class="profile-name"><%= @user.full_name %></div>
+        <div class="profile-name">
+          <%= @user.full_name %>
+          <%= link_to '', '', data: { toggle: "modal", target: "#profileDetailModal" }, class: 'fas fa-edit' if @user == current_user %>
+        </div>
         <div class="profile-infos">
           <p><i class="fas fa-map-marker-alt"></i> Home City: <%= @user.home_city %></p>
         <% if @user == current_user %>
           <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
-          <p><i class="far fa-envelope"></i> Email: <%= link_to @user.email, @user.email %></p>
+          <p><i class="far fa-envelope"></i> Email: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></p>
         </div>
-          <%= link_to "Edit Account", edit_user_registration_path, class: "btn btn-flat" %>
         <% elsif current_user.is_connection?(@user) %>
           <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
           <p><i class="far fa-envelope"></i> Email: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></p>
@@ -45,6 +52,34 @@
             <%= f.submit "Connect request", class: "btn btn-flat" %>
           <% end %>
         </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="profileDetailModal" tabindex="-1" role="dialog" aria-labelledby="profileDetailModalLabel" aria-hidden="true">
+  <%= render 'devise/registrations/detail_form', resource: current_user %>
+</div>
+<div class="modal fade bd-example-modal-lg" id="profilePictureModal" tabindex="-1" role="dialog" aria-labelledby="profilePictureModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="profilePictureModalLabel">Crop profile photo</h5>
+        <button data-dismiss="modal" aria-label="Close" style="display: none;" id="close-modal">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.input :photo, as: :file, input_html: { class: 'd-none', id: 'photo-input' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a profile photo' %>
+          <canvas id="canvas" style="width: 400px;">
+          </canvas>
+          <div class="w-100 justify-content-between">
+            <button class="btn-ghost" id='btnCrop'>Crop</button>
+            <button class="btn-ghost" id='btnReset'>Reset</button>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <%= f.button :submit, "Upload", class: 'btn-flat mb-4' %>
         <% end %>
       </div>
     </div>
