@@ -21,6 +21,7 @@
         <% if @user == current_user %>
           <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
           <p><i class="far fa-envelope"></i> Email: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></p>
+          <%= link_to 'Change password', '', data: { toggle: "modal", target: "#passwordModal" } %>
         </div>
         <% elsif current_user.is_connection?(@user) %>
           <p><i class="fas fa-mobile-alt"></i> Mobile: <%= @user.phone_number %></p>
@@ -60,8 +61,8 @@
 <div class="modal fade" id="profileDetailModal" tabindex="-1" role="dialog" aria-labelledby="profileDetailModalLabel" aria-hidden="true">
   <%= render 'devise/registrations/detail_form', resource: current_user %>
 </div>
-<div class="modal fade bd-example-modal-lg" id="profilePictureModal" tabindex="-1" role="dialog" aria-labelledby="profilePictureModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="profilePictureModal" tabindex="-1" role="dialog" aria-labelledby="profilePictureModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-photo" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-center">
         <h5 class="modal-title" id="profilePictureModalLabel">Crop profile photo</h5>
@@ -70,16 +71,54 @@
       </div>
       <div class="modal-body text-center">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= f.input :photo, as: :file, input_html: { class: 'd-none', id: 'photo-input' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a profile photo' %>
-          <canvas id="canvas" style="width: 400px;">
-          </canvas>
-          <div class="w-100 justify-content-between">
-            <button class="btn-ghost" id='btnCrop'>Crop</button>
-            <button class="btn-ghost" id='btnReset'>Reset</button>
+          <div class="row">
+            <div class="col-10 offset-1 p-0">
+              <%= f.input :photo, as: :file, input_html: { class: 'd-none', id: 'photo-input' }, label_html: { class: 'upload-photo'}, label: '📷 Upload a profile photo' %>
+            </div>
           </div>
+          <div class="row">
+            <div class="col-5 offset-1 p-0">
+              <canvas id="canvas" style="width: 100%; height: 55vh;"></canvas>
+            </div>
+            <div class="col-4 offset-1 p-0">
+              <div id="photo-preview"></div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around mt-4">
+            <%= link_to 'Reset', '', class: 'btn btn-ghost', id: 'btnReset'  %>
+            <%= link_to 'Crop', '', class: 'btn btn-ghost', id: 'btnCrop' %>
+            <%= f.button :submit, "Upload", class: 'btn-flat' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="passwordModalLabel">Change password</h5>
+        <button data-dismiss="modal" aria-label="Close" style="display: none;" id="close-modal">
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= f.input :current_password,
+                      hint: "we need your current password to confirm your changes",
+                      required: true,
+                      input_html: { autocomplete: "current-password" } %>
+          <%= f.input :password,
+                      hint: "leave it blank if you don't want to change it",
+                      required: true,
+                      label: 'New password',
+                      input_html: { autocomplete: "new-password" } %>
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
       </div>
       <div class="modal-footer">
-        <%= f.button :submit, "Upload", class: 'btn-flat mb-4' %>
+        <%= f.button :submit, "Update", class: 'btn-flat mb-4' %>
         <% end %>
       </div>
     </div>

@@ -61,10 +61,19 @@ div.pac-container {
 }
 
 .cropper-container.cropper-bg {
-  min-width: 100% !important;
-  max-width: 100% !important;
+  width: 100% !important;
+  width: 100% !important;
 }
 
 .modal.fade.show {
   opacity: 1 !important;
+}
+
+@media (min-width: 576px) {
+  .modal-photo { max-width: none; }
+}
+
+.modal-photo {
+  width: 80%;
+  padding: 0;
 }
