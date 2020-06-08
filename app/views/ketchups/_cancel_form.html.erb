@@ -7,14 +7,13 @@
       </button>
     </div>
     <div class="modal-body text-left">
-      <%= form_with model: ketchup, local: true, id: 'ketchup-cancel-form' do |form| %>
+      <%= simple_form_for ketchup, html: { id: 'ketchup-cancel-form' } do |f| %>
         <div class="form-group">
-          <%= form.label :Please_tell_your_connection_why! %>
-          <%= form.text_field :cancel_reason, class: 'form-control' %>
+          <%= f.input :cancel_reason, label: 'Please tell your connection why!', class: 'form-control' %>
         </div>
     </div>
     <div class="modal-footer">
-      <%= form.submit "Cancel", class: 'btn btn-flat' %>
+      <%= f.submit "Cancel", class: 'btn btn-flat' %>
       <% end %>
     </div>
   </div>

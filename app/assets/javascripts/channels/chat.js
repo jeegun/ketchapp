@@ -8,7 +8,9 @@ App.chat = App.cable.subscriptions.create("ChatChannel", {
     var message = data['message']
 
     // message.classList.add('my-message-bubble my-msg');
-    chatbox.append(message);
-    chatbox.scrollTop(chatbox[0].scrollHeight);
+    if (chatbox) {
+      chatbox.append(message);
+      chatbox.scrollTop(chatbox[0].scrollHeight);
+    }
   }
 });

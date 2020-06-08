@@ -30,7 +30,8 @@ const displayPreview = (input) => {
           aspectRatio: 1 / 1,
           viewMode: 1
         });
-        document.getElementById('btnCrop').addEventListener('click', () => {
+        document.getElementById('btnCrop').addEventListener('click', (event) => {
+          event.preventDefault();
           // Get a string base 64 data url
           const croppedImageDataURL = cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096}).toDataURL("image/png");
           // Create a img tag with base 64 data url
@@ -53,16 +54,20 @@ const displayPreview = (input) => {
           // Replace input files with files containing the cropped image file
           input.files = myFileList;
           // Close modal
-          document.getElementById('close-modal').click();
         });
-        document.getElementById('btnReset').addEventListener('click', () => {
+        document.getElementById('btnReset').addEventListener('click', (event) => {
+          event.preventDefault();
           cropper.reset();
+          const child = preview.lastElementChild;
+          if (child) {
+            preview.removeChild(child);
+          }
+          input.files = '';
         });
       };
       img.src = event.currentTarget.result;
     }
-    reader.readAsDataURL(input.files[0])
-    document.getElementById("open-modal").click();
+    reader.readAsDataURL(input.files[0]);
   }
 }
 const previewImageOnFileSelect = () => {
