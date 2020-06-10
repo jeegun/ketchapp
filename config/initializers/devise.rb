@@ -5,11 +5,12 @@
 Devise.setup do |config|
   # Google Calendar Config
   config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'],
-  ENV['GOOGLE_CLIENT_SECRET'],
+  ENV['Gtrue,OOGLE_CLIENT_SECRET'],
   { access_type: "offline",
     prompt: "consent",
-    select_account: true,
-    scope: 'userinfo.email, userinfo.profile, calendar' }
+    select_account:
+  # adding People API to scope
+    scope: ['userinfo.email, userinfo.profile, calendar, people', Google::Apis::PeopleV1::AUTH_CONTACTS_READONLY].join(',') }
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
