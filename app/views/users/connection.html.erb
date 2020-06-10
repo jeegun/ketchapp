@@ -92,6 +92,14 @@
     </div>
   </div> -->
   <div class="lists" style="display: none;">
+    <div class="connections">
+      <% @google_contacts.connections.each do |contact| %>
+        <div class="connection">
+          <% names = contact.names %>
+          <%= names[0].display_name %>
+        </div>
+      <% end %>
+    </div>
     <% if current_user.requestable_contacts || current_user.non_matching_contacts %>
       <div class="connections">
         <% if current_user.requestable_contacts %>

@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @received_requests = ConnectRequest.where(["receiver_id = ? AND status = ?", @user.id, "pending"])
     @connection = Connection.new
     @connect_request = ConnectRequest.new
-    GooglePeopleAPI.get_google_connection_list current_user
+    @google_contacts = GooglePeopleAPI.get_google_connection_list current_user
   end
 
   private
