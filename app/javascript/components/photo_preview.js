@@ -37,6 +37,7 @@ const displayPreview = (input) => {
           // Create a img tag with base 64 data url
           const croppedImage = document.createElement("IMG");
           croppedImage.classList.add('w-100');
+          croppedImage.style.borderRadius = "50%";
           croppedImage.src = croppedImageDataURL;
           // Get rid of existing cropped image preview if there is any
           const child = preview.lastElementChild;
