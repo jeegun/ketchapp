@@ -1,3 +1,1 @@
-<div class="<%#= current_user.id == message.user_id ? 'my-message-bubble my-msg' : 'other-message-bubble other-msg' %>">
-  <p class="message-body"><%= message.user.first_name %>:&nbsp<%= message.body %><t><%= message.created_at.strftime("%k:%M") %></t></p>
-</div>
+<p data-senderId="<%= current_user.id %>"><%= message.body %>&nbsp;&nbsp;&nbsp;<i style="font-size: 12px; opacity: 0.5;"><%= message.created_at.strftime("%k:%M") %></i> </p>

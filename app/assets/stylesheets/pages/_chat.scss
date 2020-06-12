@@ -1,15 +1,17 @@
 .chat-list {
   flex: 0 0 30%;
+  margin-top: 1rem;
 }
 
 .current-chat {
   flex: 0 0 65%;
+  margin-top: 1rem;
 }
 
 .current-chat .avatar {
-  height: 38px;
-  width: 38px;
-  margin-right: 16px;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-right: 1rem;
 }
 
 .messages {
