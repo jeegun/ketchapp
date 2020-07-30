@@ -47,7 +47,7 @@
     autocomplete.addListener('place_changed', fillInForm);
   }
   document.addEventListener("DOMContentLoaded", function() {
-    $('input[class="daterange form-control"]').daterangepicker({
+    $('#trip_dates').daterangepicker({
       autoApply: true,
       minDate: '<%= @today %>',
       startDate: '<%= @today %>',

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", registrations: "registrations" }
 
   resources :users, only: [:show] do
     resources :connect_requests, only: [:create]
@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   #   end
   # end
 
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
 
   resources :connections, only: [:destroy]
 

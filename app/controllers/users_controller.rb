@@ -3,6 +3,23 @@ require 'google/apis/people_v1'
 class UsersController < ApplicationController
   before_action :set_user, only: [:trip, :save, :ketchup, :notification, :connection, :show]
   before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection, :show]
+  helper_method :resource_name, :resource, :devise_mapping, :resource_class
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def resource_class
+    User
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
 
   def show
     @connect_request = ConnectRequest.new

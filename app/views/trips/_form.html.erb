@@ -5,19 +5,19 @@
   <%#= f.submit "Search your connections", class: "btn btn-flat" %>
 <%# end %>
 
-<%= form_with model: @trip, local: true, class: 'trip-form' do |form| %>
+<%= simple_form_for @trip do |f| %>
   <div class="trip-form col-xs-12 col-md-8 offset-md-2">
-    <div class="form-group" style="flex: 0 0 35%;">
-      <%= form.text_field :dates, class: "daterange form-control" %>
+    <div style="flex: 0 0 35%;">
+      <input class="daterange form-control" type="text" name="trip[dates]" id="trip_dates">
     </div>
-    <div class="form-group" style="flex: 0 0 35%;">
-      <%= form.text_field :location, class: 'form-control', placeholder: "Enter a city", onkeypress: "return event.keyCode!=13" %>
-      <%= form.text_field :latitude, type: "hidden" %>
-      <%= form.text_field :longitude, type: "hidden" %>
-      <%= form.text_field :country_code, type: "hidden" %>
+    <div style="flex: 0 0 35%;">
+      <%= f.input :location, input_html: {placeholder: "Enter a city"}, label: false, onkeypress: "return event.keyCode!=13" %>
+      <%= f.input :latitude, as: "hidden" %>
+      <%= f.input :longitude, as: "hidden" %>
+      <%= f.input :country_code, as: "hidden" %>
     </div>
     <div class="actions" style="flex: 0 0 30%;">
-      <%= form.submit "Search connections", class: 'btn btn-flat mt-0 select-btn' %>
+      <%= f.submit "Search connections", class: 'btn btn-flat mt-0 select-btn' %>
     </div>
 
   </div>
