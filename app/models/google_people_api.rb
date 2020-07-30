@@ -33,7 +33,7 @@ class GooglePeopleAPI
     end
     response = service.list_person_connections(
      'people/me',
-      page_size: 50,
+      page_size: 500,
       person_fields: ['names', 'emailAddresses', 'phoneNumbers']
     )
     response

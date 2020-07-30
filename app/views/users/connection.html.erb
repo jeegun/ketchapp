@@ -92,14 +92,6 @@
     </div>
   </div> -->
   <div class="lists" style="display: none;">
-    <div class="connections">
-      <% @google_contacts.connections.each do |contact| %>
-        <div class="connection">
-          <% names = contact.names %>
-          <%= names[0].display_name %>
-        </div>
-      <% end %>
-    </div>
     <% if current_user.requestable_contacts || current_user.non_matching_contacts %>
       <div class="connections">
         <% if current_user.requestable_contacts %>
@@ -138,6 +130,20 @@
               </div>
             <% end %>
           <% end %>
+        <% end %>
+        <% @google_contacts.connections.each do |contact| %>
+          <div class="connection">
+            <div class="connection-head">
+              <%= image_tag 'profile.png', class: "avatar" %>
+            </div>
+            <div class="connection-content">
+              <p style="font-weight: 700;"><%= contact.names[0].display_name %></p>
+              <p>Email: <%= contact.email_addresses[0].value %></p>
+            </div>
+            <div class="connection-actions">
+              <%= link_to '', "#", method: :post, data: { toggle: 'tooltip', placement: 'bottom' }, title: 'Invite', class: 'far fa-envelope' %>
+            </div>
+          </div>
         <% end %>
       </div>
     <% end %>
