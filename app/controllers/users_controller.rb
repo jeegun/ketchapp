@@ -1,3 +1,5 @@
+require 'google/apis/people_v1'
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:trip, :save, :ketchup, :notification, :connection, :show]
   before_action :set_notifications, only: [:trip, :save, :ketchup, :notification, :connection, :show]
@@ -56,6 +58,7 @@ class UsersController < ApplicationController
     @received_requests = ConnectRequest.where(["receiver_id = ? AND status = ?", @user.id, "pending"])
     @connection = Connection.new
     @connect_request = ConnectRequest.new
+    @google_contacts = GooglePeopleAPI.get_google_connection_list current_user
   end
 
   private

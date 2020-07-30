@@ -9,7 +9,7 @@ Devise.setup do |config|
   { access_type: "offline",
     prompt: "consent",
     select_account: true,
-    scope: 'userinfo.email, userinfo.profile, calendar' }
+    scope: 'userinfo.email, userinfo.profile, calendar, contacts.readonly' }
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
